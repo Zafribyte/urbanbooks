@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8EBC53E8-302D-4A51-AE39-B1E4631CFB68}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>urbanbooks</RootNamespace>
+    <AssemblyName>Data_Access</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Author.cs" />
+    <Compile Include="AuthorHandler.cs" />
+    <Compile Include="Book.cs" />
+    <Compile Include="BookHandler.cs" />
+    <Compile Include="BookCategory.cs" />
+    <Compile Include="BookCategoryHandler.cs" />
+    <Compile Include="CartItem.cs" />
+    <Compile Include="CartItemHandler.cs" />
+    <Compile Include="Company.cs" />
+    <Compile Include="CompanyHandler.cs" />
+    <Compile Include="DataProvider.cs" />
+    <Compile Include="Delivery.cs" />
+    <Compile Include="DeliveryHandler.cs" />
+    <Compile Include="Invoice.cs" />
+    <Compile Include="InvoiceHandler.cs" />
+    <Compile Include="InvoiceItem.cs" />
+    <Compile Include="InvoiceItemHandler.cs" />
+    <Compile Include="KeywordHandler.cs" />
+    <Compile Include="Keyword.cs" />
+    <Compile Include="Manufacturer.cs" />
+    <Compile Include="ManufacturerHandler.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="OrderHandler.cs" />
+    <Compile Include="OrderItem.cs" />
+    <Compile Include="OrderItemHandler.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="Product_Keyword.cs" />
+    <Compile Include="Product_Special.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Publisher.cs" />
+    <Compile Include="PublisherHandler.cs" />
+    <Compile Include="Special.cs" />
+    <Compile Include="SpecialHandler.cs" />
+    <Compile Include="Supplier.cs" />
+    <Compile Include="SupplierHandler.cs" />
+    <Compile Include="Technology.cs" />
+    <Compile Include="TechnologyHandler.cs" />
+    <Compile Include="TechCategory.cs" />
+    <Compile Include="TechCategoryHandler.cs" />
+    <Compile Include="WishlistItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WishlistItemHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

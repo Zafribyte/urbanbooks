@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/fonts/fontello/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @using urbanbooks.Helpers;
+    <link rel="stylesheet" href="~/fonts/fontello/css/fontello.css" type="text/css" />
+    <link rel="stylesheet" href="~/fonts/fontello/css/animation.css" type="text/css" />
+
+</head>
+<body>
+    <!--Navigation Bar-->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Dashboard", "Index", "Dashboard", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.NoEncodeActionLink("<i class='icon-book'></i>", "Manage Books", "Index", "Dashboard", htmlAttributes: new { @class = "btn" })</li>
+                <li>@Html.NoEncodeActionLink("<span class='icon-laptop'></span>", "Manage Technology", "Index", "Dashboard", htmlAttributes: new { @class = "btn" })</li>
+                <li>@Html.NoEncodeActionLink("<span class='glyphicon glyphicon-stats'></span>", "Manage Reports", "Index", "Dashboard", htmlAttributes: new { @class = "btn" })</li>
+                <li>@Html.NoEncodeActionLink("<span class='glyphicon glyphicon-certificate'></span>", "Manage Specials", "Index", "Dashboard", htmlAttributes: new { @class = "btn" })</li>
+            </ul>
+            @Html.Partial("_LoginPartial")
+            <div class="navbar-form input-group input-group-sm form-inline">
+                <input type="search" title="Enter Search" placeholder="Search" class="form-control input-sm pull-right" /><span class="input-group-addon glyphicon glyphicon-search btn btn-default">@Html.ActionLink(" ", "Index", "Employee")</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!--LogIn Modal PlaceHolder-->
+    <div id="myModal" class="modal fade in">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id="myModalContent">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Body PlaceHolder-->
+    <div class="body-content">
+        @RenderBody()
+        <hr />
+        <!--Footer-->
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/modalform")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+

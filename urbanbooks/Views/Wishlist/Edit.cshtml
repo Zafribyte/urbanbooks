@@ -1,0 +1,76 @@
+﻿@using urbanbooks.Models
+@using urbanbooks.Helpers;
+@model ProductViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            <label>Product Title</label>
+        </th>
+        <th>
+            <label>Description</label>
+        </th>
+        <th>
+            <label>Unit Price</label>
+        </th>
+    </tr>
+    @if (Model.allWishlistItems != null)
+    {
+        foreach (var item in Model.allWishlistItems)
+        {
+            using (@Html.BeginForm("Delete", "Wishlist", new { WishlistItemID = item.WishlistItemID }))
+            {
+
+                <tr>
+                    @if (Model.allBook != null || Model.allTechnology !=null)
+                    {
+                        foreach (var book in Model.allBook)
+                        {
+                            if (book.ProductID == item.ProductID)
+                            {
+                                <td>
+                                    @Html.DisplayFor(modelItem => book.BookTitle)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => book.Synopsis)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => book.SellingPrice)
+                                </td>
+                            }
+                        }
+                         
+                        foreach (var gadget in Model.allTechnology)
+                        {
+                            if (gadget.ProductID == item.ProductID)
+                            {
+                                <td>
+                                    @Html.DisplayFor(modelItem => gadget.ModelName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => gadget.Specifications)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => gadget.SellingPrice)
+                                </td>
+                            }
+
+                        }
+                    }
+                    <td>
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'> </span>", "Add to cart", "_AddToCart", "Cart", new { productId = item.ProductID, wishID = item.WishlistID }, htmlAttributes: new { @class = "btn btn-default" })
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'> </span>", "View Product Details", "Details", "Book", new { bookId = item.ProductID }, htmlAttributes: new { @class = "btn btn-default" })
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-remove'> </span>", "Remove from wishlist", "Delete", "Wishlist", new { WishlistItemID = item.WishlistItemID }, htmlAttributes: new { @class = "btn btn-default" })
+                    </td>
+
+                </tr>
+            }
+
+        }
+    }
+</table>

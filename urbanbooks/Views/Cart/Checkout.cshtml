@@ -1,0 +1,310 @@
+﻿@using urbanbooks.Models;
+@model ProductViewModel
+
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("Checkout", "Cart", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+<div class="row">
+    <div class="container" style="align-items:center"><h3>Checkout</h3></div>
+
+</div>
+
+
+
+<div class="row">
+    <div class="container">
+        <div class="panel panel-success">
+
+            <div class="panel-header success" style="padding-left:10px">
+                <h4>Reciept</h4>
+            </div>
+
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <tr>
+                        <th width="500px">
+                            <label>Item</label>
+                        </th>
+                        <th width="100px">
+                            <label>Quantity</label>
+                        </th>
+                        <th width="150px">
+                            <label>Unit Price</label>
+                        </th>
+                        <th width="150px">
+                            <label>Total</label>
+                        </th>
+                        <th width="100px"></th>
+                    </tr>
+
+                    @if (Model.allCartItem != null)
+                    {
+                        Session["myBooks"] = Model.allBook; Session["myGadget"] = Model.allTechnology; Session["myItems"] = Model.allCartItem; Session["myHelper"] = Model.ItsA_wrap;
+                        foreach (var item in Model.allCartItem)
+                        {
+                            foreach (var count in Model.secureCart)
+                            {
+                                if (count.ProductID == item.ProductID)
+                                {
+                                    <tr>
+                                        @if (Model.allTechnology != null || Model.allBook != null)
+                                        {
+                                            foreach (var book in Model.allBook)
+                                            {
+                                                if (book.ProductID == item.ProductID)
+                                                {
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => book.BookTitle)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Quantity)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => book.SellingPrice)
+                                                    </td>
+
+                                                    if (count.ProductID == item.ProductID)
+                                                    {
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => count.TotalPerItem)
+                                                        </td>
+                                                    }
+                                                }
+                                            }
+
+                                            foreach (var gadget in Model.allTechnology)
+                                            {
+                                                if (gadget.ProductID == item.ProductID)
+                                                {
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => gadget.ModelName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Quantity)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => gadget.SellingPrice)
+                                                    </td>
+
+                                                    if (count.ProductID == item.ProductID)
+                                                    {
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => count.TotalPerItem)
+                                                        </td>
+                                                    }
+                                                }
+                                                <td width="100px">
+                                                    @Html.ActionLink("Remove", "_Remove", "Cart", new { id = item.CartItemID }, new { @class = "btn btn-danger" })
+                                                </td>
+                                            }
+                                        }
+                                    </tr>
+                                }
+
+                            }
+                        }
+                    }
+                </table>
+            </div>
+
+            <div class="panel-footer" style="text-align:center; width:auto">
+                <table class="table table-striped" style="border:none">
+                    @foreach (var item in Model.ItsA_wrap)
+                    {
+                        <tr>
+                            <td width="500px"></td>
+                            <td width="100px"></td>
+                            <td width="150px"></td>
+                            <td width="150px">Sub Total</td>
+                            <td width="100px">@Html.DisplayFor(modelItem => item.SubTotal)</td>
+                        </tr>
+                        <tr>
+                            <td width="500px"></td>
+                            <td width="100px"></td>
+                            <td width="150px"></td>
+                            <td width="150px">VAT Total</td>
+                            <td width="100px">@Html.DisplayFor(modelItem => item.VatAddedTotal)</td>
+                        </tr>
+                        <tr>
+                            <td width="500px"></td>
+                            <td width="100px"></td>
+                            <td width="150px"></td>
+                            <td width="150px">Total</td>
+                            <td width="100px">@Html.DisplayFor(modelItem => item.CartTotal)</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <br />
+    <hr />
+
+
+<h4>Delivery/Shipping Information</h4>
+<div class="row">
+    <div class="form-horizontal  container">
+        <div class="form-group">
+            <label class="control-label col-md-2">Delivery Address</label>
+            <div class="col-md-10">
+                <textarea rows="6" cols="3" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Delivery Type</label>
+            <div class="col-md-10">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Delivery Price</label>
+            <div class="col-md-10">
+                <input type="text" value="" class="form-control" />
+            </div>
+        </div>
+
+
+    </div>
+</div>
+    
+    <hr />
+    <h3>Billing Information</h3>
+
+<div class="row">
+    <div class="form-horizontal container">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Bill.CreditCardNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Bill.CreditCardNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Bill.CreditCardNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Bill.CVC, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Bill.CVC, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Bill.CVC, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Bill.ExpiryDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <script type="text/javascript">  $('#myDatepicker').datepicker();  </script>
+            <div class="col-md-10" style="width:300px">
+                <div class="fuelux">
+                    <div class="datepicker" data-initialize="datepicker" id="myDatepicker">
+                        <div class="input-group input-group-sm form-inline">
+                            <input class="form-control" id="myDatepickerInput" type="text" />
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                    <span class="sr-only">Toggle Calendar</span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+                                    <div class="datepicker-calendar">
+                                        <div class="datepicker-calendar-header">
+                                            <button class="prev"><span class="glyphicon glyphicon-chevron-left"></span><span class="sr-only">Previous Month</span></button>
+                                            <button class="next"><span class="glyphicon glyphicon-chevron-right"></span><span class="sr-only">Next Month</span></button>
+                                            <button class="title">
+                                                <span class="month">
+                                                    <span data-month="0">January</span>
+                                                    <span data-month="1">February</span>
+                                                    <span data-month="2">March</span>
+                                                    <span data-month="3">April</span>
+                                                    <span data-month="4">May</span>
+                                                    <span data-month="5">June</span>
+                                                    <span data-month="6">July</span>
+                                                    <span data-month="7">August</span>
+                                                    <span data-month="8">September</span>
+                                                    <span data-month="9">October</span>
+                                                    <span data-month="10">November</span>
+                                                    <span data-month="11">December</span>
+                                                </span> <span class="year"></span>
+                                            </button>
+                                        </div>
+                                        <table class="datepicker-calendar-days">
+                                            <thead>
+                                                <tr>
+                                                    <th>Su</th>
+                                                    <th>Mo</th>
+                                                    <th>Tu</th>
+                                                    <th>We</th>
+                                                    <th>Th</th>
+                                                    <th>Fr</th>
+                                                    <th>Sa</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div class="datepicker-calendar-footer">
+                                            <button class="datepicker-today">Today</button>
+                                        </div>
+                                    </div>
+                                    <div class="datepicker-wheels" aria-hidden="true">
+                                        <div class="datepicker-wheels-month">
+                                            <h2 class="header">Month</h2>
+                                            <ul>
+                                                <li data-month="0"><button>Jan</button></li>
+                                                <li data-month="1"><button>Feb</button></li>
+                                                <li data-month="2"><button>Mar</button></li>
+                                                <li data-month="3"><button>Apr</button></li>
+                                                <li data-month="4"><button>May</button></li>
+                                                <li data-month="5"><button>Jun</button></li>
+                                                <li data-month="6"><button>Jul</button></li>
+                                                <li data-month="7"><button>Aug</button></li>
+                                                <li data-month="8"><button>Sep</button></li>
+                                                <li data-month="9"><button>Oct</button></li>
+                                                <li data-month="10"><button>Nov</button></li>
+                                                <li data-month="11"><button>Dec</button></li>
+                                            </ul>
+                                        </div>
+                                        <div class="datepicker-wheels-year">
+                                            <h2 class="header">Year</h2>
+                                            <ul></ul>
+                                        </div>
+                                        <div class="datepicker-wheels-footer clearfix">
+                                            <button class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+                                            <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+    
+  @Html.ActionLink("Back", "Edit", null, new { @class="btn btn-danger"})
+    <span>&nbsp;</span>
+ @* @Html.ActionLink("Checkout", "Checkout", null, new { @class = "btn btn-success", data_modal = ""})*@
+    <input type="submit" value="Checkout" class="btn btn-success" />
+
+
+@Scripts.Render("~/bundles/jquery")
+@Styles.Render("~/Content/fuelux.css")
+@Styles.Render("~/Content/fuelux.css.map")
+@Styles.Render("~/Content/fuelux.min.css")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/modalform")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/fuelux")
+}

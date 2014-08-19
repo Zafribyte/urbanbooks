@@ -1,0 +1,73 @@
+﻿@using urbanbooks.Helpers
+@model IEnumerable<urbanbooks.Technology>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SellingPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModelName)
+        </th>
+        <th width="400px">
+            @Html.DisplayNameFor(model => model.Specifications)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Manufacturer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModelNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageFront)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SellingPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModelName)
+            </td>
+            <td width="400px">
+                @Html.DisplayFor(modelItem => item.Specifications)
+            </td>
+            <td>
+                @foreach (var viewTem in ViewBag.Manufact)
+                {
+                    if (item.ManufacturerID == viewTem.ManufacturerID)
+                    {
+                        string temp = viewTem.Name;
+                        @Html.DisplayFor(modelItem => temp)
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModelNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageFront)
+            </td>
+            <td>
+                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to wishlist", "Add", "Wishlist", new { productId = item.ProductID }, htmlAttributes: new { @class = "btn btn-default" })
+                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "View", "Details", "Book", new { bookId = item.ProductID }, htmlAttributes: new { @class = "btn btn-default" })
+                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "AddToCart", "Cart", new { ProductID = item.ProductID }, htmlAttributes: new { @class = "btn btn-default" })
+            </td>
+        </tr>
+    }
+
+</table>

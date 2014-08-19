@@ -1,0 +1,16 @@
+
+.icon-desktop:before { content: '\e800'; } /* '' */
+.icon-laptop:before { content: '\e801'; } /* '' */
+.icon-tablet:before { content: '\e802'; } /* '' */
+.icon-book-alt:before { content: '\e803'; } /* '' */
+.icon-ipod:before { content: '\e804'; } /* '' */
+.icon-mobile:before { content: '\e805'; } /* '' */
+.icon-monitor:before { content: '\e806'; } /* '' */
+.icon-tablet-1:before { content: '\e807'; } /* '' */
+.icon-mobile-1:before { content: '\e808'; } /* '' */
+.icon-laptop-1:before { content: '\e809'; } /* '' */
+.icon-desktop-1:before { content: '\e80a'; } /* '' */
+.icon-laptop-circled:before { content: '\e80b'; } /* '' */
+.icon-book:before { content: '\e80c'; } /* '' */
+.icon-book-1:before { content: '\e80d'; } /* '' */
+.icon-book-2:before { content: '\e80e'; } /* '' */

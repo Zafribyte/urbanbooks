@@ -1,0 +1,134 @@
+﻿@using urbanbooks.Models;
+@model ProductViewModel
+
+<div class="modal-header" style="align-content:center;">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">Quick Register</h4>
+</div>
+
+@using (Html.BeginForm("Confirm", "Cart", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="row">
+        <div class="container">
+            <div class="panel panel-success">
+
+                <div class="panel-header success" style="padding-left:10px">
+                    <h4>Reciept</h4>
+                </div>
+
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <th width="500px">
+                                <label>Item</label>
+                            </th>
+                            <th width="100px">
+                                <label>Quantity</label>
+                            </th>
+                            <th width="150px">
+                                <label>Unit Price</label>
+                            </th>
+                            <th width="150px">
+                                <label>Total</label>
+                        </tr>
+
+                        @if (Model.allCartItem != null)
+                        {
+                            Session["myBooks"] = Model.allBook; Session["myGadget"] = Model.allTechnology; Session["myItems"] = Model.allCartItem; Session["myHelper"] = Model.ItsA_wrap;
+                            foreach (var item in Model.allCartItem)
+                            {
+                                foreach (var count in Model.secureCart)
+                                {
+                                    if (count.ProductID == item.ProductID)
+                                    {
+                                        <tr>
+                                            @if (Model.allTechnology != null || Model.allBook != null)
+                                            {
+                                                foreach (var book in Model.allBook)
+                                                {
+                                                    if (book.ProductID == item.ProductID)
+                                                    {
+                                                        <td width="500px">
+                                                            @Html.DisplayFor(modelItem => book.BookTitle)
+                                                        </td>
+                                                        <td width="100px">
+                                                            @Html.DisplayFor(modelItem => item.Quantity)
+                                                        </td>
+                                                        <td width="150px">
+                                                            @Html.DisplayFor(modelItem => book.SellingPrice)
+                                                        </td>
+
+                                                        if (count.ProductID == item.ProductID)
+                                                        {
+                                                            <td width="150px">
+                                                                @Html.DisplayFor(modelItem => count.TotalPerItem)
+                                                            </td>
+                                                        }
+                                                    }
+                                                }
+
+                                                foreach (var gadget in Model.allTechnology)
+                                                {
+                                                    if (gadget.ProductID == item.ProductID)
+                                                    {
+                                                        <td width="500px">
+                                                            @Html.DisplayFor(modelItem => gadget.ModelName)
+                                                        </td>
+                                                        <td width="100px">
+                                                            @Html.DisplayFor(modelItem => item.Quantity)
+                                                        </td>
+                                                        <td width="150px">
+                                                            @Html.DisplayFor(modelItem => gadget.SellingPrice)
+                                                        </td>
+
+                                                        if (count.ProductID == item.ProductID)
+                                                        {
+                                                            <td width="150px">
+                                                                @Html.DisplayFor(modelItem => count.TotalPerItem)
+                                                            </td>
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        </tr>
+                                    }
+
+                                }
+                            }
+                        }
+                    </table>
+                </div>
+
+                <div class="panel-footer" style="text-align:center; width:auto">
+                    <table class="table table-striped" style="border:none">
+                        @foreach (var item in Model.ItsA_wrap)
+                        {
+                            <tr>
+                                <td width="500px"></td>
+                                <td width="100px"></td>
+                                <td width="150px">Sub Total</td>
+                                <td width="150px">@Html.DisplayFor(modelItem => item.SubTotal)</td>
+                            </tr>
+                            <tr>
+                                <td width="500px"></td>
+                                <td width="100px"></td>
+                                <td width="150px">VAT Total</td>
+                                <td width="150px">@Html.DisplayFor(modelItem => item.VatAddedTotal)</td>
+                            </tr>
+                            <tr>
+                                <td width="500px"></td>
+                                <td width="100px"></td>
+                                <td width="150px">Total</td>
+                                <td width="150px">@Html.DisplayFor(modelItem => item.CartTotal)</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

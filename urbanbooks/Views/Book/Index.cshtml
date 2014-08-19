@@ -1,0 +1,62 @@
+﻿@model IEnumerable<urbanbooks.Book>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+@using urbanbooks.Helpers;
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Synopsis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SellingPrice)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ISBN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Synopsis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SellingPrice)
+        </td>
+        <td>
+            @foreach (var type in ViewBag.BookTypeBag) {
+                if(item.BookCategoryID == type.BookCategoryID)
+                {
+                   string name = type.CategoryName;
+                   @Html.DisplayFor(modelItem => name)
+                }
+            }
+        </td>
+        <td>
+            @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to wishlist", "Add", "Wishlist", new { productId=item.ProductID}, htmlAttributes: new { @class = "btn btn-default" })
+            @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "View", "Details", "Book", new { bookId = item.ProductID}, htmlAttributes: new { @class = "btn btn-default" })
+            @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "AddToCart", "Cart",new{ProductID=item.ProductID}, htmlAttributes: new { @class = "btn btn-default" })
+        </td>
+    </tr>
+}
+
+</table>

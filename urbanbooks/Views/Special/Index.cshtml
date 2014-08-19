@@ -1,0 +1,58 @@
+﻿@model IEnumerable<urbanbooks.Special>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CutDownPercentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecialPrice)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CutDownPercentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpecialPrice)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SpecialID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SpecialID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SpecialID })
+        </td>
+    </tr>
+}
+
+</table>
