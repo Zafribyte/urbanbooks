@@ -606,7 +606,7 @@
 				this.setRestrictedDates( this.restricted );
 				if ( !this.setDate( this.options.date ) ) {
 					this.$input.val( '' );
-					this.inputValue = this.$input.val();
+					this.inputValue = this.$input.val().text;
 				}
 				if ( this.sameYearOnly ) {
 					this.yearRestriction = ( this.selectedDate ) ? this.selectedDate.getFullYear() : new Date().getFullYear();
@@ -673,7 +673,7 @@
 				date = new Date( $td.attr( 'data-year' ), $td.attr( 'data-month' ), $td.attr( 'data-date' ) );
 				this.selectedDate = date;
 				this.$input.val( this.formatDate( date ) );
-				this.inputValue = this.$input.val();
+				this.inputValue = this.$input.val().text;
 				this.$input.focus();
 			},
 
