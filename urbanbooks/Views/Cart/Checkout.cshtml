@@ -201,7 +201,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Bill.ExpiryDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <script type="text/javascript">  $('#myDatepicker').datepicker();  </script>
+            
             <div class="col-md-10">
                 @Html.JQueryUI().DatepickerFor(model => model.Bill.ExpiryDate)
                 @Html.JQueryUI().DatepickerFor(model => model.Bill.ExpiryDate)
@@ -224,6 +224,6 @@
 @Scripts.Render("~/bundles/bootstrap")
 @Scripts.Render("~/bundles/modalform")
 }
-
+<script type="text/javascript"> $('.datefield').datepicker();</script>
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/fuelux")
