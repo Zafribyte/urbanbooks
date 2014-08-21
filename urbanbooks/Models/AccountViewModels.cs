@@ -61,31 +61,26 @@ namespace urbanbooks.Models
         [ScaffoldColumn(false)]
         public int CustomerID { get; set; }
         [StringLength(150, MinimumLength = 1)]
-        [Display(Name = "Name")]
-        [Required]
+        [Display(Name = "First Name")]
         public string FirstName
         { get; set; }
-        [Required]
-        [Display(Name = "Surname")]
+        [Display(Name = "Last Name")]
         [StringLength(150, MinimumLength = 2)]
         public string LastName
         { get; set; }
-        [Required]
         [Display(Name = "Address")]
+        [DataType(DataType.MultilineText)]
         [StringLength(150, MinimumLength=10)]
-        public string PhysicalAddress
+        public string Address
         { get; set; }
         [Required]
         [Display(Name = "Cell Phone")]
         [DataType(DataType.PhoneNumber)]
         public string CellPhone
         { get; set; }
-        [StringLength(10)]
-        [DataType(DataType.PhoneNumber)]
-        public string Telephone
-        { get; set; }
         [Required]
         [EmailAddress]
+        [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string Email { get; set; }
 

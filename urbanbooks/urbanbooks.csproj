@@ -183,6 +183,30 @@
     <Compile Include="Migrations\201408130920591_complex.Designer.cs">
       <DependentUpon>201408130920591_complex.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408201209505_address.cs" />
+    <Compile Include="Migrations\201408201209505_address.Designer.cs">
+      <DependentUpon>201408201209505_address.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408201228231_nw.cs" />
+    <Compile Include="Migrations\201408201228231_nw.Designer.cs">
+      <DependentUpon>201408201228231_nw.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408201252493_er.cs" />
+    <Compile Include="Migrations\201408201252493_er.Designer.cs">
+      <DependentUpon>201408201252493_er.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408201330438_erro.cs" />
+    <Compile Include="Migrations\201408201330438_erro.Designer.cs">
+      <DependentUpon>201408201330438_erro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408201335095_error.cs" />
+    <Compile Include="Migrations\201408201335095_error.Designer.cs">
+      <DependentUpon>201408201335095_error.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408201413379_error1.cs" />
+    <Compile Include="Migrations\201408201413379_error1.Designer.cs">
+      <DependentUpon>201408201413379_error1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddNewBookViewModel.cs" />
@@ -200,8 +224,8 @@
     <Content Include="App_Data\BookStore Database_log.ldf" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\fuelux.css" />
-    <Content Include="Content\fuelux.min.css" />
+    <Content Include="Content\datepicker.css" />
+    <Content Include="Content\datepicker3.css" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -277,12 +301,12 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\bookandJumboTron.jpg" />
     <Content Include="Images\dots.png" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fontello\font\fontello.eot" />
     <Content Include="fonts\fontello\font\fontello.ttf" />
     <Content Include="fonts\fontello\font\fontello.woff" />
-    <Content Include="Content\fuelux.css.map" />
     <Content Include="Scripts\fuelux.js" />
     <Content Include="Scripts\fuelux.min.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
@@ -395,6 +419,24 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201408130920591_complex.resx">
       <DependentUpon>201408130920591_complex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408201209505_address.resx">
+      <DependentUpon>201408201209505_address.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408201228231_nw.resx">
+      <DependentUpon>201408201228231_nw.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408201252493_er.resx">
+      <DependentUpon>201408201252493_er.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408201330438_erro.resx">
+      <DependentUpon>201408201330438_erro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408201335095_error.resx">
+      <DependentUpon>201408201335095_error.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408201413379_error1.resx">
+      <DependentUpon>201408201413379_error1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -91,13 +91,18 @@ namespace urbanbooks.Controllers
         [HttpPost]
         public async Task<ActionResult> FullRegister(FullRegisterViewModel model)
         {
+            CustomerContext context = new CustomerContext();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-                //Customer Customers = new Customer() { FirstName = model.FirstName, LastName = model.LastName, Email = model.Email, PhysicalAddress = model.PhysicalAddress, CellPhone = model.CellPhone };
-                //Cart Carts = new Cart { DateLastModified = DateTime.Now };
-                //Wishlist Wishlists = new Wishlist { CustomerID = user.Customers.CustomerID };
-                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, Address = model.Address, PhoneNumber = model.CellPhone };
+                Customer Customers = new Customer() { FirstName = model.FirstName, LastName = model.LastName, User_Id=user.Id };
+                user.Carts = new Cart { DateLastModified = DateTime.Now };
+                IQueryable<Customer> cust = context.Customers;
+                var i = context.Customers.ToList().LastOrDefault();
+                user.Wishlists = new Wishlist { CustomerID = i.CustomerID };
+                IdentityResult result = await UserManager.CreateAsync(user, model.Password); 
+                context.Customers.Add(Customers); 
+                context.SaveChanges(); 
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);

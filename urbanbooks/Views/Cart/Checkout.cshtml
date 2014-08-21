@@ -1,4 +1,4 @@
-﻿@using urbanbooks.Models;
+﻿@using urbanbooks.Models
 @model ProductViewModel
 
 @{
@@ -6,224 +6,231 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/datepicker.css" rel="stylesheet" />
+<link href="~/Content/datepicker3.css" rel="stylesheet" />
 
 @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-<div class="row">
-    <div class="container" style="align-items:center"><h3>Checkout</h3></div>
+    <div class="row">
+        <div class="container" style="align-items:center"><h3>Checkout</h3></div>
 
-</div>
+    </div>
 
 
 
-<div class="row">
-    <div class="container">
-        <div class="panel panel-success">
+    <div class="row">
+        <div class="container">
+            <div class="panel panel-success">
 
-            <div class="panel-header success" style="padding-left:10px">
-                <h4>Reciept</h4>
-            </div>
+                <div class="panel-header success" style="padding-left:10px">
+                    <h4>Reciept</h4>
+                </div>
 
-            <div class="panel-body">
-                <table class="table table-striped">
-                    <tr>
-                        <th width="500px">
-                            <label>Item</label>
-                        </th>
-                        <th width="100px">
-                            <label>Quantity</label>
-                        </th>
-                        <th width="150px">
-                            <label>Unit Price</label>
-                        </th>
-                        <th width="150px">
-                            <label>Total</label>
-                        </th>
-                        <th width="100px"></th>
-                    </tr>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <th width="500px">
+                                <label>Item</label>
+                            </th>
+                            <th width="100px">
+                                <label>Quantity</label>
+                            </th>
+                            <th width="150px">
+                                <label>Unit Price</label>
+                            </th>
+                            <th width="150px">
+                                <label>Total</label>
+                            </th>
+                            <th width="100px"></th>
+                        </tr>
 
-                    @if (Model.allCartItem != null)
-                    {
-                        Session["myBooks"] = Model.allBook; Session["myGadget"] = Model.allTechnology; Session["myItems"] = Model.allCartItem; Session["myHelper"] = Model.ItsA_wrap;
-                        foreach (var item in Model.allCartItem)
+                        @if (Model.allCartItem != null)
                         {
-                            foreach (var count in Model.secureCart)
+                            Session["myBooks"] = Model.allBook; Session["myGadget"] = Model.allTechnology; Session["myItems"] = Model.allCartItem; Session["myHelper"] = Model.ItsA_wrap;
+                            foreach (var item in Model.allCartItem)
                             {
-                                if (count.ProductID == item.ProductID)
+                                foreach (var count in Model.secureCart)
                                 {
-                                    <tr>
-                                        @if (Model.allTechnology != null || Model.allBook != null)
-                                        {
-                                            foreach (var book in Model.allBook)
+                                    if (count.ProductID == item.ProductID)
+                                    {
+                                        <tr>
+                                            @if (Model.allTechnology != null || Model.allBook != null)
                                             {
-                                                if (book.ProductID == item.ProductID)
+                                                foreach (var book in Model.allBook)
                                                 {
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => book.BookTitle)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Quantity)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => book.SellingPrice)
-                                                    </td>
-
-                                                    if (count.ProductID == item.ProductID)
+                                                    if (book.ProductID == item.ProductID)
                                                     {
                                                         <td>
-                                                            @Html.DisplayFor(modelItem => count.TotalPerItem)
+                                                            @Html.DisplayFor(modelItem => book.BookTitle)
                                                         </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Quantity)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => book.SellingPrice)
+                                                        </td>
+
+                                                        if (count.ProductID == item.ProductID)
+                                                        {
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => count.TotalPerItem)
+                                                            </td>
+                                                        }
                                                     }
                                                 }
-                                            }
 
-                                            foreach (var gadget in Model.allTechnology)
-                                            {
-                                                if (gadget.ProductID == item.ProductID)
+                                                foreach (var gadget in Model.allTechnology)
                                                 {
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => gadget.ModelName)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Quantity)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => gadget.SellingPrice)
-                                                    </td>
-
-                                                    if (count.ProductID == item.ProductID)
+                                                    if (gadget.ProductID == item.ProductID)
                                                     {
                                                         <td>
-                                                            @Html.DisplayFor(modelItem => count.TotalPerItem)
+                                                            @Html.DisplayFor(modelItem => gadget.ModelName)
                                                         </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Quantity)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => gadget.SellingPrice)
+                                                        </td>
+
+                                                        if (count.ProductID == item.ProductID)
+                                                        {
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => count.TotalPerItem)
+                                                            </td>
+                                                        }
                                                     }
+                                                    <td width="100px">
+                                                        @Html.ActionLink("Remove", "_Remove", "Cart", new { id = item.CartItemID }, new { @class = "btn btn-danger" })
+                                                    </td>
                                                 }
-                                                <td width="100px">
-                                                    @Html.ActionLink("Remove", "_Remove", "Cart", new { id = item.CartItemID }, new { @class = "btn btn-danger" })
-                                                </td>
                                             }
-                                        }
-                                    </tr>
+                                        </tr>
+                                    }
+
                                 }
-
                             }
                         }
-                    }
-                </table>
-            </div>
+                    </table>
+                </div>
 
-            <div class="panel-footer" style="text-align:center; width:auto">
-                <table class="table table-striped" style="border:none">
-                    @foreach (var item in Model.ItsA_wrap)
-                    {
-                        <tr>
-                            <td width="500px"></td>
-                            <td width="100px"></td>
-                            <td width="150px"></td>
-                            <td width="150px">Sub Total</td>
-                            <td width="100px">@Html.DisplayFor(modelItem => item.SubTotal)</td>
-                        </tr>
-                        <tr>
-                            <td width="500px"></td>
-                            <td width="100px"></td>
-                            <td width="150px"></td>
-                            <td width="150px">VAT Total</td>
-                            <td width="100px">@Html.DisplayFor(modelItem => item.VatAddedTotal)</td>
-                        </tr>
-                        <tr>
-                            <td width="500px"></td>
-                            <td width="100px"></td>
-                            <td width="150px"></td>
-                            <td width="150px">Total</td>
-                            <td width="100px">@Html.DisplayFor(modelItem => item.CartTotal)</td>
-                        </tr>
-                    }
-                </table>
+                <div class="panel-footer" style="text-align:center; width:auto">
+                    <table class="table table-striped" style="border:none">
+                        @foreach (var item in Model.ItsA_wrap)
+                        {
+                            <tr>
+                                <td width="500px"></td>
+                                <td width="100px"></td>
+                                <td width="150px"></td>
+                                <td width="150px">Sub Total</td>
+                                <td width="100px">@Html.DisplayFor(modelItem => item.SubTotal)</td>
+                            </tr>
+                            <tr>
+                                <td width="500px"></td>
+                                <td width="100px"></td>
+                                <td width="150px"></td>
+                                <td width="150px">VAT Total</td>
+                                <td width="100px">@Html.DisplayFor(modelItem => item.VatAddedTotal)</td>
+                            </tr>
+                            <tr>
+                                <td width="500px"></td>
+                                <td width="100px"></td>
+                                <td width="150px"></td>
+                                <td width="150px">Total</td>
+                                <td width="100px">@Html.DisplayFor(modelItem => item.CartTotal)</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <br />
     <hr />
 
 
-<h4>Delivery/Shipping Information</h4>
-<div class="row">
-    <div class="form-horizontal  container">
-        <div class="form-group">
-            <label class="control-label col-md-2">Delivery Address</label>
-            <div class="col-md-10">
-                <textarea rows="6" cols="3" class="form-control"></textarea>
+    <h4>Delivery/Shipping Information</h4>
+    <div class="row">
+        <div class="form-horizontal  container">
+            <div class="form-group">
+                <label class="control-label col-md-2">Delivery Address</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.deliveryHelper.DeliveryAddress, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.deliveryHelper.DeliveryAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Delivery Type</label>
+
+                <div class="col-md-10">
+                    @Html.DropDownList("Service", Model.I_DeliveryList, new { @class = "form-control new" })
+                </div>
+            </div>
+            <script type="text/javascript">$(".new").change(function () { $(".olden").val($(this).val());});</script>
+            <div class="form-group">
+                <label class="control-label col-md-2">Delivery Price</label>
+                <div class="col-md-10">
+                    <input type="text" value="" class="form-control olden" />
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Delivery Type</label>
-            <div class="col-md-10">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Delivery Price</label>
-            <div class="col-md-10">
-                <input type="text" value="" class="form-control" />
-            </div>
-        </div>
-
-
     </div>
-</div>
-    
+
     <hr />
     <h3>Billing Information</h3>
 
-<div class="row">
-    <div class="form-horizontal container">
+    <div class="row">
+        <div class="form-horizontal container">
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Bill.CreditCardNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Bill.CreditCardNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Bill.CreditCardNumber, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Bill.CreditCardNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Bill.CreditCardNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Bill.CreditCardNumber, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Bill.CVC, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Bill.CVC, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Bill.CVC, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Bill.CVC, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Bill.CVC, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Bill.CVC, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Bill.ExpiryDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            
-            <div class="col-md-10">
-                @Html.JQueryUI().DatepickerFor(model => model.Bill.ExpiryDate)
-                @Html.JQueryUI().DatepickerFor(model => model.Bill.ExpiryDate)
-                @Html.ValidationMessageFor(model => model.Bill.ExpiryDate)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Bill.ExpiryDate, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Bill.ExpiryDate, new { htmlAttributes = new { @class = "form-control datef" } })
+                    <script type="text/javascript"> $(function () { $('.datef').datepicker({ startDate: "3d" }) })</script>
+                    @Html.ValidationMessageFor(model => model.Bill.ExpiryDate, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
+        </div>
     </div>
-</div>
-    
-  @Html.ActionLink("Back", "Edit", null, new { @class="btn btn-danger"})
+
+    @Html.ActionLink("Back", "Edit", null, new { @class = "btn btn-danger" })
     <span>&nbsp;</span>
     <input type="submit" value="Checkout" class="btn btn-success" />
 
 
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/jqueryui")
-@Styles.Render("~/Content/css")
-@Styles.Render("~/Content/themes/base/css")
-@Scripts.Render("~/bundles/bootstrap")
-@Scripts.Render("~/bundles/modalform")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    @Scripts.Render("~/bundles/modalform")
 }
-<script type="text/javascript"> $('.datefield').datepicker();</script>
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/fuelux")
+
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/fuelux")
