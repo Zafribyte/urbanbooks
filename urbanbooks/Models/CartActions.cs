@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Linq.Expressions.Internal;
 using System.Web;
 using System.Threading.Tasks;
 
@@ -9,7 +11,6 @@ namespace urbanbooks.Models
     public class CartActions
     {
         BusinessLogicHandler myHandler;
-        Cart cart;
         CartItem item;
         //public async Task<Cart> GetCartAsync(int customerId)
         //{ myHandler = new BusinessLogicHandler(); return myHandler.GetCart(customerId); }
