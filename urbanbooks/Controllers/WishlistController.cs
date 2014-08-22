@@ -50,13 +50,13 @@ namespace urbanbooks.Controllers
                 ProductViewModel bridge = new ProductViewModel();
                 myHandler = new BusinessLogicHandler();
 
-                bridge.allWishlistItems = await grantMyWish.GetWishlistItems(user.Wishlists.WishlistID);
+                bridge.allWishlistItems =  grantMyWish.GetWishlistItems(user.Wishlists.WishlistID);
                 {
                     bridge.allBook = (IEnumerable<Book>)myHandler.GetBooks();
                     bridge.allTechnology = (IEnumerable<Technology>)myHandler.GetTechnology();
                 }
 
-                Session["wishlistTotal"] = await grantMyWish.GetWishlistTotal(user.Wishlists.WishlistID);
+                Session["wishlistTotal"] =  grantMyWish.GetWishlistTotal(user.Wishlists.WishlistID);
                 Session["cartTotal"] = cart.GetTotalAsync(user.Carts.CartID);
                 return View(bridge);
             }
@@ -111,7 +111,7 @@ namespace urbanbooks.Controllers
                 wish.DateAdded = DateTime.Now;
                 myHandler.AddWishlistItem(wish);
 
-                Session["wishlistTotal"] = await act.GetWishlistTotal(thisUser.Wishlists.WishlistID);
+                Session["wishlistTotal"] =  act.GetWishlistTotal(thisUser.Wishlists.WishlistID);
                 Session["cartTotal"] =(double) cart.GetTotalAsync(thisUser.Carts.CartID);
 
                 return RedirectToAction("Index", "Home", null);
