@@ -198,6 +198,8 @@
     <Content Include="App_Data\BookStore Database_log.ldf" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\datepicker.css" />
+    <Content Include="Content\datepicker3.css" />
     <Content Include="Content\fuelux.css" />
     <Content Include="Content\fuelux.min.css" />
     <Content Include="favicon.ico" />
@@ -213,6 +215,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\bookandJumboTron.jpg" />
     <Content Include="Images\dots.png" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fontello\font\fontello.eot" />
