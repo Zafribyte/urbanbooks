@@ -9,16 +9,16 @@ namespace urbanbooks.Models
     public class WishlistActions
     {
         BusinessLogicHandler myHandler;
-        public async Task<IEnumerable<WishlistItem>> GetWishlistItems(int wishlistID)
+        public IEnumerable<WishlistItem> GetWishlistItems(int wishlistID)
         {
             myHandler = new BusinessLogicHandler();
-            IEnumerable<WishlistItem> wishes = (IEnumerable<WishlistItem>)myHandler.GetWishlistItems(wishlistID);
+            IEnumerable<WishlistItem> wishes = myHandler.GetWishlistItems(wishlistID);
             return wishes;
         }
 
-        public async Task<int> GetWishlistTotal(int wishlistID)
+        public int GetWishlistTotal(int wishlistID)
         {
-            IEnumerable<WishlistItem> wishdata = await GetWishlistItems(wishlistID);
+            IEnumerable<WishlistItem> wishdata = GetWishlistItems(wishlistID);
             if (wishdata != null)
             {
                 var total = from tot in wishdata
@@ -28,7 +28,7 @@ namespace urbanbooks.Models
             return 0;
         }
 
-        public async Task<bool> InsertWishlistItem(WishlistItem wish)
+        public bool InsertWishlistItem(WishlistItem wish)
         {
             myHandler = new BusinessLogicHandler();
             if (myHandler.AddWishlistItem(wish))

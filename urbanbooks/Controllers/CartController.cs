@@ -26,7 +26,7 @@ namespace urbanbooks.Controllers
             var thisUser = await userMgr.FindByNameAsync(User.Identity.Name);
             int Id = (int)thisUser.Carts.CartID;
             Session["cartTotal"] = act.GetTotalAsync(Id);
-            Session["wishlistTotal"] = await wishAct.GetWishlistTotal(thisUser.Wishlists.WishlistID);
+            Session["wishlistTotal"] =  wishAct.GetWishlistTotal(thisUser.Wishlists.WishlistID);
             IEnumerable<CartItem> myItems = act.GetCartItemsAsync(Id);
             myHandler = new BusinessLogicHandler();
             IEnumerable<Book> ifBooks = myHandler.GetBooks();
@@ -188,7 +188,7 @@ namespace urbanbooks.Controllers
             var thisUser = await userMgr.FindByNameAsync(User.Identity.Name);
             int Id = (int)thisUser.Carts.CartID;
             Session["cartTotal"] =  act.GetTotalAsync(Id);
-            Session["wishlistTotal"] = await wishAct.GetWishlistTotal(thisUser.Wishlists.WishlistID);
+            Session["wishlistTotal"] = wishAct.GetWishlistTotal(thisUser.Wishlists.WishlistID);
             //List<CartItem> myItems = new List<CartItem>(); 
              IEnumerable<CartItem> myItems = act.GetCartItemsAsync(Id);
 
@@ -217,16 +217,19 @@ namespace urbanbooks.Controllers
             }
             if (myItems != null)
             {
-                var revised = from rev in ifGadget
-                              join item in myItems on rev.ProductID equals item.ProductID
-                              where rev.ProductID == item.ProductID
-                              select new { rev.ProductID, rev.SellingPrice, item.Quantity };
-                foreach (var ite in revised)
+                if (ifGadget != null)
                 {
-                    cartHelp = new ProductViewModel.CartHelper();
-                    cartHelp.ProductID = ite.ProductID;
-                    cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
-                    itemList.Add(cartHelp);
+                    var revised = from rev in ifGadget
+                                  join item in myItems on rev.ProductID equals item.ProductID
+                                  where rev.ProductID == item.ProductID
+                                  select new { rev.ProductID, rev.SellingPrice, item.Quantity };
+                    foreach (var ite in revised)
+                    {
+                        cartHelp = new ProductViewModel.CartHelper();
+                        cartHelp.ProductID = ite.ProductID;
+                        cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
+                        itemList.Add(cartHelp);
+                    }
                 }
             }
             double cartTotal = Convert.ToDouble(Session["cartTotal"].ToString());
