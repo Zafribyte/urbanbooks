@@ -35,7 +35,7 @@
                 if (count.ProductID == item.ProductID)
                 {
                     <tr>
-                        @if (Model.allTechnology != null || Model.allBook != null)
+                        @if (Model.allBook != null)
                         {
                             foreach (var book in Model.allBook)
                             {
@@ -45,7 +45,7 @@
                                         @Html.DisplayFor(modelItem => book.BookTitle)
                                     </td>
                                     <td class="form-group form-inline">
-                                        @Html.EditorFor(modelItem => item.Quantity, new { @id="quantity" })
+                                        @Html.EditorFor(modelItem => item.Quantity, new { @id = "quantity" })
                                     </td>
                                     @*                            <td>
                                             @Html.DisplayFor(modelItem => book.Description)
@@ -62,29 +62,32 @@
                                     }
                                 }
                             }
-
-                            foreach (var gadget in Model.allTechnology)
+                            if (Model.allTechnology != null)
                             {
-                                if (gadget.ProductID == item.ProductID)
-                                {
-                                    <td>
-                                        @Html.DisplayFor(modelItem => gadget.ModelName)
-                                    </td>
-                                    <td>
-                                        @Html.TextBoxFor(modelItem => item.Quantity, new { @id="quantity"})
-                                    </td>
-                                    @*                            <td width="400px">
-                                            @Html.DisplayFor(modelItem => gadget.Description)
-                                        </td>*@
-                                    <td>
-                                        @Html.DisplayFor(modelItem => gadget.SellingPrice)
-                                    </td>
 
-                                    if (count.ProductID == item.ProductID)
+                                foreach (var gadget in Model.allTechnology)
+                                {
+                                    if (gadget.ProductID == item.ProductID)
                                     {
                                         <td>
-                                            @Html.DisplayFor(modelItem => count.TotalPerItem)
+                                            @Html.DisplayFor(modelItem => gadget.ModelName)
                                         </td>
+                                        <td>
+                                            @Html.TextBoxFor(modelItem => item.Quantity, new { @id = "quantity" })
+                                        </td>
+                                        @*                            <td width="400px">
+                                                @Html.DisplayFor(modelItem => gadget.Description)
+                                            </td>*@
+                                        <td>
+                                            @Html.DisplayFor(modelItem => gadget.SellingPrice)
+                                        </td>
+
+                                        if (count.ProductID == item.ProductID)
+                                        {
+                                            <td>
+                                                @Html.DisplayFor(modelItem => count.TotalPerItem)
+                                            </td>
+                                        }
                                     }
                                 }
                             }
