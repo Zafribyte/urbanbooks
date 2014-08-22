@@ -50,18 +50,21 @@ namespace urbanbooks.Models
             myItems = GetCartItemsAsync(cartId);
             if (myItems != null)
             {
-                if (myBooks != null || myGadget !=null)
+                if (myBooks != null )
                 {
                     var totalBook = from item in myItems
                                 join bi in myBooks on item.ProductID equals bi.ProductID
                                 where item.ProductID == bi.ProductID
                                 select (item.Quantity * bi.SellingPrice);
                     final = (double)totalBook.Sum();
-                    var total = from item in myItems
-                                join gadget in myGadget on item.ProductID equals gadget.ProductID
-                                where gadget.ProductID == item.ProductID
-                                select (item.Quantity * gadget.SellingPrice);
-                    final += (double)total.Sum();
+                    if (myGadget != null)
+                    {
+                        var total = from item in myItems
+                                    join gadget in myGadget on item.ProductID equals gadget.ProductID
+                                    where gadget.ProductID == item.ProductID
+                                    select (item.Quantity * gadget.SellingPrice);
+                        final += (double)total.Sum();
+                    }
                 }
                 return final;
             }
