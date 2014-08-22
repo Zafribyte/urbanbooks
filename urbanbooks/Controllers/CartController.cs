@@ -53,16 +53,19 @@ namespace urbanbooks.Controllers
             }
             if (myItems != null)
             {
-                var revised = from rev in ifGadget
-                              join item in myItems on rev.ProductID equals item.ProductID
-                              where rev.ProductID == item.ProductID
-                              select new { rev.ProductID, rev.SellingPrice, item.Quantity };
-                foreach (var ite in revised)
+                if (ifGadget != null)
                 {
-                    cartHelp = new ProductViewModel.CartHelper();
-                    cartHelp.ProductID = ite.ProductID;
-                    cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
-                    itemList.Add(cartHelp);
+                    var revised = from rev in ifGadget
+                                  join item in myItems on rev.ProductID equals item.ProductID
+                                  where rev.ProductID == item.ProductID
+                                  select new { rev.ProductID, rev.SellingPrice, item.Quantity };
+                    foreach (var ite in revised)
+                    {
+                        cartHelp = new ProductViewModel.CartHelper();
+                        cartHelp.ProductID = ite.ProductID;
+                        cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
+                        itemList.Add(cartHelp);
+                    }
                 }
             }
             double cartTotal = Convert.ToDouble(Session["cartTotal"].ToString());
