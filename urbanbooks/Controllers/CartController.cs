@@ -178,8 +178,6 @@ namespace urbanbooks.Controllers
         public async Task<ActionResult> Checkout()
         {
             #region Data to Display
-            ///  i need the cart
-            ///  i need to load the items in session
             CartActions act = new CartActions(); WishlistActions wishAct = new WishlistActions();
             ApplicationDbContext dataSocket = new ApplicationDbContext();
             UserStore<ApplicationUser> myStore = new UserStore<ApplicationUser>(dataSocket);
@@ -188,7 +186,8 @@ namespace urbanbooks.Controllers
             int Id = (int)thisUser.Carts.CartID;
             Session["cartTotal"] = await act.GetTotalAsync(Id);
             Session["wishlistTotal"] = await wishAct.GetWishlistTotal(thisUser.Wishlists.WishlistID);
-            IEnumerable<CartItem> myItems = await act.GetCartItemsAsync(Id);
+            List<CartItem> myItems = new List<CartItem>(); 
+              myItems =  await act.GetCartItemsAsync(Id);
 
             myHandler = new BusinessLogicHandler();
             IEnumerable<Book> ifBooks = myHandler.GetBooks();
