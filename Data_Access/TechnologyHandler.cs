@@ -28,7 +28,7 @@ namespace urbanbooks
                         Techno.ProductID = Convert.ToInt32(row["ProductID"]);
                         Techno.ModelName = row["ModelName"].ToString();
                         Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
-                        Techno.Specifications = row["Specs"].ToString();
+                        Techno.Specs= row["Specs"].ToString();
                         Techno.TechCategoryID= (int)row["TechCategoryID"];
                         Techno.ModelNumber = row["ModelNumber"].ToString();
                         Techno.ManufacturerID = Convert.ToInt32(row["ManufacturerID"]);
@@ -59,7 +59,7 @@ namespace urbanbooks
                     DataRow row = table.Rows[0];
                     Techno = new Technology();
                     Techno.ProductID = Convert.ToInt32(row["ProductID"]);
-                    Techno.Specifications = row["Description"].ToString();
+                    Techno.Specs = row["Specs"].ToString();
                     Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
                     Techno.TechID = Convert.ToInt32(row["TechnologyID"]);
                     Techno.Manufacturer = row["Manufacturer"].ToString();
@@ -84,7 +84,7 @@ namespace urbanbooks
             {
                 new SqlParameter("@ProductID", TechnoProduct.ProductID ),
                 new SqlParameter("@ProductTitle", TechnoProduct.ModelName),
-                new SqlParameter("@Description", TechnoProduct.Specifications),
+                new SqlParameter("@Description", TechnoProduct.Specs),
                 new SqlParameter("@CostPrice", TechnoProduct.CostPrice),
                 new SqlParameter("@MarkUp", company.MarkUp),
                 new SqlParameter("@SellingPrice", TechnoProduct.SellingPrice),
@@ -121,7 +121,7 @@ namespace urbanbooks
             SqlParameter[] Params = new SqlParameter[]
             {
                 new SqlParameter("@ProductTitle", TechnoProduct.ModelName),
-                new SqlParameter("@Description", TechnoProduct.Specifications),
+                new SqlParameter("@Description", TechnoProduct.Specs),
                 new SqlParameter("@CostPrice", TechnoProduct.CostPrice),
                 new SqlParameter("@MarkUp", company.MarkUp),
                 new SqlParameter("@SellingPrice", TechnoProduct.SellingPrice),
@@ -171,7 +171,7 @@ namespace urbanbooks
                     DataRow row = table.Rows[0];
                     Techno = new Technology();
                     Techno.ProductID = Convert.ToInt32(row["ProductID"]);
-                    Techno.Specifications = row["Description"].ToString();
+                    Techno.Specs = row["Description"].ToString();
                     Techno.CostPrice = Convert.ToDouble(row["CostPrice"]);
                     company.MarkUp = Convert.ToDouble(row["MarkUp"]);
                     Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
