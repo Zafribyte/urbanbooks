@@ -187,7 +187,7 @@ namespace urbanbooks.Controllers
             Session["cartTotal"] = await act.GetTotalAsync(Id);
             Session["wishlistTotal"] = await wishAct.GetWishlistTotal(thisUser.Wishlists.WishlistID);
             List<CartItem> myItems = new List<CartItem>(); 
-              myItems =  await act.GetCartItemsAsync(Id);
+              myItems =(List<CartItem>) await act.GetCartItemsAsync(Id);
 
             myHandler = new BusinessLogicHandler();
             IEnumerable<Book> ifBooks = myHandler.GetBooks();
