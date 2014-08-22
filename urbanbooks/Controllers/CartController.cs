@@ -134,7 +134,7 @@ namespace urbanbooks.Controllers
                 }
                 catch { }
             }
-            if (await myActions.AddToCartAsync(cart.CartID, ProductID))
+            if (myActions.AddToCartAsync(cart.CartID, ProductID))
             { Session["cartTotal"] = await GetCartTotal(cart.CartID); }
             else
             { }
@@ -372,7 +372,7 @@ namespace urbanbooks.Controllers
             CartActions myActions = new CartActions();
             Cart cart = new Cart();
             cart.CartID = user.Carts.CartID;
-            if (await myActions.AddToCartAsync(cart.CartID, ProductID))
+            if (myActions.AddToCartAsync(cart.CartID, ProductID))
             { Session["cartTotal"] = await GetCartTotal(cart.CartID); myHandler = new BusinessLogicHandler(); myHandler.DeleteWishlistItem(wishID); }
             else
             { }
