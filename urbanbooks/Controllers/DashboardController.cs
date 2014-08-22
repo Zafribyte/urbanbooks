@@ -8,25 +8,23 @@ namespace urbanbooks.Controllers
 {
     public class DashboardController : Controller
     {
-        // GET: Dashboard
+
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Dashboard/Details/5
+
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Dashboard/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Dashboard/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -42,13 +40,13 @@ namespace urbanbooks.Controllers
             }
         }
 
-        // GET: Dashboard/Edit/5
+
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Dashboard/Edit/5
+ 
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
