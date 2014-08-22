@@ -16,6 +16,7 @@ namespace urbanbooks
         { get; set; }
         public string BookTitle 
         { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Synopsis 
         { get; set; }
         [ScaffoldColumn(false)]
