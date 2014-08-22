@@ -1,14 +1,16 @@
 ﻿@using urbanbooks.Models;
-@using System.IO
 @model AddNewBookViewModel
+
+
+
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<h2>CreateBook</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Book", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -17,36 +19,28 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
+            @Html.LabelFor(model => model.books.BookTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.books.BookTitle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.books.BookTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.books.Synopsis, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.books.Synopsis, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.books.Synopsis, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.books.ISBN, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.books.ISBN, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.books.ISBN, "", new { @class = "text-danger" })
             </div>
-        </div> <!--ISBN-->
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.books.Publisher, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.books.Publisher, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.books.Publisher, "", new { @class = "text-danger" })
-            </div>
-        </div>  <!--PUBLISHER-->
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.books.ProductTitle, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.books.ProductTitle, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.books.ProductTitle, "", new { @class = "text-danger" })
-            </div>
-        </div>  <!--BOOK TITLE-->
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.books.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.books.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.books.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>  <!--DESCRIPTION-->
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.books.CostPrice, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -54,15 +48,7 @@
                 @Html.EditorFor(model => model.books.CostPrice, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.books.CostPrice, "", new { @class = "text-danger" })
             </div>
-        </div>  <!--COST PRICE-->
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.books.MarkUp, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.books.MarkUp, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.books.MarkUp, "", new { @class = "text-danger" })
-            </div>
-        </div>  <!--MARK UP-->
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.books.SellingPrice, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -70,51 +56,61 @@
                 @Html.EditorFor(model => model.books.SellingPrice, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.books.SellingPrice, "", new { @class = "text-danger" })
             </div>
-        </div>  <!--SELLING PRICE-->
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.books.Publisher, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.books.Publisher, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.books.KeyWords, "", new { @class = "text-danger" })
-            </div>
-        </div>  <!--PUBLISHER-->
-
-        <div class="form-group">
-
-            <h5>Book Type</h5>
-            <div class="col-md-10 dropdown">
-                @Html.DropDownList("Booooooo", Model.booktype)
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </div>
-        </div>  <!--BOOK TYPE DROP DOWN-->
-
-
-        <div class="form-group">
-
-            <h5>Supplier</h5>
-            <div class="col-md-10 dropdown">
-                @Html.DropDownList("suppliers", Model.suppliers)
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </div>
-        </div>  <!--SUPPLIER DROP DOWN-->
-
-        <div class="form-group">
-            <h5>Front Image</h5>
-            <input class="btn btn-default" id="FindFile" type="file" name="FindFile" />
         </div>
 
+        <div class="form-group">
+            <div>
+                <h5>Category</h5>
+                <div class="col-md-10 dropdown">
+                    @Html.DropDownList("CategoryName", Model.bookCategories)
+                </div>
+            </div>
         </div>
+
+        <div class="form-group">
+            <div>
+                <h5>Publisher</h5>
+                <div class="col-md-10 dropdown">
+                    @Html.DropDownList("PublisherName", Model.publishers)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div>
+                <h5>Supplier</h5>
+                <div class="col-md-10 dropdown">
+                    @Html.DropDownList("Name", Model.suppliers)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <h5>Author</h5>
+                <div class="col-md-10 dropdown">
+                    @Html.DropDownList("FullName", Model.authors)
+                </div>
+            </div>
+        </div>
+
+        <fieldset>
+            <legend>Image</legend>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.books.CoverImage)
+            </div>
+            <div class="editor-field">
+                <input id="CoverImage" title="Upload Book Cover" type="file" name="file" />
+            </div>
+        </fieldset>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+
 }
 
 <div>
