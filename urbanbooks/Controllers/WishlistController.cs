@@ -56,7 +56,7 @@ namespace urbanbooks.Controllers
                 }
 
                 Session["wishlistTotal"] = await grantMyWish.GetWishlistTotal(user.Wishlists.WishlistID);
-                Session["cartTotal"] = await cart.GetTotalAsync(user.Carts.CartID);
+                Session["cartTotal"] = cart.GetTotalAsync(user.Carts.CartID);
                 return View(bridge);
             }
             else
@@ -111,7 +111,7 @@ namespace urbanbooks.Controllers
                 myHandler.AddWishlistItem(wish);
 
                 Session["wishlistTotal"] = await act.GetWishlistTotal(thisUser.Wishlists.WishlistID);
-                Session["cartTotal"] = await cart.GetTotalAsync(thisUser.Carts.CartID);
+                Session["cartTotal"] = cart.GetTotalAsync(thisUser.Carts.CartID);
 
                 return RedirectToAction("Index", "Home", null);
             }

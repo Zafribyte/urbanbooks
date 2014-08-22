@@ -78,7 +78,7 @@ namespace urbanbooks.Controllers
             CartActions act = new CartActions();
             Cart cart = new Cart();
             // cart = await act.GetCartAsync(user.Customers.CustomerID);
-            ViewBag.CartTotal = await act.GetTotalAsync(cart.CartID);
+            ViewBag.CartTotal = act.GetTotalAsync(cart.CartID);
         }
 
         [AllowAnonymous]
