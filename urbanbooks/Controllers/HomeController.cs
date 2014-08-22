@@ -24,7 +24,7 @@ namespace urbanbooks.Controllers
                 ApplicationUserManager mgr = new ApplicationUserManager(myStore);
                 var thisUser = mgr.FindByNameAsync(User.Identity.Name);
                 int cartId = (int)thisUser.Result.Carts.CartID;
-                Session["cartTotal"] = GetCartTotal(cartId);
+                Session["cartTotal"] = (double) GetCartTotal(cartId);
                 Session["wishlistTotal"] = await wish.GetWishlistTotal(thisUser.Result.Wishlists.WishlistID);
             }
             else
@@ -33,7 +33,7 @@ namespace urbanbooks.Controllers
             return View();
         }
 
-        public async Task<double> GetCartTotal(int CartID)
+        public double GetCartTotal(int CartID)
         {
             double total;
             CartActions myA = new CartActions();

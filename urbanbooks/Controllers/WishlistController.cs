@@ -111,7 +111,7 @@ namespace urbanbooks.Controllers
                 myHandler.AddWishlistItem(wish);
 
                 Session["wishlistTotal"] = await act.GetWishlistTotal(thisUser.Wishlists.WishlistID);
-                Session["cartTotal"] = cart.GetTotalAsync(thisUser.Carts.CartID);
+                Session["cartTotal"] =(double) cart.GetTotalAsync(thisUser.Carts.CartID);
 
                 return RedirectToAction("Index", "Home", null);
             }
