@@ -244,7 +244,6 @@
     <Compile Include="Models\AddNewBookViewModel.cs" />
     <Compile Include="Models\AddNewTechViewModel.cs" />
     <Compile Include="Models\CartActions.cs" />
-    <Compile Include="Models\ContentViewModel.cs" />
     <Compile Include="Models\DBContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ImageData.cs" />
