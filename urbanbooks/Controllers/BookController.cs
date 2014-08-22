@@ -109,7 +109,7 @@ namespace urbanbooks.Controllers
             return View(bookM);
         }
         [HttpPost]
-        public ActionResult CreateBook(FormCollection collection, HttpPostedFileBase file)
+        public ActionResult Create(FormCollection collection, HttpPostedFileBase file)
         {
 
             try
