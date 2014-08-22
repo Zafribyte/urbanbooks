@@ -1,33 +1,32 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Manage Books";
     Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
 }
 
 <div class="row" style="width:10px;"></div>
 <div class="container">
-    <div class="jumbotron"> <label class="lead"> welcome <i class="glyphicon glyphicon-fire"></i>Sudo...</label><br />Here you have dominion over the employees... </div>
+    <div class="jumbotron"> <label class="lead"> welcome <i class="glyphicon glyphicon-fire"></i>@User.Identity.Name</label><br />Here you can Add, Edit or delete a Book from the catalogue</div>
 </div>
 
 <div class="container">
     <div class="row">
         <div class="col-lg-4" style="text-align:center">
             <span class="glyphicon glyphicon-book img-circle" style="height:150px; width:150px; font-size:100px; color:white; background-color:#1e1e1e"></span>
-            <h4 class="caption">Addd a Book</h4>
-            <p>this is some test text</p>
-            <button class="btn btn-default">Add Book</button>
+            <h4 class="caption">Add a Book</h4>
+            <p>Add a Book to the catalogue</p>
+            <a href="~/Book/CreateBook" class="btn btn-default">Add Book</a>
         </div>
         <div class="col-lg-4" style="text-align:center">
             <span class="glyphicon glyphicon-book img-circle" style="height:150px; width:150px; font-size:100px;color:white; background-color:#1e1e1e"></span>
             <h4 class="caption">Delete a Book</h4>
-            <p>Delete a book</p>
-            <button class="btn btn-default">Delete Book</button>
+            <p>Delete a book from the catalogue</p>
+            <a href="~/Book/Delete" class="btn btn-default">Delete Book</a>
         </div>
         <div class="col-lg-4" style="text-align:center">
             <span class="glyphicon glyphicon-book img-circle" style="height:150px; width:150px; font-size:100px;color:white; background-color:#1e1e1e"></span>
             <h4 class="caption">Update a Book</h4>
-            <p>Update book details </p>
-            <button class="btn btn-default">Update Book</button>
+            <p>Update book details</p>
+            <a href="~/Book/Edit" class="btn btn-default">Update Book</a>
         </div>
     </div>
 </div>
