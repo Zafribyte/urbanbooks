@@ -17,7 +17,7 @@ namespace urbanbooks.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                CartActions act = new CartActions()//
+                CartActions act = new CartActions()
                 WishlistActions wish = new WishlistActions();
                 ApplicationDbContext mycontext = new ApplicationDbContext();
                 UserStore<ApplicationUser> myStore = new UserStore<ApplicationUser>(mycontext);
