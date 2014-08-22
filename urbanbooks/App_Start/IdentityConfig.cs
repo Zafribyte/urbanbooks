@@ -54,7 +54,6 @@ namespace urbanbooks
             }
             return manager;
         }
-
     }
 
     public class EmailService : IIdentityMessageService

@@ -1,17 +1,18 @@
 ﻿@model urbanbooks.Models.FullRegisterViewModel
 
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "FullRegister";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2>FullRegister</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Register</h4>
+        <h4>FullRegisterViewModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -70,16 +71,12 @@
             </div>
         </div>
 
-        <div class="form-group ">
-            <div class="col-md-offset-2 col-md-5">
-                <input type="submit" value="Register" class="btn btn-default" />
-            </div>
-            <div class="col-lg-offset-0">
-                <input type="submit" value="Register" class="btn btn-default" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
-
- </div>
+    </div>
 }
 
 <div>

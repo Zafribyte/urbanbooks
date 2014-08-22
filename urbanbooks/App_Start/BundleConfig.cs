@@ -15,12 +15,6 @@ namespace urbanbooks
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                            "~/Scripts/jquery-ui-{version}.js" , "~/Scripts/jquery-ui.unobtrusive{version}.js"));
-
-            bundles.Add(new StyleBundle("~/Content/themes/base/css").Include("~/Content/themes/base/jquery.ui.core.css", "~/Content/themes/base/jquery.ui.datepicker.css", "~/Content/themes/base/jquery.ui.theme.css"));
-
-
             bundles.Add(new ScriptBundle("~/bundles/fuelux").Include(
                         "~/Scripts/fuelux.js", "~/Scripts/fuelux.min.js"));
 

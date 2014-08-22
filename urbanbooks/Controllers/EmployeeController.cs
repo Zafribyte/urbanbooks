@@ -7,7 +7,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace urbanbooks.Controllers
 {
-    [Authorize(Roles="admin")]
     
     public class EmployeeController : Controller
     {

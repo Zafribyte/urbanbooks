@@ -6,7 +6,6 @@ using System.Web.Mvc;
 
 namespace urbanbooks.Controllers
 {
-    [Authorize(Roles="admin, employee")]
     public class BookTypeController : Controller
     {
         BusinessLogicHandler myHandler;
@@ -15,14 +14,16 @@ namespace urbanbooks.Controllers
         public ActionResult Index()
         {
             myHandler = new BusinessLogicHandler();
-            List<BookCategory> typeList = myHandler.GetBookTypeList();
+
+            List<BookCategory> typeList = new List<BookCategory>();
+               typeList = myHandler.GetBookCategoryList();
             return View(typeList);
         }
         [AllowAnonymous]
         public ActionResult Details(int id)
         {
             myHandler = new BusinessLogicHandler();
-            typeOf  = myHandler.GetBookTypeList().Single(typ => typ.BookCategoryID == id);
+            typeOf  = myHandler.GetBookCategoryList().Single(typ => typ.BookCategoryID == id);
             return View(typeOf);
         }
 
@@ -41,7 +42,7 @@ namespace urbanbooks.Controllers
                 TryUpdateModel(typeOf);
                 if (ModelState.IsValid)
                 {
-                    //myHandler.UpdateBookType(typeOf);
+                    myHandler.UpdateBookType(typeOf);
                     return RedirectToAction("Index");
                 }
                 return View();
@@ -57,7 +58,7 @@ namespace urbanbooks.Controllers
             myHandler = new BusinessLogicHandler();
             typeOf = new BookCategory();
 
-            typeOf = myHandler.GetBookTypeList().Single(tlist => tlist.BookCategoryID == id);
+            typeOf = myHandler.GetBookCategoryList().Single(tlist => tlist.BookCategoryID == id);
 
             return View(typeOf);
         }
