@@ -46,7 +46,7 @@ namespace urbanbooks.Models
             IEnumerable<Technology> myGadget = myHandler.GetTechnology();
             IEnumerable<CartItem> myItems;
             double final = 0;
-            myItems = await GetCartItemsAsync(cartId);
+            myItems = GetCartItemsAsync(cartId);
             if (myItems != null)
             {
                 if (myBooks != null || myGadget !=null)
@@ -69,10 +69,10 @@ namespace urbanbooks.Models
            
         }
 
-        public async Task<IEnumerable<CartItem>> GetCartItemsAsync(int cartId)
+        public IEnumerable<CartItem> GetCartItemsAsync(int cartId)
         {
             myHandler = new BusinessLogicHandler();
-            return myHandler.GetCartItems(cartId);
+            return (IEnumerable<CartItem>) myHandler.GetCartItems(cartId);
         }
 
         public async Task<bool> UpdateCartItem(CartItem item)

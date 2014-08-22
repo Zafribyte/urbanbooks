@@ -54,23 +54,7 @@ namespace urbanbooks
 
         //BOOKTYPE
 
-        public List<BookCategory> BookCategory
-        { get; set; }
 
-        //EMPLOYEE
-
-        //public List<Employee> Employee
-        //{ get; set; }
-
-        //SUPPLIER
-
-        public List<Supplier> Supplier
-        { get; set; }
-
-        //AUTHOR
-
-        public List<Author> Author
-        { get; set; }
 
     }
 }

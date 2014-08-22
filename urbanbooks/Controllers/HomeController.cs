@@ -24,7 +24,7 @@ namespace urbanbooks.Controllers
                 ApplicationUserManager mgr = new ApplicationUserManager(myStore);
                 var thisUser = mgr.FindByNameAsync(User.Identity.Name);
                 int cartId = (int)thisUser.Result.Carts.CartID;
-                Session["cartTotal"] = await GetCartTotal(cartId);
+                Session["cartTotal"] = GetCartTotal(cartId);
                 Session["wishlistTotal"] = await wish.GetWishlistTotal(thisUser.Result.Wishlists.WishlistID);
             }
             else

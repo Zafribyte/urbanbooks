@@ -19,6 +19,6 @@ namespace urbanbooks
         public int ProductID 
         { get; set; }
         [Display(Name="Date Added")]
-        public DateTime DateAdded { get; set; }
+        public DateTime DateAdded { get; set; }//
     }
 }
