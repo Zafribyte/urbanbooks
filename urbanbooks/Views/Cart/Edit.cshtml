@@ -41,6 +41,7 @@
                             {
                                 if (book.ProductID == item.ProductID)
                                 {
+                                    @Html.HiddenFor(modelItem => item.CartItemID, new { htmlAttributes = new { @class = "cartID" } })
                                     <td>
                                         @Html.DisplayFor(modelItem => book.BookTitle)
                                     </td>
@@ -69,6 +70,7 @@
                                 {
                                     if (gadget.ProductID == item.ProductID)
                                     {
+                                        @Html.HiddenFor(modelItem => item.CartItemID, new { htmlAttributes = new { @class = "cartID" } })
                                         <td>
                                             @Html.DisplayFor(modelItem => gadget.ModelName)
                                         </td>
@@ -136,16 +138,19 @@
 @Scripts.Render("~/bundles/jquery")
 
 <script type="text/javascript">
-    $('.quants').change(function () {
-        $.ajax({
-            url: '@Url.Action("UpdateQuantity", "Cart")',
-            type: 'post',
-            data: {
-                Text: $('#quantity').val()
-            },
-            success: function (_result) {
-                $('#TaskDesc').val(_result.foo);
-            }
-        });
+    $(".quants").change(function () {
+        var quantity = $(this).val();
+        if (quantity > 1) {
+            $.ajax({
+                url: '@Url.Action("UpdateQuantity", "Cart")',
+                type: 'post',
+                data: { 'quantity': quantity },
+                datatype: 'json',
+                success: function (response) { $(".olden").val(response); }
+            })
+        }
+        else {
+            $(".olden").val(" ");
+        }
     });
 </script>
