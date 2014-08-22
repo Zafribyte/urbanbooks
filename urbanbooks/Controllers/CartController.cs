@@ -175,11 +175,12 @@ namespace urbanbooks.Controllers
             int Id = (int)thisUser.Carts.CartID;
             Session["cartTotal"] = await act.GetTotalAsync(Id);
             Session["wishlistTotal"] = await wishAct.GetWishlistTotal(thisUser.Wishlists.WishlistID);
-            IEnumerable<CartItem> myItems = (IEnumerable<CartItem>)await act.GetCartItemsAsync(Id);
+            
 
             myHandler = new BusinessLogicHandler();
             IEnumerable<Book> ifBooks = myHandler.GetBooks();
             IEnumerable<Technology> ifGadget = myHandler.GetTechnology();
+            IEnumerable<CartItem> myItems = (IEnumerable<CartItem>)await act.GetCartItemsAsync(Id);
             ProductViewModel myNewModel = new ProductViewModel();
             myNewModel.allBook = ifBooks;
             myNewModel.allCartItem = myItems;
