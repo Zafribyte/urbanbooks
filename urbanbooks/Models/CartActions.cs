@@ -72,7 +72,7 @@ namespace urbanbooks.Models
         public async Task<IEnumerable<CartItem>> GetCartItemsAsync(int cartId)
         {
             myHandler = new BusinessLogicHandler();
-            return (IEnumerable<CartItem>) myHandler.GetCartItems(cartId);
+            return myHandler.GetCartItems(cartId);
         }
 
         public async Task<bool> UpdateCartItem(CartItem item)
