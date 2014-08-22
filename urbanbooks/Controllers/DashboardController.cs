@@ -6,7 +6,6 @@ using System.Web.Mvc;
 
 namespace urbanbooks.Controllers
 {
-    [Authorize(Roles="employee, admin")]
     public class DashboardController : Controller
     {
         // GET: Dashboard

@@ -5,7 +5,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 
 namespace urbanbooks.Models
 {
@@ -19,9 +18,11 @@ namespace urbanbooks.Models
             // Add custom user claims here
             return userIdentity;
         }
-        public virtual Wishlist Wishlists { get; set; }
-        public virtual Cart Carts { get; set; }
 
+        public virtual Employee Employees { get; set; }
+        public virtual Customer Customers { get; set; }
+        public virtual Cart Carts { get; set; }
+        public virtual Wishlist Wishlists { get; set; }
     }
 
 
@@ -31,14 +32,30 @@ namespace urbanbooks.Models
         [ScaffoldColumn(false)]
         public int CustomerID
         { get; set; }
-        [ScaffoldColumn(false)]
-        public string User_Id 
-        { get; set; }
         [Display(Name = "Name")]
         public string FirstName
         { get; set; }
         [Display(Name = "Surname")]
         public string LastName
+        { get; set; }
+        [Display(Name = "Address")]
+        public string PhysicalAddress
+        { get; set; }
+        [Display(Name = "Cell Phone")]
+        [DataType(DataType.PhoneNumber)]
+        public string CellPhone
+        { get; set; }
+        [StringLength(10)]
+        [DataType(DataType.PhoneNumber)]
+        public string Telephone
+        { get; set; }
+        [DataType(DataType.EmailAddress)]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "email address is not valid.")]
+        [Display(Name = "e-mail Address")]
+        public string Email
+        { get; set; }
+        [ScaffoldColumn(false)]
+        public bool Status
         { get; set; }
     }
 
@@ -51,15 +68,32 @@ namespace urbanbooks.Models
         [ScaffoldColumn(false)]
         public int EmployeeID
         { get; set; }
-        [ScaffoldColumn(false)]
-        public string User_Id
-        { get; set; }
         [Display(Name = "Name")]
         public string FirstName
         { get; set; }
         [Display(Name = "Surname")]
         public string LastName
         { get; set; }
+        public string Address
+        { get; set; }
+        [Display(Name = "Cell Phone")]
+        [StringLength(10)]
+        [DataType(DataType.PhoneNumber)]
+        public string CellPhone
+        { get; set; }
+        [StringLength(10)]
+        [DataType(DataType.PhoneNumber)]
+        public string Telephone
+        { get; set; }
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "e-mail Address ")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "email address is not valid.")]
+        public string Email
+        { get; set; }
+        [ScaffoldColumn(false)]
+        public bool Status
+        { get; set; }
+
     }
 
 
@@ -108,21 +142,9 @@ namespace urbanbooks.Models
             return new ApplicationDbContext();
         }
 
-        protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<IdentityUser>().ToTable("Users");
-            modelBuilder.Entity<ApplicationUser>().ToTable("Users");
-            modelBuilder.Entity<IdentityUserRole>().ToTable("UserRoles");
-            modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins");
-            modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
-            modelBuilder.Entity<IdentityRole>().ToTable("Roles");
-        }
-
         public System.Data.Entity.DbSet<Employee> Employees { get; set; }
 
-        //public DbSet<Customer> Customer { get; set; }
+        public System.Data.Entity.DbSet<Customer> Customers { get; set; }
 
         public System.Data.Entity.DbSet<urbanbooks.Book> Books { get; set; }
 
@@ -136,7 +158,7 @@ namespace urbanbooks.Models
 
         public System.Data.Entity.DbSet<urbanbooks.Supplier> Suppliers { get; set; }
 
-        public System.Data.Entity.DbSet<urbanbooks.BookCategory> BookTypes { get; set; }
+        public System.Data.Entity.DbSet<urbanbooks.BookCategory> Categories { get; set; }
 
         public System.Data.Entity.DbSet<urbanbooks.Models.FullRegisterViewModel> FullRegisterViewModels { get; set; }
 
@@ -144,11 +166,6 @@ namespace urbanbooks.Models
 
         public System.Data.Entity.DbSet<urbanbooks.CartItem> CartItems { get; set; }
 
-        public System.Data.Entity.DbSet<urbanbooks.Company> Company { get; set; }
-
         public System.Data.Entity.DbSet<urbanbooks.WishlistItem> WishlistItems { get; set; }
-
-        public System.Data.Entity.DbSet<urbanbooks.Order> Orders { get; set; }
-
     }
 }

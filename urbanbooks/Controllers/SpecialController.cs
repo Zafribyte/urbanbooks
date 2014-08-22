@@ -26,13 +26,11 @@ namespace urbanbooks.Controllers
             return View(mySpecial);
         }
 
-        [Authorize(Roles="admin, employee")]
         public ActionResult Create()
         {
             return View();
         }
 
-        [Authorize(Roles = "admin, employee")]
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -53,13 +51,11 @@ namespace urbanbooks.Controllers
             }
         }
 
-        [Authorize(Roles = "admin, employee")]
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        [Authorize(Roles = "admin, employee")]
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -80,13 +76,11 @@ namespace urbanbooks.Controllers
             }
         }
 
-        [Authorize(Roles = "admin, employee")]
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        [Authorize(Roles = "admin, employee")]
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

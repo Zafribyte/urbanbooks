@@ -10,7 +10,7 @@
     @using urbanbooks.Helpers;
     <link rel="stylesheet" href="~/fonts/fontello/css/fontello.css" type="text/css" />
     <link rel="stylesheet" href="~/fonts/fontello/css/animation.css" type="text/css" />
-
+    
 
 </head>
 <body>
@@ -28,18 +28,14 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                <li>
-                  @Html.ActionLink("Books", "Index", "Book")
-                </li>
-                <li>
-                    @Html.ActionLink("Technology", "Index", "Technology")
-                </li>
+                <li>@Html.ActionLink("Books", "Index", "Book")</li>
+                <li>@Html.ActionLink("Technology", "Index", "Technology")</li>
                 <li>@Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'>  R" + Session["cartTotal"] + "</span>", "Cart", "Edit", "Cart", htmlAttributes: new { @class = "btn" })</li>
-                <li>@Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'>  " + Session["wishlistTotal"] + "</span>", "Wishlist", "Edit", "Wishlist", htmlAttributes: new { @class = "btn" })</li>
+                <li>@Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'>  "+Session["wishlistTotal"]+"</span>", "Wishlist", "Edit", "Wishlist", htmlAttributes: new { @class = "btn" })</li>
             </ul>
             @Html.Partial("_LoginPartial")
             <div class="navbar-form input-group input-group-sm form-inline">
-                <input type="search" title="Enter Search" placeholder="Search" class="form-control input-sm pull-right" /><span class="input-group-addon glyphicon glyphicon-search btn btn-default" >@Html.ActionLink(" ", "Index", "Cart")</span>
+                <input type="search" title="Enter Search" placeholder="Search" class="form-control input-sm pull-right" /><span class="input-group-addon glyphicon glyphicon-search btn btn-default">@Html.ActionLink(" ", "Index", "Employee")</span>
             </div>
         </div>
 
@@ -61,10 +57,10 @@
         @RenderBody()
         <hr />
         <!--Footer-->
-    </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/modalform")
-    @RenderSection("scripts", required: false)
+        </div>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/modalform")
+        @RenderSection("scripts", required: false)
 </body>
 </html>

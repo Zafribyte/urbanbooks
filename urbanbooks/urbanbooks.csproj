@@ -40,6 +40,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\packages\mongocsharpdriver.1.9.2\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\packages\mongocsharpdriver.1.9.2\lib\net35\MongoDB.Driver.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -164,29 +170,85 @@
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\BookTypeController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ContentRepository.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\galleryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\SpecialController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\TechnologyController.cs" />
     <Compile Include="Controllers\WishlistController.cs" />
+    <Compile Include="CreateBook.aspx.cs">
+      <DependentUpon>CreateBook.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateBook.aspx.designer.cs">
+      <DependentUpon>CreateBook.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\MyHelpers.cs" />
-    <Compile Include="Migrations\201408130920591_complex.cs" />
-    <Compile Include="Migrations\201408130920591_complex.Designer.cs">
-      <DependentUpon>201408130920591_complex.cs</DependentUpon>
+    <Compile Include="Migrations\201407280957487_new.cs" />
+    <Compile Include="Migrations\201407280957487_new.Designer.cs">
+      <DependentUpon>201407280957487_new.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407281023045_this.cs" />
+    <Compile Include="Migrations\201407281023045_this.Designer.cs">
+      <DependentUpon>201407281023045_this.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407281032400_carts.cs" />
+    <Compile Include="Migrations\201407281032400_carts.Designer.cs">
+      <DependentUpon>201407281032400_carts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407281039465_sick.cs" />
+    <Compile Include="Migrations\201407281039465_sick.Designer.cs">
+      <DependentUpon>201407281039465_sick.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407281050249_date.cs" />
+    <Compile Include="Migrations\201407281050249_date.Designer.cs">
+      <DependentUpon>201407281050249_date.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407292258075_ihavenoidea.cs" />
+    <Compile Include="Migrations\201407292258075_ihavenoidea.Designer.cs">
+      <DependentUpon>201407292258075_ihavenoidea.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407300006229_ilzm.cs" />
+    <Compile Include="Migrations\201407300006229_ilzm.Designer.cs">
+      <DependentUpon>201407300006229_ilzm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407311425250_grantMyWish.cs" />
+    <Compile Include="Migrations\201407311425250_grantMyWish.Designer.cs">
+      <DependentUpon>201407311425250_grantMyWish.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408010815495_darrenMesseditup.cs" />
+    <Compile Include="Migrations\201408010815495_darrenMesseditup.Designer.cs">
+      <DependentUpon>201408010815495_darrenMesseditup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408010851157_broken.cs" />
+    <Compile Include="Migrations\201408010851157_broken.Designer.cs">
+      <DependentUpon>201408010851157_broken.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408011140459_z.cs" />
+    <Compile Include="Migrations\201408011140459_z.Designer.cs">
+      <DependentUpon>201408011140459_z.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408060907008_as.cs" />
+    <Compile Include="Migrations\201408060907008_as.Designer.cs">
+      <DependentUpon>201408060907008_as.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddNewBookViewModel.cs" />
+    <Compile Include="Models\AddNewTechViewModel.cs" />
     <Compile Include="Models\CartActions.cs" />
-    <Compile Include="Models\CustomerContext.cs" />
-    <Compile Include="Models\EmployeeContext.cs" />
+    <Compile Include="Models\ContentViewModel.cs" />
+    <Compile Include="Models\DBContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ImageData.cs" />
+    <Compile Include="Models\MongoPictureModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\WishlistActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -197,8 +259,7 @@
     <Content Include="App_Data\BookStore Database_log.ldf" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\fuelux.css" />
-    <Content Include="Content\fuelux.min.css" />
+    <Content Include="CreateBook.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontello\css\animation.css" />
     <Content Include="fonts\fontello\css\fontello-codes.css" />
@@ -217,10 +278,7 @@
     <Content Include="fonts\fontello\font\fontello.eot" />
     <Content Include="fonts\fontello\font\fontello.ttf" />
     <Content Include="fonts\fontello\font\fontello.woff" />
-    <Content Include="Content\fuelux.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\fuelux.js" />
-    <Content Include="Scripts\fuelux.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -230,9 +288,12 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modalform.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\platform.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Uploads\Adobe-Premiere.png" />
+    <Content Include="Uploads\flower-icon.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -271,37 +332,30 @@
     <Content Include="Views\Employee\Details.cshtml" />
     <Content Include="Views\Employee\Create.cshtml" />
     <Content Include="Views\Employee\Edit.cshtml" />
-    <Content Include="Views\Book\Index.cshtml" />
-    <Content Include="Views\Book\Details.cshtml" />
-    <Content Include="Views\Book\Create.cshtml" />
-    <Content Include="Views\Book\Edit.cshtml" />
-    <Content Include="Views\Book\Delete.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Cart\Edit.cshtml" />
     <Content Include="Views\Special\Index.cshtml" />
     <Content Include="Views\Special\Details.cshtml" />
     <Content Include="Views\Special\Create.cshtml" />
     <Content Include="Views\Special\Edit.cshtml" />
     <Content Include="Views\Special\Delete.cshtml" />
-    <Content Include="Views\Technology\Index.cshtml" />
-    <Content Include="Views\Technology\Details.cshtml" />
-    <Content Include="Views\Technology\Create.cshtml" />
-    <Content Include="Views\Technology\Edit.cshtml" />
-    <Content Include="Views\Technology\Delete.cshtml" />
     <Content Include="Views\Wishlist\Details.cshtml" />
     <Content Include="Views\Book\ManageBooks.cshtml" />
     <Content Include="Views\Technology\ManageTechnology.cshtml" />
     <Content Include="Views\Supplier\Create.cshtml" />
     <Content Include="Views\Supplier\Index.cshtml" />
-    <Content Include="Views\BookType\Index.cshtml" />
-    <Content Include="Views\BookType\Details.cshtml" />
-    <Content Include="Views\BookType\Create.cshtml" />
-    <Content Include="Views\BookType\Edit.cshtml" />
     <Content Include="Views\Account\FullRegister.cshtml" />
     <Content Include="Views\Wishlist\Edit.cshtml" />
-    <Content Include="Views\Order\Index.cshtml" />
-    <Content Include="Views\Cart\Checkout.cshtml" />
-    <Content Include="Views\Cart\AddToCart.cshtml" />
-    <Content Include="Views\Cart\Confirm.cshtml" />
+    <Content Include="Views\Book\Index.cshtml" />
+    <Content Include="Views\BookType\Index.cshtml" />
+    <Content Include="Views\Book\CreateBook.cshtml" />
+    <Content Include="Views\Book\Details.cshtml" />
+    <Content Include="Views\Book\Edit.cshtml" />
+    <Content Include="Views\gallery\Index.cshtml" />
+    <Content Include="Views\gallery\AddPicture.cshtml" />
+    <Content Include="Views\Book\Delete.cshtml" />
+    <Content Include="Views\Technology\Index.cshtml" />
+    <Content Include="Views\Technology\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Author\" />
@@ -324,8 +378,41 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201408130920591_complex.resx">
-      <DependentUpon>201408130920591_complex.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201407280957487_new.resx">
+      <DependentUpon>201407280957487_new.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407281023045_this.resx">
+      <DependentUpon>201407281023045_this.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407281032400_carts.resx">
+      <DependentUpon>201407281032400_carts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407281039465_sick.resx">
+      <DependentUpon>201407281039465_sick.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407281050249_date.resx">
+      <DependentUpon>201407281050249_date.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407292258075_ihavenoidea.resx">
+      <DependentUpon>201407292258075_ihavenoidea.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407300006229_ilzm.resx">
+      <DependentUpon>201407300006229_ilzm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407311425250_grantMyWish.resx">
+      <DependentUpon>201407311425250_grantMyWish.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408010815495_darrenMesseditup.resx">
+      <DependentUpon>201408010815495_darrenMesseditup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408010851157_broken.resx">
+      <DependentUpon>201408010851157_broken.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408011140459_z.resx">
+      <DependentUpon>201408011140459_z.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408060907008_as.resx">
+      <DependentUpon>201408060907008_as.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

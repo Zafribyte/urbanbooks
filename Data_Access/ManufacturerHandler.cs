@@ -23,8 +23,9 @@ namespace urbanbooks
                     foreach (DataRow row in table.Rows)
                     {
                         Manufacturer manu = new Manufacturer();
-                        manu.ManufacturerID = Convert.ToInt32(row["ManufacturerID"]);
-                        manu.Name = row["Name"].ToString();                       
+                        manu.ManufacturerID = Convert.ToInt32(row["KeywordID"]);
+                        manu.Name = row["Keywords"].ToString();                       
+                       // manu.ProductID = Convert.ToInt32(row["ProductID"]);
                         ManufacturerList.Add(manu);
                     }
                 }

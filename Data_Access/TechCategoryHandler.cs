@@ -14,7 +14,7 @@ namespace urbanbooks
         {
             List<TechCategory> TechCategoryList = null;
 
-            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewAllTechnologyCategory",
+            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewAllTechCategories",
                 CommandType.StoredProcedure))
             {
                 if (table.Rows.Count > 0)
@@ -24,7 +24,7 @@ namespace urbanbooks
                     {
                         TechCategory category = new TechCategory();
                         category.TechCategoryID = Convert.ToInt32(row["TechCategoryID"]);
-                        category.CategoryName = row["CategoryName"].ToString();
+                        category.CategoryName = row["categoryName"].ToString();
                         category.CategoryDescription = row["CategoryDescription"].ToString();
                         TechCategoryList.Add(category);
                     }

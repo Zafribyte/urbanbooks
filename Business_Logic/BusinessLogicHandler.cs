@@ -11,8 +11,6 @@ namespace urbanbooks
 
         #region COMMON ACTIONS
 
-        public List<Manufacturer> GetManufaturers()
-        { ManufacturerHandler myHandler = new ManufacturerHandler(); return myHandler.GetManufacturerList(); }
         public List<Supplier> GetSuppliers()
         { SupplierHandler myHandler = new SupplierHandler(); return myHandler.GetSupplierList(); }    //ADMIN & SYSTEM
 
@@ -22,10 +20,10 @@ namespace urbanbooks
         public List<Company> GetCompanyDetails()
         { CompanyHandler myHandler = new CompanyHandler(); return myHandler.CompanyDetails(); }
 
-        public BookCategory GetBookType(int BookCategoryID)
+        public BookCategory GetBookCategory(int BookCategoryID)
         { BookCategoryHandler myhandler = new BookCategoryHandler(); return myhandler.GetBookCategory(BookCategoryID); } //ADMIN, USER & SYSTEM
 
-        public List<BookCategory> GetBookTypeList()
+        public List<BookCategory> GetBookCategoryList()
         { BookCategoryHandler myhandler = new BookCategoryHandler(); return myhandler.GetBookCategoryList(); }
 
         public Special GetSpecialDetails(int SpecialID)
@@ -97,20 +95,25 @@ namespace urbanbooks
         #region ADMIN ACTIONS
 
             #region BOOK
-        public Book GetBook(int ProductID)
+        public Book GetBook(int BookID)
         {
             BookHandler myHandler = new BookHandler();
-            return myHandler.GetBookDetails(ProductID);
+            return myHandler.GetBookDetails(BookID);
         }
 
         public bool AddBook(Book book)
         {
             BookHandler myHandler = new BookHandler();
-            bool tryAdd = false;
-            if (myHandler.InsertBookProduct(book) == true && myHandler.InsertBook(book) == true)
-                tryAdd = true;
+            return myHandler.InsertBook(book);
+        }
+        public Book AddExperimentBook(Book book)
+        {
+            BookHandler myHandler = new BookHandler();
+            Book b = new Book();
 
-            return tryAdd;
+            b = myHandler.experimentalBook(book);
+
+            return b;
         }
 
         public bool UpdateBook(Book book)
@@ -124,8 +127,9 @@ namespace urbanbooks
             return mybinder;
         }
 
-        public bool DeleteBook(int ProductID)
-        { BookHandler myHandler = new BookHandler(); return myHandler.DeleteBookProduct(ProductID); }
+        public bool DeleteBook(int BookID)
+        { BookHandler myHandler = new BookHandler(); 
+          return myHandler.DeleteBookProduct(BookID); }
         #endregion
 
             #region TECHNOLOGY
@@ -140,7 +144,15 @@ namespace urbanbooks
             else
                 return myBinder;
         }
+        public Technology AddExperimentTech(Technology tech)
+        {
+            TechnologyHandler myHandler = new TechnologyHandler();
+            Technology t = new Technology();
 
+            t = myHandler.experimentalTech(tech);
+
+            return t;
+        }
         public bool UpdateTechnology(Technology gadget)
         {
             TechnologyHandler myHandler = new TechnologyHandler();

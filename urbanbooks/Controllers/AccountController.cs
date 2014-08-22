@@ -5,18 +5,15 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using urbanbooks.Models;
-using System.Data.Entity.Core.Objects;
 
 namespace urbanbooks.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
@@ -94,9 +91,9 @@ namespace urbanbooks.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-                //Customer Customers = new Customer() { FirstName = model.FirstName, LastName = model.LastName, Email = model.Email, PhysicalAddress = model.PhysicalAddress, CellPhone = model.CellPhone };
-                //Cart Carts = new Cart { DateLastModified = DateTime.Now };
-                //Wishlist Wishlists = new Wishlist { CustomerID = user.Customers.CustomerID };
+                user.Customers = new Customer() { FirstName = model.FirstName, LastName = model.LastName, Email = model.Email, PhysicalAddress = model.PhysicalAddress, CellPhone = model.CellPhone };
+                user.Carts = new Cart { DateLastModified = DateTime.Now };
+                user.Wishlists = new Wishlist { CustomerID = user.Customers.CustomerID };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -131,22 +128,19 @@ namespace urbanbooks.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            Customer cust = new Customer();
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-                cust.User_Id = user.Id;
-                CustomerContext context = new CustomerContext();
+                user.Customers = new Customer { Email = model.Email };
                 user.Carts = new Cart { DateLastModified = DateTime.Now };
-                user.Wishlists = new Wishlist { };
-                IdentityResult result = new IdentityResult();
+                user.Wishlists = new Wishlist {CustomerID = user.Customers.CustomerID };
+                IdentityResult result = new IdentityResult(); 
                 try
-                { result = await UserManager.CreateAsync(user, model.Password); context.Customers.Add(cust); context.SaveChanges(); }
+                {result = await UserManager.CreateAsync(user, model.Password); }
                 catch(Exception e)
                 { Response.Write("" + e); }
                 if (result.Succeeded)
                 {
-
                     await SignInAsync(user, isPersistent: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

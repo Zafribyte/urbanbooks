@@ -19,130 +19,64 @@
         <th>
             <label>Unit Price</label>
         </th>
-        <th>
-            <label>Total Price</label>
-        </th>
-        <th>
-        </th>
     </tr>
 
     @if (Model.allCartItem != null)
     {
         foreach (var item in Model.allCartItem)
         {
-            foreach (var count in Model.secureCart)
-            {
-                if (count.ProductID == item.ProductID)
+            <tr>
+                @if (Model.allTechnology != null || Model.allBook != null)
                 {
-                    <tr>
-                        @if (Model.allTechnology != null || Model.allBook != null)
+                    foreach (var book in Model.allBook)
+                    {
+                        if (book.ProductID == item.ProductID)
                         {
-                            foreach (var book in Model.allBook)
-                            {
-                                if (book.ProductID == item.ProductID)
-                                {
-                                    <td>
-                                        @Html.DisplayFor(modelItem => book.BookTitle)
-                                    </td>
-                                    <td class="form-group form-inline">
-                                        @Html.EditorFor(modelItem => item.Quantity, new { @id="quantity" })
-                                    </td>
-                                    @*                            <td>
-                                            @Html.DisplayFor(modelItem => book.Description)
-                                        </td>*@
-                                    <td>
-                                        @Html.DisplayFor(modelItem => book.SellingPrice)
-                                    </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => book.ProductTitle)
+                            </td>
+                            <td class="form-group form-inline">
+                                @Html.EditorFor(modelItem => item.Quantity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => book.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => book.SellingPrice)
+                            </td>
+                        }
+                    }
 
-                                    if (count.ProductID == item.ProductID)
-                                    {
-                                        <td>
-                                            @Html.DisplayFor(modelItem => count.TotalPerItem)
-                                        </td>
-                                    }
-                                }
-                            }
-
-                            foreach (var gadget in Model.allTechnology)
-                            {
-                                if (gadget.ProductID == item.ProductID)
-                                {
-                                    <td>
-                                        @Html.DisplayFor(modelItem => gadget.ModelName)
-                                    </td>
-                                    <td>
-                                        @Html.TextBoxFor(modelItem => item.Quantity, new { @id="quantity"})
-                                    </td>
-                                    @*                            <td width="400px">
-                                            @Html.DisplayFor(modelItem => gadget.Description)
-                                        </td>*@
-                                    <td>
-                                        @Html.DisplayFor(modelItem => gadget.SellingPrice)
-                                    </td>
-
-                                    if (count.ProductID == item.ProductID)
-                                    {
-                                        <td>
-                                            @Html.DisplayFor(modelItem => count.TotalPerItem)
-                                        </td>
-                                    }
-                                }
-                            }
+                    foreach (var gadget in Model.allTechnology)
+                    {
+                        if (gadget.ProductID == item.ProductID)
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => gadget.ProductTitle)
+                            </td>
+                            <td>
+                                @Html.EditorFor(modelItem => item.Quantity)
+                            </td>
+                            <td width="400px">
+                                @Html.DisplayFor(modelItem => gadget.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => gadget.SellingPrice)
+                            </td>
                         }
 
-
-                        <td>
-                            @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'> </span>", "Add to wishlist", "Add", "Wishlist", new { productId = item.ProductID, CartItemID = item.CartItemID }, htmlAttributes: new { @class = "btn btn-default" })
-                            @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'> </span>", "View Product Details", "Details", "Book", new { bookId = item.ProductID }, htmlAttributes: new { @class = "btn btn-default" })
-                            @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-remove'> </span>", "Remove from cart", "Delete", "Cart", new { CartItemID = item.CartItemID }, htmlAttributes: new { @class = "btn btn-default" })
-                        </td>
-                    </tr>
+                    }
                 }
-            }
+
+
+                <td>
+                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'> </span>", "Add to wishlist", "Add", "Wishlist", new { productId = item.ProductID, CartItemID = item.CartItemID }, htmlAttributes: new { @class = "btn btn-default" })
+                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'> </span>", "View Product Details", "Details", "Book", new { bookId = item.ProductID }, htmlAttributes: new { @class = "btn btn-default" })
+                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-remove'> </span>", "Remove from cart", "Delete", "Cart", new { CartItemID = item.CartItemID }, htmlAttributes: new { @class = "btn btn-default" })
+                </td>
+            </tr>
         }
     }
-    @foreach (var item in Model.ItsA_wrap)
-    {
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><strong>Sub Total</strong></td>
-            <td>@Html.DisplayFor(modelItem => item.SubTotal)</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><strong>VAT Total</strong></td>
-            <td>@Html.DisplayFor(modelItem => item.VatAddedTotal)</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><strong>Total</strong></td>
-            <td>@Html.DisplayFor(modelItem => item.CartTotal)</td>
-        </tr>
 
-    }
 </table>
-@Html.NoEncodeActionLink("<span class='glyphicon glyphicon-circle-arrow-left'> Back </span>", "Back", "Add", "Wishlist", new { }, htmlAttributes: new { @class = "btn btn-default" })
-@Html.NoEncodeActionLink("<span>Checkout <span class='glyphicon glyphicon-circle-arrow-right'></span></span>", "Proceed to Checkout", "Checkout", "Cart", new { }, htmlAttributes: new { @class = "btn btn-default" })
 
-@Scripts.Render("~/bundles/jquery")
-
-<script type="text/javascript">
-    $('#input').change(function () {
-        $.ajax({
-            url: '@Url.Action("Edit", "Cart")',
-            type: 'post',
-            data: {
-                Text: $('#quantity').val()
-            },
-            success: function (_result) {
-                $('#TaskDesc').val(_result.foo);
-            }
-        });
-    });
-</script>

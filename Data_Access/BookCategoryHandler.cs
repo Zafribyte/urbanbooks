@@ -25,6 +25,7 @@ namespace urbanbooks
                     {
                         BookCategory bookCategory = new BookCategory();
                         bookCategory.BookCategoryID = Convert.ToInt32(row["BookCategoryID"]);
+                        bookCategory.CategoryName = row["CategoryName"].ToString();
                         bookCategory.CategoryDescription = row["CategoryDescription"].ToString();
                         bookCategoryList.Add(bookCategory);
                     }
@@ -38,7 +39,7 @@ namespace urbanbooks
             BookCategory bookCategory = null;
 
             SqlParameter[] Params = { new SqlParameter("@BookCategoryID", BookCategoryID) };
-            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewSpecificBookType",
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewSpecificBookCategory",
                 CommandType.StoredProcedure, Params))
             {
                 if (table.Rows.Count == 1)
@@ -93,7 +94,7 @@ namespace urbanbooks
             {
                 new SqlParameter("@Description", bookCategory.CategoryDescription)
             };
-            return DataProvider.ExecuteNonQuery("sp_InsertBookType", CommandType.StoredProcedure,
+            return DataProvider.ExecuteNonQuery("sp_InsertBookCategory", CommandType.StoredProcedure,
                 Params);
         }
 
