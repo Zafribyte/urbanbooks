@@ -66,7 +66,8 @@ namespace urbanbooks.Controllers
                 }
             }
             double cartTotal = Convert.ToDouble(Session["cartTotal"].ToString());
-            List<Company> company = myHandler.GetCompanyDetails();
+            List<Company> company = new List<Company>();
+            company = myHandler.GetCompanyDetails();
             double vat = 0;
             foreach (var item in company)
             { vat = item.VATPercentage; }
