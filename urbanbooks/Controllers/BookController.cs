@@ -33,7 +33,7 @@ namespace urbanbooks.Controllers
             Book book = myHandler.GetBook(bookId);
             return View(book);
         }
-        public ActionResult CreateBook()
+        public ActionResult Create()
         {
             #region Create
             AddNewBookViewModel bookM = new AddNewBookViewModel();
@@ -132,7 +132,7 @@ namespace urbanbooks.Controllers
                 {
                     if (file != null)
                     {
-                        file.SaveAs(HttpContext.Server.MapPath("~/Uploads/Books/") + file.FileName);
+                        file.SaveAs(HttpContext.Server.MapPath("~/Uploads/Books/file.FileName") + file.FileName);
                         book.CoverImage = file.FileName;
                     }
 
