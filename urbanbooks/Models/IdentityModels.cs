@@ -19,6 +19,8 @@ namespace urbanbooks.Models
             // Add custom user claims here
             return userIdentity;
         }
+        [DataType(DataType.MultilineText)]
+        public string Address { get; set; }
         public virtual Wishlist Wishlists { get; set; }
         public virtual Cart Carts { get; set; }
 
@@ -32,7 +34,7 @@ namespace urbanbooks.Models
         public int CustomerID
         { get; set; }
         [ScaffoldColumn(false)]
-        public string User_Id 
+        public string User_Id
         { get; set; }
         [Display(Name = "Name")]
         public string FirstName

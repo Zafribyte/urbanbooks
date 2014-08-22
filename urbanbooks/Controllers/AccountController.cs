@@ -30,7 +30,8 @@ namespace urbanbooks.Controllers
             UserManager = userManager;
         }
 
-        public ApplicationUserManager UserManager {
+        public ApplicationUserManager UserManager
+        {
             get
             {
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
@@ -60,7 +61,7 @@ namespace urbanbooks.Controllers
                 {
                     await SignInAsync(user, model.RememberMe);
                     //return RedirectToLocal(returnUrl);
-                    
+
                     return Json(new { success = true, url = returnUrl });
                 }
                 else
@@ -76,7 +77,7 @@ namespace urbanbooks.Controllers
         {
             CartActions act = new CartActions();
             Cart cart = new Cart();
-           // cart = await act.GetCartAsync(user.Customers.CustomerID);
+            // cart = await act.GetCartAsync(user.Customers.CustomerID);
             ViewBag.CartTotal = await act.GetTotalAsync(cart.CartID);
         }
 
@@ -91,13 +92,18 @@ namespace urbanbooks.Controllers
         [HttpPost]
         public async Task<ActionResult> FullRegister(FullRegisterViewModel model)
         {
+            CustomerContext context = new CustomerContext();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-                //Customer Customers = new Customer() { FirstName = model.FirstName, LastName = model.LastName, Email = model.Email, PhysicalAddress = model.PhysicalAddress, CellPhone = model.CellPhone };
-                //Cart Carts = new Cart { DateLastModified = DateTime.Now };
-                //Wishlist Wishlists = new Wishlist { CustomerID = user.Customers.CustomerID };
+                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, Address = model.Address, PhoneNumber = model.CellPhone };
+                Customer Customers = new Customer() { FirstName = model.FirstName, LastName = model.LastName, User_Id = user.Id };
+                user.Carts = new Cart { DateLastModified = DateTime.Now };
+                IQueryable<Customer> cust = context.Customers;
+                var i = context.Customers.ToList().LastOrDefault();
+                user.Wishlists = new Wishlist { CustomerID = i.CustomerID };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+                context.Customers.Add(Customers);
+                context.SaveChanges();
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
@@ -106,7 +112,7 @@ namespace urbanbooks.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                   // return Json(new { success = true });
+                    // return Json(new { success = true });
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -142,7 +148,7 @@ namespace urbanbooks.Controllers
                 IdentityResult result = new IdentityResult();
                 try
                 { result = await UserManager.CreateAsync(user, model.Password); context.Customers.Add(cust); context.SaveChanges(); }
-                catch(Exception e)
+                catch (Exception e)
                 { Response.Write("" + e); }
                 if (result.Succeeded)
                 {
@@ -171,7 +177,7 @@ namespace urbanbooks.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
-            if (userId == null || code == null) 
+            if (userId == null || code == null)
             {
                 return View("Error");
             }
@@ -225,11 +231,11 @@ namespace urbanbooks.Controllers
         {
             return View();
         }
-	
+
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
-            if (code == null) 
+            if (code == null)
             {
                 return View("Error");
             }
@@ -457,13 +463,13 @@ namespace urbanbooks.Controllers
                     if (result.Succeeded)
                     {
                         await SignInAsync(user, isPersistent: false);
-                        
+
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                         // Send an email with this link
                         // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                         // SendEmail(user.Email, callbackUrl, "Confirm your account", "Please confirm your account by clicking this link");
-                        
+
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -573,7 +579,8 @@ namespace urbanbooks.Controllers
 
         private class ChallengeResult : HttpUnauthorizedResult
         {
-            public ChallengeResult(string provider, string redirectUri) : this(provider, redirectUri, null)
+            public ChallengeResult(string provider, string redirectUri)
+                : this(provider, redirectUri, null)
             {
             }
 
