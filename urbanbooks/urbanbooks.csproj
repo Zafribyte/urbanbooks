@@ -210,6 +210,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddNewBookViewModel.cs" />
+    <Compile Include="Models\AddNewTechViewModel.cs" />
     <Compile Include="Models\CartActions.cs" />
     <Compile Include="Models\CustomerContext.cs" />
     <Compile Include="Models\EmployeeContext.cs" />

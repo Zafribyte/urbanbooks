@@ -58,7 +58,6 @@
     <Compile Include="Company.cs" />
     <Compile Include="CompanyHandler.cs" />
     <Compile Include="DataProvider.cs" />
-    <Compile Include="DBContext.cs" />
     <Compile Include="Delivery.cs" />
     <Compile Include="DeliveryHandler.cs" />
     <Compile Include="Invoice.cs" />
