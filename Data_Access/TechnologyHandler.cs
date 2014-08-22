@@ -11,7 +11,6 @@ namespace urbanbooks
     public class TechnologyHandler
     {
         Company company = new Company();
-        Keyword keys = new Keyword();
         public List<Technology> GetTechnologyList()
         {
             List<Technology> TechnologyList = null;
@@ -25,19 +24,20 @@ namespace urbanbooks
                     foreach (DataRow row in table.Rows)
                     {
                         Technology Techno = new Technology();
-                        Techno.ProductID = Convert.ToInt32(row["ProductID"]);
+                        Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
                         Techno.ModelName = row["ModelName"].ToString();
-                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
-                        Techno.Specs= row["Specs"].ToString();
-                        Techno.TechCategoryID= (int)row["TechCategoryID"];
+                        Techno.Specs = row["Specs"].ToString();
                         Techno.ModelNumber = row["ModelNumber"].ToString();
-                        Techno.ManufacturerID = Convert.ToInt32(row["ManufacturerID"]);
+                        Techno.ManufacturerID = (int)row["ManufacturerID"];
+                        Techno.TechCategoryID = (int)row["TechCategoryID"];
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
                         if (row["ImageFront"] != DBNull.Value)
                         { Techno.ImageFront = (byte)row["ImageFront"]; }
-                        if (row["ImageSide"] != DBNull.Value)
-                        { Techno.ImageTop = (byte)row["ImageSide"]; }
                         if (row["ImageTop"] != DBNull.Value)
-                        { Techno.ImageSide = (byte)row["ImageTop"]; }
+                        { Techno.ImageTop = (byte)row["ImageTop"]; }
+                        if (row["ImageSide"] != DBNull.Value)
+                        { Techno.ImageSide = (byte)row["ImageSide"]; }
                         TechnologyList.Add(Techno);
                     }
                 }
@@ -50,7 +50,7 @@ namespace urbanbooks
         {
             Technology Techno = null;
 
-            SqlParameter[] Params = { new SqlParameter("@_ProductID", ProductID) };
+            SqlParameter[] Params = { new SqlParameter("@ProductID", ProductID) };
             using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewSpecificTechUser",
                 CommandType.StoredProcedure, Params))
             {
@@ -58,40 +58,92 @@ namespace urbanbooks
                 {
                     DataRow row = table.Rows[0];
                     Techno = new Technology();
+                    Techno.TechID = Convert.ToInt32(row["TechID"]);
                     Techno.ProductID = Convert.ToInt32(row["ProductID"]);
                     Techno.Specs = row["Specs"].ToString();
                     Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
-                    Techno.TechID = Convert.ToInt32(row["TechnologyID"]);
-                    Techno.Manufacturer = row["Manufacturer"].ToString();
+
+                    Techno.ManufacturerID = (int)row["ManufacturerID"];
                     Techno.ModelNumber = row["ModelNumber"].ToString();
-                    if (row["ProductImageFront"] != DBNull.Value)
-                    { Techno.ImageFront = (byte)row["ProductImageFront"]; }
-                    if (row["ProductImageTop"] != DBNull.Value)
-                    { Techno.ImageTop = (byte)row["ProductImageTop"]; }
-                    if (row["ProductImageSide"] != DBNull.Value)
-                    { Techno.ImageSide = (byte)row["ProductImageSide"]; }
+                    if (row["ImageFront"] != DBNull.Value)
+                    { Techno.ImageFront = (byte)row["ImageFront"]; }
+                    if (row["ImageTop"] != DBNull.Value)
+                    { Techno.ImageTop = (byte)row["ImageTop"]; }
+                    if (row["ImageSide"] != DBNull.Value)
+                    { Techno.ImageSide = (byte)row["ImageSide"]; }
                 }
             }
             return Techno;
         }//STORED PROCEDURE
         #endregion
 
+        public Technology experimentalTech(Technology tech)
+        {
+            Technology tc;
+            SqlParameter[] Params = {
+                                        new SqlParameter("@CostPrice", tech.CostPrice),
+                                        new SqlParameter("@SellingPrice", tech.SellingPrice),
+                                        new SqlParameter("@IsBook", tech.IsBook = false),
+                                        new SqlParameter("@DateAdded", tech.DateAdded)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ManhattanProject", CommandType.StoredProcedure, Params))
+            {
+                tc = new Technology();
+                if (table.Rows.Count == 1)
+                {
+                    DataRow row = table.Rows[0];
+                    tc.ProductID = Convert.ToInt32(row["ProductID"]);
+                }
+
+            }
+            return tc;
+        }
+
         #region Admin
 
+        public Technology GetTechnologyDetails(int TechID)
+        {
+            Technology Techno = null;
+
+            SqlParameter[] Params = { new SqlParameter("@TechID", TechID) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewSpecificTechAdmin",
+                CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count == 1)
+                {
+                    DataRow row = table.Rows[0];
+                    Techno = new Technology();
+                    Techno.TechID = Convert.ToInt32(row["TechID"]);
+                    //Techno.ProductID = Convert.ToInt32(row["ProductID"]);
+                    Techno.ModelName = row["ModelName"].ToString();
+                    Techno.Specs = row["Specs"].ToString();
+                    Techno.ModelNumber = row["ModelNumber"].ToString();
+                    Techno.CostPrice = Convert.ToDouble(row["CostPrice"]);
+                    Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                    //Techno.ManufacturerID = (int)row["ManufacturerID"];
+                    //Techno.TechCategoryID = (int)row["TechCategoryID"];
+                    if (row["ImageFront"] != DBNull.Value)
+                    { Techno.ImageFront = (byte)row["ImageFront"]; }
+                    if (row["ImageLeft"] != DBNull.Value)
+                    { Techno.ImageTop = (byte)row["ImageLeft"]; }
+                    if (row["ImageRight"] != DBNull.Value)
+                    { Techno.ImageSide = (byte)row["ImageRight"]; }
+                }
+            }
+            return Techno;
+        }
         public bool UpdateTechnologyProduct(Technology TechnoProduct)
         {
             SqlParameter[] Params = new SqlParameter[]
             {
                 new SqlParameter("@ProductID", TechnoProduct.ProductID ),
                 new SqlParameter("@ProductTitle", TechnoProduct.ModelName),
-                new SqlParameter("@Description", TechnoProduct.Specs),
+                new SqlParameter("@Specs", TechnoProduct.Specs),
                 new SqlParameter("@CostPrice", TechnoProduct.CostPrice),
                 new SqlParameter("@MarkUp", company.MarkUp),
                 new SqlParameter("@SellingPrice", TechnoProduct.SellingPrice),
                 new SqlParameter("@SupplierID", TechnoProduct.SupplierID),
                 new SqlParameter("@DateAdded", TechnoProduct.DateAdded),
-                new SqlParameter("@KeyWords", keys.KeywordID), //Note
-                //SOME MISSING PARAMS
                 new SqlParameter("@TechnologyID", TechnoProduct.TechID),
                 new SqlParameter("@Make", TechnoProduct.Manufacturer),
                 new SqlParameter("@TechType", TechnoProduct.TechCategoryID),
@@ -106,10 +158,14 @@ namespace urbanbooks
             SqlParameter[] Params = new SqlParameter[]
             {
                 new SqlParameter("@ProductID", TechnoProduct.ProductID),
-                new SqlParameter("@TechnologyID", TechnoProduct.TechID ),
+                new SqlParameter("@ModelName", TechnoProduct.ModelName),
                 new SqlParameter("@ModelNumber", TechnoProduct.ModelNumber),
-                new SqlParameter("@Manufacturer", TechnoProduct.Manufacturer),
-                new SqlParameter("@TechnologyTypeID", TechnoProduct.TechCategoryID)
+                new SqlParameter("@Specs", TechnoProduct.Specs),
+                new SqlParameter("@ManufacturerID", TechnoProduct.ManufacturerID),
+                new SqlParameter("@TechCategoryID", TechnoProduct.TechCategoryID),
+                new SqlParameter("@ImageFront", TechnoProduct.ImageFront),
+                new SqlParameter("@ImageTop", TechnoProduct.ImageTop),
+                new SqlParameter("@ImageSide", TechnoProduct.ImageSide)
             };
             return DataProvider.ExecuteNonQuery("sp_InsertTechnology", CommandType.StoredProcedure,
                 Params);
@@ -120,14 +176,10 @@ namespace urbanbooks
 
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@ProductTitle", TechnoProduct.ModelName),
-                new SqlParameter("@Description", TechnoProduct.Specs),
                 new SqlParameter("@CostPrice", TechnoProduct.CostPrice),
-                new SqlParameter("@MarkUp", company.MarkUp),
                 new SqlParameter("@SellingPrice", TechnoProduct.SellingPrice),
-                new SqlParameter("@SupplierID", TechnoProduct.SupplierID),
                 new SqlParameter("@DateAdded", TechnoProduct.DateAdded),
-                new SqlParameter("@KeyWords", keys.KeywordID),
+                new SqlParameter("@IsBook", TechnoProduct.IsBook = false)
             };
             return DataProvider.ExecuteNonQuery("sp_InsertProduct", CommandType.StoredProcedure,
                 Params);
@@ -158,37 +210,9 @@ namespace urbanbooks
                 Params);
         }//STORED PROCEDURE
 
-        public Technology GetTechnologyDetails(int ProductID)
-        {
-            Technology Techno = null;
-
-            SqlParameter[] Params = { new SqlParameter("@_ProductID", ProductID) };
-            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewSpecificTechnology",
-                CommandType.StoredProcedure, Params))
-            {
-                if (table.Rows.Count == 1)
-                {
-                    DataRow row = table.Rows[0];
-                    Techno = new Technology();
-                    Techno.ProductID = Convert.ToInt32(row["ProductID"]);
-                    Techno.Specs = row["Description"].ToString();
-                    Techno.CostPrice = Convert.ToDouble(row["CostPrice"]);
-                    company.MarkUp = Convert.ToDouble(row["MarkUp"]);
-                    Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
-                    Techno.TechID = Convert.ToInt32(row["TechnologyID"]);
-                    Techno.Manufacturer = row["Manufacturer"].ToString();
-                    Techno.ModelNumber = row["ModelNumber"].ToString();
-                    if (row["ProductImageFront"] != DBNull.Value)
-                    { Techno.ImageFront = (byte)row["ProductImageFront"]; }
-                    if (row["ProductImageLeft"] != DBNull.Value)
-                    { Techno.ImageTop = (byte)row["ProductImageLeft"]; }
-                    if (row["ProductImageRight"] != DBNull.Value)
-                    { Techno.ImageSide = (byte)row["ProductImageRight"]; }
-                }
-            }
-            return Techno;
-        }//STORED PROCEDURE
+        //STORED PROCEDURE
 
         #endregion
     }
 }
+
