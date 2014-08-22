@@ -55,8 +55,6 @@
                     @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>","Add to Wishlist", "Add", "Wishlist", new { productId = item.ProductID}, htmlAttributes: new { @class = "btn btn-default"})
                     @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "View", "Details", "Book", new { bookId = item.ProductID }, htmlAttributes: new { @class = "btn btn-default" })
                     @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "AddToCart", "Cart", new { productId = item.ProductID }, htmlAttributes: new { @class = "btn btn-default" }) 
-                    @Html.ActionLink("Details", "Details", new { bookId = item.BookID }) |
-                    @Html.ActionLink("Delete", "Delete", new { bookId = item.BookID })
                 </td>
 
             </tr>
