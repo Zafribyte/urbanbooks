@@ -41,38 +41,23 @@ namespace urbanbooks
         public override int ProductID
         { get; set; }
 
-        [Display(Name="Cost Price")]
-        public override double CostPrice 
+        [Display(Name = "Cost Price")]
+        public override double CostPrice
         { get; set; }
 
-        [Display(Name="Price")]
+        [Display(Name = "Price")]
         [DataType(DataType.Currency)]
         public override double SellingPrice
         { get; set; }
 
         [ScaffoldColumn(false)]
-        public override DateTime DateAdded 
+        public override DateTime DateAdded
         { get; set; }
 
         [ScaffoldColumn(false)]
         public override int SupplierID
         { get; set; }
-   
-        
 
 
-        //TECHTYPE
-
-        public List<TechCategory> TechCategoryList
-        { get; set; }
-
-        //EMPLOYEE
-
-        //public List<Employee> Employee
-        //{ get; set; }
-        //SUPPLIER
-
-        public List<Supplier> SupplierList 
-        { get; set; }
     }
 }

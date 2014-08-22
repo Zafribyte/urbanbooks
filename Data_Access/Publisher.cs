@@ -11,6 +11,5 @@ namespace urbanbooks
         public int PublisherID { get; set; }
         public string Name { get; set; }
 
-        public List<Book> BookList { get; set; }
     }
 }

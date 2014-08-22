@@ -27,7 +27,7 @@ namespace urbanbooks.Controllers
             int Id = (int)thisUser.Carts.CartID;
             Session["cartTotal"] = await act.GetTotalAsync(Id);
             Session["wishlistTotal"] = await wishAct.GetWishlistTotal(thisUser.Wishlists.WishlistID);
-            IEnumerable<CartItem> myItems = await act.GetCartItemsAsync(Id);
+            IEnumerable<CartItem> myItems = act.GetCartItemsAsync(Id);
             myHandler = new BusinessLogicHandler();
             IEnumerable<Book> ifBooks = myHandler.GetBooks();
             IEnumerable<Technology> ifGadget = myHandler.GetTechnology();
@@ -187,7 +187,7 @@ namespace urbanbooks.Controllers
             Session["cartTotal"] = await act.GetTotalAsync(Id);
             Session["wishlistTotal"] = await wishAct.GetWishlistTotal(thisUser.Wishlists.WishlistID);
             List<CartItem> myItems = new List<CartItem>(); 
-              myItems =(List<CartItem>) await act.GetCartItemsAsync(Id);
+              myItems =(List<CartItem>) = act.GetCartItemsAsync(Id);
 
             myHandler = new BusinessLogicHandler();
             IEnumerable<Book> ifBooks = myHandler.GetBooks();

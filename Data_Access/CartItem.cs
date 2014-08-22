@@ -24,7 +24,5 @@ namespace urbanbooks
         [ScaffoldColumn(false)]
         public DateTime DateAdded 
         { get; set; }
-
-        public virtual Product Products { get; set; } 
     }
 }
