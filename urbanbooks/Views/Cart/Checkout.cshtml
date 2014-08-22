@@ -55,7 +55,7 @@
                                     if (count.ProductID == item.ProductID)
                                     {
                                         <tr>
-                                            @if (Model.allTechnology != null || Model.allBook != null)
+                                            @if (Model.allBook != null)
                                             {
                                                 foreach (var book in Model.allBook)
                                                 {
@@ -77,33 +77,38 @@
                                                                 @Html.DisplayFor(modelItem => count.TotalPerItem)
                                                             </td>
                                                         }
+                                                        <td width="100px">
+                                                            @Html.ActionLink("Remove", "_Remove", "Cart", new { id = item.CartItemID }, new { @class = "btn btn-danger" })
+                                                        </td>
                                                     }
                                                 }
-
-                                                foreach (var gadget in Model.allTechnology)
+                                                if (Model.allTechnology != null)
                                                 {
-                                                    if (gadget.ProductID == item.ProductID)
+                                                    foreach (var gadget in Model.allTechnology)
                                                     {
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => gadget.ModelName)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.Quantity)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => gadget.SellingPrice)
-                                                        </td>
-
-                                                        if (count.ProductID == item.ProductID)
+                                                        if (gadget.ProductID == item.ProductID)
                                                         {
                                                             <td>
-                                                                @Html.DisplayFor(modelItem => count.TotalPerItem)
+                                                                @Html.DisplayFor(modelItem => gadget.ModelName)
                                                             </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Quantity)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => gadget.SellingPrice)
+                                                            </td>
+
+                                                            if (count.ProductID == item.ProductID)
+                                                            {
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => count.TotalPerItem)
+                                                                </td>
+                                                            }
                                                         }
+                                                        <td width="100px">
+                                                            @Html.ActionLink("Remove", "_Remove", "Cart", new { id = item.CartItemID }, new { @class = "btn btn-danger" })
+                                                        </td>
                                                     }
-                                                    <td width="100px">
-                                                        @Html.ActionLink("Remove", "_Remove", "Cart", new { id = item.CartItemID }, new { @class = "btn btn-danger" })
-                                                    </td>
                                                 }
                                             }
                                         </tr>
@@ -166,24 +171,22 @@
                 <label class="control-label col-md-2">Delivery Type</label>
 
                 <div class="col-md-10">
-                    @Html.DropDownList("Service", Model.I_DeliveryList, new { @class = "form-control new" })
+                    @Html.DropDownList("ServiceName", Model.I_DeliveryList, new { @class = "form-control new" })
                 </div>
             </div>
             <script type="text/javascript">
                 $(".new").change(function () {
                     var selectedValue = $(this).val();
-                    if(selectedValue != "Delivery Service")
-                    {
+                    if (selectedValue != "Delivery Service") {
                         $.ajax({
                             url: '@Url.Action("GetDeliveryPrice", "Cart")',
                             type: 'post',
                             data: { 'selectedValue': selectedValue },
                             datatype: 'json',
-                            success: function (response) { $(".olden").val(response);}
+                            success: function (response) { $(".olden").val(response); }
                         })
                     }
-                    else
-                    {
+                    else {
                         $(".olden").val('');
                     }
                 });

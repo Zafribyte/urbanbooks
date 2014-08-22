@@ -24,7 +24,7 @@ namespace urbanbooks
                     {
                         Delivery delivery = new Delivery();
                         delivery.DeliveryServiceID = Convert.ToInt32(row["DeliveryServiceID"]);
-                        delivery.ServiceName = row["Service"].ToString();
+                        delivery.ServiceName = row["ServiceName"].ToString();
                         delivery.Price =Convert.ToDouble(row["Price"]);
                         DeliveryList.Add(delivery);
                     }
