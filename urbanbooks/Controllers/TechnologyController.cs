@@ -19,7 +19,7 @@ namespace urbanbooks.Controllers
         {
             myHandler = new BusinessLogicHandler();
             List<Technology> myGadgetList = myHandler.GetTechnology();
-            IEnumerable<Manufacturer> manufacturer = myHandler.GetManufaturers();
+            IEnumerable<Manufacturer> manufacturer = myHandler.GetManufacturers();
             ViewBag.Manufact = manufacturer;
             return View(myGadgetList);
         }
