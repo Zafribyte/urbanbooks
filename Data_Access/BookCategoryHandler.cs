@@ -25,6 +25,7 @@ namespace urbanbooks
                     {
                         BookCategory bookCategory = new BookCategory();
                         bookCategory.BookCategoryID = Convert.ToInt32(row["BookCategoryID"]);
+                        bookCategory.CategoryName = row["CategoryName"].ToString();
                         bookCategory.CategoryDescription = row["CategoryDescription"].ToString();
                         bookCategoryList.Add(bookCategory);
                     }
