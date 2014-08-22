@@ -25,6 +25,7 @@ namespace urbanbooks
                         Publisher publisher = new Publisher();
                         publisher.PublisherID = Convert.ToInt32(row["PublisherID"]);
                         publisher.Name = row["Publisher"].ToString();
+                        publisher.ProductID = Convert.ToInt32(row["ProductID"]);
                         PublisherList.Add(publisher);
                     }
                 }

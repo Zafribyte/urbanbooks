@@ -1,9 +1,8 @@
-﻿@using urbanbooks.Models;
-@model AddNewBookViewModel
+﻿@model urbanbooks.Book
 
 @{
     ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
 }
 
 <h2>Delete</h2>
@@ -14,51 +13,67 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.books.SellingPrice)
+            @Html.DisplayNameFor(model => model.ISBN)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.books.SellingPrice)
+            @Html.DisplayFor(model => model.ISBN)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.books.SupplierID)
+            @Html.DisplayNameFor(model => model.Publisher)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.books.SupplierID)
+            @Html.DisplayFor(model => model.Publisher)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.books.ISBN)
+            @Html.DisplayNameFor(model => model.ProductTitle)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.books.ISBN)
+            @Html.DisplayFor(model => model.ProductTitle)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.books.BookTitle)
+            @Html.DisplayNameFor(model => model.Description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.books.BookTitle)
+            @Html.DisplayFor(model => model.Description)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.books.Synopsis)
+            @Html.DisplayNameFor(model => model.CostPrice)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.books.Synopsis)
+            @Html.DisplayFor(model => model.CostPrice)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.books.CoverImage)
+            @Html.DisplayNameFor(model => model.MarkUp)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.books.CoverImage)
+            @Html.DisplayFor(model => model.MarkUp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SellingPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SellingPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KeyWords)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KeyWords)
         </dd>
 
     </dl>

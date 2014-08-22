@@ -27,7 +27,7 @@ namespace urbanbooks
         [ScaffoldColumn(false)]
         public int AuthorID
         { get; set; }
-        public string CoverImage
+        public byte CoverImage
         { get; set; }
 
         //OVERRIDE

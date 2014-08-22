@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace urbanbooks.Controllers
 {
+    [Authorize(Roles = "admin, employee")]
     public class OrderController : Controller
     {
         BusinessLogicHandler myHandler;
@@ -14,7 +15,11 @@ namespace urbanbooks.Controllers
         OrderItem item;
         public ActionResult Index()
         {
-            return View();
+            
+            myHandler = new BusinessLogicHandler();
+            List<Order> orderslist = myHandler.GetOrdersList();
+            
+            return View(orderslist);
         }
 
         public ActionResult Details(int orderId)

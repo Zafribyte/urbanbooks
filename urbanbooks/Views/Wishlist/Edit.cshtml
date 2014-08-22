@@ -34,10 +34,10 @@
                             if (book.ProductID == item.ProductID)
                             {
                                 <td>
-                                    @Html.DisplayFor(modelItem => book.ProductTitle)
+                                    @Html.DisplayFor(modelItem => book.BookTitle)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => book.Description)
+                                    @Html.DisplayFor(modelItem => book.Synopsis)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => book.SellingPrice)
@@ -50,10 +50,10 @@
                             if (gadget.ProductID == item.ProductID)
                             {
                                 <td>
-                                    @Html.DisplayFor(modelItem => gadget.ProductTitle)
+                                    @Html.DisplayFor(modelItem => gadget.ModelName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => gadget.Description)
+                                    @Html.DisplayFor(modelItem => gadget.Specifications)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => gadget.SellingPrice)
@@ -63,7 +63,7 @@
                         }
                     }
                     <td>
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'> </span>", "Add to cart", "AddToCart", "Cart", new { productId = item.ProductID, }, htmlAttributes: new { @class = "btn btn-default" })
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'> </span>", "Add to cart", "_AddToCart", "Cart", new { productId = item.ProductID, wishID = item.WishlistID }, htmlAttributes: new { @class = "btn btn-default" })
                         @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'> </span>", "View Product Details", "Details", "Book", new { bookId = item.ProductID }, htmlAttributes: new { @class = "btn btn-default" })
                         @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-remove'> </span>", "Remove from wishlist", "Delete", "Wishlist", new { WishlistItemID = item.WishlistItemID }, htmlAttributes: new { @class = "btn btn-default" })
                     </td>

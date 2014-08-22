@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace urbanbooks.Controllers
 {
+    [Authorize(Roles="admin, employee")]
     public class SupplierController : Controller
     {
         BusinessLogicHandler myHandler;

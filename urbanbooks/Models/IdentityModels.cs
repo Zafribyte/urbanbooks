@@ -19,9 +19,6 @@ namespace urbanbooks.Models
             // Add custom user claims here
             return userIdentity;
         }
-        [Required]
-        [DataType(DataType.MultilineText)]
-        public string Address { get; set; }
         public virtual Wishlist Wishlists { get; set; }
         public virtual Cart Carts { get; set; }
 
@@ -130,8 +127,6 @@ namespace urbanbooks.Models
         public System.Data.Entity.DbSet<urbanbooks.Book> Books { get; set; }
 
         public System.Data.Entity.DbSet<Cart> Carts { get; set; }
-
-        public System.Data.Entity.DbSet<Customer> Customers { get; set; }
 
         public System.Data.Entity.DbSet<urbanbooks.Special> Specials { get; set; }
 

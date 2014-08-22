@@ -24,8 +24,8 @@ namespace urbanbooks
                     {
                         Author author = new Author();
                         author.AuthorID = Convert.ToInt32(row["AuthorID"]);
-                        author.Name = row["FullName"].ToString();
-                        //author.Surname = row["Surname"].ToString();
+                        author.Name = row["Name"].ToString();
+                        author.Surname = row["Surname"].ToString();
                         AuthorList.Add(author);
                     }
                 }

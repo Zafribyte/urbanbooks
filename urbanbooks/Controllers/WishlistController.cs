@@ -10,6 +10,7 @@ using urbanbooks.Models;
 
 namespace urbanbooks.Controllers
 {
+    [Authorize]
     public class WishlistController : Controller
     {
         BusinessLogicHandler myHandler;
@@ -92,11 +93,19 @@ namespace urbanbooks.Controllers
                 ApplicationUserManager mgr = new ApplicationUserManager(myStore);
                 var thisUser = await mgr.FindByNameAsync(User.Identity.Name);
 
-                myHandler = new BusinessLogicHandler();
-                myHandler.DeleteCartItem(thisUser.Carts.CartID);
                 WishlistItem wish = new WishlistItem();
                 CartActions cart = new CartActions();
                 wish.ProductID = productId;
+
+                myHandler = new BusinessLogicHandler();
+                IEnumerable<CartItem> inItems = myHandler.GetCartItems(thisUser.Carts.CartID);
+                if (inItems != null)
+                {
+                    CartItem items = inItems.SingleOrDefault(item => item.ProductID == productId);
+                    if(items.ProductID == productId)
+                    { myHandler = new BusinessLogicHandler(); myHandler.DeleteCartItem(items.CartItemID); }
+
+                }
                 wish.WishlistID = (int)thisUser.Wishlists.WishlistID;
                 wish.DateAdded = DateTime.Now;
                 myHandler.AddWishlistItem(wish);

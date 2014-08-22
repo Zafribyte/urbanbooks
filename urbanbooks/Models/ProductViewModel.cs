@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 
@@ -14,11 +13,9 @@ namespace urbanbooks.Models
         public IEnumerable<Technology> allTechnology { get; set; }
         public IEnumerable<WishlistItem> allWishlistItems { get; set; }
         public IEnumerable<CartHelper> secureCart { get; set; }
-        public List<SelectListItem> I_DeliveryList { get; set; }
         public List<CartConclude> ItsA_wrap { get; set; }
 
         public Billing Bill { get; set; }
-        public DeliveryHelper deliveryHelper {get;set;}
 
         public class CartHelper
         {
@@ -51,23 +48,15 @@ namespace urbanbooks.Models
         public string CreditCardNumber
         { get; set; }
         [Required]
-        [StringLength(4, ErrorMessage = "Invalid CVC")]
         [RegularExpression(@"^.{3,}$", ErrorMessage = "Invalid CVC")]
-        public string CVC
+        [StringLength(4, ErrorMessage="Invalid CVC")]
+        public int CVC
         { get; set; }
         [Display(Name = "Expiry Date")]
         [Required]
         public DateTime ExpiryDate
         { get; set; }
 
-    }
-    public class DeliveryHelper
-    {
-        [Required]
-        [Display(Name="Delivery Address")]
-        [DataType(DataType.MultilineText)]
-        public string DeliveryAddress 
-        { get; set; }
     }
 
 }

@@ -1,36 +1,31 @@
 namespace urbanbooks.Migrations
 {
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    using urbanbooks.Models;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<urbanbooks.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<urbanbooks.Models.CustomerContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(urbanbooks.Models.ApplicationDbContext context)
+        protected override void Seed(urbanbooks.Models.CustomerContext context)
         {
-            //if (!context.Users.Any(myUser => myUser.UserName == "admin@urbanbooks.co.za"))
-            //{
-            //    var userStore = new UserStore<ApplicationUser>(context);
-            //    var roleStore = new RoleStore<IdentityRole>(context);
-            //    var userManager = new UserManager<ApplicationUser>(userStore);
-            //    var roleManager = new RoleManager<IdentityRole>(roleStore);
+            //  This method will be called after migrating to the latest version.
 
-            //    var user = new ApplicationUser { UserName = "admin@urbanbooks.co.za", Email = "admin@urbanbooks.co.za" };
-            //    userManager.Create(user, "password");
-            //    roleManager.Create(new IdentityRole { Name = "admin" });
-            //    user.Carts = new Cart { DateLastModified = DateTime.Now };
-            //    user.Wishlists = new Wishlist { Status = false };
-            //    userManager.AddToRole(user.Id, "admin");
-            //}
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  to avoid creating duplicate seed data. E.g.
+            //
+            //    context.People.AddOrUpdate(
+            //      p => p.FullName,
+            //      new Person { FullName = "Andrew Peters" },
+            //      new Person { FullName = "Brice Lambson" },
+            //      new Person { FullName = "Rowan Miller" }
+            //    );
+            //
         }
     }
 }

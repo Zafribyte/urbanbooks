@@ -1,5 +1,5 @@
-﻿@model IEnumerable<urbanbooks.Technology>
-@using urbanbooks.Models;
+﻿@using urbanbooks.Helpers
+@model IEnumerable<urbanbooks.Technology>
 
 @{
     ViewBag.Title = "Index";
@@ -14,7 +14,16 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.SellingPrice)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.ModelName)
+        </th>
+        <th width="400px">
+            @Html.DisplayNameFor(model => model.Specifications)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Manufacturer)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ModelNumber)
@@ -22,47 +31,43 @@
         <th>
             @Html.DisplayNameFor(model => model.ImageFront)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageTop)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageSide)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SellingPrice)
-        </th>
+        <th></th>
     </tr>
 
-    @if (Model != null)
+    @foreach (var item in Model)
     {
-        foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModelName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModelNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ImageFront)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ImageTop)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ImageSide)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SellingPrice)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
-                </td>
-            </tr>
-        }
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SellingPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModelName)
+            </td>
+            <td width="400px">
+                @Html.DisplayFor(modelItem => item.Specifications)
+            </td>
+            <td>
+                @foreach (var viewTem in ViewBag.Manufact)
+                {
+                    if (item.ManufacturerID == viewTem.ManufacturerID)
+                    {
+                        string temp = viewTem.Name;
+                        @Html.DisplayFor(modelItem => temp)
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModelNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageFront)
+            </td>
+            <td>
+                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to wishlist", "Add", "Wishlist", new { productId = item.ProductID }, htmlAttributes: new { @class = "btn btn-default" })
+                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "View", "Details", "Book", new { bookId = item.ProductID }, htmlAttributes: new { @class = "btn btn-default" })
+                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "AddToCart", "Cart", new { ProductID = item.ProductID }, htmlAttributes: new { @class = "btn btn-default" })
+            </td>
+        </tr>
     }
 
 </table>

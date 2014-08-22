@@ -138,26 +138,11 @@ namespace urbanbooks.Controllers
             return RedirectToAction("Index", "Home");
         }
         [HttpPost]
-        public async Task<ActionResult> UpdateQuantity(string quantity, string itemId)
+        public JsonResult Edit(int hey)
         {
-
-            string userName = User.Identity.GetUserName();
-            ApplicationDbContext dataSocket = new ApplicationDbContext();
-            UserStore<ApplicationUser> myStore = new UserStore<ApplicationUser>(dataSocket);
-            userMgr = new ApplicationUserManager(myStore);
-            var user = await userMgr.FindByEmailAsync(userName);
-
-
-            myHandler = new BusinessLogicHandler();
-            CartItem item = new CartItem();
-            item.CartItemID = Convert.ToInt32(itemId);
-            item.CartID = user.Carts.CartID;
-            item.Quantity = Convert.ToInt32(quantity);
-            if (myHandler.UpdateCartItem(item))
-            { return Json(new { success = true }); }
-            else
-            { return Json("Error updating quantity"); }
-        }   
+            Response.Write("Fuck you");
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }   ///EXPERIMENTAL
 
         public async Task<double> GetCartTotal(int CartID)
         {
@@ -177,7 +162,6 @@ namespace urbanbooks.Controllers
 
         public async Task< ActionResult> Checkout()
         {
-            #region Data to Display
             ///  i need the cart
             ///  i need to load the items in session
             CartActions act = new CartActions(); WishlistActions wishAct = new WishlistActions();
@@ -246,52 +230,25 @@ namespace urbanbooks.Controllers
             myNewModel.ItsA_wrap.Add(finishing);
 
             myNewModel.secureCart = itemList;
-
-            #endregion
-
-            #region Drop down data
-            DeliveryHandler deliver = new DeliveryHandler();
-            IEnumerable<Delivery> delivery = (IEnumerable<Delivery>)deliver.GetDeliveryList();
-            var dataStore = from name in delivery
-                            select new { Value = name.DeliveryServiceID, Text = name.ServiceName};
-            ViewBag.DeliveryList = new SelectList(dataStore.ToList());
-
-            List<SelectListItem> deliveryI = new List<SelectListItem>();
-            deliveryI.Add(new SelectListItem { Text = "Delivery Service", Value="", Selected=true });
-            foreach(var item in delivery)
-            { deliveryI.Add(new SelectListItem { Text = item.ServiceName, Value = item.DeliveryServiceID.ToString() }); }
-            myNewModel.I_DeliveryList = new List<SelectListItem>();
-            myNewModel.I_DeliveryList = deliveryI;
-            ViewData["I_Delivery"] = deliveryI; 
-            #endregion
-
-            #region Default Address
-            if (thisUser.Address != null)
-            { myNewModel.deliveryHelper = new DeliveryHelper(); myNewModel.deliveryHelper.DeliveryAddress = thisUser.Address; }
-            #endregion
             return View(myNewModel);
         }
 
         [HttpPost]
         public ActionResult Checkout(ProductViewModel helperModel)
         {
-            IEnumerable<Book> ifBooks = (IEnumerable<Book>)Session["myBooks"];
-            IEnumerable<Technology> ifGadget = (IEnumerable<Technology>)Session["myGadget"];
-            List<CartItem> myItems = (List<CartItem>)Session["myItems"];
             if (ModelState.IsValid)
             {
-                
                 try
                 { }
                 catch
                 { }
             }
 
-            
-
             #region Feed The Model
 
-
+            IEnumerable<Book> ifBooks =(IEnumerable<Book>) Session["myBooks"];
+            IEnumerable<Technology> ifGadget = (IEnumerable<Technology>)Session["myGadget"];
+            List<CartItem> myItems = (List<CartItem>)Session["myItems"];
             CartItem thishereItem = new CartItem();
             try
             {
@@ -446,16 +403,6 @@ namespace urbanbooks.Controllers
             }
             catch
             { return RedirectToAction("Edit"); }
-        }
-        [HttpPost]
-        public ActionResult GetDeliveryPrice(string selectedValue) 
-        {
-            myHandler = new BusinessLogicHandler();
-            Delivery myHelper = new Delivery(); 
-            myHelper = myHandler.GetDeliveryDetails(Convert.ToInt32(selectedValue.ToString()));
-
-            string thiz = myHelper.Price.ToString();
-            return Json(thiz);
         }
 
         public ActionResult Confirm()
