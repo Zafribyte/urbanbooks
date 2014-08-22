@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Linq.Expressions.Internal;
 using System.Web;
-using System.Threading.Tasks;
 
 namespace urbanbooks.Models
 {
@@ -15,7 +14,7 @@ namespace urbanbooks.Models
         //public async Task<Cart> GetCartAsync(int customerId)
         //{ myHandler = new BusinessLogicHandler(); return myHandler.GetCart(customerId); }
 
-        public async Task<bool> AddToCartAsync(int cartId, int ProductID)
+        public bool AddToCartAsync(int cartId, int ProductID)
         {
             myHandler = new BusinessLogicHandler();
             item = new CartItem();
