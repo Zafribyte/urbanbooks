@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Threading;
 using System.Threading.Tasks;
 using urbanbooks.Helpers;
 using Microsoft.AspNet.Identity;
@@ -25,7 +26,7 @@ namespace urbanbooks.Controllers
                 var thisUser = mgr.FindByNameAsync(User.Identity.Name);
                 int cartId = (int)thisUser.Result.Carts.CartID;
                 Session["cartTotal"] = (double) GetCartTotal(cartId);
-                Session["wishlistTotal"] = await wish.GetWishlistTotal(thisUser.Result.Wishlists.WishlistID);
+                Session["wishlistTotal"] = wish.GetWishlistTotal(thisUser.Result.Wishlists.WishlistID);
             }
             else
             { Session["cartTotal"] = "0.00"; Session["wishlistTotal"] = 0; }
