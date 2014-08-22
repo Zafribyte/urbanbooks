@@ -34,8 +34,8 @@
                 <li>
                     @Html.ActionLink("Technology", "Index", "Technology")
                 </li>
-                <li>@Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'>  R" + Session["cartTotal"] + "</span>", "Cart", "Edit", "Cart", htmlAttributes: new { @class = "btn" })</li>
-                <li>@Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'>  " + Session["wishlistTotal"] + "</span>", "Wishlist", "Edit", "Wishlist", htmlAttributes: new { @class = "btn" })</li>
+                <li>@Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'>  R" + Session["cartTotal"].ToString() + "</span>", "Cart", "Edit", "Cart", htmlAttributes: new { @class = "btn" })</li>
+                <li>@Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'>  " + Session["wishlistTotal"].ToString() + "</span>", "Wishlist", "Edit", "Wishlist", htmlAttributes: new { @class = "btn" })</li>
             </ul>
             @Html.Partial("_LoginPartial")
             <div class="navbar-form input-group input-group-sm form-inline">
