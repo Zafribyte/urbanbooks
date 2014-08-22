@@ -24,7 +24,7 @@ namespace urbanbooks
                     {
                         Manufacturer manu = new Manufacturer();
                         manu.ManufacturerID = Convert.ToInt32(row["ManufacturerID"]);
-                        manu.Name = row["Name"].ToString();                       
+                        manu.Name = row["Manufacturer"].ToString();
                         ManufacturerList.Add(manu);
                     }
                 }
