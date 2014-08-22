@@ -38,7 +38,7 @@ namespace urbanbooks
             Delivery delivery = null;
 
             SqlParameter[] Params = { new SqlParameter("@DeliveryID", deliveryId) };
-            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewDelivery",
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewSpecificDelivery",
                 CommandType.StoredProcedure, Params))
             {
                 if (table.Rows.Count == 1)

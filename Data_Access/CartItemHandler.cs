@@ -53,6 +53,7 @@ namespace urbanbooks
             SqlParameter[] Params = new SqlParameter[]
             {
                 new SqlParameter("@CartItemID", cartItem.CartItemID),
+                new SqlParameter("@CartID", cartItem.CartID),
                 new SqlParameter("@Quantity", cartItem.Quantity )
             };
             return DataProvider.ExecuteNonQuery("sp_UpdateCartItem", CommandType.StoredProcedure,

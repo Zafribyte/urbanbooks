@@ -41,11 +41,12 @@
                             {
                                 if (book.ProductID == item.ProductID)
                                 {
+                                    @Html.HiddenFor(modelItem => item.CartItemID, new { @class ="cartItemId"})
                                     <td>
                                         @Html.DisplayFor(modelItem => book.BookTitle)
                                     </td>
                                     <td class="form-group form-inline">
-                                        @Html.EditorFor(modelItem => item.Quantity, new { @id="quantity" })
+                                        @Html.EditorFor(modelItem => item.Quantity, new { htmlAttributes = new { @class = "form-control quants" } })
                                     </td>
                                     @*                            <td>
                                             @Html.DisplayFor(modelItem => book.Description)
@@ -67,15 +68,13 @@
                             {
                                 if (gadget.ProductID == item.ProductID)
                                 {
+                                    @Html.HiddenFor(modelItem => item.CartItemID, new { @class ="cartItemId"})
                                     <td>
                                         @Html.DisplayFor(modelItem => gadget.ModelName)
                                     </td>
                                     <td>
-                                        @Html.TextBoxFor(modelItem => item.Quantity, new { @id="quantity"})
+                                        @Html.EditorFor(modelItem => item.Quantity, new { htmlAttributes = new { @class="form-control quants" } })
                                     </td>
-                                    @*                            <td width="400px">
-                                            @Html.DisplayFor(modelItem => gadget.Description)
-                                        </td>*@
                                     <td>
                                         @Html.DisplayFor(modelItem => gadget.SellingPrice)
                                     </td>
@@ -129,20 +128,25 @@
 </table>
 @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-circle-arrow-left'> Back </span>", "Back", "Add", "Wishlist", new { }, htmlAttributes: new { @class = "btn btn-default" })
 @Html.NoEncodeActionLink("<span>Checkout <span class='glyphicon glyphicon-circle-arrow-right'></span></span>", "Proceed to Checkout", "Checkout", "Cart", new { }, htmlAttributes: new { @class = "btn btn-default" })
-
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
 @Scripts.Render("~/bundles/jquery")
 
 <script type="text/javascript">
-    $('#input').change(function () {
-        $.ajax({
-            url: '@Url.Action("Edit", "Cart")',
-            type: 'post',
-            data: {
-                Text: $('#quantity').val()
-            },
-            success: function (_result) {
-                $('#TaskDesc').val(_result.foo);
-            }
-        });
+    $(".quants").change(function () {
+        var quantity = $(this).val();
+        var itemId = $(".cartItemId").val();
+        if (quantity != "-1") {
+            $.ajax({
+                url: '@Url.Action("UpdateQuantity", "Cart")',
+                type: 'post',
+                data: { 'quantity': quantity, 'itemId': itemId },
+                datatype: 'json',
+                success: function (response) { }
+            })
+        }
+        else {
+            $(this).val('');
+        }
     });
 </script>

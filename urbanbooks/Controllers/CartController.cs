@@ -138,11 +138,26 @@ namespace urbanbooks.Controllers
             return RedirectToAction("Index", "Home");
         }
         [HttpPost]
-        public JsonResult Edit(int hey)
+        public async Task<ActionResult> UpdateQuantity(string quantity, string itemId)
         {
-            Response.Write("Fuck you");
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
-        }   ///EXPERIMENTAL
+
+            string userName = User.Identity.GetUserName();
+            ApplicationDbContext dataSocket = new ApplicationDbContext();
+            UserStore<ApplicationUser> myStore = new UserStore<ApplicationUser>(dataSocket);
+            userMgr = new ApplicationUserManager(myStore);
+            var user = await userMgr.FindByEmailAsync(userName);
+
+
+            myHandler = new BusinessLogicHandler();
+            CartItem item = new CartItem();
+            item.CartItemID = Convert.ToInt32(itemId);
+            item.CartID = user.Carts.CartID;
+            item.Quantity = Convert.ToInt32(quantity);
+            if (myHandler.UpdateCartItem(item))
+            { return Json(new { success = true }); }
+            else
+            { return Json("Error updating quantity"); }
+        }   
 
         public async Task<double> GetCartTotal(int CartID)
         {
@@ -248,6 +263,11 @@ namespace urbanbooks.Controllers
             myNewModel.I_DeliveryList = new List<SelectListItem>();
             myNewModel.I_DeliveryList = deliveryI;
             ViewData["I_Delivery"] = deliveryI; 
+            #endregion
+
+            #region Default Address
+            if (thisUser.Address != null)
+            { myNewModel.deliveryHelper = new DeliveryHelper(); myNewModel.deliveryHelper.DeliveryAddress = thisUser.Address; }
             #endregion
             return View(myNewModel);
         }
@@ -426,6 +446,16 @@ namespace urbanbooks.Controllers
             }
             catch
             { return RedirectToAction("Edit"); }
+        }
+        [HttpPost]
+        public ActionResult GetDeliveryPrice(string selectedValue) 
+        {
+            myHandler = new BusinessLogicHandler();
+            Delivery myHelper = new Delivery(); 
+            myHelper = myHandler.GetDeliveryDetails(Convert.ToInt32(selectedValue.ToString()));
+
+            string thiz = myHelper.Price.ToString();
+            return Json(thiz);
         }
 
         public ActionResult Confirm()

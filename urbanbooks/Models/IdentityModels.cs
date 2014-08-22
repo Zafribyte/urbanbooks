@@ -19,7 +19,7 @@ namespace urbanbooks.Models
             // Add custom user claims here
             return userIdentity;
         }
-        
+        [Required]
         [DataType(DataType.MultilineText)]
         public string Address { get; set; }
         public virtual Wishlist Wishlists { get; set; }

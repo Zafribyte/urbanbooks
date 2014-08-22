@@ -65,7 +65,6 @@ namespace urbanbooks.Models
     {
         [Required]
         [Display(Name="Delivery Address")]
-        [RegularExpression(@"^.{16,}$", ErrorMessage = "Please provide full address")]
         [DataType(DataType.MultilineText)]
         public string DeliveryAddress 
         { get; set; }
