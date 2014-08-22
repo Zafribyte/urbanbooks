@@ -25,7 +25,7 @@ namespace urbanbooks.Controllers
             userMgr = new ApplicationUserManager(myStore);
             var thisUser = await userMgr.FindByNameAsync(User.Identity.Name);
             int Id = (int)thisUser.Carts.CartID;
-            Session["cartTotal"] = await act.GetTotalAsync(Id);
+            Session["cartTotal"] = act.GetTotalAsync(Id);
             Session["wishlistTotal"] = await wishAct.GetWishlistTotal(thisUser.Wishlists.WishlistID);
             IEnumerable<CartItem> myItems = act.GetCartItemsAsync(Id);
             myHandler = new BusinessLogicHandler();
@@ -163,7 +163,7 @@ namespace urbanbooks.Controllers
         {
             double total;
             CartActions myA = new CartActions();
-            total = await myA.GetTotalAsync(CartID);
+            total = myA.GetTotalAsync(CartID);
             return total;
         }
 

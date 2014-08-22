@@ -37,7 +37,7 @@ namespace urbanbooks.Controllers
         {
             double total;
             CartActions myA = new CartActions();
-            total = await myA.GetTotalAsync(CartID);
+            total = myA.GetTotalAsync(CartID);
             return total;
         }
 

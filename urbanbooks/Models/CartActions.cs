@@ -38,7 +38,7 @@ namespace urbanbooks.Models
 
         //}
 
-        public async Task<double> GetTotalAsync(int cartId)
+        public double GetTotalAsync(int cartId)
         {
             
             myHandler = new BusinessLogicHandler();
