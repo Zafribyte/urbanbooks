@@ -1,4 +1,4 @@
-﻿@model IEnumerable<urbanbooks.BookType>
+﻿@model IEnumerable<urbanbooks.BookCategory>
 
 @{
     ViewBag.Title = "Index";
@@ -13,28 +13,29 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.CategoryDescription)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BookTypeName)
+            @Html.DisplayNameFor(model => model.CategoryName)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BookTypeName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BookCategoryID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.BookCategoryID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.BookCategoryID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.BookCategoryID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.BookCategoryID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.BookCategoryID })
+            </td>
+        </tr>
+    }
 
 </table>
