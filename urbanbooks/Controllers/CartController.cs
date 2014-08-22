@@ -110,6 +110,7 @@ namespace urbanbooks.Controllers
 
         ApplicationUserManager userMgr;
         
+
         public async Task<ActionResult> AddToCart(int ProductID)
         {
             string userName = User.Identity.GetUserName();
@@ -163,6 +164,7 @@ namespace urbanbooks.Controllers
 
         public async Task< ActionResult> Checkout()
         {
+ #region Data to Display
             ///  i need the cart
             ///  i need to load the items in session
             CartActions act = new CartActions(); WishlistActions wishAct = new WishlistActions();
@@ -231,6 +233,24 @@ namespace urbanbooks.Controllers
             myNewModel.ItsA_wrap.Add(finishing);
 
             myNewModel.secureCart = itemList;
+
+            #endregion
+
+            #region Drop down data
+            DeliveryHandler deliver = new DeliveryHandler();
+            IEnumerable<Delivery> delivery = (IEnumerable<Delivery>)deliver.GetDeliveryList();
+            var dataStore = from name in delivery
+                            select new { Value = name.DeliveryServiceID, Text = name.ServiceName};
+            ViewBag.DeliveryList = new SelectList(dataStore.ToList());
+
+            List<SelectListItem> deliveryI = new List<SelectListItem>();
+            deliveryI.Add(new SelectListItem { Text = "Delivery Service", Value="", Selected=true });
+            foreach(var item in delivery)
+            { deliveryI.Add(new SelectListItem { Text = item.ServiceName, Value = item.DeliveryServiceID.ToString() }); }
+            myNewModel.I_DeliveryList = new List<SelectListItem>();
+            myNewModel.I_DeliveryList = deliveryI;
+            ViewData["I_Delivery"] = deliveryI; 
+            #endregion
             return View(myNewModel);
         }
 
