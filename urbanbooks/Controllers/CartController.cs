@@ -17,12 +17,12 @@ namespace urbanbooks.Controllers
     public class CartController : Controller
     {
         BusinessLogicHandler myHandler;
-        public async Task< ActionResult> Edit()
+        public async Task<ActionResult> Edit()
         {
             CartActions act = new CartActions(); WishlistActions wishAct = new WishlistActions();
             ApplicationDbContext dataSocket = new ApplicationDbContext();
             UserStore<ApplicationUser> myStore = new UserStore<ApplicationUser>(dataSocket);
-            userMgr = new ApplicationUserManager(myStore); 
+            userMgr = new ApplicationUserManager(myStore);
             var thisUser = await userMgr.FindByNameAsync(User.Identity.Name);
             int Id = (int)thisUser.Carts.CartID;
             Session["cartTotal"] = await act.GetTotalAsync(Id);
@@ -35,7 +35,7 @@ namespace urbanbooks.Controllers
             myNewModel.allBook = ifBooks;
             myNewModel.allCartItem = myItems;
             myNewModel.allTechnology = ifGadget;
-            List<ProductViewModel.CartHelper> itemList =  new List<ProductViewModel.CartHelper>();
+            List<ProductViewModel.CartHelper> itemList = new List<ProductViewModel.CartHelper>();
             ProductViewModel.CartHelper cartHelp;
             if (myItems != null)
             {
@@ -66,8 +66,7 @@ namespace urbanbooks.Controllers
                 }
             }
             double cartTotal = Convert.ToDouble(Session["cartTotal"].ToString());
-            List<Company> company = new List<Company>();
-            company = myHandler.GetCompanyDetails();
+            List<Company> company = myHandler.GetCompanyDetails();
             double vat = 0;
             foreach (var item in company)
             { vat = item.VATPercentage; }
@@ -85,7 +84,7 @@ namespace urbanbooks.Controllers
             return View(myNewModel);
         }
 
-        
+
         //public ActionResult Edit(int CartItemID)
         //{
         //    CartItem item = new CartItem();
@@ -109,7 +108,6 @@ namespace urbanbooks.Controllers
         //}
 
         ApplicationUserManager userMgr;
-        
 
         public async Task<ActionResult> AddToCart(int ProductID)
         {
@@ -134,17 +132,32 @@ namespace urbanbooks.Controllers
                 catch { }
             }
             if (await myActions.AddToCartAsync(cart.CartID, ProductID))
-            {Session["cartTotal"] = await GetCartTotal(cart.CartID); }
+            { Session["cartTotal"] = await GetCartTotal(cart.CartID); }
             else
-            {  }
+            { }
             return RedirectToAction("Index", "Home");
         }
         [HttpPost]
-        public JsonResult Edit(int hey)
+        public async Task<ActionResult> UpdateQuantity(string quantity, string itemId)
         {
-            Response.Write("Fuck you");
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
-        }   ///EXPERIMENTAL
+
+            string userName = User.Identity.GetUserName();
+            ApplicationDbContext dataSocket = new ApplicationDbContext();
+            UserStore<ApplicationUser> myStore = new UserStore<ApplicationUser>(dataSocket);
+            userMgr = new ApplicationUserManager(myStore);
+            var user = await userMgr.FindByEmailAsync(userName);
+
+
+            myHandler = new BusinessLogicHandler();
+            CartItem item = new CartItem();
+            item.CartItemID = Convert.ToInt32(itemId);
+            item.CartID = user.Carts.CartID;
+            item.Quantity = Convert.ToInt32(quantity);
+            if (myHandler.UpdateCartItem(item))
+            { return Json(new { success = true }); }
+            else
+            { return Json("Error updating quantity"); }
+        }
 
         public async Task<double> GetCartTotal(int CartID)
         {
@@ -159,12 +172,12 @@ namespace urbanbooks.Controllers
             myHandler = new BusinessLogicHandler();
             myHandler.DeleteCartItem(CartItemID);
 
-            return RedirectToAction("Edit"); 
+            return RedirectToAction("Edit");
         }
 
-        public async Task< ActionResult> Checkout()
+        public async Task<ActionResult> Checkout()
         {
- #region Data to Display
+            #region Data to Display
             ///  i need the cart
             ///  i need to load the items in session
             CartActions act = new CartActions(); WishlistActions wishAct = new WishlistActions();
@@ -175,12 +188,11 @@ namespace urbanbooks.Controllers
             int Id = (int)thisUser.Carts.CartID;
             Session["cartTotal"] = await act.GetTotalAsync(Id);
             Session["wishlistTotal"] = await wishAct.GetWishlistTotal(thisUser.Wishlists.WishlistID);
-            
+            IEnumerable<CartItem> myItems = await act.GetCartItemsAsync(Id);
 
             myHandler = new BusinessLogicHandler();
             IEnumerable<Book> ifBooks = myHandler.GetBooks();
             IEnumerable<Technology> ifGadget = myHandler.GetTechnology();
-            IEnumerable<CartItem> myItems = (IEnumerable<CartItem>)await act.GetCartItemsAsync(Id);
             ProductViewModel myNewModel = new ProductViewModel();
             myNewModel.allBook = ifBooks;
             myNewModel.allCartItem = myItems;
@@ -241,16 +253,21 @@ namespace urbanbooks.Controllers
             DeliveryHandler deliver = new DeliveryHandler();
             IEnumerable<Delivery> delivery = (IEnumerable<Delivery>)deliver.GetDeliveryList();
             var dataStore = from name in delivery
-                            select new { Value = name.DeliveryServiceID, Text = name.ServiceName};
+                            select new { Value = name.DeliveryServiceID, Text = name.ServiceName };
             ViewBag.DeliveryList = new SelectList(dataStore.ToList());
 
             List<SelectListItem> deliveryI = new List<SelectListItem>();
-            deliveryI.Add(new SelectListItem { Text = "Delivery Service", Value="", Selected=true });
-            foreach(var item in delivery)
+            deliveryI.Add(new SelectListItem { Text = "Delivery Service", Value = "", Selected = true });
+            foreach (var item in delivery)
             { deliveryI.Add(new SelectListItem { Text = item.ServiceName, Value = item.DeliveryServiceID.ToString() }); }
             myNewModel.I_DeliveryList = new List<SelectListItem>();
             myNewModel.I_DeliveryList = deliveryI;
-            ViewData["I_Delivery"] = deliveryI; 
+            ViewData["I_Delivery"] = deliveryI;
+            #endregion
+
+            #region Default Address
+            if (thisUser.Address != null)
+            { myNewModel.deliveryHelper = new DeliveryHelper(); myNewModel.deliveryHelper.DeliveryAddress = thisUser.Address; }
             #endregion
             return View(myNewModel);
         }
@@ -258,26 +275,30 @@ namespace urbanbooks.Controllers
         [HttpPost]
         public ActionResult Checkout(ProductViewModel helperModel)
         {
+            IEnumerable<Book> ifBooks = (IEnumerable<Book>)Session["myBooks"];
+            IEnumerable<Technology> ifGadget = (IEnumerable<Technology>)Session["myGadget"];
+            List<CartItem> myItems = (List<CartItem>)Session["myItems"];
             if (ModelState.IsValid)
             {
+
                 try
                 { }
                 catch
                 { }
             }
 
+
+
             #region Feed The Model
 
-            IEnumerable<Book> ifBooks =(IEnumerable<Book>) Session["myBooks"];
-            IEnumerable<Technology> ifGadget = (IEnumerable<Technology>)Session["myGadget"];
-            List<CartItem> myItems = (List<CartItem>)Session["myItems"];
+
             CartItem thishereItem = new CartItem();
             try
             {
                 ProductViewModel.CartHelper cartHelp;
                 List<ProductViewModel.CartHelper> itemList = new List<ProductViewModel.CartHelper>();
-               // if (myItems.Count == 0)
-               // { return RedirectToAction("Edit"); }
+                // if (myItems.Count == 0)
+                // { return RedirectToAction("Edit"); }
                 double cartTotal = 0;
                 if (myItems != null)
                 {
@@ -358,7 +379,7 @@ namespace urbanbooks.Controllers
         public ActionResult _Remove(int Id)
         {
             ProductViewModel helperModel = new ProductViewModel();
-            IEnumerable<Book> ifBooks =(IEnumerable<Book>) Session["myBooks"];
+            IEnumerable<Book> ifBooks = (IEnumerable<Book>)Session["myBooks"];
             IEnumerable<Technology> ifGadget = (IEnumerable<Technology>)Session["myGadget"];
             List<CartItem> myItems = (List<CartItem>)Session["myItems"];
             CartItem thishereItem = new CartItem();
@@ -426,6 +447,16 @@ namespace urbanbooks.Controllers
             catch
             { return RedirectToAction("Edit"); }
         }
+        [HttpPost]
+        public ActionResult GetDeliveryPrice(string selectedValue)
+        {
+            myHandler = new BusinessLogicHandler();
+            Delivery myHelper = new Delivery();
+            myHelper = myHandler.GetDeliveryDetails(Convert.ToInt32(selectedValue.ToString()));
+
+            string thiz = myHelper.Price.ToString();
+            return Json(thiz);
+        }
 
         public ActionResult Confirm()
         {
@@ -488,9 +519,9 @@ namespace urbanbooks.Controllers
 
             helperModel.secureCart = itemList;
 
-           //HAVE TO ADD BILLING ************************
+            //HAVE TO ADD BILLING ************************
             return PartialView(helperModel);
         }
-       
+
     }
 }
