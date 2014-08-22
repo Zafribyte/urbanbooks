@@ -15,28 +15,25 @@ namespace urbanbooks
         [ScaffoldColumn(false)]
         public int TechCategoryID
         { get; set; }
-        [Display(Name="Model")]
-        public string ModelName 
+        [ScaffoldColumn(true)]
+        public string ModelName
         { get; set; }
-        public string Specifications 
+        [ScaffoldColumn(true)]
+        public string Specs
         { get; set; }
         public string Manufacturer
         { get; set; }
-        [Display(Name="Model Number")]
         public string ModelNumber
         { get; set; }
-        [ScaffoldColumn(false)]
         public int ManufacturerID
         { get; set; }
-        [Display(Name="Front Image")]
-        public byte ImageFront 
+        public byte ImageFront
         { get; set; }
-        [Display(Name = "Top Image")]
         public byte ImageTop
         { get; set; }
-        [Display(Name = "Side Image")]
         public byte ImageSide
         { get; set; }
+
 
 
         //OVERRIDE
