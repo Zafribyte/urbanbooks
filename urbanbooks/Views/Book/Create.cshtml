@@ -73,6 +73,7 @@
                 <h5>Publisher</h5>
                 <div class="col-md-10 dropdown">
                     @Html.DropDownList("PublisherName", Model.publishers)
+                    @Html.ActionLink("Add a Publisher", "Create", "Publisher")
                 </div>
             </div>
         </div>
@@ -90,6 +91,7 @@
                 <h5>Author</h5>
                 <div class="col-md-10 dropdown">
                     @Html.DropDownList("FullName", Model.authors)
+                    @Html.ActionLink("Add an Author", "Create", "Authors")
                 </div>
             </div>
         </div>
