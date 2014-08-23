@@ -27,6 +27,8 @@ namespace urbanbooks
                         company.Telephone = row["Telephone"].ToString();
                         company.VATPercentage = Convert.ToDouble(row["VATPercentage"].ToString());
                         company.Email = row["Email"].ToString();
+                        company.BookMarkUp = Convert.ToDouble(row["BookMarkUp"].ToString());
+                        company.TechMarkUp = Convert.ToDouble(row["TechMarkUp"].ToString());
                         //company.VATRegistrationNumber = Convert.ToInt32(row["VATRegistrationNumber"]);
                         AuthorList.Add(company);
                     }

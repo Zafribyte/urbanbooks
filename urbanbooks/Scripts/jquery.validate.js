@@ -863,7 +863,8 @@ $.extend($.validator, {
 			if ( method === "required" ) {
 				value = $element.get(0).getAttribute(method);
 				// Some browsers return an empty string for the required attribute
-				// and non-HTML5 browsers might have required="" markup
+				// and non-HTML5 browsers might have required="" 
+
 				if ( value === "" ) {
 					value = true;
 				}

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace urbanbooks.Controllers
 {
-    [Authorize(Roles="admin, employee")]
+    //[Authorize(Roles="admin, employee")]
     public class BookTypeController : Controller
     {
         BusinessLogicHandler myHandler;
@@ -41,7 +41,7 @@ namespace urbanbooks.Controllers
                 TryUpdateModel(typeOf);
                 if (ModelState.IsValid)
                 {
-                    //myHandler.UpdateBookType(typeOf);
+                    myHandler.AddBookType(typeOf);
                     return RedirectToAction("Index");
                 }
                 return View();

@@ -92,9 +92,10 @@ namespace urbanbooks
         {
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@Description", bookCategory.CategoryDescription)
+                new SqlParameter("@CategoryName", bookCategory.CategoryName),
+                new SqlParameter("@CategoryDescription", bookCategory.CategoryDescription )
             };
-            return DataProvider.ExecuteNonQuery("sp_InsertBookType", CommandType.StoredProcedure,
+            return DataProvider.ExecuteNonQuery("sp_InsertBookCategory", CommandType.StoredProcedure,
                 Params);
         }
 
@@ -103,6 +104,7 @@ namespace urbanbooks
             SqlParameter[] Params = new SqlParameter[]
             {
                 new SqlParameter("@BookCategoryID", bookCategory.BookCategoryID),
+                new SqlParameter("@CategoryName", bookCategory.CategoryName),
                 new SqlParameter("@CategoryDescription", bookCategory.CategoryDescription )
             };
             return DataProvider.ExecuteNonQuery("sp_UpdateBookCategory", CommandType.StoredProcedure,
