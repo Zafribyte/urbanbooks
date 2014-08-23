@@ -140,7 +140,7 @@ namespace urbanbooks
                 new SqlParameter("@ProductTitle", TechnoProduct.ModelName),
                 new SqlParameter("@Specs", TechnoProduct.Specs),
                 new SqlParameter("@CostPrice", TechnoProduct.CostPrice),
-                new SqlParameter("@MarkUp", company.MarkUp),
+                //new SqlParameter("@MarkUp", company.MarkUp),
                 new SqlParameter("@SellingPrice", TechnoProduct.SellingPrice),
                 new SqlParameter("@SupplierID", TechnoProduct.SupplierID),
                 new SqlParameter("@DateAdded", TechnoProduct.DateAdded),

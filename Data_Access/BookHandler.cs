@@ -138,7 +138,7 @@ namespace urbanbooks
                 new SqlParameter("@Title", book.BookTitle),
                 new SqlParameter("@Description", book.Synopsis),
                 new SqlParameter("@CostPrice", book.CostPrice),
-                new SqlParameter("@MarkUp", company.MarkUp),
+                //new SqlParameter("@MarkUp", company.MarkUp),
                 new SqlParameter("@SellingPrice", book.SellingPrice),
                 new SqlParameter("@SupplierID", book.SupplierID),
                 //new SqlParameter("@EmployeeID", book.EmployeeID),
