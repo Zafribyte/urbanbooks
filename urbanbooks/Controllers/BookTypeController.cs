@@ -41,7 +41,7 @@ namespace urbanbooks.Controllers
                 TryUpdateModel(typeOf);
                 if (ModelState.IsValid)
                 {
-                    myHandler.UpdateBookType(typeOf);
+                    myHandler.AddBookType(typeOf);
                     return RedirectToAction("Index");
                 }
                 return View();
