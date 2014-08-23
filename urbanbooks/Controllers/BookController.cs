@@ -194,13 +194,26 @@ namespace urbanbooks.Controllers
             }
         }
         [HttpPost]
-        public ActionResult GetBookMarkup()
+        public ActionResult GetBookMarkup(string selectedValue)
         {
+            double s = 0;
+            double t = 0;
+
             List<Company> company = new List<Company>(); BusinessLogicHandler myHandler = new BusinessLogicHandler();
             company = myHandler.GetCompanyDetails();
             double vat = 0;
             foreach (var item in company)
             { vat = item.BookMarkUp; }
+            try
+            {
+                s = Convert.ToDouble(selectedValue);
+                t = (s * vat) + s;
+                return Json(t);
+            }
+            catch
+            {
+                return Json("Error");
+            }
         }
         public ActionResult Delete(int BookID)
         {

@@ -45,7 +45,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.books.CostPrice, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.books.CostPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.books.CostPrice, new { htmlAttributes = new { @class = "form-control new" } })
                 @Html.ValidationMessageFor(model => model.books.CostPrice, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -53,7 +53,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.books.SellingPrice, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.books.SellingPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.books.SellingPrice, new { htmlAttributes = new { @class = "form-control olden" } })
                 @Html.ValidationMessageFor(model => model.books.SellingPrice, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -62,7 +62,7 @@
             <div>
                 <label class="control-label col-md-2">Category</label>
                 <div class="col-md-10 dropdown">
-                    @Html.DropDownList("CategoryName", Model.bookCategories, new { @class = "form-control new" })
+                    @Html.DropDownList("CategoryName", Model.bookCategories, new { @class = "form-control" })
                     @Html.ActionLink("Add a Category", "Create", "BookType")
                 </div>
             </div>
@@ -72,7 +72,7 @@
             <div>
                 <label class="control-label col-md-2" >Publisher</label>
                 <div class="col-md-10 dropdown">
-                    @Html.DropDownList("PublisherName", Model.publishers, new { @class = "form-control new" })
+                    @Html.DropDownList("PublisherName", Model.publishers, new { @class = "form-control " })
                     @Html.ActionLink("Add a Publisher", "Create", "Publisher")
                 </div>
             </div>
@@ -82,7 +82,7 @@
             <div>
                 <label class="control-label col-md-2">Supplier</label>
                 <div class="col-md-10 dropdown">
-                    @Html.DropDownList("Name", Model.suppliers, new { @class = "form-control new" })<br />
+                    @Html.DropDownList("Name", Model.suppliers, new { @class = "form-control" })<br />
                 </div>
             </div>
         </div>
@@ -90,7 +90,7 @@
             <div>
                 <label class="control-label col-md-2">Author</label>
                 <div class="col-md-10 dropdown">
-                    @Html.DropDownList("FullName", Model.authors, new { @class = "form-control new" })
+                    @Html.DropDownList("FullName", Model.authors, new { @class = "form-control" })
                     @Html.ActionLink("Add an Author", "Create", "Authors")
                 </div>
             </div>
@@ -105,6 +105,23 @@
                 <input id="CoverImage" title="Upload Book Cover" type="file" name="file" />
             </div>
         </fieldset>
+        <script type="text/javascript">
+                $(".new").change(function () {
+                    var selectedValue = $(this).val();
+                    if (selectedValue != " ") {
+                        $.ajax({
+                            url: '@Url.Action("GetBookMarkUp", "Book")',
+                            type: 'post',
+                            data: { 'selectedValue': selectedValue },
+                            datatype: 'json',
+                            success: function (response) { $(".olden").val(response); }
+                        })
+                    }
+                    else {
+                        $(".olden").val(" ");
+                    }
+                });
+    </script>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
