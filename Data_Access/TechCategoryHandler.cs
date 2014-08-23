@@ -14,7 +14,7 @@ namespace urbanbooks
         {
             List<TechCategory> TechCategoryList = null;
 
-            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewAllTechnologyCategory",
+            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewAllTechCategories",
                 CommandType.StoredProcedure))
             {
                 if (table.Rows.Count > 0)

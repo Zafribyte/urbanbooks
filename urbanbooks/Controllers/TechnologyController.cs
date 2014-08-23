@@ -36,7 +36,7 @@ namespace urbanbooks.Controllers
             return View(gadget);
         }
 
-        [Authorize(Roles = "admin, employee")]
+        //[Authorize(Roles = "admin, employee")]
         public ActionResult Create()
         {
             AddNewTechViewModel techM = new AddNewTechViewModel();
@@ -94,7 +94,7 @@ namespace urbanbooks.Controllers
         
         }
 
-        [Authorize(Roles = "admin, employee")]
+        //[Authorize(Roles = "admin, employee")]
         [HttpPost]
         public ActionResult Create(FormCollection collection, HttpPostedFileBase file, HttpPostedFileBase file2, HttpPostedFileBase file3)
         {
@@ -154,7 +154,7 @@ namespace urbanbooks.Controllers
             }
         }
 
-        [Authorize(Roles = "admin, employee")]
+        //[Authorize(Roles = "admin, employee")]
         public ActionResult Edit(int gadgetID)
         {
             myHandler = new BusinessLogicHandler();
@@ -163,7 +163,7 @@ namespace urbanbooks.Controllers
             return View(gadget);
         }
 
-        [Authorize(Roles = "admin, employee")]
+        //[Authorize(Roles = "admin, employee")]
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -184,13 +184,13 @@ namespace urbanbooks.Controllers
             }
         }
 
-        [Authorize(Roles = "admin, employee")]
+        //[Authorize(Roles = "admin, employee")]
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        [Authorize(Roles = "admin, employee")]
+        //[Authorize(Roles = "admin, employee")]
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
