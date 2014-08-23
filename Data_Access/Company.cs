@@ -16,7 +16,8 @@ namespace urbanbooks
         public int VATRegistrationNumber { get; set; }
         [Display(Name="VAT")]
         public double VATPercentage { get; set; }
-        public double MarkUp { get; set; }
+        public double BookMarkUp { get; set; }
+        public double TechMarkUp { get; set; }
         public string Address { get; set; }
         public string Telephone { get; set; }
         public string Fax { get; set; }
