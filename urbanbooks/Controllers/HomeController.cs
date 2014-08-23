@@ -56,7 +56,7 @@ namespace urbanbooks.Controllers
             return View();
         }
 
-        public JsonResult GlobalSearch(string search)
+        public ActionResult GlobalSearch(string search)
         {
             BusinessLogicHandler myHandler = new BusinessLogicHandler();
             IEnumerable<Book> books = myHandler.GetBooks();
