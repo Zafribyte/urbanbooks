@@ -14,7 +14,7 @@ namespace urbanbooks.Controllers
 {
     public class HomeController : Controller
     {
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -54,6 +54,14 @@ namespace urbanbooks.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public JsonResult GlobalSearch(string search)
+        {
+            BusinessLogicHandler myHandler = new BusinessLogicHandler();
+            IEnumerable<Book> books = myHandler.GetBooks();
+            List<string> complete = books.Where(book => book.BookTitle.StartsWith(search)).Select(title => title.BookTitle).ToList();
+            return Json(complete, JsonRequestBehavior.AllowGet);
         }
     }
 }

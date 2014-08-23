@@ -42,10 +42,16 @@
             </ul>
             @Html.Partial("_LoginPartial")
             <div class="navbar-form input-group input-group-sm form-inline">
-                @Html.TextBox("search", null, new { id = "searchGlobal", placeholder ="Search", @class="form-control input-sm pull-right"})<span class="input-group-addon glyphicon glyphicon-search btn btn-default" >@Html.ActionLink(" ", "Index", "Cart")</span>
+                @using (Html.BeginForm()) { 
+                @Html.TextBox("search", null, new { id = "searchGlobal", placeholder ="Search", @class="form-control input-sm pull-right"})<span class="input-group-addon glyphicon glyphicon-search btn btn-default" ></span>
+                }
             </div>
         </div>
-
+        <script type="text/javascript">
+            $('#searchGlobal').autocomplete({
+                source:'@Url.Action("GlobalSearch", "Home", null )'
+            })
+        </script>
     </div>
 
     <!--LogIn Modal PlaceHolder-->
