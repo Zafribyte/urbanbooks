@@ -10,7 +10,10 @@
     @using urbanbooks.Helpers;
     <link rel="stylesheet" href="~/fonts/fontello/css/fontello.css" type="text/css" />
     <link rel="stylesheet" href="~/fonts/fontello/css/animation.css" type="text/css" />
-
+    <link href="~/Content/jquery-ui.theme.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.structure.min.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -39,7 +42,7 @@
             </ul>
             @Html.Partial("_LoginPartial")
             <div class="navbar-form input-group input-group-sm form-inline">
-                <input type="search" title="Enter Search" placeholder="Search" class="form-control input-sm pull-right" /><span class="input-group-addon glyphicon glyphicon-search btn btn-default" >@Html.ActionLink(" ", "Index", "Cart")</span>
+                @Html.TextBox("search", null, new { id = "searchGlobal", placeholder ="Search"})<span class="input-group-addon glyphicon glyphicon-search btn btn-default" >@Html.ActionLink(" ", "Index", "Cart")</span>
             </div>
         </div>
 
@@ -65,6 +68,9 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/modalform")
+    <script src="~/Scripts/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/jquery-2.1.1.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
