@@ -43,7 +43,7 @@
             @Html.Partial("_LoginPartial")
             <div class="navbar-form input-group input-group-sm form-inline">
                 @using (Html.BeginForm()) { 
-                @Html.TextBox("search", null, new { id = "searchGlobal", placeholder ="Search", @class="form-control input-sm pull-right"})<span class="input-group-addon glyphicon glyphicon-search btn btn-default" >@Html.ActionLink(" ", "Index", "Cart")</span>
+                @Html.TextBox("search", null, new { id = "searchGlobal", placeholder ="Search", @class="form-control input-sm pull-right"})<span class="input-group-addon glyphicon glyphicon-search btn btn-default" ></span>
                 }
             </div>
         </div>
