@@ -112,48 +112,24 @@ namespace urbanbooks.Controllers
                 gadget.SellingPrice = Convert.ToDouble(collection.GetValue("techs.SellingPrice").AttemptedValue);
                 gadget.IsBook = false;
                 gadget.DateAdded = DateTime.Now;
-                if (file != null && file.ContentLength > 0)
-                {
-                    try
-                    {
-                        string path = Path.Combine(Server.MapPath("~/Uploads"), Path.GetFileName(file.FileName));
-                        file.SaveAs(path);
-                        gadget.ImageFront = Convert.ToByte(collection.GetValue("techs.ImageFront").AttemptedValue);
-                    }
-                    catch (Exception ex)
-                    {
-                        ViewBag.Message = "Error" + ex.Message.ToString();
-                    }
-                }
-                if (file2 != null && file2.ContentLength > 0)
-                {
-                    try
-                    {
-                        string path2 = Path.Combine(Server.MapPath("~/Uploads"), Path.GetFileName(file2.FileName));
-                        file2.SaveAs(path2);
-                        gadget.ImageTop = Convert.ToByte(collection.GetValue("techs.ImageTop").AttemptedValue);
-                    }
-                    catch (Exception ex)
-                    {
-                        ViewBag.Message = "Error" + ex.Message.ToString();
-                    }
-                }
-                if (file3 != null && file3.ContentLength > 0)
-                {
-                    try
-                    {
-                        string path3 = Path.Combine(Server.MapPath("~/Uploads"), Path.GetFileName(file3.FileName));
-                        file2.SaveAs(path3);
-                        gadget.ImageSide = Convert.ToByte(collection.GetValue("techs.ImageSide").AttemptedValue);
-                    }
-                    catch (Exception ex)
-                    {
-                        ViewBag.Message = "Error" + ex.Message.ToString();
-                    }
-                }
                 TryUpdateModel(gadget);
                 if (ModelState.IsValid)
                 {
+                    if (file != null)
+                    {
+                        file.SaveAs(HttpContext.Server.MapPath("~/Uploads/Tech/ImageFront") + file.FileName);
+                        gadget.ImageFront = file.FileName;
+                    }
+                    if (file2 != null)
+                    {
+                        file2.SaveAs(HttpContext.Server.MapPath("~/Uploads/Tech/ImageTop") + file2.FileName);
+                        gadget.ImageTop = file2.FileName;
+                    }
+                    if (file3 != null)
+                    {
+                        file3.SaveAs(HttpContext.Server.MapPath("~/Uploads/Tech/ImageSide") + file3.FileName);
+                        gadget.ImageSide = file3.FileName;
+                    }
                     Technology ta = new Technology();
                     ta = myHandler.AddExperimentTech(gadget);
                     ta.ModelName = gadget.ModelName;

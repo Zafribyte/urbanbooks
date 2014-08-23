@@ -27,11 +27,11 @@ namespace urbanbooks
         { get; set; }
         public int ManufacturerID
         { get; set; }
-        public byte ImageFront
+        public string ImageFront
         { get; set; }
-        public byte ImageTop
+        public string ImageTop
         { get; set; }
-        public byte ImageSide
+        public string ImageSide
         { get; set; }
 
 
