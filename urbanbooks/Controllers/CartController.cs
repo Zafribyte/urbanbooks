@@ -141,7 +141,7 @@ namespace urbanbooks.Controllers
             return RedirectToAction("Index", "Home");
         }
         [HttpPost]
-        public async Task<ActionResult> UpdateQuantity(string quantity, string itemId)
+        public async Task<ActionResult> UpdateQuantity(string quantity, string cartId)
         {
 
             string userName = User.Identity.GetUserName();
@@ -153,7 +153,7 @@ namespace urbanbooks.Controllers
 
             myHandler = new BusinessLogicHandler();
             CartItem item = new CartItem();
-            item.CartItemID = Convert.ToInt32(itemId);
+            item.CartItemID = Convert.ToInt32(cartId);
             item.CartID = user.Carts.CartID;
             item.Quantity = Convert.ToInt32(quantity);
             if (myHandler.UpdateCartItem(item))

@@ -3,7 +3,7 @@
 @model  ProductViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Cart";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -139,12 +139,13 @@
 
 <script type="text/javascript">
     $(".quants").change(function () {
+        var cartId = $(".cartID").val();
         var quantity = $(this).val();
         if (quantity > 1) {
             $.ajax({
                 url: '@Url.Action("UpdateQuantity", "Cart")',
                 type: 'post',
-                data: { 'quantity': quantity },
+                data: { 'quantity': quantity, 'cartID':cartId },
                 datatype: 'json',
                 success: function (response) { $(".olden").val(response); }
             })
