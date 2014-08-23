@@ -62,8 +62,8 @@
             <div>
                 <h5>Category</h5>
                 <div class="col-md-10 dropdown">
-                    @Html.DropDownList("CategoryName", Model.bookCategories)
-                    @Html.ActionLink("Add a Category", "Create")
+                    @Html.DropDownList("CategoryName", Model.bookCategories)<br />
+                    @Html.ActionLink("Add a Category", "Create", "BookCategory")
                 </div>
             </div>
         </div>
