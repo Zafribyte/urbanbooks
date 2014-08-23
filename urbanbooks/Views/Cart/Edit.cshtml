@@ -30,6 +30,7 @@
     {
         foreach (var item in Model.allCartItem)
         {
+            @Html.HiddenFor(modelItem => item.CartItemID, new { htmlAttributes = new { @class = "cartId" } })
             foreach (var count in Model.secureCart)
             {
                 if (count.ProductID == item.ProductID)
@@ -41,7 +42,7 @@
                             {
                                 if (book.ProductID == item.ProductID)
                                 {
-                                    @Html.HiddenFor(modelItem => item.CartItemID, new { htmlAttributes = new { @class = "cartId" } })
+                                    
                                     <td>
                                         @Html.DisplayFor(modelItem => book.BookTitle)
                                     </td>
@@ -70,7 +71,7 @@
                                 {
                                     if (gadget.ProductID == item.ProductID)
                                     {
-                                        @Html.HiddenFor(modelItem => item.CartItemID, new { htmlAttributes = new { @class = "cartId" } })
+                                       
                                         <td>
                                             @Html.DisplayFor(modelItem => gadget.ModelName)
                                         </td>
