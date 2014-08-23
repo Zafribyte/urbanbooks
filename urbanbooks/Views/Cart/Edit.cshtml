@@ -30,7 +30,7 @@
     {
         foreach (var item in Model.allCartItem)
         {
-            @Html.HiddenFor(modelItem => item.CartItemID, new { htmlAttributes = new { @class = "cartId" } })
+            @Html.HiddenFor(modelItem => item.CartItemID, new { @class ="cartItemId"})
             foreach (var count in Model.secureCart)
             {
                 if (count.ProductID == item.ProductID)
@@ -140,13 +140,13 @@
 
 <script type="text/javascript">
     $(".quants").change(function () {
-        var cartId = $(".cartId").val();
         var quantity = $(this).val();
-        if (quantity > 1) {
+        var itemId = $(".cartItemId").val();
+        if (quantity != "-1") {
             $.ajax({
                 url: '@Url.Action("UpdateQuantity", "Cart")',
                 type: 'post',
-                data: { 'quantity': quantity, 'cartId':cartId },
+                data: { 'quantity': quantity, 'itemId': itemId },
                 datatype: 'json',
                 success: function (response) { $(".olden").val(response); }
             })
