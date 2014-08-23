@@ -196,6 +196,8 @@
   <ItemGroup>
     <Content Include="App_Data\BookStore Database.mdf" />
     <Content Include="App_Data\BookStore Database_log.ldf" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datepicker.css" />
@@ -234,15 +236,20 @@
     <Content Include="Images\bookandJumboTron.jpg" />
     <Content Include="Images\dots.png" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fontello\font\fontello.eot" />
     <Content Include="fonts\fontello\font\fontello.ttf" />
     <Content Include="fonts\fontello\font\fontello.woff" />
     <Content Include="Content\fuelux.css.map" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\fuelux.js" />
     <Content Include="Scripts\fuelux.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -335,9 +342,6 @@
     <Folder Include="Views\Author\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
