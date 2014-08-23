@@ -103,6 +103,7 @@ namespace urbanbooks
             SqlParameter[] Params = new SqlParameter[]
             {
                 new SqlParameter("@BookCategoryID", bookCategory.BookCategoryID),
+                new SqlParameter("@BookCategroyName", bookCategory.CategoryName),
                 new SqlParameter("@CategoryDescription", bookCategory.CategoryDescription )
             };
             return DataProvider.ExecuteNonQuery("sp_UpdateBookCategory", CommandType.StoredProcedure,
