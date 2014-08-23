@@ -32,12 +32,9 @@ namespace urbanbooks
                         Techno.ManufacturerID = (int)row["ManufacturerID"];
                         Techno.TechCategoryID = (int)row["TechCategoryID"];
                         Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
-                        if (row["ImageFront"] != DBNull.Value)
-                        { Techno.ImageFront = (byte)row["ImageFront"]; }
-                        if (row["ImageTop"] != DBNull.Value)
-                        { Techno.ImageTop = (byte)row["ImageTop"]; }
-                        if (row["ImageSide"] != DBNull.Value)
-                        { Techno.ImageSide = (byte)row["ImageSide"]; }
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        Techno.ImageTop = row["ImageTop"].ToString();
+                        Techno.ImageSide = row["ImageSide"].ToString();
                         TechnologyList.Add(Techno);
                     }
                 }
@@ -62,15 +59,12 @@ namespace urbanbooks
                     Techno.ProductID = Convert.ToInt32(row["ProductID"]);
                     Techno.Specs = row["Specs"].ToString();
                     Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
-
+                    Techno.ImageFront = row["ImageFront"].ToString();
+                    Techno.ImageTop = row["ImageTop"].ToString();
+                    Techno.ImageSide = row["ImageSide"].ToString();
                     Techno.ManufacturerID = (int)row["ManufacturerID"];
                     Techno.ModelNumber = row["ModelNumber"].ToString();
-                    if (row["ImageFront"] != DBNull.Value)
-                    { Techno.ImageFront = (byte)row["ImageFront"]; }
-                    if (row["ImageTop"] != DBNull.Value)
-                    { Techno.ImageTop = (byte)row["ImageTop"]; }
-                    if (row["ImageSide"] != DBNull.Value)
-                    { Techno.ImageSide = (byte)row["ImageSide"]; }
+                    
                 }
             }
             return Techno;
@@ -122,12 +116,9 @@ namespace urbanbooks
                     Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
                     //Techno.ManufacturerID = (int)row["ManufacturerID"];
                     //Techno.TechCategoryID = (int)row["TechCategoryID"];
-                    if (row["ImageFront"] != DBNull.Value)
-                    { Techno.ImageFront = (byte)row["ImageFront"]; }
-                    if (row["ImageLeft"] != DBNull.Value)
-                    { Techno.ImageTop = (byte)row["ImageLeft"]; }
-                    if (row["ImageRight"] != DBNull.Value)
-                    { Techno.ImageSide = (byte)row["ImageRight"]; }
+                    Techno.ImageFront = row["ImageFront"].ToString();
+                    Techno.ImageTop = row["ImageTop"].ToString();
+                    Techno.ImageSide = row["ImageSide"].ToString();
                 }
             }
             return Techno;
