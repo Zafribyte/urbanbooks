@@ -27,6 +27,15 @@ namespace urbanbooks.Controllers
             ViewBag.BookTypeBag = myType;
             return View(myBookList);
         }
+        public ActionResult AdminIndex()
+        {
+            myHandler = new BusinessLogicHandler();
+            List<Book> myBookList = new List<Book>();
+            myBookList = myHandler.GetBooks();
+            IEnumerable<BookCategory> myType = myHandler.GetBookCategoryList();
+            ViewBag.BookTypeBag = myType;
+            return View(myBookList);
+        }
         public ActionResult Details(int bookId)
         {
             myHandler = new BusinessLogicHandler();

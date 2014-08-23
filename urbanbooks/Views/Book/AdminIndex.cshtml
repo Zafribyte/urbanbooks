@@ -1,0 +1,60 @@
+﻿@model IEnumerable<urbanbooks.Book>
+@using urbanbooks.Models
+@using urbanbooks.Helpers;
+@{
+    ViewBag.Title = "AdminIndex";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<h2>Admin Catalogue</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BookTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SellingPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CoverImage)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SellingPrice)
+            </td>
+            <td>
+                <img src="~/Uploads/Books/@item.CoverImage" width="100" height="100" />
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { bookId = item.BookID }) |
+                @Html.ActionLink("Details", "Details", new { bookId = item.BookID }) |
+                @Html.ActionLink("Delete", "Delete", new { bookId = item.BookID })
+            </td>
+        </tr>
+    }
+
+</table>
