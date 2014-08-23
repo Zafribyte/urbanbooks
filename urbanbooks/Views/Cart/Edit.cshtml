@@ -145,7 +145,7 @@
             $.ajax({
                 url: '@Url.Action("UpdateQuantity", "Cart")',
                 type: 'post',
-                data: { 'quantity': quantity, 'cartID':cartId },
+                data: { 'quantity': quantity, 'cartId':cartId },
                 datatype: 'json',
                 success: function (response) { $(".olden").val(response); }
             })
