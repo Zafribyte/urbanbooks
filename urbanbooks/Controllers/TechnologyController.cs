@@ -14,7 +14,7 @@ namespace urbanbooks.Controllers
     {
         Technology gadget;
         BusinessLogicHandler myHandler;
-        [Authorize(Roles="admin, employee")]
+        //[Authorize(Roles="admin, employee")]
         public ActionResult ManageTechnology()
         { return View(); } 
 
