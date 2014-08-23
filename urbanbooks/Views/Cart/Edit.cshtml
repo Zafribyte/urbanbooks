@@ -41,7 +41,7 @@
                             {
                                 if (book.ProductID == item.ProductID)
                                 {
-                                    @Html.HiddenFor(modelItem => item.CartItemID, new { htmlAttributes = new { @class = "cartID" } })
+                                    @Html.HiddenFor(modelItem => item.CartItemID, new { htmlAttributes = new { @class = "cartId" } })
                                     <td>
                                         @Html.DisplayFor(modelItem => book.BookTitle)
                                     </td>
@@ -70,7 +70,7 @@
                                 {
                                     if (gadget.ProductID == item.ProductID)
                                     {
-                                        @Html.HiddenFor(modelItem => item.CartItemID, new { htmlAttributes = new { @class = "cartID" } })
+                                        @Html.HiddenFor(modelItem => item.CartItemID, new { htmlAttributes = new { @class = "cartId" } })
                                         <td>
                                             @Html.DisplayFor(modelItem => gadget.ModelName)
                                         </td>
@@ -139,7 +139,7 @@
 
 <script type="text/javascript">
     $(".quants").change(function () {
-        var cartId = $(".cartID").val();
+        var cartId = $(".cartId").val();
         var quantity = $(this).val();
         if (quantity > 1) {
             $.ajax({
