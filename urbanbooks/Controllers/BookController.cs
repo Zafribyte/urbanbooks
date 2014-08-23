@@ -200,7 +200,7 @@ namespace urbanbooks.Controllers
             company = myHandler.GetCompanyDetails();
             double vat = 0;
             foreach (var item in company)
-            { vat = item.Boo; }
+            { vat = item.BookMarkUp; }
         }
         public ActionResult Delete(int BookID)
         {
