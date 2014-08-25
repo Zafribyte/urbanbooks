@@ -1,4 +1,5 @@
 ﻿@using urbanbooks.Models
+@using TwitterBootstrapMVC;
 @using TwitterBootstrapMVC.RegularHtmlExtensions;
 @using TwitterBootstrapMVC.Controls.V3;
 @model ProductViewModel
@@ -18,7 +19,6 @@
         <div class="container" style="align-items:center"><h3>Checkout</h3></div>
 
     </div>
-
 
     <div class="row">
         <div class="container">
@@ -231,8 +231,8 @@
                 <div class="col-md-10">
                     
                     @Html.EditorFor(model => model.Bill.ExpiryDate, new { htmlAttributes = new { @class = "form-control datef" } })
-                    @Html
-                    <script type="text/javascript"> $(function () { $('.datef').datepicker({ startDate: "3d", todayHighlight: true }) })</script>
+                    @Html.Bootstrap().TextBoxFor(modelItem => modelItem.Bill.ExpiryDate).DatePicker()
+                    <script type="text/javascript"> $(function () { $('.datepicker').datepicker({ startDate: "3d", todayHighlight: true }) })</script>
                     @Html.ValidationMessageFor(model => model.Bill.ExpiryDate, "", new { @class = "text-danger" })
                 </div>
             </div>
