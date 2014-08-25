@@ -230,9 +230,8 @@
 
                 <div class="col-md-10">
                     
-                    @Html.EditorFor(model => model.Bill.ExpiryDate, new { htmlAttributes = new { @class = "form-control datef" } })
-                    @Html
-                    <script type="text/javascript"> $(function () { $('.datef').datepicker({ startDate: "3d", todayHighlight: true }) })</script>
+                    @Html.EditorFor(model => model.Bill.ExpiryDate, new { htmlAttributes = new { @class = "form-control datep" } })
+
                     @Html.ValidationMessageFor(model => model.Bill.ExpiryDate, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -243,7 +242,9 @@
     @Html.ActionLink("Back", "Edit", null, new { @class = "btn btn-danger" })
     <span>&nbsp;</span>
     <input type="submit" value="Checkout" class="btn btn-success" />
-
+    <script type="text/javascript">
+        $(document).on(function () { $(".datep").datepicker(); })
+    </script>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
