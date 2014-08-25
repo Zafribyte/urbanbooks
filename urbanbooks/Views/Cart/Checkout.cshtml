@@ -1,6 +1,4 @@
 ﻿@using urbanbooks.Models
-@using TwitterBootstrapMVC;
-@using TwitterBootstrapMVC.Controls;
 @model ProductViewModel
 
 @{
@@ -228,11 +226,9 @@
                 @Html.LabelFor(model => model.Bill.ExpiryDate, htmlAttributes: new { @class = "control-label col-md-2" })
 
                 <div class="col-md-10">
-                    
-                    @Html.EditorFor(model => model.Bill.ExpiryDate, new { htmlAttributes = new { @class = "form-control datef" } })
-                    <script type="text/javascript"> $(function () { $('.datepicker').datepicker({ }) })</script>
-                    
-                    @Html.Bootstrap().ControlGroup().TextBoxFor(model => model.Expiry_Date).DatePicker()
+
+                    @Html.EditorFor(model => model.Bill.ExpiryDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                    <script type="text/javascript"> $(function () { $('.datepicker').datepicker({}) })</script>
                     @Html.ValidationMessageFor(model => model.Bill.ExpiryDate, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -251,12 +247,12 @@
     @Styles.Render("~/Content/themes/base/css")
     @Scripts.Render("~/bundles/bootstrap")
 
-<script src="~/Scripts/jquery-2.1.1.js"></script>
-<script src="~/Scripts/jquery-2.1.1.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
-<script src="~/Scripts/bootstrap.js"></script>
-<script src="~/Scripts/bootstrap-datepicker.js"></script>
-    
+    <script src="~/Scripts/jquery-2.1.1.js"></script>
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+
     @Scripts.Render("~/bundles/modalform")
 }
 
