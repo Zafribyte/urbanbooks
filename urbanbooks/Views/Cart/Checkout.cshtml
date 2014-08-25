@@ -7,10 +7,20 @@
     ViewBag.Title = "Checkout";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
 <link href="~/Content/datepicker.css" rel="stylesheet" />
 <link href="~/Content/datepicker3.css" rel="stylesheet" />
+
+
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+
+<script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
 
 @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -230,7 +240,7 @@
 
                 <div class="col-md-10">
                     
-                    @Html.EditorFor(model => model.Bill.ExpiryDate, new { htmlAttributes = new { @class = "form-control datep" } })
+                    @Html.EditorFor(model => model.Bill.ExpiryDate, new { htmlAttributes = new { @class = "form-control datep", id="killed" } })
 
                     @Html.ValidationMessageFor(model => model.Bill.ExpiryDate, "", new { @class = "text-danger" })
                 </div>
@@ -243,7 +253,7 @@
     <span>&nbsp;</span>
     <input type="submit" value="Checkout" class="btn btn-success" />
     <script type="text/javascript">
-        $(document).on(function () { $(".datep").datepicker(); })
+        $(document).on(function () { $('.datep').datetimepicker(); })
     </script>
 
     @Scripts.Render("~/bundles/jquery")
@@ -252,12 +262,7 @@
     @Styles.Render("~/Content/themes/base/css")
     @Scripts.Render("~/bundles/bootstrap")
 
-<script src="~/Scripts/jquery-2.1.1.js"></script>
-<script src="~/Scripts/jquery-2.1.1.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
-<script src="~/Scripts/bootstrap.js"></script>
-<script src="~/Scripts/bootstrap-datepicker.js"></script>
-    
+
     @Scripts.Render("~/bundles/modalform")
 }
 
