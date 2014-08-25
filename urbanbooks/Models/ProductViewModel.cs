@@ -21,6 +21,9 @@ namespace urbanbooks.Models
         public Billing Bill { get; set; }
         public DeliveryHelper deliveryHelper { get; set; }
 
+        public DateTime Expiry_Date
+        { get; set; }
+
         public class CartHelper
         {
             public int ProductID { get; set; }
@@ -57,7 +60,6 @@ namespace urbanbooks.Models
         public string CVC
         { get; set; }
         [Display(Name = "Expiry Date")]
-        [Required]
         public DateTime ExpiryDate
         { get; set; }
 

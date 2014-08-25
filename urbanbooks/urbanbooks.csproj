@@ -99,6 +99,12 @@
     <Reference Include="T4MVCExtensions">
       <HintPath>..\packages\T4MVCExtensions.3.6.5\lib\net40\T4MVCExtensions.dll</HintPath>
     </Reference>
+    <Reference Include="TwitterBootstrapMVC">
+      <HintPath>..\packages\TwitterBootstrapMVC.3.8.0\lib\net40\TwitterBootstrapMVC.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitterBootstrapMVC.Eyecon.Datepicker.MVC4">
+      <HintPath>..\packages\TwitterBootstrapMVC.Eyecon.Datepicker.MVC4.1.0.15\lib\net40\TwitterBootstrapMVC.Eyecon.Datepicker.MVC4.dll</HintPath>
+    </Reference>
     <Reference Include="TwitterBootstrapMVC.Eyecon.Datepicker.MVC5">
       <HintPath>..\packages\TwitterBootstrapMVC.Eyecon.Datepicker.MVC5.1.0.15\lib\net40\TwitterBootstrapMVC.Eyecon.Datepicker.MVC5.dll</HintPath>
     </Reference>
