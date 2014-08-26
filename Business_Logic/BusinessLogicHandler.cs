@@ -344,7 +344,7 @@ namespace urbanbooks
         public List<Keyword> GetKeywords()
         { KeywordHandler myHandler = new KeywordHandler(); return myHandler.GetKeywordsList(); }
 
-        public bool CreateInvoice(Invoice invoice)
+        public int CreateInvoice(Invoice invoice)
         { InvoiceHandler myHandler = new InvoiceHandler(); return myHandler.CreateInvoice(invoice); }
 
         public bool AddinvoiceItem(InvoiceItem item)

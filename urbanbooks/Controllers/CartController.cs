@@ -280,14 +280,25 @@ namespace urbanbooks.Controllers
         [HttpPost]
         public ActionResult Checkout(ProductViewModel helperModel, FormCollection collection)
         {
+            Delivery shipping = new Delivery();
             IEnumerable<Book> ifBooks = (IEnumerable<Book>)Session["myBooks"];
             IEnumerable<Technology> ifGadget = (IEnumerable<Technology>)Session["myGadget"];
             List<CartItem> myItems = (List<CartItem>)Session["myItems"];
+            shipping = myHandler.GetDeliveryDetails(Convert.ToInt32(collection[1].ToString()));
             if (ModelState.IsValid)
             {
 
                 try
-                { }
+                {
+                    #region Creating the reciept/invoice
+                    Invoice reciept = new Invoice { DateCreated = DateTime.Now, DeliveryAddress = helperModel.deliveryHelper.DeliveryAddress, DeliveryServiceID = Convert.ToInt32(collection[1].ToString()), Status = false };
+                    try
+                    {
+                        int recieptNumber = myHandler.CreateInvoice(reciept);
+                    }
+                    catch { }
+                    #endregion
+                }
                 catch
                 { }
             }

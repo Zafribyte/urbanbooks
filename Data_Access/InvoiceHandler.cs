@@ -10,8 +10,9 @@ namespace urbanbooks
 {
     public class InvoiceHandler
     {
-        public bool CreateInvoice(Invoice invoice)
+        public int CreateInvoice(Invoice invoice)
         {
+
             SqlParameter[] Params = new SqlParameter[]
             {
                 new SqlParameter("@CustomerID", invoice.CustomerID),
@@ -19,7 +20,7 @@ namespace urbanbooks
                 new SqlParameter("@DateCreated", invoice.DateCreated),
                 new SqlParameter("@DeliveryAddress",invoice.DeliveryAddress),
             };
-            return DataProvider.ExecuteNonQuery("sp_InsertBook", CommandType.StoredProcedure,
+            return DataProvider.ExecuteNonQuery("sp_InsertInvoice", CommandType.StoredProcedure,
                 Params);
         }
 
