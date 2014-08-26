@@ -284,6 +284,7 @@ namespace urbanbooks.Controllers
             IEnumerable<Book> ifBooks = (IEnumerable<Book>)Session["myBooks"];
             IEnumerable<Technology> ifGadget = (IEnumerable<Technology>)Session["myGadget"];
             List<CartItem> myItems = (List<CartItem>)Session["myItems"];
+            myHandler = new BusinessLogicHandler();
             shipping = myHandler.GetDeliveryDetails(Convert.ToInt32(collection[1].ToString()));
             if (ModelState.IsValid)
             {
@@ -294,7 +295,8 @@ namespace urbanbooks.Controllers
                     Invoice reciept = new Invoice { DateCreated = DateTime.Now, DeliveryAddress = helperModel.deliveryHelper.DeliveryAddress, DeliveryServiceID = Convert.ToInt32(collection[1].ToString()), Status = false };
                     try
                     {
-                        
+                        InvoiceItem invoiceLine = new InvoiceItem();
+                        invoiceLine = myHandler.GetInvoiceLastNumber(reciept);
                     }
                     catch { }
                     #endregion

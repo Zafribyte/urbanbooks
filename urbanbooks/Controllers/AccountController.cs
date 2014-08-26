@@ -98,10 +98,10 @@ namespace urbanbooks.Controllers
             {
                 var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, Address = model.Address, PhoneNumber = model.CellPhone };
                 Customer Customers = new Customer() { FirstName = model.FirstName, LastName = model.LastName, User_Id = user.Id };
-                user.Carts = new Cart { DateLastModified = DateTime.Now };
+                user.Carts = new Cart { DateLastModified = DateTime.Now};
                 IQueryable<Customer> cust = context.Customers;
                 var i = context.Customers.ToList().LastOrDefault();
-                user.Wishlists = new Wishlist { CustomerID = i.CustomerID };
+                user.Wishlists = new Wishlist { Status = false};
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 context.Customers.Add(Customers);
                 context.SaveChanges();

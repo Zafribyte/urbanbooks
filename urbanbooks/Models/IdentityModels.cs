@@ -74,9 +74,6 @@ namespace urbanbooks.Models
         public DateTime DateLastModified
         { get; set; }
         [ScaffoldColumn(false)]
-        public int CustomerID
-        { get; set; }
-        [ScaffoldColumn(false)]
         public bool Status
         { get; set; }
 
@@ -88,9 +85,6 @@ namespace urbanbooks.Models
     {
         [ScaffoldColumn(false)]
         public int WishlistID
-        { get; set; }
-        [ScaffoldColumn(false)]
-        public int CustomerID
         { get; set; }
         [ScaffoldColumn(false)]
         public bool Status
