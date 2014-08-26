@@ -288,21 +288,64 @@ namespace urbanbooks.Controllers
             shipping = myHandler.GetDeliveryDetails(Convert.ToInt32(collection[1].ToString()));
             if (ModelState.IsValid)
             {
+                #region Get User
+                string userName = User.Identity.GetUserName();
+                ApplicationDbContext dataSocket = new ApplicationDbContext();
+                UserStore<ApplicationUser> myStore = new UserStore<ApplicationUser>(dataSocket);
+                userMgr = new ApplicationUserManager(myStore);
+                var user = userMgr.FindByEmail(userName);
+                #endregion
 
                 try
                 {
                     #region Creating the reciept/invoice
-                    Invoice reciept = new Invoice { DateCreated = DateTime.Now, DeliveryAddress = helperModel.deliveryHelper.DeliveryAddress, DeliveryServiceID = Convert.ToInt32(collection[1].ToString()), Status = false };
+                    Invoice reciept = new Invoice {User_Id = user.Id, DateCreated = DateTime.Now, DeliveryAddress = helperModel.deliveryHelper.DeliveryAddress, DeliveryServiceID = Convert.ToInt32(collection[1].ToString()), Status = false };
                     try
                     {
                         InvoiceItem invoiceLine = new InvoiceItem();
                         invoiceLine = myHandler.GetInvoiceLastNumber(reciept);
+                        foreach (var item in myItems)
+                        {
+                            invoiceLine.CartItemID = item.CartItemID;
+                            invoiceLine.ProductID = item.ProductID;
+                            invoiceLine.Quantity = item.Quantity;
+                            myHandler.AddinvoiceItem(invoiceLine);
+                        }
+
+                    }
+                    catch { }
+                    #endregion
+
+                    #region Placing the order
+                    try
+                    {
+                        foreach (var item in myItems)
+                        {
+                            if (ifBooks != null)
+                            {
+                                foreach (var book in ifBooks)
+                                {
+                                    
+                                    if(book.ProductID == item.ProductID)
+                                    {
+                                        Order ord = new Order { DateCreated = DateTime.Now.Date, DateLastModified = DateTime.Now.Date, SupplierID = book.SupplierID, Status = false };
+                                        OrderItem orderLine = new OrderItem();
+                                        orderLine = myHandler.AddOrder(ord);
+                                        orderLine.ProductID = book.ProductID;
+                                        orderLine.Quantity = item.Quantity;
+                                        myHandler.AddOrderItem(orderLine);
+                                    }
+                                }
+                            }
+                        }
                     }
                     catch { }
                     #endregion
                 }
                 catch
-                { }
+                {/*Navigate to custom error page*/ }
+
+                RedirectToAction("Reciept", helperModel);
             }
 
 
@@ -539,6 +582,12 @@ namespace urbanbooks.Controllers
 
             //HAVE TO ADD BILLING ************************
             return PartialView(helperModel);
+        }
+
+        public ActionResult Reciept(ProductViewModel data)
+        {
+            //
+            return View(data);
         }
 
     }

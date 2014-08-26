@@ -60,19 +60,25 @@ namespace urbanbooks
             return order;
         }
 
-        public bool CreateOrder(Order order)
+        public OrderItem CreateOrder(Order order)
         {
-            SqlParameter[] Params = new SqlParameter[]
+            OrderItem OrderLine;
+            SqlParameter[] Params = { new SqlParameter("@DateCreated", order.DateCreated),
+                                      new SqlParameter("@DateLastModified", order.DateLastModified),
+                                      new SqlParameter("@Status", order.Status),
+                                      new SqlParameter("@SupplierID",order.SupplierID)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_CreateOrder", CommandType.StoredProcedure, Params))
             {
-                new SqlParameter("@OrderNumber", order.OrderNo),
-                new SqlParameter("@DateCreated", order.DateCreated),
-                new SqlParameter("@DateSent", order.DateSent),
-                new SqlParameter("@DateLastModified", order.DateLastModified),
-                new SqlParameter("@SupplierID", order.SupplierID),
-                new SqlParameter("@Employee", order.EmployeeID)
-            };
-            return DataProvider.ExecuteNonQuery("sp_CreateOrder", CommandType.StoredProcedure,
-                Params);
+                OrderLine = new OrderItem();
+                if (table.Rows.Count == 1)
+                {
+                    DataRow row = table.Rows[0];
+                    OrderLine.OrderNo = Convert.ToInt32(row["OrderNumber"]);
+                }
+
+            }
+            return OrderLine;
         }
 
         public bool DeleteOrder(int OrderNumber)

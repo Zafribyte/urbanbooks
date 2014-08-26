@@ -13,7 +13,7 @@ namespace urbanbooks
         public int InvoiceID 
         { get; set; }
         [ScaffoldColumn(false)]
-        public int User_Id 
+        public string User_Id 
         { get; set; }
         [ScaffoldColumn(false)]
         public int DeliveryServiceID 
