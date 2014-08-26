@@ -10,7 +10,7 @@ namespace urbanbooks
 {
     public class InvoiceHandler
     {
-        public int CreateInvoice(Invoice invoice)
+        public bool CreateInvoice(Invoice invoice)
         {
 
             SqlParameter[] Params = new SqlParameter[]
@@ -23,6 +23,36 @@ namespace urbanbooks
             return DataProvider.ExecuteNonQuery("sp_InsertInvoice", CommandType.StoredProcedure,
                 Params);
         }
+
+
+
+
+
+        public Invoice GetInvoiceNumber(Invoice invoice)
+        {
+            Invoice reciept;
+            SqlParameter[] Params = { new SqlParameter("@CostPrice", reciept.DateCreated),
+                                      new SqlParameter("@SellingPrice", invoice.SellingPrice),
+                                      new SqlParameter("@DateAdded", invoice.DateAdded)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ManhattanProject", CommandType.StoredProcedure, Params))
+            {
+                reciept = new Invoice();
+                if (table.Rows.Count == 1)
+                {
+                    DataRow row = table.Rows[0];
+                    reciept.InvoiceID = Convert.ToInt32(row["InvoiceID     "]);
+                }
+
+            }
+            return reciept;
+        }
+
+
+
+
+
+
 
         public Invoice GetInvoice(int InvoiceID)
         {
