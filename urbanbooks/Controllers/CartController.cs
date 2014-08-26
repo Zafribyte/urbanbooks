@@ -294,7 +294,7 @@ namespace urbanbooks.Controllers
                     Invoice reciept = new Invoice { DateCreated = DateTime.Now, DeliveryAddress = helperModel.deliveryHelper.DeliveryAddress, DeliveryServiceID = Convert.ToInt32(collection[1].ToString()), Status = false };
                     try
                     {
-                        int recieptNumber = myHandler.CreateInvoice(reciept);
+                        
                     }
                     catch { }
                     #endregion
@@ -346,7 +346,7 @@ namespace urbanbooks.Controllers
                         itemList.Add(cartHelp);
                     }
                 }
-                List<Company> company = new List<Company>(); BusinessLogicHandler myHandler = new BusinessLogicHandler();
+                List<Company> company = new List<Company>();  myHandler = new BusinessLogicHandler();
                 company = myHandler.GetCompanyDetails();
                 double vat = 0;
                 foreach (var item in company)

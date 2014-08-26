@@ -28,18 +28,18 @@ namespace urbanbooks
 
 
 
-        public Invoice GetInvoiceNumber(Invoice invoice)
+        public InvoiceItem GetInvoiceNumber(Invoice invoice)
         {
-            Invoice reciept;
+            InvoiceItem reciept;
             SqlParameter[] Params = { new SqlParameter("@CostPrice", invoice.DateCreated),
                                       new SqlParameter("@DeliveryAddress", invoice.DeliveryAddress),
                                       new SqlParameter("@Status", invoice.Status),
                                       new SqlParameter("@User_Id", invoice.User_Id),
                                       new SqlParameter("@DeliveryServiceID", invoice.DeliveryServiceID)
                                     };
-            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ManhattanProject", CommandType.StoredProcedure, Params))
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_InsertInvoice", CommandType.StoredProcedure, Params))
             {
-                reciept = new Invoice();
+                reciept = new InvoiceItem();
                 if (table.Rows.Count == 1)
                 {
                     DataRow row = table.Rows[0];

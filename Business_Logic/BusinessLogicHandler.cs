@@ -314,6 +314,9 @@ namespace urbanbooks
             return myHandler.GetBookList();
         }
 
+        public InvoiceItem GetInvoiceLastNumber(Invoice reciept)
+        { InvoiceHandler myHandler = new InvoiceHandler(); return myHandler.GetInvoiceNumber(reciept); }
+
         public List<Technology> GetTechnology()
         { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.GetTechnologyList(); }
 
@@ -344,7 +347,7 @@ namespace urbanbooks
         public List<Keyword> GetKeywords()
         { KeywordHandler myHandler = new KeywordHandler(); return myHandler.GetKeywordsList(); }
 
-        public int CreateInvoice(Invoice invoice)
+        public bool CreateInvoice(Invoice invoice)
         { InvoiceHandler myHandler = new InvoiceHandler(); return myHandler.CreateInvoice(invoice); }
 
         public bool AddinvoiceItem(InvoiceItem item)
