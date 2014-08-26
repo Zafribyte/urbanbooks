@@ -278,7 +278,7 @@ namespace urbanbooks.Controllers
         }
 
         [HttpPost]
-        public ActionResult Checkout(ProductViewModel helperModel)
+        public ActionResult Checkout(ProductViewModel helperModel, FormCollection collection)
         {
             IEnumerable<Book> ifBooks = (IEnumerable<Book>)Session["myBooks"];
             IEnumerable<Technology> ifGadget = (IEnumerable<Technology>)Session["myGadget"];
