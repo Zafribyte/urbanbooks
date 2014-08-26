@@ -15,7 +15,7 @@ namespace urbanbooks
 
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@CustomerID", invoice.CustomerID),
+                new SqlParameter("@CustomerID", invoice.User_Id),
                 new SqlParameter("@DeliveryServiceID", invoice.DeliveryServiceID),
                 new SqlParameter("@DateCreated", invoice.DateCreated),
                 new SqlParameter("@DeliveryAddress",invoice.DeliveryAddress),
@@ -31,9 +31,11 @@ namespace urbanbooks
         public Invoice GetInvoiceNumber(Invoice invoice)
         {
             Invoice reciept;
-            SqlParameter[] Params = { new SqlParameter("@CostPrice", reciept.DateCreated),
-                                      new SqlParameter("@SellingPrice", invoice.SellingPrice),
-                                      new SqlParameter("@DateAdded", invoice.DateAdded)
+            SqlParameter[] Params = { new SqlParameter("@CostPrice", invoice.DateCreated),
+                                      new SqlParameter("@DeliveryAddress", invoice.DeliveryAddress),
+                                      new SqlParameter("@Status", invoice.Status),
+                                      new SqlParameter("@User_Id", invoice.User_Id),
+                                      new SqlParameter("@DeliveryServiceID", invoice.DeliveryServiceID)
                                     };
             using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ManhattanProject", CommandType.StoredProcedure, Params))
             {
@@ -41,7 +43,7 @@ namespace urbanbooks
                 if (table.Rows.Count == 1)
                 {
                     DataRow row = table.Rows[0];
-                    reciept.InvoiceID = Convert.ToInt32(row["InvoiceID     "]);
+                    reciept.InvoiceID = Convert.ToInt32(row["InvoiceID"]);
                 }
 
             }
@@ -68,7 +70,7 @@ namespace urbanbooks
                     invoice = new Invoice();
                     invoice.InvoiceID = Convert.ToInt32(row["InvoiceID"]);
                     invoice.DateCreated = Convert.ToDateTime(row["DateCreated"]);
-                    invoice.CustomerID = Convert.ToInt32(row["CustomerID"]);
+                    invoice.User_Id = Convert.ToInt32(row["CustomerID"]);
                     invoice.DeliveryServiceID = Convert.ToInt32(row["DeliveryServiceID"]);
                     invoice.DeliveryAddress = row["DeliveryAddress"].ToString();
                 }
