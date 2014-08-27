@@ -1,0 +1,51 @@
+﻿@model urbanbooks.OrderItem
+@*using urbanbooks.Models*@       
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<h2>Details</h2>
+<div >
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderNo);
+            </th>
+        </tr>
+        <tr>
+            <th>
+                Invoice No:  9843
+            </th>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.dateCreated);</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.OrderItemNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.ProductID)</th>
+            <th>@Html.DisplayNameFor(model => model.Quantity)</th>
+        </tr>
+
+       @foreach (var item in model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderItemNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id=item.OrderNo })
+            </td>
+        </tr>
+       }
+    </table>
+
+</div>
+    
+

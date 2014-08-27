@@ -204,6 +204,7 @@
     <Compile Include="Models\CustomerContext.cs" />
     <Compile Include="Models\EmployeeContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\OrderModels.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\WishlistActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -356,6 +357,8 @@
     <Content Include="Views\Cart\Confirm.cshtml" />
     <Content Include="Views\Book\AdminIndex.cshtml" />
     <Content Include="Views\Cart\Reciept.cshtml" />
+    <Content Include="Views\Order\Details.cshtml" />
+    <Content Include="Views\Order\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
