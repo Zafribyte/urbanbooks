@@ -10,11 +10,11 @@ namespace urbanbooks
 {
     public class OrderItemHandler
     {
-        public List<OrderItem> GetOrderItemList()
+        public List<OrderItem> GetOrderItemList(int orderID)
         {
             List<OrderItem> orderItems = null;
 
-            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewOrderItems",
+            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_GetOrderItemList",
                 CommandType.StoredProcedure))
             {
                 if (table.Rows.Count > 0)

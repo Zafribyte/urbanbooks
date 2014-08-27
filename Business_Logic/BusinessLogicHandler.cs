@@ -49,8 +49,8 @@ namespace urbanbooks
         public List<InvoiceItem> GetInvoiceItems()
         { InvoiceItemHandler myHandler = new InvoiceItemHandler(); return myHandler.GetInvoiceItemList(); } //SYSTEM & ADMIN! USER
 
-        public List<OrderItem> GetOrderItemsList()
-        { OrderItemHandler myHandler = new OrderItemHandler(); return myHandler.GetOrderItemList(); } //SYSTEM & ADMIN
+        public List<OrderItem> GetOrderItemsList(int orderID)
+        { OrderItemHandler myHandler = new OrderItemHandler(); return myHandler.GetOrderItemList(orderID); } //SYSTEM & ADMIN
 
         public bool DeleteOrderItem(int orderItemID)
         { OrderItemHandler myHandler = new OrderItemHandler(); return myHandler.DeleteOrderItem(orderItemID); } //SYSTEM & ADMIN
@@ -273,6 +273,7 @@ namespace urbanbooks
 
         public bool AddOrderItem(OrderItem item)
         { OrderItemHandler myHandler = new OrderItemHandler(); return myHandler.InsertOrderItem(item); }
+
 
         #endregion
 

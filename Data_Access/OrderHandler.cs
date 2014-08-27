@@ -26,8 +26,6 @@ namespace urbanbooks
                         order.OrderNo = Convert.ToInt32(row["OrderNo"]);
                         order.DateCreated = Convert.ToDateTime(row["DateCreated"]);
                         order.DateLastModified = Convert.ToDateTime(row["DateLastModified"]);
-                        order.DateSent = Convert.ToDateTime(row["DateSent"]);
-                        order.EmployeeID = Convert.ToInt32(row["EmployeeID"]);
                         OrdersList.Add(order);
                     }
                 }

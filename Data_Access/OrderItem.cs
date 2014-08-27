@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace urbanbooks
 {
-    public class OrderItem
+    public class OrderItem : Order
     {
-        [ScaffoldColumn(false)]
+        [ScaffoldColumn(true)]
         [Key]public int OrderItemNumber 
         { get; set; }
-        [ScaffoldColumn(false)]
+        [ScaffoldColumn(true)]
         public int ProductID 
         { get; set; }
         public int Quantity 
@@ -20,5 +20,14 @@ namespace urbanbooks
         [ScaffoldColumn(false)]
         public int OrderNo
         { get; set; }
+
+        //Order Details
+
+        public int orderNo{get; set;}
+        public DateTime dateCreated { get; set; }
+
+
     }
+
+
 }

@@ -26,15 +26,12 @@ namespace urbanbooks.Controllers
         {
             order = new Order();
             order = myHandler.GetOrder(orderId);
-            List<OrderItem> itemList = myHandler.GetOrderItemsList();
+            List<OrderItem> itemList = myHandler.GetOrderItemsList(orderId);
             ViewBag.Order = order;
             return View(itemList);
         }
 
-        public ActionResult Create()
-        {
-            return View();
-        }
+
         public async Task<ActionResult> AddOrderItems(OrderItem item)
         {
             List<Order> myOrderList = new List<Order>();
@@ -45,27 +42,8 @@ namespace urbanbooks.Controllers
             
             return Json(new { success = true });
         }
-        [HttpPost]
-        public async Task<ActionResult> Create(FormCollection collection)
-        {
-            myHandler = new BusinessLogicHandler();
-            order = new Order();
-            item = new OrderItem();
-            TryUpdateModel(order);
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    myHandler.AddOrder(order);
-                    await AddOrderItems(item);
-                }
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
+        
 
         public ActionResult Edit(int id)
         {
