@@ -71,6 +71,8 @@ namespace urbanbooks.Models
         { get; set; }
         public string DeliveryServiceName 
         { get; set; }
+        public string DeliveryServiceType 
+        { get; set; }
         public double DeliveryServicePrice 
         { get; set; }
     }

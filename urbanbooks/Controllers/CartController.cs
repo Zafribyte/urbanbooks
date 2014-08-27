@@ -296,32 +296,35 @@ namespace urbanbooks.Controllers
                 double cartTotal = 0;
                 if (myItems != null)
                 {
-                    var revised = from rev in ifBooks
-                                  join item in myItems on rev.ProductID equals item.ProductID
-                                  where rev.ProductID == item.ProductID
-                                  select new { rev.ProductID, rev.SellingPrice, item.Quantity };
-                    foreach (var ite in revised)
+                    if (ifBooks != null)
                     {
-                        cartHelp = new ProductViewModel.CartHelper();
-                        cartHelp.ProductID = ite.ProductID;
-                        cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
-                        cartTotal += (ite.SellingPrice * ite.Quantity);
-                        itemList.Add(cartHelp);
+                        var revised = from rev in ifBooks
+                                      join item in myItems on rev.ProductID equals item.ProductID
+                                      where rev.ProductID == item.ProductID
+                                      select new { rev.ProductID, rev.SellingPrice, item.Quantity };
+                        foreach (var ite in revised)
+                        {
+                            cartHelp = new ProductViewModel.CartHelper();
+                            cartHelp.ProductID = ite.ProductID;
+                            cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
+                            cartTotal += (ite.SellingPrice * ite.Quantity);
+                            itemList.Add(cartHelp);
+                        }
                     }
-                }
-                if (myItems != null)
-                {
-                    var revised = from rev in ifGadget
-                                  join item in myItems on rev.ProductID equals item.ProductID
-                                  where rev.ProductID == item.ProductID
-                                  select new { rev.ProductID, rev.SellingPrice, item.Quantity };
-                    foreach (var ite in revised)
+                    if (ifGadget != null)
                     {
-                        cartHelp = new ProductViewModel.CartHelper();
-                        cartHelp.ProductID = ite.ProductID;
-                        cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
-                        cartTotal += (ite.SellingPrice * ite.Quantity);
-                        itemList.Add(cartHelp);
+                        var revised = from rev in ifGadget
+                                      join item in myItems on rev.ProductID equals item.ProductID
+                                      where rev.ProductID == item.ProductID
+                                      select new { rev.ProductID, rev.SellingPrice, item.Quantity };
+                        foreach (var ite in revised)
+                        {
+                            cartHelp = new ProductViewModel.CartHelper();
+                            cartHelp.ProductID = ite.ProductID;
+                            cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
+                            cartTotal += (ite.SellingPrice * ite.Quantity);
+                            itemList.Add(cartHelp);
+                        }
                     }
                 }
                 List<Company> company = new List<Company>(); myHandler = new BusinessLogicHandler();
@@ -337,6 +340,9 @@ namespace urbanbooks.Controllers
                 finishing.SubTotal = subTotal;
                 helperModel.ItsA_wrap = new List<ProductViewModel.CartConclude>();
                 helperModel.ItsA_wrap.Add(finishing);
+
+                helperModel.deliveryHelper.DeliveryServiceName = shipping.ServiceName;
+                helperModel.deliveryHelper.DeliveryServicePrice = shipping.Price;
 
                 helperModel.secureCart = itemList;
                 helperModel.allBook = ifBooks;
