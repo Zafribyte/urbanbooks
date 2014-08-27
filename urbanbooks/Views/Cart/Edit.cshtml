@@ -31,32 +31,33 @@
         foreach (var item in Model.allCartItem)
         {
             Session["myBooks"] = Model.allBook; Session["myGadget"] = Model.allTechnology; Session["myItems"] = Model.allCartItem; Session["myHelper"] = Model.ItsA_wrap;
-            @Html.HiddenFor(modelItem => item.CartItemID, new { @class ="cartItemId"})
+
             foreach (var count in Model.secureCart)
             {
                 if (count.ProductID == item.ProductID)
                 {
                     <tr>
+                        @Html.HiddenFor(modelItem => item.CartItemID, new { @class = "cartItemId", id=""+item.CartItemID })
                         @if (Model.allBook != null)
                         {
                             foreach (var book in Model.allBook)
                             {
                                 if (book.ProductID == item.ProductID)
                                 {
-                                    
+
                                     <td>
                                         @Html.DisplayFor(modelItem => book.BookTitle)
                                     </td>
                                     <td class="form-group form-inline">
                                         @Html.EditorFor(modelItem => item.Quantity, new { htmlAttributes = new { @class = "form-control quants" } })
                                     </td>
-                                    <td >
-                                      <span class="currency-align">@Html.DisplayFor(modelItem => book.SellingPrice)</span>
+                                    <td>
+                                        <span class="currency-align">@Html.DisplayFor(modelItem => book.SellingPrice)</span>
                                     </td>
 
                                     if (count.ProductID == item.ProductID)
                                     {
-                                        <td >
+                                        <td>
                                             @Html.DisplayFor(modelItem => count.TotalPerItem)
                                         </td>
                                     }
@@ -69,23 +70,23 @@
                                 {
                                     if (gadget.ProductID == item.ProductID)
                                     {
-                                       
+
                                         <td>
                                             @Html.DisplayFor(modelItem => gadget.ModelName)
                                         </td>
                                         <td>
-                                            @Html.TextBoxFor(modelItem => item.Quantity, new {htmlAttributes = new { @class = "form-control quants" } })
+                                            @Html.TextBoxFor(modelItem => item.Quantity, new { htmlAttributes = new { @class = "form-control quants" } })
                                         </td>
                                         @*                            <td width="400px">
                                                 @Html.DisplayFor(modelItem => gadget.Description)
                                             </td>*@
-                                        <td >
+                                        <td>
                                             <span class="currency-align">@Html.DisplayFor(modelItem => gadget.SellingPrice)</span>
                                         </td>
 
                                         if (count.ProductID == item.ProductID)
                                         {
-                                            <td >
+                                            <td>
                                                 @Html.DisplayFor(modelItem => count.TotalPerItem)
                                             </td>
                                         }
@@ -93,7 +94,6 @@
                                 }
                             }
                         }
-
 
                         <td>
                             @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'> </span>", "Add to wishlist", "Add", "Wishlist", new { productId = item.ProductID, CartItemID = item.CartItemID }, htmlAttributes: new { @class = "btn btn-default" })
@@ -110,23 +110,23 @@
         <tr>
             <td></td>
             <td></td>
-            <td></td>
             <td><strong>Sub Total</strong></td>
-            <td >@Html.DisplayFor(modelItem => item.SubTotal)</td>
+            <td>@Html.DisplayFor(modelItem => item.SubTotal)</td>
+            <td ></td>
         </tr>
         <tr>
-            <td></td>
             <td></td>
             <td></td>
             <td><strong>VAT Total</strong></td>
-            <td >@Html.DisplayFor(modelItem => item.VatAddedTotal)</td>
+            <td>@Html.DisplayFor(modelItem => item.VatAddedTotal)</td>
+            <td ></td>
         </tr>
         <tr>
             <td></td>
             <td></td>
-            <td></td>
             <td><strong>Total</strong></td>
-            <td >@Html.DisplayFor(modelItem => item.CartTotal)</td>
+            <td>@Html.DisplayFor(modelItem => item.CartTotal)</td>
+            <td ></td>
         </tr>
 
     }
@@ -139,14 +139,14 @@
 <script type="text/javascript">
     $(".quants").change(function () {
         var quantity = $(this).val();
-        var itemId = $(".cartItemId").val();
+        var itemId = $(this).parent().parent().find(".cartItemId").val()
         if (quantity != "-1") {
             $.ajax({
                 url: '@Url.Action("UpdateQuantity", "Cart")',
                 type: 'post',
                 data: { 'quantity': quantity, 'itemId': itemId },
                 datatype: 'json',
-                success: function (response) { $(".olden").val(response); }
+                success: function (response) {  }
             })
         }
         else {

@@ -29,12 +29,8 @@ namespace urbanbooks.Models
             
         }
 
-        //public async Task<bool> UpdateCartAsync(int cartId)
+        //public bool CalculateSubTotal(int cartId)
         //{
-        //    myHandler = new BusinessLogicHandler();
-        //    cart = new Cart();
-        //    cart.DateLastModified = DateTime.Now;
-        //    return tru
 
         //}
 
