@@ -13,11 +13,11 @@
 
         <div class="container">
             <div class="col-md-3">
-                @Html.DisplayFor(model => model.UserDetails.Name)<br/>
-                @Html.DisplayFor(model => model.UserDetails.LName)<br/>
-                @Html.DisplayFor(model => model.UserDetails.email)<br/>
-                @Html.DisplayFor(model => model.UserDetails.PhoneNumber)<br />
-                @Html.DisplayFor(model => model.UserDetails.Address)<br />
+              <label class="control-label">Name :</label>  @Html.DisplayFor(model => model.UserDetails.Name)<br/>
+              <label class="control-label">Last Name :</label>  @Html.DisplayFor(model => model.UserDetails.LName)<br/>
+                <label class="control-label">E-Mail :</label>  @Html.DisplayFor(model => model.UserDetails.email)<br/>
+                <label class="control-label">Phone Number :</label> @Html.DisplayFor(model => model.UserDetails.PhoneNumber)<br />
+                <label class="control-label">Address :</label> @Html.DisplayFor(model => model.UserDetails.Address)<br />
             </div>
             <div class="col-md-3">
 
@@ -47,6 +47,11 @@
             <div class="col-md-3">
 
             </div>
+            <div class="col-md-3">
+                <label class="caption">Shipping Details</label><br/>
+                <label class="control-label">Service Name :</label> @Html.DisplayFor(model => model.deliveryHelper.DeliveryServiceName)<br/>
+              <label class="control-label">Delivery Address :</label>  @Html.DisplayFor(model => model.deliveryHelper.DeliveryAddress)<br />
+            </div>
         </div>
 
         <div class="container">
@@ -75,13 +80,10 @@
                 </th>
                 <th width="150px">
                     <label>Total</label>
-                </th>
-                <th width="100px"></th>
             </tr>
 
             @if (Model.allCartItem != null)
             {
-                Session["myBooks"] = Model.allBook; Session["myGadget"] = Model.allTechnology; Session["myItems"] = Model.allCartItem; Session["myHelper"] = Model.ItsA_wrap;
                 foreach (var item in Model.allCartItem)
                 {
                     foreach (var count in Model.secureCart)
@@ -98,7 +100,7 @@
                                             <td>
                                                 @Html.DisplayFor(modelItem => book.BookTitle)
                                             </td>
-                                            <td>
+                                            <td style="align-items:flex-end">
                                                 @Html.DisplayFor(modelItem => item.Quantity)
                                             </td>
                                             <td>
@@ -111,9 +113,6 @@
                                                     @Html.DisplayFor(modelItem => count.TotalPerItem)
                                                 </td>
                                             }
-                                            <td width="100px">
-                                                @Html.ActionLink("Remove", "_Remove", "Cart", new { id = item.CartItemID }, new { @class = "btn btn-danger" })
-                                            </td>
                                         }
                                     }
                                     if (Model.allTechnology != null)
@@ -125,7 +124,7 @@
                                                 <td>
                                                     @Html.DisplayFor(modelItem => gadget.ModelName)
                                                 </td>
-                                                <td>
+                                                <td style="align-items:flex-end">
                                                     @Html.DisplayFor(modelItem => item.Quantity)
                                                 </td>
                                                 <td>
@@ -139,9 +138,6 @@
                                                     </td>
                                                 }
                                             }
-                                            <td width="100px">
-                                                @Html.ActionLink("Remove", "_Remove", "Cart", new { id = item.CartItemID }, new { @class = "btn btn-danger" })
-                                            </td>
                                         }
                                     }
                                 }
@@ -151,29 +147,32 @@
                     }
                 }
             }
+            <tr class="alert">
+                <td rowspan="3">Shipping</td>
+                <td></td>
+                <td>@Html.DisplayFor(model => model.deliveryHelper.DeliveryServicePrice)</td>
+                <td>@Html.DisplayFor(model => model.deliveryHelper.DeliveryServicePrice)</td>
+            </tr>
             <tfoot>
                 @foreach (var item in Model.ItsA_wrap)
                 {
                     <tr>
-                        <td> width="500px"></td>
+                        <td width="500px"></td>
                         <td width="100px"></td>
-                        <td width="150px"></td>
-                        <td width="150px">Sub Total</td>
-                        <td width="100px">@Html.DisplayFor(modelItem => item.SubTotal)</td>
+                        <td width="150px"><strong class="control-label">Sub Total</strong></td>
+                        <td width="150px">@Html.DisplayFor(modelItem => item.SubTotal)</td>
                     </tr>
                     <tr>
                         <td width="500px"></td>
                         <td width="100px"></td>
-                        <td width="150px"></td>
-                        <td width="150px">VAT Total</td>
-                        <td width="100px">@Html.DisplayFor(modelItem => item.VatAddedTotal)</td>
+                        <td width="150px"><strong class="control-label">VAT Total</strong></td>
+                        <td width="150px">@Html.DisplayFor(modelItem => item.VatAddedTotal)</td>
                     </tr>
                     <tr>
                         <td width="500px"></td>
                         <td width="100px"></td>
-                        <td width="150px"></td>
-                        <td width="150px">Total</td>
-                        <td width="100px">@Html.DisplayFor(modelItem => item.CartTotal)</td>
+                        <td width="150px"><strong class="control-label">Total</strong></td>
+                        <td width="150px">@Html.DisplayFor(modelItem => item.CartTotal)</td>
                     </tr>
                 }
             </tfoot>

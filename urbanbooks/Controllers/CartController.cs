@@ -282,6 +282,71 @@ namespace urbanbooks.Controllers
             List<CartItem> myItems = (List<CartItem>)Session["myItems"];
             myHandler = new BusinessLogicHandler();
             shipping = myHandler.GetDeliveryDetails(Convert.ToInt32(collection[1].ToString()));
+
+            #region Feed The Model
+
+
+            CartItem thishereItem = new CartItem();
+            try
+            {
+                ProductViewModel.CartHelper cartHelp;
+                List<ProductViewModel.CartHelper> itemList = new List<ProductViewModel.CartHelper>();
+                // if (myItems.Count == 0)
+                // { return RedirectToAction("Edit"); }
+                double cartTotal = 0;
+                if (myItems != null)
+                {
+                    var revised = from rev in ifBooks
+                                  join item in myItems on rev.ProductID equals item.ProductID
+                                  where rev.ProductID == item.ProductID
+                                  select new { rev.ProductID, rev.SellingPrice, item.Quantity };
+                    foreach (var ite in revised)
+                    {
+                        cartHelp = new ProductViewModel.CartHelper();
+                        cartHelp.ProductID = ite.ProductID;
+                        cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
+                        cartTotal += (ite.SellingPrice * ite.Quantity);
+                        itemList.Add(cartHelp);
+                    }
+                }
+                if (myItems != null)
+                {
+                    var revised = from rev in ifGadget
+                                  join item in myItems on rev.ProductID equals item.ProductID
+                                  where rev.ProductID == item.ProductID
+                                  select new { rev.ProductID, rev.SellingPrice, item.Quantity };
+                    foreach (var ite in revised)
+                    {
+                        cartHelp = new ProductViewModel.CartHelper();
+                        cartHelp.ProductID = ite.ProductID;
+                        cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
+                        cartTotal += (ite.SellingPrice * ite.Quantity);
+                        itemList.Add(cartHelp);
+                    }
+                }
+                List<Company> company = new List<Company>(); myHandler = new BusinessLogicHandler();
+                company = myHandler.GetCompanyDetails();
+                double vat = 0;
+                foreach (var item in company)
+                { vat = item.VATPercentage; }
+                double vatAmount = (cartTotal * vat);
+                double subTotal = (cartTotal - vatAmount);
+                ProductViewModel.CartConclude finishing = new ProductViewModel.CartConclude();
+                finishing.CartTotal = cartTotal;
+                finishing.VatAddedTotal = vatAmount;
+                finishing.SubTotal = subTotal;
+                helperModel.ItsA_wrap = new List<ProductViewModel.CartConclude>();
+                helperModel.ItsA_wrap.Add(finishing);
+
+                helperModel.secureCart = itemList;
+                helperModel.allBook = ifBooks;
+                helperModel.allCartItem = myItems;
+
+                helperModel.allTechnology = ifGadget;
+            }
+            catch { }
+            #endregion
+
             if (ModelState.IsValid)
             {
                 #region Get User
@@ -341,76 +406,10 @@ namespace urbanbooks.Controllers
                 catch
                 {/*Navigate to custom error page*/ }
 
-                RedirectToAction("Reciept", helperModel);
+               return RedirectToAction("Reciept", helperModel);
             }
-
-
-
-            #region Feed The Model
-
-
-            CartItem thishereItem = new CartItem();
-            try
-            {
-                ProductViewModel.CartHelper cartHelp;
-                List<ProductViewModel.CartHelper> itemList = new List<ProductViewModel.CartHelper>();
-                // if (myItems.Count == 0)
-                // { return RedirectToAction("Edit"); }
-                double cartTotal = 0;
-                if (myItems != null)
-                {
-                    var revised = from rev in ifBooks
-                                  join item in myItems on rev.ProductID equals item.ProductID
-                                  where rev.ProductID == item.ProductID
-                                  select new { rev.ProductID, rev.SellingPrice, item.Quantity };
-                    foreach (var ite in revised)
-                    {
-                        cartHelp = new ProductViewModel.CartHelper();
-                        cartHelp.ProductID = ite.ProductID;
-                        cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
-                        cartTotal += (ite.SellingPrice * ite.Quantity);
-                        itemList.Add(cartHelp);
-                    }
-                }
-                if (myItems != null)
-                {
-                    var revised = from rev in ifGadget
-                                  join item in myItems on rev.ProductID equals item.ProductID
-                                  where rev.ProductID == item.ProductID
-                                  select new { rev.ProductID, rev.SellingPrice, item.Quantity };
-                    foreach (var ite in revised)
-                    {
-                        cartHelp = new ProductViewModel.CartHelper();
-                        cartHelp.ProductID = ite.ProductID;
-                        cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
-                        cartTotal += (ite.SellingPrice * ite.Quantity);
-                        itemList.Add(cartHelp);
-                    }
-                }
-                List<Company> company = new List<Company>();  myHandler = new BusinessLogicHandler();
-                company = myHandler.GetCompanyDetails();
-                double vat = 0;
-                foreach (var item in company)
-                { vat = item.VATPercentage; }
-                double vatAmount = (cartTotal * vat);
-                double subTotal = (cartTotal - vatAmount);
-                ProductViewModel.CartConclude finishing = new ProductViewModel.CartConclude();
-                finishing.CartTotal = cartTotal;
-                finishing.VatAddedTotal = vatAmount;
-                finishing.SubTotal = subTotal;
-                helperModel.ItsA_wrap = new List<ProductViewModel.CartConclude>();
-                helperModel.ItsA_wrap.Add(finishing);
-
-                helperModel.secureCart = itemList;
-                helperModel.allBook = ifBooks;
-                helperModel.allCartItem = myItems;
-
-                helperModel.allTechnology = ifGadget;
-            }
-            catch { }
-            #endregion
-
-            return View(helperModel);
+            else
+            { return View(helperModel); }
         }
 
         public async Task<ActionResult> _AddToCart(int ProductID, int wishID)
@@ -656,6 +655,7 @@ namespace urbanbooks.Controllers
             model.UserDetails = new ProvideUser();
             model.UserDetails.Address = user.Address;
             model.UserDetails.email = user.Email;
+            model.UserDetails.PhoneNumber = user.PhoneNumber;
             CustomerContext customer = new CustomerContext();
             Customer thisCust = new Customer();
             thisCust = customer.Customers.FirstOrDefault(cust => cust.User_Id == user.Id);
