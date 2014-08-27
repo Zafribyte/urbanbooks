@@ -17,7 +17,7 @@ namespace urbanbooks.Models
         public IEnumerable<CartHelper> secureCart { get; set; }
         public List<SelectListItem> I_DeliveryList { get; set; }
         public List<CartConclude> ItsA_wrap { get; set; }
-
+        public ProvideUser UserDetails { get; set; }
         public Billing Bill { get; set; }
         public DeliveryHelper deliveryHelper { get; set; }
 
@@ -68,6 +68,25 @@ namespace urbanbooks.Models
         [Display(Name = "Delivery Address")]
         [DataType(DataType.MultilineText)]
         public string DeliveryAddress
+        { get; set; }
+        public string DeliveryServiceName 
+        { get; set; }
+        public string DeliveryServiceType 
+        { get; set; }
+        public double DeliveryServicePrice 
+        { get; set; }
+    }
+    public class ProvideUser
+    {
+        public string Name 
+        { get; set; }
+        public string LName 
+        { get; set; }
+        public string Address 
+        { get; set; }
+        public string PhoneNumber 
+        { get; set; }
+        public string email 
         { get; set; }
     }
 }

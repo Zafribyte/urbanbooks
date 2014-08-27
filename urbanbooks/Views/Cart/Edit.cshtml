@@ -30,6 +30,7 @@
     {
         foreach (var item in Model.allCartItem)
         {
+            Session["myBooks"] = Model.allBook; Session["myGadget"] = Model.allTechnology; Session["myItems"] = Model.allCartItem; Session["myHelper"] = Model.ItsA_wrap;
             @Html.HiddenFor(modelItem => item.CartItemID, new { @class ="cartItemId"})
             foreach (var count in Model.secureCart)
             {

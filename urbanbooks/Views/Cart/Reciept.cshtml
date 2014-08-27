@@ -1,94 +1,183 @@
-﻿@model IEnumerable<urbanbooks.Technology>
+﻿@using urbanbooks.Models
+
+@model  ProductViewModel
 
 @{
     ViewBag.Title = "Reciept";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Reciept</h2>
+@if (Model.UserDetails != null)
+{
+    <div class="row">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CostPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SellingPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsBook)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModelName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Specs)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Manufacturer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModelNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ManufacturerID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageFront)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageTop)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageSide)
-        </th>
-        <th></th>
-    </tr>
+        <div class="container">
+            <div class="col-md-3">
+              <label class="control-label">Name :</label>  @Html.DisplayFor(model => model.UserDetails.Name)<br/>
+              <label class="control-label">Last Name :</label>  @Html.DisplayFor(model => model.UserDetails.LName)<br/>
+                <label class="control-label">E-Mail :</label>  @Html.DisplayFor(model => model.UserDetails.email)<br/>
+                <label class="control-label">Phone Number :</label> @Html.DisplayFor(model => model.UserDetails.PhoneNumber)<br />
+                <label class="control-label">Address :</label> @Html.DisplayFor(model => model.UserDetails.Address)<br />
+            </div>
+            <div class="col-md-3">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CostPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SellingPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsBook)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModelName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Specs)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Manufacturer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModelNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ManufacturerID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageFront)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageTop)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageSide)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductID })
-        </td>
-    </tr>
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="container">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-3">
+                <label class="caption">Shipping Details</label><br/>
+                <label class="control-label">Service Name :</label> @Html.DisplayFor(model => model.deliveryHelper.DeliveryServiceName)<br/>
+                <label class="control-label">Service Type :</label> @Html.DisplayFor(model => model.deliveryHelper.DeliveryServiceType)<br/>
+              <label class="control-label">Delivery Address :</label>  @Html.DisplayFor(model => model.deliveryHelper.DeliveryAddress)<br />
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+        </div>
+
+    </div>
 }
 
-</table>
+<div class="row">
+    <div class="container">
+        <table class="table table-striped">
+            <tr>
+                <th width="500px">
+                    <label>Item</label>
+                </th>
+                <th width="100px">
+                    <label>Quantity</label>
+                </th>
+                <th width="150px">
+                    <label>Unit Price</label>
+                </th>
+                <th width="150px">
+                    <label>Total</label>
+            </tr>
+
+            @if (Model.allCartItem != null)
+            {
+                foreach (var item in Model.allCartItem)
+                {
+                    foreach (var count in Model.secureCart)
+                    {
+                        if (count.ProductID == item.ProductID)
+                        {
+                            <tr>
+                                @if (Model.allBook != null)
+                                {
+                                    foreach (var book in Model.allBook)
+                                    {
+                                        if (book.ProductID == item.ProductID)
+                                        {
+                                            <td>
+                                                @Html.DisplayFor(modelItem => book.BookTitle)
+                                            </td>
+                                            <td style="align-items:flex-end">
+                                                @Html.DisplayFor(modelItem => item.Quantity)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => book.SellingPrice)
+                                            </td>
+
+                                            if (count.ProductID == item.ProductID)
+                                            {
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => count.TotalPerItem)
+                                                </td>
+                                            }
+                                        }
+                                    }
+                                    if (Model.allTechnology != null)
+                                    {
+                                        foreach (var gadget in Model.allTechnology)
+                                        {
+                                            if (gadget.ProductID == item.ProductID)
+                                            {
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => gadget.ModelName)
+                                                </td>
+                                                <td style="align-items:flex-end">
+                                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => gadget.SellingPrice)
+                                                </td>
+
+                                                if (count.ProductID == item.ProductID)
+                                                {
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => count.TotalPerItem)
+                                                    </td>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            </tr>
+                        }
+
+                    }
+                }
+            }
+            <tr class="alert">
+                <td rowspan="3">Shipping</td>
+                <td></td>
+                <td>@Html.DisplayFor(model => model.deliveryHelper.DeliveryServicePrice)</td>
+                <td>@Html.DisplayFor(model => model.deliveryHelper.DeliveryServicePrice)</td>
+            </tr>
+            <tfoot>
+                @foreach (var item in Model.ItsA_wrap)
+                {
+                    <tr>
+                        <td width="500px"></td>
+                        <td width="100px"></td>
+                        <td width="150px"><strong class="control-label">Sub Total</strong></td>
+                        <td width="150px">@Html.DisplayFor(modelItem => item.SubTotal)</td>
+                    </tr>
+                    <tr>
+                        <td width="500px"></td>
+                        <td width="100px"></td>
+                        <td width="150px"><strong class="control-label">VAT Total</strong></td>
+                        <td width="150px">@Html.DisplayFor(modelItem => item.VatAddedTotal)</td>
+                    </tr>
+                    <tr>
+                        <td width="500px"></td>
+                        <td width="100px"></td>
+                        <td width="150px"><strong class="control-label">Total</strong></td>
+                        <td width="150px">@Html.DisplayFor(modelItem => item.CartTotal)</td>
+                    </tr>
+                }
+            </tfoot>
+        </table>
+    </div>
+</div>
+
