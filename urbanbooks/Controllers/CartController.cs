@@ -363,6 +363,8 @@ namespace urbanbooks.Controllers
                 var user = userMgr.FindByEmail(userName);
                 #endregion
 
+                int bookSupplier = 0;
+                int technologySupplier = 0;
                 try
                 {
                     #region Creating the reciept/invoice
@@ -383,6 +385,8 @@ namespace urbanbooks.Controllers
                     catch { }
                     #endregion
 
+
+
                     #region Placing the order
                     try
                     {
@@ -390,13 +394,14 @@ namespace urbanbooks.Controllers
                         {
                             if (ifBooks != null)
                             {
+
                                 foreach (var book in ifBooks)
                                 {
-                                    
+                                    Order ord = new Order { DateCreated = DateTime.Now.Date, DateLastModified = DateTime.Now.Date, SupplierID = book.SupplierID, Status = false };
+                                    OrderItem orderLine = new OrderItem();
+
                                     if(book.ProductID == item.ProductID)
                                     {
-                                        Order ord = new Order { DateCreated = DateTime.Now.Date, DateLastModified = DateTime.Now.Date, SupplierID = book.SupplierID, Status = false };
-                                        OrderItem orderLine = new OrderItem();
                                         orderLine = myHandler.AddOrder(ord);
                                         orderLine.ProductID = book.ProductID;
                                         orderLine.Quantity = item.Quantity;
@@ -406,12 +411,14 @@ namespace urbanbooks.Controllers
                             }
                             if (ifGadget != null)
                             {
+
                                 foreach(var gadget in ifGadget)
                                 {
+                                    Order ord = new Order { DateCreated = DateTime.Now.Date, DateLastModified = DateTime.Now.Date, SupplierID = gadget.SupplierID, Status = false };
+                                    OrderItem orderLine = new OrderItem();
                                     if (gadget.ProductID == item.ProductID)
                                     {
-                                        Order ord = new Order { DateCreated = DateTime.Now.Date, DateLastModified = DateTime.Now.Date, SupplierID = book.SupplierID, Status = false };
-                                        OrderItem orderLine = new OrderItem();
+
                                         orderLine = myHandler.AddOrder(ord);
                                         orderLine.ProductID = gadget.ProductID;
                                         orderLine.Quantity = item.Quantity;
@@ -426,7 +433,7 @@ namespace urbanbooks.Controllers
                 }
                 catch
                 {/*Navigate to custom error page*/ }
-                Session["deliverData"] = helperModel;////////////////////////////////////////
+                Session["deliverData"] = helperModel;/////////////////
                 return RedirectToAction("Reciept", new { model = helperModel });
             }
             else

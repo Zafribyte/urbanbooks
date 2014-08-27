@@ -29,6 +29,7 @@ namespace urbanbooks
                         Techno.ModelName = row["ModelName"].ToString();
                         Techno.Specs = row["Specs"].ToString();
                         Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.SupplierID = Convert.ToInt32(row["SupplierID"].ToString());
                         Techno.ManufacturerID = (int)row["ManufacturerID"];
                         Techno.TechCategoryID = (int)row["TechCategoryID"];
                         Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
