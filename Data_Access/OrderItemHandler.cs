@@ -38,7 +38,6 @@ namespace urbanbooks
         {
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@OrderItemNumber", orderItem.OrderItemNumber),
                 new SqlParameter("@ProductID", orderItem.ProductID),
                 new SqlParameter("@Quantity", orderItem.Quantity),
                 new SqlParameter("@OrderNo", orderItem.OrderNo)

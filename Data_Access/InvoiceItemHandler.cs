@@ -41,7 +41,6 @@ namespace urbanbooks
             {
                 new SqlParameter("@Quantity", item.Quantity),
                 new SqlParameter("@ProductID", item.ProductID),
-                new SqlParameter("@InvoiceLineID", item.InvoiceLineID),
                 new SqlParameter("@CartItemID", item.CartItemID),
                 new SqlParameter("@InvoiceID", item.InvoiceID)
             };

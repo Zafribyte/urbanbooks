@@ -245,7 +245,7 @@ namespace urbanbooks
 
         #region ORDER
 
-        public bool AddOrder(Order order)
+        public OrderItem AddOrder(Order order)
         { OrderHandler myHandler = new OrderHandler(); return myHandler.CreateOrder(order); }
 
         public Order GetOrder(int OrderNumber)

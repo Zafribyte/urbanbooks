@@ -15,7 +15,7 @@ namespace urbanbooks
 
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@CustomerID", invoice.User_Id),
+                new SqlParameter("@User_Id", invoice.User_Id),
                 new SqlParameter("@DeliveryServiceID", invoice.DeliveryServiceID),
                 new SqlParameter("@DateCreated", invoice.DateCreated),
                 new SqlParameter("@DeliveryAddress",invoice.DeliveryAddress),
@@ -31,7 +31,7 @@ namespace urbanbooks
         public InvoiceItem GetInvoiceNumber(Invoice invoice)
         {
             InvoiceItem reciept;
-            SqlParameter[] Params = { new SqlParameter("@CostPrice", invoice.DateCreated),
+            SqlParameter[] Params = { new SqlParameter("@Date", invoice.DateCreated),
                                       new SqlParameter("@DeliveryAddress", invoice.DeliveryAddress),
                                       new SqlParameter("@Status", invoice.Status),
                                       new SqlParameter("@User_Id", invoice.User_Id),
@@ -70,7 +70,7 @@ namespace urbanbooks
                     invoice = new Invoice();
                     invoice.InvoiceID = Convert.ToInt32(row["InvoiceID"]);
                     invoice.DateCreated = Convert.ToDateTime(row["DateCreated"]);
-                    invoice.User_Id = Convert.ToInt32(row["CustomerID"]);
+                    invoice.User_Id = row["User_Id"].ToString();
                     invoice.DeliveryServiceID = Convert.ToInt32(row["DeliveryServiceID"]);
                     invoice.DeliveryAddress = row["DeliveryAddress"].ToString();
                 }

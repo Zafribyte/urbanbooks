@@ -1,0 +1,94 @@
+﻿@model IEnumerable<urbanbooks.Technology>
+
+@{
+    ViewBag.Title = "Reciept";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Reciept</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CostPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SellingPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsBook)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModelName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Specs)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Manufacturer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModelNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ManufacturerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageFront)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageTop)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageSide)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CostPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SellingPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsBook)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModelName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Specs)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Manufacturer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModelNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ManufacturerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImageFront)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImageTop)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImageSide)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProductID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProductID })
+        </td>
+    </tr>
+}
+
+</table>
