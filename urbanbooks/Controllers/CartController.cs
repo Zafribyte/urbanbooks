@@ -404,6 +404,21 @@ namespace urbanbooks.Controllers
                                     }
                                 }
                             }
+                            if (ifGadget != null)
+                            {
+                                foreach(var gadget in ifGadget)
+                                {
+                                    if (gadget.ProductID == item.ProductID)
+                                    {
+                                        Order ord = new Order { DateCreated = DateTime.Now.Date, DateLastModified = DateTime.Now.Date, SupplierID = book.SupplierID, Status = false };
+                                        OrderItem orderLine = new OrderItem();
+                                        orderLine = myHandler.AddOrder(ord);
+                                        orderLine.ProductID = gadget.ProductID;
+                                        orderLine.Quantity = item.Quantity;
+                                        myHandler.AddOrderItem(orderLine);
+                                    }
+                                }
+                            }
                         }
                     }
                     catch { }
@@ -411,8 +426,8 @@ namespace urbanbooks.Controllers
                 }
                 catch
                 {/*Navigate to custom error page*/ }
-
-               return RedirectToAction("Reciept", helperModel);
+                Session["deliverData"] = helperModel;////////////////////////////////////////
+                return RedirectToAction("Reciept", new { model = helperModel });
             }
             else
             { return View(helperModel); }
@@ -585,16 +600,16 @@ namespace urbanbooks.Controllers
             return PartialView(helperModel);
         }
 
-        public ActionResult Reciept()
+        public ActionResult Reciept(ProductViewModel model)
         {
             IEnumerable<Book> ifBooks = (IEnumerable<Book>)Session["myBooks"];
             IEnumerable<Technology> ifGadget = (IEnumerable<Technology>)Session["myGadget"];
             List<CartItem> myItems = (List<CartItem>)Session["myItems"];
+            model = (ProductViewModel)Session["deliverData"];///////////////////////////////////////////
 
-            ProductViewModel model = new ProductViewModel();
-            model.allBook = ifBooks;
-            model.allTechnology = ifGadget;
-            model.allCartItem = myItems;
+            //model.allBook = ifBooks;
+            //model.allTechnology = ifGadget;
+            //model.allCartItem = myItems;
 
             #region Calculate 
 
