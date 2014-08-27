@@ -25,7 +25,7 @@ namespace urbanbooks
                         Delivery delivery = new Delivery();
                         delivery.DeliveryServiceID = Convert.ToInt32(row["DeliveryServiceID"]);
                         delivery.ServiceName = row["ServiceName"].ToString();
-                        delivery.Price =Convert.ToDouble(row["Price"]);
+                        delivery.Price =Convert.ToDecimal(row["Price"]);
                         DeliveryList.Add(delivery);
                     }
                 }
@@ -48,7 +48,7 @@ namespace urbanbooks
                     delivery.DeliveryServiceID = Convert.ToInt32(row["DeliveryServiceID"]);
                     delivery.ServiceName = row["ServiceName"].ToString();
                     delivery.ServiceType = row["ServiceType"].ToString();
-                    delivery.Price = Convert.ToDouble(row["Price"]);
+                    delivery.Price = Convert.ToDecimal(row["Price"]);
                 }
             }
             return delivery;

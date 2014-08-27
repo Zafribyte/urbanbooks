@@ -19,7 +19,7 @@ namespace urbanbooks
         public string ServiceType 
         { get; set; }
         [DataType(DataType.Currency)]
-        public double Price 
+        public decimal Price 
         { get; set; }
     }
 }

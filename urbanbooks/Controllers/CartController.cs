@@ -332,6 +332,7 @@ namespace urbanbooks.Controllers
                 double vat = 0;
                 foreach (var item in company)
                 { vat = item.VATPercentage; }
+                //calc
                 double vatAmount = (cartTotal * vat);
                 double subTotal = (cartTotal - vatAmount);
                 ProductViewModel.CartConclude finishing = new ProductViewModel.CartConclude();
@@ -343,6 +344,7 @@ namespace urbanbooks.Controllers
 
                 helperModel.deliveryHelper.DeliveryServiceName = shipping.ServiceName;
                 helperModel.deliveryHelper.DeliveryServicePrice = shipping.Price;
+                helperModel.deliveryHelper.DeliveryServiceType = shipping.ServiceType;
 
                 helperModel.secureCart = itemList;
                 helperModel.allBook = ifBooks;
@@ -434,7 +436,7 @@ namespace urbanbooks.Controllers
                 catch
                 {/*Navigate to custom error page*/ }
                 Session["deliverData"] = helperModel;/////////////////
-                return RedirectToAction("Reciept", new { model = helperModel });
+                return RedirectToAction("Reciept");
             }
             else
             { return View(helperModel); }
