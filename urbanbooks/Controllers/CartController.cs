@@ -233,10 +233,6 @@ namespace urbanbooks.Controllers
                 }
             }
             double cartTotal = Convert.ToDouble(Session["cartTotal"].ToString());
-            //double vat = 0.14;
-            //var giza = dataSocket.Company.Select(m => m.VATPercentage);
-            //foreach (var item in giza)
-            //{ vat = (double)item; }
             List<Company> company = myHandler.GetCompanyDetails();
             double vat = 0;
             foreach (var item in company)
@@ -584,10 +580,90 @@ namespace urbanbooks.Controllers
             return PartialView(helperModel);
         }
 
-        public ActionResult Reciept(ProductViewModel data)
+        public ActionResult Reciept()
         {
-            //
-            return View(data);
+            IEnumerable<Book> ifBooks = (IEnumerable<Book>)Session["myBooks"];
+            IEnumerable<Technology> ifGadget = (IEnumerable<Technology>)Session["myGadget"];
+            List<CartItem> myItems = (List<CartItem>)Session["myItems"];
+
+            ProductViewModel model = new ProductViewModel();
+            model.allBook = ifBooks;
+            model.allTechnology = ifGadget;
+            model.allCartItem = myItems;
+
+            #region Calculate 
+
+            List<ProductViewModel.CartHelper> itemList = new List<ProductViewModel.CartHelper>();
+            ProductViewModel.CartHelper cartHelp;
+            if (myItems != null)
+            {
+                var revised = from rev in ifBooks
+                              join item in myItems on rev.ProductID equals item.ProductID
+                              where rev.ProductID == item.ProductID
+                              select new { rev.ProductID, rev.SellingPrice, item.Quantity };
+                foreach (var ite in revised)
+                {
+                    cartHelp = new ProductViewModel.CartHelper();
+                    cartHelp.ProductID = ite.ProductID;
+                    cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
+                    itemList.Add(cartHelp);
+                }
+            }
+            if (myItems != null)
+            {
+                if (ifGadget != null)
+                {
+                    var revised = from rev in ifGadget
+                                  join item in myItems on rev.ProductID equals item.ProductID
+                                  where rev.ProductID == item.ProductID
+                                  select new { rev.ProductID, rev.SellingPrice, item.Quantity };
+                    foreach (var ite in revised)
+                    {
+                        cartHelp = new ProductViewModel.CartHelper();
+                        cartHelp.ProductID = ite.ProductID;
+                        cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
+                        itemList.Add(cartHelp);
+                    }
+                }
+            }
+
+            double cartTotal = Convert.ToDouble(Session["cartTotal"].ToString());
+            myHandler = new BusinessLogicHandler();
+            List<Company> company = myHandler.GetCompanyDetails();
+            double vat = 0;
+            foreach (var item in company)
+            { vat = item.VATPercentage; }
+            double vatAmount = (cartTotal * vat);
+            double subTotal = (cartTotal - vatAmount);
+            ProductViewModel.CartConclude finishing = new ProductViewModel.CartConclude();
+            finishing.CartTotal = cartTotal;
+            finishing.VatAddedTotal = vatAmount;
+            finishing.SubTotal = subTotal;
+            model.ItsA_wrap = new List<ProductViewModel.CartConclude>();
+            model.ItsA_wrap.Add(finishing);
+
+            model.secureCart = itemList;
+            #endregion
+
+            #region Push User Details
+
+            string userName = User.Identity.GetUserName();
+            ApplicationDbContext dataSocket = new ApplicationDbContext();
+            UserStore<ApplicationUser> myStore = new UserStore<ApplicationUser>(dataSocket);
+            userMgr = new ApplicationUserManager(myStore);
+            var user = userMgr.FindByEmail(userName);
+
+            model.UserDetails = new ProvideUser();
+            model.UserDetails.Address = user.Address;
+            model.UserDetails.email = user.Email;
+            CustomerContext customer = new CustomerContext();
+            Customer thisCust = new Customer();
+            thisCust = customer.Customers.FirstOrDefault(cust => cust.User_Id == user.Id);
+            model.UserDetails.LName = thisCust.LastName;
+            model.UserDetails.Name = thisCust.FirstName;
+            #endregion
+
+            return View(model);
         }
 
     }
