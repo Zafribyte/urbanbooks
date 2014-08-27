@@ -104,7 +104,7 @@
                                             <td style="align-items:flex-end">
                                                 @Html.DisplayFor(modelItem => item.Quantity)
                                             </td>
-                                            <td>
+                                            <td class="currency-align">
                                                 @Html.DisplayFor(modelItem => book.SellingPrice)
                                             </td>
 
@@ -128,7 +128,7 @@
                                                 <td style="align-items:flex-end">
                                                     @Html.DisplayFor(modelItem => item.Quantity)
                                                 </td>
-                                                <td>
+                                                <td class="currency-align">
                                                     @Html.DisplayFor(modelItem => gadget.SellingPrice)
                                                 </td>
 
@@ -151,8 +151,8 @@
             <tr class="alert">
                 <td rowspan="3">Shipping</td>
                 <td></td>
-                <td>@Html.DisplayFor(model => model.deliveryHelper.DeliveryServicePrice)</td>
-                <td>@Html.DisplayFor(model => model.deliveryHelper.DeliveryServicePrice)</td>
+                <td class="currency-align">@Html.DisplayFor(model => model.deliveryHelper.DeliveryServicePrice)</td>
+                <td class="currency-align">@Html.DisplayFor(model => model.deliveryHelper.DeliveryServicePrice)</td>
             </tr>
             <tfoot>
                 @foreach (var item in Model.ItsA_wrap)
@@ -161,19 +161,19 @@
                         <td width="500px"></td>
                         <td width="100px"></td>
                         <td width="150px"><strong class="control-label">Sub Total</strong></td>
-                        <td width="150px">@Html.DisplayFor(modelItem => item.SubTotal)</td>
+                        <td class="currency-align" width="150px">@Html.DisplayFor(modelItem => item.SubTotal)</td>
                     </tr>
                     <tr>
                         <td width="500px"></td>
                         <td width="100px"></td>
                         <td width="150px"><strong class="control-label">VAT Total</strong></td>
-                        <td width="150px">@Html.DisplayFor(modelItem => item.VatAddedTotal)</td>
+                        <td class="currency-align" width="150px">@Html.DisplayFor(modelItem => item.VatAddedTotal)</td>
                     </tr>
                     <tr>
                         <td width="500px"></td>
                         <td width="100px"></td>
                         <td width="150px"><strong class="control-label">Total</strong></td>
-                        <td width="150px">@Html.DisplayFor(modelItem => item.CartTotal)</td>
+                        <td class="currency-align" width="150px">@Html.DisplayFor(modelItem => item.CartTotal)</td>
                     </tr>
                 }
             </tfoot>

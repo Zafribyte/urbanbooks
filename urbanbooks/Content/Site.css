@@ -36,3 +36,7 @@ footer {
 .btn-round{
     border-radius: 10px 10px 10px 10px;
 }
+
+.currency-align{
+    text-align:right;
+}

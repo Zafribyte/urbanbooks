@@ -396,19 +396,23 @@ namespace urbanbooks.Controllers
                         {
                             if (ifBooks != null)
                             {
-
+                                Order ord = new Order { DateCreated = DateTime.Now.Date, DateLastModified = DateTime.Now.Date, Status = false };
+                                OrderItem orderLine = new OrderItem();
+                                orderLine = myHandler.AddOrder(ord);
                                 foreach (var book in ifBooks)
                                 {
-                                    Order ord = new Order { DateCreated = DateTime.Now.Date, DateLastModified = DateTime.Now.Date, SupplierID = book.SupplierID, Status = false };
-                                    OrderItem orderLine = new OrderItem();
+                                   
+                                    
 
                                     if(book.ProductID == item.ProductID)
                                     {
-                                        orderLine = myHandler.AddOrder(ord);
+                                        ord.SupplierID = book.SupplierID;
+                                        
                                         orderLine.ProductID = book.ProductID;
                                         orderLine.Quantity = item.Quantity;
                                         myHandler.AddOrderItem(orderLine);
                                     }
+                                    
                                 }
                             }
                             if (ifGadget != null)
@@ -539,8 +543,7 @@ namespace urbanbooks.Controllers
             myHandler = new BusinessLogicHandler();
             Delivery myHelper = new Delivery();
             myHelper = myHandler.GetDeliveryDetails(Convert.ToInt32(selectedValue.ToString()));
-
-            string thiz = myHelper.Price.ToString();
+            string thiz = decimal.Round(myHelper.Price, 2, MidpointRounding.AwayFromZero).ToString();
             return Json(thiz);
         }
 

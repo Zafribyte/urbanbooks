@@ -50,16 +50,13 @@
                                     <td class="form-group form-inline">
                                         @Html.EditorFor(modelItem => item.Quantity, new { htmlAttributes = new { @class = "form-control quants" } })
                                     </td>
-                                    @*                            <td>
-                                            @Html.DisplayFor(modelItem => book.Description)
-                                        </td>*@
-                                    <td>
-                                        @Html.DisplayFor(modelItem => book.SellingPrice)
+                                    <td >
+                                      <span class="currency-align">@Html.DisplayFor(modelItem => book.SellingPrice)</span>
                                     </td>
 
                                     if (count.ProductID == item.ProductID)
                                     {
-                                        <td>
+                                        <td >
                                             @Html.DisplayFor(modelItem => count.TotalPerItem)
                                         </td>
                                     }
@@ -82,13 +79,13 @@
                                         @*                            <td width="400px">
                                                 @Html.DisplayFor(modelItem => gadget.Description)
                                             </td>*@
-                                        <td>
-                                            @Html.DisplayFor(modelItem => gadget.SellingPrice)
+                                        <td >
+                                            <span class="currency-align">@Html.DisplayFor(modelItem => gadget.SellingPrice)</span>
                                         </td>
 
                                         if (count.ProductID == item.ProductID)
                                         {
-                                            <td>
+                                            <td >
                                                 @Html.DisplayFor(modelItem => count.TotalPerItem)
                                             </td>
                                         }
@@ -115,21 +112,21 @@
             <td></td>
             <td></td>
             <td><strong>Sub Total</strong></td>
-            <td>@Html.DisplayFor(modelItem => item.SubTotal)</td>
+            <td >@Html.DisplayFor(modelItem => item.SubTotal)</td>
         </tr>
         <tr>
             <td></td>
             <td></td>
             <td></td>
             <td><strong>VAT Total</strong></td>
-            <td>@Html.DisplayFor(modelItem => item.VatAddedTotal)</td>
+            <td >@Html.DisplayFor(modelItem => item.VatAddedTotal)</td>
         </tr>
         <tr>
             <td></td>
             <td></td>
             <td></td>
             <td><strong>Total</strong></td>
-            <td>@Html.DisplayFor(modelItem => item.CartTotal)</td>
+            <td >@Html.DisplayFor(modelItem => item.CartTotal)</td>
         </tr>
 
     }

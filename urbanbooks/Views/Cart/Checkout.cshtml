@@ -203,10 +203,10 @@
                 });
             </script>
             <div class="form-group">
-                <label class="control-label col-md-2">Delivery Price</label>
+                <label class="control-label col-md-2 ">Delivery Price</label>
                 <div class="col-md-10">
                     
-                    @Html.EditorFor(model => model.deliveryHelper.DeliveryServicePrice, new { htmlAttributes = new { @class = "form-control olden" } })
+                    @Html.EditorFor(model => model.deliveryHelper.DeliveryServicePrice, new { htmlAttributes = new { @class = "form-control olden currency-align form-control-static", disabled = "disabled", @readonly = "readonly" } })
                 </div>
             </div>
         </div>
@@ -254,7 +254,10 @@
     <span>&nbsp;</span>
     <input type="submit" value="Checkout" class="btn btn-success" />
     <script type="text/javascript">
-         $('.datep').datepicker(); 
+        $('.datep').datepicker({
+            format: 'mm/dd/yyyy',
+            startDate: '-3d'
+        });
     </script>
 
     @Scripts.Render("~/bundles/jquery")
