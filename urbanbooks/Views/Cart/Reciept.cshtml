@@ -7,50 +7,58 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
+@if (Model.UserDetails != null)
+{
+    <div class="row">
 
-    <div class="container">
-        <div class="col-md-3">
+        <div class="container">
+            <div class="col-md-3">
+                @Html.DisplayFor(model => model.UserDetails.Name)<br/>
+                @Html.DisplayFor(model => model.UserDetails.LName)<br/>
+                @Html.DisplayFor(model => model.UserDetails.email)<br/>
+                @Html.DisplayFor(model => model.UserDetails.PhoneNumber)<br />
+                @Html.DisplayFor(model => model.UserDetails.Address)<br />
+            </div>
+            <div class="col-md-3">
 
+            </div>
+            <div class="col-md-3">
+
+            </div>
         </div>
-        <div class="col-md-3">
 
+        <div class="container">
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
         </div>
-        <div class="col-md-3">
 
-        </div>
     </div>
 
-    <div class="container">
-        <div class="col-md-3"></div>
-        <div class="col-md-3"></div>
-        <div class="col-md-3"></div>
-    </div>
+    <div class="row">
 
-</div>
+        <div class="container">
+            <div class="col-md-3">
 
-<div class="row">
+            </div>
+            <div class="col-md-3">
 
-    <div class="container">
-        <div class="col-md-3">
+            </div>
+            <div class="col-md-3">
 
+            </div>
         </div>
-        <div class="col-md-3">
 
+        <div class="container">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
         </div>
-        <div class="col-md-3">
 
-        </div>
     </div>
-
-    <div class="container">
-        <div class="col-md-3"></div>
-        <div class="col-md-3"></div>
-        <div class="col-md-3"></div>
-    </div>
-
-</div>
-
+}
 
 <div class="row">
     <div class="container">

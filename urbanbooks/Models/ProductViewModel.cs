@@ -69,6 +69,10 @@ namespace urbanbooks.Models
         [DataType(DataType.MultilineText)]
         public string DeliveryAddress
         { get; set; }
+        public string DeliveryServiceName 
+        { get; set; }
+        public double DeliveryServicePrice 
+        { get; set; }
     }
     public class ProvideUser
     {
