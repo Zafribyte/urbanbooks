@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace urbanbooks.Controllers
 {
-    [Authorize(Roles = "admin, employee")]
+    //[Authorize(Roles = "admin, employee")]
     public class OrderController : Controller
     {
         BusinessLogicHandler myHandler;

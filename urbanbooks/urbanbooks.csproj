@@ -192,18 +192,6 @@
     <Compile Include="Migrations\201408130920591_complex.Designer.cs">
       <DependentUpon>201408130920591_complex.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201408261138330_fix002.cs" />
-    <Compile Include="Migrations\201408261138330_fix002.Designer.cs">
-      <DependentUpon>201408261138330_fix002.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201408261143418_fix003.cs" />
-    <Compile Include="Migrations\201408261143418_fix003.Designer.cs">
-      <DependentUpon>201408261143418_fix003.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201408261145256_fix004.cs" />
-    <Compile Include="Migrations\201408261145256_fix004.Designer.cs">
-      <DependentUpon>201408261145256_fix004.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201408261147066_fix005.cs" />
     <Compile Include="Migrations\201408261147066_fix005.Designer.cs">
       <DependentUpon>201408261147066_fix005.cs</DependentUpon>
@@ -390,15 +378,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201408130920591_complex.resx">
       <DependentUpon>201408130920591_complex.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408261138330_fix002.resx">
-      <DependentUpon>201408261138330_fix002.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408261143418_fix003.resx">
-      <DependentUpon>201408261143418_fix003.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408261145256_fix004.resx">
-      <DependentUpon>201408261145256_fix004.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201408261147066_fix005.resx">
       <DependentUpon>201408261147066_fix005.cs</DependentUpon>
