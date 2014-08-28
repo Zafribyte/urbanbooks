@@ -401,36 +401,34 @@ namespace urbanbooks.Controllers
                                 orderLine = myHandler.AddOrder(ord);
                                 foreach (var book in ifBooks)
                                 {
-                                   
-                                    
-
                                     if(book.ProductID == item.ProductID)
                                     {
                                         ord.SupplierID = book.SupplierID;
-                                        
                                         orderLine.ProductID = book.ProductID;
                                         orderLine.Quantity = item.Quantity;
                                         myHandler.AddOrderItem(orderLine);
                                     }
                                     
                                 }
+                                ord.SupplierID = orderLine.SupplierID;
+                                myHandler.UpdateOrder(ord);
                             }
                             if (ifGadget != null)
                             {
-
+                                Order ord = new Order { DateCreated = DateTime.Now.Date, DateLastModified = DateTime.Now.Date, Status = false };
+                                OrderItem orderLine = new OrderItem();
+                                orderLine = myHandler.AddOrder(ord);
                                 foreach(var gadget in ifGadget)
                                 {
-                                    Order ord = new Order { DateCreated = DateTime.Now.Date, DateLastModified = DateTime.Now.Date, SupplierID = gadget.SupplierID, Status = false };
-                                    OrderItem orderLine = new OrderItem();
                                     if (gadget.ProductID == item.ProductID)
                                     {
-
-                                        orderLine = myHandler.AddOrder(ord);
                                         orderLine.ProductID = gadget.ProductID;
                                         orderLine.Quantity = item.Quantity;
                                         myHandler.AddOrderItem(orderLine);
                                     }
                                 }
+                                ord.SupplierID = orderLine.SupplierID;
+                                myHandler.UpdateOrder(ord);
                             }
                         }
                     }
