@@ -49,10 +49,11 @@ namespace urbanbooks
                 {
                     DataRow row = table.Rows[0];
                     company = new Company();
-                    company.Address = row["Address"].ToString();
-                    company.Email = row["E-Mail"].ToString();
+                    company.Address = row["PhysicalAddress"].ToString();
+                    company.Email = row["Email"].ToString();
                     company.Name = row["Name"].ToString();
                     company.Telephone = row["Telephone"].ToString();
+                    company.Fax = row["Fax"].ToString();
                 }
             }
             return company;

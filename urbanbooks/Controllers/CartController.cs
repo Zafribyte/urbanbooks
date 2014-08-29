@@ -708,6 +708,7 @@ namespace urbanbooks.Controllers
             myHandler = new BusinessLogicHandler();
             List<Company> company = myHandler.GetCompanyDetails();
             double vat = 0;
+            cartTotal += Convert.ToDouble(model.deliveryHelper.DeliveryServicePrice);
             foreach (var item in company)
             { vat = item.VATPercentage; }
             vat = vat + 1;

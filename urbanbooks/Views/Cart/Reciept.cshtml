@@ -14,36 +14,49 @@
 
         <div class="container">
             <div class="col-md-3">
-              <label class="control-label">Name :</label>  @Html.DisplayFor(model => model.UserDetails.Name)<br/>
-              <label class="control-label">Last Name :</label>  @Html.DisplayFor(model => model.UserDetails.LName)<br/>
-                <label class="control-label">E-Mail :</label>  @Html.DisplayFor(model => model.UserDetails.email)<br/>
-                <label class="control-label">Phone Number :</label> @Html.DisplayFor(model => model.UserDetails.PhoneNumber)<br />
-                <label class="control-label">Address :</label> @Html.DisplayFor(model => model.UserDetails.Address)<br />
+                <label>@Html.DisplayFor(m => m.company.Name)</label><br />
+                <label>@Html.DisplayFor(m => m.company.Address)</label><br />
+                <label>@Html.DisplayFor(m => m.company.Email)</label><br />
+                <label>Fax&nbsp;:&nbsp;@Html.DisplayFor(m => m.company.Fax)</label><br />
+                <label>Tel&nbsp;:&nbsp;@Html.DisplayFor(m => m.company.Telephone)</label>
             </div>
             <div class="col-md-3">
 
             </div>
             <div class="col-md-3">
-
             </div>
         </div>
 
-        <div class="container">
-            <div class="col-md-3"></div>
-            <div class="col-md-3"></div>
-            <div class="col-md-3"></div>
-        </div>
-
+        
     </div>
+    <br />
+    <div class="row">
+
+            <div class="container">
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3">
+                    <label>Invoice Number :</label>&nbsp;@Html.DisplayFor(m => m.recieptData.InvoiceID)<br />
+                    <label>Date Created :</label>&nbsp;@Html.DisplayFor(m => m.recieptData.DateCreated)
+                </div>
+            </div>
+
+        </div>
 <br/>
     <div class="row">
 
         <div class="container">
             <div class="col-md-3">
-                
+                <label>Customer Details</label><br />
+                <label class="control-label">Name :</label>  @Html.DisplayFor(model => model.UserDetails.Name)<br />
+                <label class="control-label">Last Name :</label>  @Html.DisplayFor(model => model.UserDetails.LName)<br />
+                <label class="control-label">E-Mail :</label>  @Html.DisplayFor(model => model.UserDetails.email)<br />
+                <label class="control-label">Phone Number :</label> @Html.DisplayFor(model => model.UserDetails.PhoneNumber)<br />
+                <label class="control-label">Address :</label> @Html.DisplayFor(model => model.UserDetails.Address)<br />
             </div>
             <div class="col-md-3">
-
+                
             </div>
             <div class="col-md-3">
 
@@ -77,10 +90,10 @@
                 <th width="100px">
                     <label>Quantity</label>
                 </th>
-                <th width="150px">
+                <th width="150px" style="text-align:right">
                     <label>Unit Price</label>
                 </th>
-                <th width="150px">
+                <th width="150px" style="text-align:right">
                     <label>Total</label>
             </tr>
 
@@ -111,7 +124,7 @@
 
                                             if (count.ProductID == item.ProductID)
                                             {
-                                                <td>
+                                                <td style="text-align:right">
                                                     @Html.DisplayFor(modelItem => count.TotalPerItem)
                                                 </td>
                                             }
@@ -135,7 +148,7 @@
 
                                                 if (count.ProductID == item.ProductID)
                                                 {
-                                                    <td>
+                                                    <td style="text-align:right">
                                                         @Html.DisplayFor(modelItem => count.TotalPerItem)
                                                     </td>
                                                 }
@@ -161,19 +174,19 @@
                     <tr>
                         <td width="500px"></td>
                         <td width="100px"></td>
-                        <td width="150px"><strong class="control-label">Sub Total</strong></td>
+                        <td width="150px" style="text-align:right"><strong class="control-label">Sub Total</strong></td>
                         <td class="currency-align" width="150px">@Html.DisplayFor(modelItem => item.SubTotal)</td>
                     </tr>
                     <tr>
                         <td width="500px"></td>
                         <td width="100px"></td>
-                        <td width="150px"><strong class="control-label">VAT Total</strong></td>
+                        <td width="150px" style="text-align:right"><strong class="control-label">VAT Total</strong></td>
                         <td class="currency-align" width="150px">@Html.DisplayFor(modelItem => item.VatAddedTotal)</td>
                     </tr>
                     <tr>
                         <td width="500px"></td>
                         <td width="100px"></td>
-                        <td width="150px"><strong class="control-label">Total</strong></td>
+                        <td width="150px" style="text-align:right"><strong class="control-label">Total</strong></td>
                         <td class="currency-align" width="150px">@Html.DisplayFor(modelItem => item.CartTotal)</td>
                     </tr>
                 }
