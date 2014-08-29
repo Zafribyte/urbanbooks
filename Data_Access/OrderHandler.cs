@@ -51,6 +51,7 @@ namespace urbanbooks
                     order.DateLastModified = Convert.ToDateTime(row["DateLastModified"]);
                     order.SupplierID = Convert.ToInt32(row["SupplierID"]);
                     order.EmployeeID = Convert.ToInt32(row["EmployeeID"]);
+                    order.InvoiceID = Convert.ToInt32(row["InvoiceID"]);
                     order.Status = Convert.ToBoolean(row["Status"]);
 
                 }

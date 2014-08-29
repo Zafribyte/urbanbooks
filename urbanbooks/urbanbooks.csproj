@@ -208,6 +208,10 @@
     <Compile Include="Migrations\201408290945339_fix0023.Designer.cs">
       <DependentUpon>201408290945339_fix0023.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408291135008_migration109.cs" />
+    <Compile Include="Migrations\201408291135008_migration109.Designer.cs">
+      <DependentUpon>201408291135008_migration109.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddNewBookViewModel.cs" />
@@ -218,6 +222,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\OrderModels.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
+    <Compile Include="Models\SupplierContext.cs" />
     <Compile Include="Models\WishlistActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -369,8 +374,6 @@
     <Content Include="Views\Cart\Confirm.cshtml" />
     <Content Include="Views\Book\AdminIndex.cshtml" />
     <Content Include="Views\Cart\Reciept.cshtml" />
-    <Content Include="Views\Order\Details.cshtml" />
-    <Content Include="Views\Order\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
@@ -405,6 +408,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201408290945339_fix0023.resx">
       <DependentUpon>201408290945339_fix0023.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408291135008_migration109.resx">
+      <DependentUpon>201408291135008_migration109.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

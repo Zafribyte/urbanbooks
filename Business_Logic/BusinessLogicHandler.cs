@@ -141,12 +141,7 @@ namespace urbanbooks
         public bool AddTechnology(Technology gadget)
         {
             TechnologyHandler myHandler = new TechnologyHandler();
-            bool myBinder = false;
-
-            if (myHandler.InsertTechnology(gadget) == true && myHandler.InsertTechnologyProduct(gadget) == true)
-            { return myBinder = true; }
-            else
-                return myBinder;
+            return myHandler.InsertTechnology(gadget);
         }
         public Technology AddExperimentTech(Technology tech)
         {

@@ -26,7 +26,9 @@ namespace urbanbooks
         [ScaffoldColumn(false)]
         public int EmployeeID 
         { get; set; }
+        public int InvoiceID 
+        { get; set; }
 
-        public DateTime DataModified { get; set; }
+      
     }
 }
