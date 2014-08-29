@@ -78,7 +78,6 @@ namespace urbanbooks
             SqlParameter[] Params = {
                                         new SqlParameter("@CostPrice", tech.CostPrice),
                                         new SqlParameter("@SellingPrice", tech.SellingPrice),
-                                        new SqlParameter("@IsBook", tech.IsBook = false),
                                         new SqlParameter("@DateAdded", tech.DateAdded)
                                     };
             using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ManhattanProject", CommandType.StoredProcedure, Params))

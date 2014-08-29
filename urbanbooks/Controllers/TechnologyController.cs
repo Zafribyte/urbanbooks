@@ -99,7 +99,8 @@ namespace urbanbooks.Controllers
         public ActionResult Create(FormCollection collection, HttpPostedFileBase file, HttpPostedFileBase file2, HttpPostedFileBase file3)
         {
             try
-            {
+                {
+                
                 myHandler = new BusinessLogicHandler();
                 gadget = new Technology();
                 Company c = new Company();
@@ -107,8 +108,8 @@ namespace urbanbooks.Controllers
                 gadget.ModelName = collection.GetValue("techs.ModelName").AttemptedValue.ToString();
                 gadget.Specs = collection.GetValue("techs.Specs").AttemptedValue.ToString();
                 gadget.ModelNumber = collection.GetValue("techs.ModelNumber").AttemptedValue.ToString();
-                gadget.ManufacturerID = Convert.ToInt32(collection.GetValue("Manufacturer").AttemptedValue);
-                gadget.TechCategoryID = Convert.ToInt32(collection.GetValue("TechCategoryID").AttemptedValue);
+                gadget.ManufacturerID = Convert.ToInt32(collection.GetValue("Name").AttemptedValue);
+                gadget.TechCategoryID = Convert.ToInt32(collection.GetValue("CategoryName").AttemptedValue);
                 gadget.CostPrice = Convert.ToDouble(collection.GetValue("techs.CostPrice").AttemptedValue);
                 gadget.SellingPrice = Convert.ToDouble(collection.GetValue("techs.SellingPrice").AttemptedValue);
                 gadget.IsBook = false;
