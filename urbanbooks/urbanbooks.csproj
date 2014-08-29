@@ -200,6 +200,10 @@
     <Compile Include="Migrations\201408271240277_fix0.0.Designer.cs">
       <DependentUpon>201408271240277_fix0.0.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408281510339_fix008.cs" />
+    <Compile Include="Migrations\201408281510339_fix008.Designer.cs">
+      <DependentUpon>201408281510339_fix008.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddNewBookViewModel.cs" />
@@ -391,6 +395,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201408271240277_fix0.0.resx">
       <DependentUpon>201408271240277_fix0.0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408281510339_fix008.resx">
+      <DependentUpon>201408281510339_fix008.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

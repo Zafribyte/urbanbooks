@@ -19,6 +19,8 @@ namespace urbanbooks.Models
         public List<CartConclude> ItsA_wrap { get; set; }
         public ProvideUser UserDetails { get; set; }
         public Billing Bill { get; set; }
+        public Invoice recieptData { get; set; }
+        public Company company { get; set; }
         public DeliveryHelper deliveryHelper { get; set; }
 
         public class CartHelper
@@ -75,6 +77,7 @@ namespace urbanbooks.Models
         { get; set; }
         [DataType(DataType.Currency)]
         [UIHint("Currency")]
+        [Required]
         public decimal DeliveryServicePrice 
         { get; set; }
     }

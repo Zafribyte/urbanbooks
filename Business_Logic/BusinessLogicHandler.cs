@@ -18,7 +18,8 @@ namespace urbanbooks
 
         public List<Author> GetAuthors()
         { AuthorHandler myHandler = new AuthorHandler(); return myHandler.GetAuthorList(); } //ADMIN &SYSTEM
-
+        public Company GetCompanyDetail()
+        { CompanyHandler myHandler = new CompanyHandler(); return myHandler.GetCompanyDetail(); }
         public List<Company> GetCompanyDetails()
         { CompanyHandler myHandler = new CompanyHandler(); return myHandler.CompanyDetails(); }
 
@@ -314,6 +315,9 @@ namespace urbanbooks
             BookHandler myHandler = new BookHandler();
             return myHandler.GetBookList();
         }
+
+        public bool AssignOrderToSupplier(Order ord)
+        { OrderHandler myHandler = new OrderHandler(); return myHandler.AssignSupplierToOrder(ord); }
 
         public InvoiceItem GetInvoiceLastNumber(Invoice reciept)
         { InvoiceHandler myHandler = new InvoiceHandler(); return myHandler.GetInvoiceNumber(reciept); }

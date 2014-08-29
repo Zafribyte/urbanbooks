@@ -94,7 +94,7 @@ namespace urbanbooks
         {
             Book book = null;
 
-            SqlParameter[] Params = { new SqlParameter("@BookID", BookID) };
+            SqlParameter[] Params = { new SqlParameter("@ProductID", BookID) };
             using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewSpecificBookAdmin",
                 CommandType.StoredProcedure, Params))
             {

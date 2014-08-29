@@ -96,7 +96,18 @@ namespace urbanbooks
                 new SqlParameter("@DateModified", order.DateLastModified),
                 new SqlParameter("@EmployeeID", order.EmployeeID )
             };
-            return DataProvider.ExecuteNonQuery("sp_UpdateAuthor", CommandType.StoredProcedure,
+            return DataProvider.ExecuteNonQuery("sp_UpdateOrder", CommandType.StoredProcedure,
+                Params);
+        }
+
+        public bool AssignSupplierToOrder(Order order)
+        {
+            SqlParameter[] Params = new SqlParameter[]
+            {
+                new SqlParameter("@OrderNo", order.OrderNo),
+                new SqlParameter("@SupplierID", order.SupplierID)
+            };
+            return DataProvider.ExecuteNonQuery("sp_AssignSupplier", CommandType.StoredProcedure,
                 Params);
         }
 

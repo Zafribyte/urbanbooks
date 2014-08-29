@@ -3,59 +3,38 @@
 @using urbanbooks.Helpers;
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Books";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using urbanbooks.Helpers;
+<br />
+<div class="container">
+    <div class="jumbotron">
+    </div>
+</div>
 
-<h2>Index</h2>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.BookTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ISBN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SellingPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CoverImage)
-        </th>
-        <th>
+<br />
 
-        </th>
-    </tr>
 
     @if (Model != null)
     {
-
         foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BookTitle)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ISBN)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SellingPrice)
-                </td>
+            <div class="col-md-2">
+                <div style="height:350px">
+                    <div class="thumbnail" style="text-align:center">
 
-                <td>
-                    <img src="~/Uploads/Books/@item.CoverImage" width="150" height="150" />
-                </td>
-                <td>
-                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>","Add to Wishlist", "Add", "Wishlist", new { productId = item.ProductID}, htmlAttributes: new { @class = "btn btn-default"})
-                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "View", "Details", "Book", new { bookId = item.ProductID }, htmlAttributes: new { @class = "btn btn-default" })
-                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "AddToCart", "Cart", new { productId = item.ProductID }, htmlAttributes: new { @class = "btn btn-default" }) 
-                </td>
-
-            </tr>
+                        <img class="img-thumbnail" src="~/Uploads/Books/@item.CoverImage" width="150" height="150" />
+                        <h4 class="caption">@Html.DisplayFor(modelItem => item.BookTitle)</h4>
+                        <label>ISBN :</label>&nbsp;@Html.DisplayFor(modelItem => item.ISBN)<br />
+                        <label>Price :</label>&nbsp;@Html.DisplayFor(modelItem => item.SellingPrice)
+                        <hr />
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to Wishlist", "Add", "Wishlist", new { productId = item.ProductID }, htmlAttributes: new { @class = "btn" })
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "View", "Details", "Book", new { bookId = item.ProductID }, htmlAttributes: new { @class = "btn" })
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "AddToCart", "Cart", new { productId = item.ProductID }, htmlAttributes: new { @class = "btn" })
+                    </div>
+                </div>
+            </div>
         }
     }
 
-
-</table>

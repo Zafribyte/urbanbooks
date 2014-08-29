@@ -17,37 +17,19 @@ namespace urbanbooks.Migrations
 
         protected override void Seed(urbanbooks.Models.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            string name = "admin@urbanbooks.com";
-            string password = "password";
-            string test = "admin";
-
-            //Create Role Test and User Test
-           // RoleManager.Create(new IdentityRole(test));
-            //UserManager.Create(new ApplicationUser() { UserName = test });
-
-            //Create Role Admin if it does not exist
-            if (!RoleManager.RoleExists(test))
+            if (!context.Users.Any(myUser => myUser.UserName == "admin@urbanbooks.co.za"))
             {
-                var roleresult = RoleManager.Create(new IdentityRole(test));
-            }
+                var userStore = new UserStore<ApplicationUser>(context);
+                var roleStore = new RoleStore<IdentityRole>(context);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
 
-            //Create User=Admin with password=123456
-            var user = new ApplicationUser();
-            user.UserName = name;
-            user.Email = name;
-            var adminresult = UserManager.Create(user, password);
-
-            //Add User Admin to Role Admin
-            if (adminresult.Succeeded)
-            {
-                var result = UserManager.AddToRole(user.Id, test);
+                var user = new ApplicationUser { UserName = "admin@urbanbooks.co.za", Email = "admin@urbanbooks.co.za" };
+                user.Wishlists = new Wishlist { Status = false };
+                user.Carts = new Cart { DateLastModified = DateTime.Now };
+                userManager.Create(user, "password");
+                roleManager.Create(new IdentityRole { Name = "admin" });
+                userManager.AddToRole(user.Id, "admin");
             }
         }
     }
