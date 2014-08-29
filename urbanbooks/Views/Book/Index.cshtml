@@ -18,6 +18,7 @@
 
     @if (Model != null)
     {
+        string returnUrl = HttpContext.Current.Request.RawUrl;
         foreach (var item in Model)
         {
             <div class="col-md-2">
@@ -29,9 +30,9 @@
                         <label>ISBN :</label>&nbsp;@Html.DisplayFor(modelItem => item.ISBN)<br />
                         <label>Price :</label>&nbsp;@Html.DisplayFor(modelItem => item.SellingPrice)
                         <hr />
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to Wishlist", "Add", "Wishlist", new { productId = item.ProductID }, htmlAttributes: new { @class = "btn" })
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to Wishlist", "Add", "Wishlist", new { productId = item.ProductID, returnUrl }, htmlAttributes: new { @class = "btn" })
                         @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "View", "Details", "Book", new { bookId = item.ProductID }, htmlAttributes: new { @class = "btn" })
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "AddToCart", "Cart", new { productId = item.ProductID }, htmlAttributes: new { @class = "btn" })
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "AddToCart", "Cart", new { productId = item.ProductID, returnUrl }, htmlAttributes: new { @class = "btn" })
                     </div>
                 </div>
             </div>

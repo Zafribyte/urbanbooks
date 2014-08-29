@@ -103,8 +103,11 @@ namespace urbanbooks.Controllers
                 if (inItems != null)
                 {
                     CartItem items = inItems.SingleOrDefault(item => item.ProductID == productId);
-                    if(items.ProductID == productId)
-                    { myHandler = new BusinessLogicHandler(); myHandler.DeleteCartItem(items.CartItemID); }
+                    if (items != null)
+                    {
+                        if (items.ProductID == productId)
+                        { myHandler = new BusinessLogicHandler(); myHandler.DeleteCartItem(items.CartItemID); }
+                    }
 
                 }
                 wish.WishlistID = (int)thisUser.Wishlists.WishlistID;
