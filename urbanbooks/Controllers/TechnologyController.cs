@@ -103,6 +103,7 @@ namespace urbanbooks.Controllers
                 myHandler = new BusinessLogicHandler();
                 gadget = new Technology();
                 Company c = new Company();
+                gadget.DateAdded = DateTime.Now;
                 gadget.ModelName = collection.GetValue("techs.ModelName").AttemptedValue.ToString();
                 gadget.Specs = collection.GetValue("techs.Specs").AttemptedValue.ToString();
                 gadget.ModelNumber = collection.GetValue("techs.ModelNumber").AttemptedValue.ToString();
@@ -111,7 +112,7 @@ namespace urbanbooks.Controllers
                 gadget.CostPrice = Convert.ToDouble(collection.GetValue("techs.CostPrice").AttemptedValue);
                 gadget.SellingPrice = Convert.ToDouble(collection.GetValue("techs.SellingPrice").AttemptedValue);
                 gadget.IsBook = false;
-                gadget.DateAdded = DateTime.Now;
+                
                 TryUpdateModel(gadget);
                 if (ModelState.IsValid)
                 {
