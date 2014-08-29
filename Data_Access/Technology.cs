@@ -21,8 +21,6 @@ namespace urbanbooks
         [ScaffoldColumn(true)]
         public string Specs
         { get; set; }
-        public string Manufacturer
-        { get; set; }
         public string ModelNumber
         { get; set; }
         public int ManufacturerID

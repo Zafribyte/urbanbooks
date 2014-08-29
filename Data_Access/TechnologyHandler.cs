@@ -137,7 +137,7 @@ namespace urbanbooks
                 new SqlParameter("@SupplierID", TechnoProduct.SupplierID),
                 new SqlParameter("@DateAdded", TechnoProduct.DateAdded),
                 new SqlParameter("@TechnologyID", TechnoProduct.TechID),
-                new SqlParameter("@Make", TechnoProduct.Manufacturer),
+                new SqlParameter("@Manufacturer", TechnoProduct.ManufacturerID),
                 new SqlParameter("@TechType", TechnoProduct.TechCategoryID),
                 new SqlParameter("@SerialNumber", TechnoProduct.ModelNumber)
             };
@@ -184,7 +184,7 @@ namespace urbanbooks
             {
                 new SqlParameter("@ProductID", TechnoProduct.ProductID),
                 new SqlParameter("@TechnologyID", TechnoProduct.TechID),
-                new SqlParameter("@Manufacturer", TechnoProduct.Manufacturer),
+                new SqlParameter("@ManufacturerID", TechnoProduct.ManufacturerID),
                 new SqlParameter("@TechType", TechnoProduct.TechCategoryID),
                 new SqlParameter("@ModelNumber", TechnoProduct.ModelNumber)
             };
