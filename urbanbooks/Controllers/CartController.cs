@@ -383,6 +383,7 @@ namespace urbanbooks.Controllers
                             invoiceLine.Quantity = item.Quantity;
                             myHandler.AddinvoiceItem(invoiceLine);
                         }
+                        Session["InvoiceID"] = invoiceLine.InvoiceID;
 
                     }
                     catch { }
@@ -659,11 +660,11 @@ namespace urbanbooks.Controllers
             IEnumerable<Book> ifBooks = (IEnumerable<Book>)Session["myBooks"];
             IEnumerable<Technology> ifGadget = (IEnumerable<Technology>)Session["myGadget"];
             List<CartItem> myItems = (List<CartItem>)Session["myItems"];
-            model = (ProductViewModel)Session["deliverData"];///////////////////////////////////////////
+            model = (ProductViewModel)Session["deliverData"];
 
             #region Clear the cart
 
-            //Delete all cart items
+            
 
             #endregion
 
@@ -739,6 +740,21 @@ namespace urbanbooks.Controllers
             thisCust = customer.Customers.FirstOrDefault(cust => cust.User_Id == user.Id);
             model.UserDetails.LName = thisCust.LastName;
             model.UserDetails.Name = thisCust.FirstName;
+            #endregion
+
+            #region Push Invoice nfo
+            model.recieptData = new Invoice();
+            model.recieptData.DateCreated = DateTime.Now.Date;
+            model.recieptData.InvoiceID = (int)Session["InvoiceID"];
+
+            #endregion
+
+            #region Push Company nfo
+
+            myHandler = new BusinessLogicHandler();
+            model.company = new Company();
+            model.company = myHandler.GetCompanyDetail();
+
             #endregion
 
             return View(model);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +36,26 @@ namespace urbanbooks
                 }
             }
             return AuthorList;
+        }
+
+        public Company GetCompanyDetail()
+        {
+            Company company = null;
+
+            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewCompanyDetail",
+                CommandType.StoredProcedure))
+            {
+                if (table.Rows.Count == 1)
+                {
+                    DataRow row = table.Rows[0];
+                    company = new Company();
+                    company.Address = row["Address"].ToString();
+                    company.Email = row["E-Mail"].ToString();
+                    company.Name = row["Name"].ToString();
+                    company.Telephone = row["Telephone"].ToString();
+                }
+            }
+            return company;
         }
     }
 }

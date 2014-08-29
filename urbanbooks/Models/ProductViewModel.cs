@@ -19,7 +19,8 @@ namespace urbanbooks.Models
         public List<CartConclude> ItsA_wrap { get; set; }
         public ProvideUser UserDetails { get; set; }
         public Billing Bill { get; set; }
-        public Order orderDetails { get; set; }
+        public Invoice recieptData { get; set; }
+        public Company company { get; set; }
         public DeliveryHelper deliveryHelper { get; set; }
 
         public class CartHelper

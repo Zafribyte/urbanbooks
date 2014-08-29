@@ -18,7 +18,8 @@ namespace urbanbooks
 
         public List<Author> GetAuthors()
         { AuthorHandler myHandler = new AuthorHandler(); return myHandler.GetAuthorList(); } //ADMIN &SYSTEM
-
+        public Company GetCompanyDetail()
+        { CompanyHandler myHandler = new CompanyHandler(); return myHandler.GetCompanyDetail(); }
         public List<Company> GetCompanyDetails()
         { CompanyHandler myHandler = new CompanyHandler(); return myHandler.CompanyDetails(); }
 
