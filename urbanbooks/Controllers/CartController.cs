@@ -446,7 +446,7 @@ namespace urbanbooks.Controllers
                 }
                 catch
                 {/*Navigate to custom error page*/ }
-                Session["deliverData"] = helperModel;/////////////////
+                Session["deliverData"] = helperModel;
                 return RedirectToAction("Reciept");
             }
             else
@@ -477,7 +477,7 @@ namespace urbanbooks.Controllers
             //return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             return RedirectToAction("Index", "Home");
         }
-
+          
 
         public ActionResult _Remove(int Id)
         {
