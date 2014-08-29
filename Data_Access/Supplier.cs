@@ -13,7 +13,7 @@ namespace urbanbooks
         public int SupplierID
         { get; set; }
         public string Name
-        { get; set; }
+        { get; set; }/
         public string LastName
         { get; set; }
         [StringLength(10)]
