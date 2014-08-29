@@ -26,7 +26,7 @@ namespace urbanbooks.Controllers
             var thisUser = await userMgr.FindByNameAsync(User.Identity.Name);
             int Id = (int)thisUser.Carts.CartID;
             Session["cartTotal"] = act.GetTotalAsync(Id);
-            Session["wishlistTotal"] =  wishAct.GetWishlistTotal(thisUser.Wishlists.WishlistID);
+            Session["wishlistTotal"] = wishAct.GetWishlistTotal(thisUser.Wishlists.WishlistID);
             IEnumerable<CartItem> myItems = act.GetCartItemsAsync(Id);
             myHandler = new BusinessLogicHandler();
             IEnumerable<Book> ifBooks = myHandler.GetBooks();
@@ -73,8 +73,9 @@ namespace urbanbooks.Controllers
             double vat = 0;
             foreach (var item in company)
             { vat = item.VATPercentage; }
-            double vatAmount = (cartTotal * vat);
-            double subTotal = (cartTotal - vatAmount);
+            vat = vat+1;
+            double subTotal = cartTotal / vat;
+            double vatAmount = cartTotal - subTotal;
             ProductViewModel.CartConclude finishing = new ProductViewModel.CartConclude();
             finishing.CartTotal = cartTotal;
             finishing.VatAddedTotal = vatAmount;
@@ -187,10 +188,10 @@ namespace urbanbooks.Controllers
             userMgr = new ApplicationUserManager(myStore);
             var thisUser = await userMgr.FindByNameAsync(User.Identity.Name);
             int Id = (int)thisUser.Carts.CartID;
-            Session["cartTotal"] =  act.GetTotalAsync(Id);
+            Session["cartTotal"] = act.GetTotalAsync(Id);
             Session["wishlistTotal"] = wishAct.GetWishlistTotal(thisUser.Wishlists.WishlistID);
             //List<CartItem> myItems = new List<CartItem>(); 
-             IEnumerable<CartItem> myItems = act.GetCartItemsAsync(Id);
+            IEnumerable<CartItem> myItems = act.GetCartItemsAsync(Id);
 
             myHandler = new BusinessLogicHandler();
             IEnumerable<Book> ifBooks = myHandler.GetBooks();
@@ -270,6 +271,7 @@ namespace urbanbooks.Controllers
             if (thisUser.Address != null)
             { myNewModel.deliveryHelper = new DeliveryHelper(); myNewModel.deliveryHelper.DeliveryAddress = thisUser.Address; }
             #endregion
+
             return View(myNewModel);
         }
 
@@ -365,12 +367,10 @@ namespace urbanbooks.Controllers
                 var user = userMgr.FindByEmail(userName);
                 #endregion
 
-                int bookSupplier = 0;
-                int technologySupplier = 0;
                 try
                 {
                     #region Creating the reciept/invoice
-                    Invoice reciept = new Invoice {User_Id = user.Id, DateCreated = DateTime.Now, DeliveryAddress = helperModel.deliveryHelper.DeliveryAddress, DeliveryServiceID = Convert.ToInt32(collection[1].ToString()), Status = false };
+                    Invoice reciept = new Invoice { User_Id = user.Id, DateCreated = DateTime.Now, DeliveryAddress = helperModel.deliveryHelper.DeliveryAddress, DeliveryServiceID = Convert.ToInt32(collection[1].ToString()), Status = false };
                     try
                     {
                         InvoiceItem invoiceLine = new InvoiceItem();
@@ -388,47 +388,54 @@ namespace urbanbooks.Controllers
                     #endregion
 
 
-
                     #region Placing the order
                     try
                     {
+                        Order ord;
+                        int supplierId = 0;
+                        OrderItem orderLine = new OrderItem();
+                        myHandler = new BusinessLogicHandler();
+                        List<int> orders = new List<int>();
+                        List<int> suppliers = new List<int>();
                         foreach (var item in myItems)
                         {
-                            if (ifBooks != null)
+                            try
                             {
-                                Order ord = new Order { DateCreated = DateTime.Now.Date, DateLastModified = DateTime.Now.Date, Status = false };
-                                OrderItem orderLine = new OrderItem();
-                                orderLine = myHandler.AddOrder(ord);
-                                foreach (var book in ifBooks)
+                                supplierId = ifBooks.SingleOrDefault(m => m.ProductID == item.ProductID).SupplierID;
+                                if (suppliers.Contains(supplierId))
                                 {
-                                    if(book.ProductID == item.ProductID)
-                                    {
-                                        ord.SupplierID = book.SupplierID;
-                                        orderLine.ProductID = book.ProductID;
-                                        orderLine.Quantity = item.Quantity;
-                                        myHandler.AddOrderItem(orderLine);
-                                    }
-                                    
+                                    int x = suppliers.IndexOf(supplierId);
+                                    orderLine.OrderNo = orders.ElementAt(x);
+                                    orderLine.ProductID = item.ProductID;
+                                    orderLine.Quantity = item.Quantity;
+                                    myHandler.AddOrderItem(orderLine);
                                 }
-                                ord.SupplierID = orderLine.SupplierID;
-                                myHandler.UpdateOrder(ord);
+                                else
+                                {
+                                    suppliers.Add(supplierId);
+                                    ord = new Order { DateCreated = DateTime.Now.Date, SupplierID = supplierId, DateLastModified = DateTime.Now.Date, Status = false };
+                                    orderLine = myHandler.AddOrder(ord);
+                                    orders.Add(orderLine.OrderNo);
+                                    orderLine.ProductID = item.ProductID;
+                                    orderLine.Quantity = item.Quantity;
+                                    myHandler.AddOrderItem(orderLine);
+                                }
+
                             }
-                            if (ifGadget != null)
+                            catch
                             {
-                                Order ord = new Order { DateCreated = DateTime.Now.Date, DateLastModified = DateTime.Now.Date, Status = false };
-                                OrderItem orderLine = new OrderItem();
-                                orderLine = myHandler.AddOrder(ord);
-                                foreach(var gadget in ifGadget)
+                                supplierId = ifGadget.SingleOrDefault(m => m.ProductID == item.ProductID).SupplierID;
+                                if (suppliers.Contains(supplierId))
                                 {
-                                    if (gadget.ProductID == item.ProductID)
-                                    {
-                                        orderLine.ProductID = gadget.ProductID;
-                                        orderLine.Quantity = item.Quantity;
-                                        myHandler.AddOrderItem(orderLine);
-                                    }
+
                                 }
-                                ord.SupplierID = orderLine.SupplierID;
-                                myHandler.UpdateOrder(ord);
+                                else
+                                {
+                                    suppliers.Add(supplierId);
+                                    ord = new Order { DateCreated = DateTime.Now.Date, DateLastModified = DateTime.Now.Date, Status = false };
+                                    orderLine = myHandler.AddOrder(ord);
+                                    orders.Add(orderLine.OrderNo);
+                                }
                             }
                         }
                     }
@@ -481,36 +488,44 @@ namespace urbanbooks.Controllers
                 if (myItems.Count == 0)
                 { return RedirectToAction("Edit"); }
                 double cartTotal = 0;
+
+                #region Calculate Total Per Item
                 if (myItems != null)
                 {
-                    var revised = from rev in ifBooks
-                                  join item in myItems on rev.ProductID equals item.ProductID
-                                  where rev.ProductID == item.ProductID
-                                  select new { rev.ProductID, rev.SellingPrice, item.Quantity };
-                    foreach (var ite in revised)
+                    if (ifBooks != null)
                     {
-                        cartHelp = new ProductViewModel.CartHelper();
-                        cartHelp.ProductID = ite.ProductID;
-                        cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
-                        cartTotal += (ite.SellingPrice * ite.Quantity);
-                        itemList.Add(cartHelp);
+                        var revised = from rev in ifBooks
+                                      join item in myItems on rev.ProductID equals item.ProductID
+                                      where rev.ProductID == item.ProductID
+                                      select new { rev.ProductID, rev.SellingPrice, item.Quantity };
+                        foreach (var ite in revised)
+                        {
+                            cartHelp = new ProductViewModel.CartHelper();
+                            cartHelp.ProductID = ite.ProductID;
+                            cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
+                            cartTotal += (ite.SellingPrice * ite.Quantity);
+                            itemList.Add(cartHelp);
+                        }
+                    }
+                    if (ifGadget != null)
+                    {
+                        var revised = from rev in ifGadget
+                                      join item in myItems on rev.ProductID equals item.ProductID
+                                      where rev.ProductID == item.ProductID
+                                      select new { rev.ProductID, rev.SellingPrice, item.Quantity };
+                        foreach (var ite in revised)
+                        {
+                            cartHelp = new ProductViewModel.CartHelper();
+                            cartHelp.ProductID = ite.ProductID;
+                            cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
+                            cartTotal += (ite.SellingPrice * ite.Quantity);
+                            itemList.Add(cartHelp);
+                        }
                     }
                 }
-                if (myItems != null)
-                {
-                    var revised = from rev in ifGadget
-                                  join item in myItems on rev.ProductID equals item.ProductID
-                                  where rev.ProductID == item.ProductID
-                                  select new { rev.ProductID, rev.SellingPrice, item.Quantity };
-                    foreach (var ite in revised)
-                    {
-                        cartHelp = new ProductViewModel.CartHelper();
-                        cartHelp.ProductID = ite.ProductID;
-                        cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
-                        cartTotal += (ite.SellingPrice * ite.Quantity);
-                        itemList.Add(cartHelp);
-                    }
-                }
+                #endregion
+
+                #region Totalling 
                 List<Company> company = new List<Company>(); BusinessLogicHandler myHandler = new BusinessLogicHandler();
                 company = myHandler.GetCompanyDetails();
                 double vat = 0;
@@ -522,6 +537,9 @@ namespace urbanbooks.Controllers
                 finishing.CartTotal = cartTotal;
                 finishing.VatAddedTotal = vatAmount;
                 finishing.SubTotal = subTotal;
+#endregion
+
+                #region Feeding the model
                 helperModel.ItsA_wrap = new List<ProductViewModel.CartConclude>();
                 helperModel.ItsA_wrap.Add(finishing);
 
@@ -530,6 +548,24 @@ namespace urbanbooks.Controllers
                 helperModel.allCartItem = myItems;
 
                 helperModel.allTechnology = ifGadget;
+                #endregion
+
+                #region Drop down data
+                DeliveryHandler deliver = new DeliveryHandler();
+                IEnumerable<Delivery> delivery = (IEnumerable<Delivery>)deliver.GetDeliveryList();
+                var dataStore = from name in delivery
+                                select new { Value = name.DeliveryServiceID, Text = name.ServiceName };
+                ViewBag.DeliveryList = new SelectList(dataStore.ToList());
+
+                List<SelectListItem> deliveryI = new List<SelectListItem>();
+                deliveryI.Add(new SelectListItem { Text = "Delivery Service", Value = "", Selected = true });
+                foreach (var item in delivery)
+                { deliveryI.Add(new SelectListItem { Text = item.ServiceName, Value = item.DeliveryServiceID.ToString() }); }
+                helperModel.I_DeliveryList = new List<SelectListItem>();
+                helperModel.I_DeliveryList = deliveryI;
+                ViewData["I_Delivery"] = deliveryI;
+                #endregion
+
                 return View("Checkout", helperModel);
             }
             catch
@@ -621,7 +657,7 @@ namespace urbanbooks.Controllers
             //model.allTechnology = ifGadget;
             //model.allCartItem = myItems;
 
-            #region Calculate 
+            #region Calculate
 
             List<ProductViewModel.CartHelper> itemList = new List<ProductViewModel.CartHelper>();
             ProductViewModel.CartHelper cartHelp;

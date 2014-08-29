@@ -315,6 +315,9 @@ namespace urbanbooks
             return myHandler.GetBookList();
         }
 
+        public bool AssignOrderToSupplier(Order ord)
+        { OrderHandler myHandler = new OrderHandler(); return myHandler.AssignSupplierToOrder(ord); }
+
         public InvoiceItem GetInvoiceLastNumber(Invoice reciept)
         { InvoiceHandler myHandler = new InvoiceHandler(); return myHandler.GetInvoiceNumber(reciept); }
 

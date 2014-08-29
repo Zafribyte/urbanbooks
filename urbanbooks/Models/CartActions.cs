@@ -11,8 +11,6 @@ namespace urbanbooks.Models
     {
         BusinessLogicHandler myHandler;
         CartItem item;
-        //public async Task<Cart> GetCartAsync(int customerId)
-        //{ myHandler = new BusinessLogicHandler(); return myHandler.GetCart(customerId); }
 
         public bool AddToCartAsync(int cartId, int ProductID)
         {
@@ -28,11 +26,6 @@ namespace urbanbooks.Models
                 return false;
             
         }
-
-        //public bool CalculateSubTotal(int cartId)
-        //{
-
-        //}
 
         public double GetTotalAsync(int cartId)
         {
@@ -73,12 +66,5 @@ namespace urbanbooks.Models
             myHandler = new BusinessLogicHandler();
             return (IEnumerable<CartItem>) myHandler.GetCartItems(cartId);
         }
-
-        public bool UpdateCartItem(CartItem item)
-        {
-            myHandler = new BusinessLogicHandler();
-            return myHandler.UpdateCartItem(item);
-        }
-
     }
 }

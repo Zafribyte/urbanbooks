@@ -75,6 +75,7 @@ namespace urbanbooks.Models
         { get; set; }
         [DataType(DataType.Currency)]
         [UIHint("Currency")]
+        [Required]
         public decimal DeliveryServicePrice 
         { get; set; }
     }

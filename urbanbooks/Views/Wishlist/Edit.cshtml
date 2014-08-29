@@ -27,7 +27,7 @@
             {
 
                 <tr>
-                    @if (Model.allBook != null || Model.allTechnology !=null)
+                    @if (Model.allBook != null)
                     {
                         foreach (var book in Model.allBook)
                         {
@@ -44,7 +44,8 @@
                                 </td>
                             }
                         }
-                         
+                        if(Model.allTechnology !=null) 
+                        {
                         foreach (var gadget in Model.allTechnology)
                         {
                             if (gadget.ProductID == item.ProductID)
@@ -53,13 +54,14 @@
                                     @Html.DisplayFor(modelItem => gadget.ModelName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => gadget.Specifications)
+                                    @Html.DisplayFor(modelItem => gadget.Specs)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => gadget.SellingPrice)
                                 </td>
                             }
 
+                        }
                         }
                     }
                     <td>
