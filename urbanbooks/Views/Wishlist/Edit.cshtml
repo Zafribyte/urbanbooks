@@ -65,7 +65,7 @@
                         }
                     }
                     <td>
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'> </span>", "Add to cart", "_AddToCart", "Cart", new { productId = item.ProductID, wishID = item.WishlistID }, htmlAttributes: new { @class = "btn btn-default" })
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'> </span>", "Add to cart", "_AddToCart", "Cart", new { productId = item.ProductID, wishID = item.WishlistItemID}, htmlAttributes: new { @class = "btn btn-default" })
                         @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'> </span>", "View Product Details", "Details", "Book", new { bookId = item.ProductID }, htmlAttributes: new { @class = "btn btn-default" })
                         @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-remove'> </span>", "Remove from wishlist", "Delete", "Wishlist", new { WishlistItemID = item.WishlistItemID }, htmlAttributes: new { @class = "btn btn-default" })
                     </td>

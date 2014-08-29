@@ -238,8 +238,9 @@ namespace urbanbooks.Controllers
             double vat = 0;
             foreach (var item in company)
             { vat = item.VATPercentage; }
-            double vatAmount = (cartTotal * vat);
-            double subTotal = (cartTotal - vatAmount);
+            vat = vat + 1;
+            double subTotal = cartTotal / vat;
+            double vatAmount = cartTotal - subTotal;
             ProductViewModel.CartConclude finishing = new ProductViewModel.CartConclude();
             finishing.CartTotal = cartTotal;
             finishing.VatAddedTotal = vatAmount;
@@ -460,10 +461,16 @@ namespace urbanbooks.Controllers
             var user = await userMgr.FindByEmailAsync(userName);
             //int customer = (int)user.Customers.CustomerID;
             CartActions myActions = new CartActions();
+            WishlistActions wishes = new WishlistActions();
             Cart cart = new Cart();
             cart.CartID = user.Carts.CartID;
             if (myActions.AddToCartAsync(cart.CartID, ProductID))
-            { Session["cartTotal"] = await GetCartTotal(cart.CartID); myHandler = new BusinessLogicHandler(); myHandler.DeleteWishlistItem(wishID); }
+            {
+                myHandler = new BusinessLogicHandler(); 
+                myHandler.DeleteWishlistItem(wishID); 
+                Session["cartTotal"] = await GetCartTotal(cart.CartID);
+                Session["wishlistTotal"] = wishes.GetWishlistTotal(user.Wishlists.WishlistID);
+            }
             else
             { }
             //return Json(new { success = true }, JsonRequestBehavior.AllowGet);
@@ -631,8 +638,9 @@ namespace urbanbooks.Controllers
             double vat = 0;
             foreach (var item in company)
             { vat = item.VATPercentage; }
-            double vatAmount = (cartTotal * vat);
-            double subTotal = (cartTotal - vatAmount);
+            vat = vat + 1;
+            double subTotal = cartTotal / vat;
+            double vatAmount = cartTotal - subTotal;
             ProductViewModel.CartConclude finishing = new ProductViewModel.CartConclude();
             finishing.CartTotal = cartTotal;
             finishing.VatAddedTotal = vatAmount;
@@ -653,9 +661,11 @@ namespace urbanbooks.Controllers
             List<CartItem> myItems = (List<CartItem>)Session["myItems"];
             model = (ProductViewModel)Session["deliverData"];///////////////////////////////////////////
 
-            //model.allBook = ifBooks;
-            //model.allTechnology = ifGadget;
-            //model.allCartItem = myItems;
+            #region Clear the cart
+
+            //Delete all cart items
+
+            #endregion
 
             #region Calculate
 
@@ -699,8 +709,9 @@ namespace urbanbooks.Controllers
             double vat = 0;
             foreach (var item in company)
             { vat = item.VATPercentage; }
-            double vatAmount = (cartTotal * vat);
-            double subTotal = (cartTotal - vatAmount);
+            vat = vat + 1;
+            double subTotal = cartTotal / vat;
+            double vatAmount = cartTotal - subTotal;
             ProductViewModel.CartConclude finishing = new ProductViewModel.CartConclude();
             finishing.CartTotal = cartTotal;
             finishing.VatAddedTotal = vatAmount;
