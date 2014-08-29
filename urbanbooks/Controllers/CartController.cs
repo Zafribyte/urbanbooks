@@ -113,7 +113,7 @@ namespace urbanbooks.Controllers
 
         ApplicationUserManager userMgr;
 
-        public async Task<ActionResult> AddToCart(int ProductID)
+        public async Task<ActionResult> AddToCart(int ProductID, string returnUrl)
         {
             string userName = User.Identity.GetUserName();
             ApplicationDbContext dataSocket = new ApplicationDbContext();
@@ -139,7 +139,7 @@ namespace urbanbooks.Controllers
             { Session["cartTotal"] = await GetCartTotal(cart.CartID); }
             else
             { }
-            return RedirectToAction("Index", "Home");
+            return Redirect(returnUrl);
         }
         [HttpPost]
         public async Task<ActionResult> UpdateQuantity(string quantity, string itemId)
@@ -453,7 +453,7 @@ namespace urbanbooks.Controllers
             { return View(helperModel); }
         }
 
-        public async Task<ActionResult> _AddToCart(int ProductID, int wishID)
+        public async Task<ActionResult> _AddToCart(int ProductID, int wishID, string returnUrl)
         {
             string userName = User.Identity.GetUserName();
             ApplicationDbContext dataSocket = new ApplicationDbContext();
@@ -475,7 +475,7 @@ namespace urbanbooks.Controllers
             else
             { }
             //return Json(new { success = true }, JsonRequestBehavior.AllowGet);
-            return RedirectToAction("Index", "Home");
+            return Redirect(returnUrl); //RedirectToAction(returnUrl);
         }
           
 
