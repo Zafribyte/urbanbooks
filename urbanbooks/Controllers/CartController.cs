@@ -160,7 +160,7 @@ namespace urbanbooks.Controllers
             if (myHandler.UpdateCartItem(item))
             { return Json(new { success = true }); }
             else
-            { return Json("Error updating quantity"); }
+            { return Json("Error updating quantity"); }//
         }
 
         public async Task<double> GetCartTotal(int CartID)
