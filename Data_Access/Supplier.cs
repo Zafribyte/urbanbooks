@@ -14,7 +14,6 @@ namespace urbanbooks
         { get; set; }
         public string Name
         { get; set; }
-
         public string LastName
         { get; set; }
         [StringLength(10)]
