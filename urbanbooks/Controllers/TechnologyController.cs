@@ -108,7 +108,7 @@ namespace urbanbooks.Controllers
                 gadget.ModelName = collection.GetValue("techs.ModelName").AttemptedValue.ToString();
                 gadget.Specs = collection.GetValue("techs.Specs").AttemptedValue.ToString();
                 gadget.ModelNumber = collection.GetValue("techs.ModelNumber").AttemptedValue.ToString();
-                gadget.ManufacturerID = Convert.ToInt32(collection.GetValue("Name").AttemptedValue);
+                gadget.ManufacturerID = Convert.ToInt32(collection.GetValue("Manufacturer").AttemptedValue);
                 gadget.TechCategoryID = Convert.ToInt32(collection.GetValue("CategoryName").AttemptedValue);
                 gadget.SupplierID = Convert.ToInt32(collection.GetValue("Name").AttemptedValue);
                 gadget.CostPrice = Convert.ToDouble(collection.GetValue("techs.CostPrice").AttemptedValue);
