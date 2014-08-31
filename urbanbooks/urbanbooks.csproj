@@ -377,6 +377,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
+    <Folder Include="Uploads\Tech\ImageFront\" />
+    <Folder Include="Uploads\Tech\ImageSide\" />
+    <Folder Include="Uploads\Tech\ImageTop\" />
     <Folder Include="Views\Author\" />
   </ItemGroup>
   <ItemGroup>
