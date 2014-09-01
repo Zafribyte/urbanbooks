@@ -22,12 +22,14 @@ namespace urbanbooks.Controllers
             return View(orderslist);
         }
 
-        public ActionResult Details(int orderId)
+        public ActionResult Details(int orderNo)
         {
-            order = new Order();
-            order = myHandler.GetOrder(orderId);
-            List<OrderItem> itemList = myHandler.GetOrderItemsList(orderId);
-            ViewBag.Order = order;
+            
+            myHandler = new BusinessLogicHandler();
+            //order = new Order();
+            //OrderItem orderItem = new OrderItem();
+            //order = myHandler.GetOrder(orderNo);           
+            List<OrderItem> itemList = myHandler.GetOrderItemsList(orderNo);
             return View(itemList);
         }
 

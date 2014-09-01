@@ -4,13 +4,22 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
 }
+@using urbanbooks.Helpers;
 
 <h2>Order List</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<br/>
 <hr/>
+<ul>
+    <li>@Html.ActionLink("Create New", "Create")</li>
+
+    <li>@Html.ActionLink("View All Orders", "ViewAllOrders")</li>
+
+    <li>@Html.ActionLink("View Removed Orders", "DeletedOrders")</li>
+</ul>
+            
+ 
+<hr/>
+<p>*Not Recieved</p>
 <table class="table">
     <tr>
         <th>
@@ -18,10 +27,11 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DateCreated)
-        </th>        
+        </th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.OrderNo)
@@ -29,10 +39,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.DateCreated)
         </td>
-        <td>           
-            @Html.ActionLink("Details", "Details", new { id=item.OrderNo }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.OrderNo })
+        <td>
+            @Html.ActionLink("Details", "Details", new { OrderNo = item.OrderNo })|
         </td>
+
     </tr>
 }
 
