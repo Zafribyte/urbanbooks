@@ -184,6 +184,13 @@
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\TechnologyController.cs" />
     <Compile Include="Controllers\WishlistController.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -215,6 +222,14 @@
     <Compile Include="Migrations\201409010733165_fi003.cs" />
     <Compile Include="Migrations\201409010733165_fi003.Designer.cs">
       <DependentUpon>201409010733165_fi003.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409010959136_fi004.cs" />
+    <Compile Include="Migrations\201409010959136_fi004.Designer.cs">
+      <DependentUpon>201409010959136_fi004.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409011052383_fi005.cs" />
+    <Compile Include="Migrations\201409011052383_fi005.Designer.cs">
+      <DependentUpon>201409011052383_fi005.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -262,6 +277,7 @@
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\jquery-ui.structure.min.css" />
     <Content Include="Content\jquery-ui.theme.min.css" />
+    <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontello\css\animation.css" />
     <Content Include="fonts\fontello\css\fontello-codes.css" />
@@ -422,6 +438,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409010733165_fi003.resx">
       <DependentUpon>201409010733165_fi003.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409010959136_fi004.resx">
+      <DependentUpon>201409010959136_fi004.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409011052383_fi005.resx">
+      <DependentUpon>201409011052383_fi005.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
