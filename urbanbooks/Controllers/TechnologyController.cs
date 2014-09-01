@@ -14,6 +14,7 @@ namespace urbanbooks.Controllers
     {
         Technology gadget;
         BusinessLogicHandler myHandler;
+        AddNewTechViewModel techA;
         //[Authorize(Roles="admin, employee")]
         public ActionResult ManageTechnology()
         { return View(); }
@@ -174,17 +175,17 @@ namespace urbanbooks.Controllers
         }
 
         //[Authorize(Roles = "admin, employee")]
-        public ActionResult Edit(int gadgetID)
+        public ActionResult Edit(int ProductID)
         {
             myHandler = new BusinessLogicHandler();
             gadget = new Technology();
-            gadget = myHandler.GetTechnologyDetails(gadgetID);
+            gadget = myHandler.GetTechnologyDetails(ProductID);
             return View(gadget);
         }
 
         //[Authorize(Roles = "admin, employee")]
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int ProductID, FormCollection collection)
         {
             try
             {

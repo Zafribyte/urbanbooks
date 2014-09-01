@@ -155,12 +155,7 @@ namespace urbanbooks
         public bool UpdateTechnology(Technology gadget)
         {
             TechnologyHandler myHandler = new TechnologyHandler();
-            bool myBinder = false;
-
-            if (myHandler.UpdateTechnologyProduct(gadget) == true && myHandler.UpdateTechnology(gadget) == true)
-            { return myBinder = true; }
-            else
-                return myBinder;
+            return myHandler.UpdateTechnology(gadget);
         }
 
         public bool DeleteTechnology(int ProductID)

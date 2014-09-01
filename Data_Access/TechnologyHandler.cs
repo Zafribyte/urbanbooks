@@ -65,7 +65,7 @@ namespace urbanbooks
                     Techno.ImageSide = row["ImageSide"].ToString();
                     Techno.ManufacturerID = (int)row["ManufacturerID"];
                     Techno.ModelNumber = row["ModelNumber"].ToString();
-                    
+
                 }
             }
             return Techno;
@@ -123,24 +123,41 @@ namespace urbanbooks
             }
             return Techno;
         }
-        public bool UpdateTechnologyProduct(Technology TechnoProduct)
+        public Technology UpdateTechnologyProduct(Technology TechnoProduct)
         {
+            Technology tc;
+            SqlParameter[] Params = {
+                                        new SqlParameter("@CostPrice", TechnoProduct.CostPrice),
+                                        new SqlParameter("@SellingPrice", TechnoProduct.SellingPrice),
+                                        new SqlParameter("@DateAdded", TechnoProduct.DateAdded)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_NewManhattanProject", CommandType.StoredProcedure, Params))
+            {
+                tc = new Technology();
+                if (table.Rows.Count == 1)
+                {
+                    DataRow row = table.Rows[0];
+                    tc.ProductID = Convert.ToInt32(row["ProductID"]);
+                }
+
+            }
+            return tc;
+        }
+        public bool UpdateTechnology(Technology TechnoProduct)
+        {
+
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@ProductID", TechnoProduct.ProductID ),
-                new SqlParameter("@ProductTitle", TechnoProduct.ModelName),
+                new SqlParameter("@ProductID", TechnoProduct.ProductID),
+                new SqlParameter("@ModelName", TechnoProduct.ModelName),
+                new SqlParameter("@ModelNumber", TechnoProduct.ModelNumber),
                 new SqlParameter("@Specs", TechnoProduct.Specs),
-                new SqlParameter("@CostPrice", TechnoProduct.CostPrice),
-                //new SqlParameter("@MarkUp", company.MarkUp),
-                new SqlParameter("@SellingPrice", TechnoProduct.SellingPrice),
-                new SqlParameter("@SupplierID", TechnoProduct.SupplierID),
-                new SqlParameter("@DateAdded", TechnoProduct.DateAdded),
                 new SqlParameter("@TechnologyID", TechnoProduct.TechID),
-                new SqlParameter("@Manufacturer", TechnoProduct.ManufacturerID),
-                new SqlParameter("@TechType", TechnoProduct.TechCategoryID),
-                new SqlParameter("@SerialNumber", TechnoProduct.ModelNumber)
+                new SqlParameter("@ManufacturerID", TechnoProduct.ManufacturerID),
+                new SqlParameter("@TechType", TechnoProduct.TechCategoryID)
+                
             };
-            return DataProvider.ExecuteNonQuery("sp_UpdateProduct", CommandType.StoredProcedure,
+            return DataProvider.ExecuteNonQuery("sp_UpdateTechnology", CommandType.StoredProcedure,
                 Params);
         }
 
@@ -176,21 +193,6 @@ namespace urbanbooks
         //    return DataProvider.ExecuteNonQuery("sp_InsertProduct", CommandType.StoredProcedure,
         //        Params);
         //}
-
-        public bool UpdateTechnology(Technology TechnoProduct)
-        {
-
-            SqlParameter[] Params = new SqlParameter[]
-            {
-                new SqlParameter("@ProductID", TechnoProduct.ProductID),
-                new SqlParameter("@TechnologyID", TechnoProduct.TechID),
-                new SqlParameter("@ManufacturerID", TechnoProduct.ManufacturerID),
-                new SqlParameter("@TechType", TechnoProduct.TechCategoryID),
-                new SqlParameter("@ModelNumber", TechnoProduct.ModelNumber)
-            };
-            return DataProvider.ExecuteNonQuery("sp_UpdateTechnology", CommandType.StoredProcedure,
-                Params);
-        }
 
         public bool DeleteTechnologyProduct(int ProductID)
         {
