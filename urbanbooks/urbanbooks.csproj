@@ -257,8 +257,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\datepicker3.css" />
-    <Content Include="Content\fuelux.css" />
-    <Content Include="Content\fuelux.min.css" />
     <Content Include="Content\images\ui-bg_flat_30_cccccc_40x100.png" />
     <Content Include="Content\images\ui-bg_flat_50_5c5c5c_40x100.png" />
     <Content Include="Content\images\ui-bg_glass_20_555555_1x400.png" />
@@ -295,7 +293,6 @@
     <Content Include="fonts\fontello\font\fontello.eot" />
     <Content Include="fonts\fontello\font\fontello.ttf" />
     <Content Include="fonts\fontello\font\fontello.woff" />
-    <Content Include="Content\fuelux.css.map" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -307,6 +304,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <None Include="Properties\PublishProfiles\urbanSyntax.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />

@@ -11,7 +11,7 @@ namespace urbanbooks
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Redirect("/Home/Index");
+            Response.Redirect("~/Home/Index");
         }
     }
 }
