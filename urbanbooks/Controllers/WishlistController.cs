@@ -84,7 +84,7 @@ namespace urbanbooks.Controllers
             }
         }
 
-        public async Task<ActionResult> Add(int productId)
+        public async Task<ActionResult> Add(int productId, string returnUrl)
         {
             WishlistActions act = new WishlistActions();
             if (User.Identity.IsAuthenticated)
@@ -117,7 +117,7 @@ namespace urbanbooks.Controllers
                 Session["wishlistTotal"] =  act.GetWishlistTotal(thisUser.Wishlists.WishlistID);
                 Session["cartTotal"] =(double) cart.GetTotalAsync(thisUser.Carts.CartID);
 
-                return RedirectToAction("Index", "Home", null);
+                return Redirect(returnUrl);
             }
             else
             { return RedirectToAction("Account", "Login", null); }
