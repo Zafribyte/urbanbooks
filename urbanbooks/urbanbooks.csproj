@@ -231,6 +231,10 @@
     <Compile Include="Migrations\201409011052383_fi005.Designer.cs">
       <DependentUpon>201409011052383_fi005.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409011319337_lkj.cs" />
+    <Compile Include="Migrations\201409011319337_lkj.Designer.cs">
+      <DependentUpon>201409011319337_lkj.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddNewBookViewModel.cs" />
@@ -395,13 +399,13 @@
     <Content Include="Views\Book\AdminIndex.cshtml" />
     <Content Include="Views\Cart\Reciept.cshtml" />
     <Content Include="Views\Technology\AdminIndex.cshtml" />
+    <Content Include="Views\Author\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
     <Folder Include="Uploads\Tech\ImageFront\" />
     <Folder Include="Uploads\Tech\ImageSide\" />
     <Folder Include="Uploads\Tech\ImageTop\" />
-    <Folder Include="Views\Author\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -444,6 +448,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409011052383_fi005.resx">
       <DependentUpon>201409011052383_fi005.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409011319337_lkj.resx">
+      <DependentUpon>201409011319337_lkj.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

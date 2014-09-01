@@ -46,12 +46,11 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.CoverImage)
+                <img src="~/Uploads/Books/@Model.CoverImage" width="200" height="200"/>
             </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { productId = Model.ProductID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
