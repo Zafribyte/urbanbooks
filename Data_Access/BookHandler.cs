@@ -90,11 +90,11 @@ namespace urbanbooks
         }
         #region Admin
 
-        public Book GetBookDetails(int BookID)
+        public Book GetBookDetails(int ProductID)
         {
             Book book = null;
 
-            SqlParameter[] Params = { new SqlParameter("@ProductID", BookID) };
+            SqlParameter[] Params = { new SqlParameter("@ProductID", ProductID) };
             using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewSpecificBookAdmin",
                 CommandType.StoredProcedure, Params))
             {
@@ -103,16 +103,17 @@ namespace urbanbooks
                     DataRow row = table.Rows[0];
                     book = new Book();
                     book.BookID = Convert.ToInt32(row["BookID"]);
-                    //book.ProductID = Convert.ToInt32(row["ProductID"]);
+                    book.ProductID = Convert.ToInt32(row["ProductID"]);
                     book.BookTitle = row["BookTitle"].ToString();
                     book.Synopsis = row["Synopsis"].ToString();
                     book.CostPrice = Convert.ToDouble(row["CostPrice"]);
                     book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
-                    //book.SupplierID = Convert.ToInt32(row["SupplierID"]);
+                    book.SupplierID = Convert.ToInt32(row["SupplierID"]);
                     book.ISBN = row["ISBN"].ToString();
-                    //book.BookCategoryID = Convert.ToInt32(row["BookCategoryID"]);
-                    //book.PublisherID = Convert.ToInt32(row["PublisherID"]);
-                    //book.AuthorID = Convert.ToInt32(row["AuthorID"]);
+                    book.BookCategoryID = Convert.ToInt32(row["BookCategoryID"]);
+                    book.PublisherID = Convert.ToInt32(row["PublisherID"]);
+                    book.AuthorID = Convert.ToInt32(row["AuthorID"]);
+                    book.CoverImage = row["CoverImage"].ToString();
                 }
             }
             return book;
