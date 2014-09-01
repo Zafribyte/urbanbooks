@@ -14,7 +14,7 @@ namespace urbanbooks
         {
             List<Order> OrdersList = null;
 
-            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewAllOrders", //*Note
+            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewOrders", //*Note
                 CommandType.StoredProcedure))
             {
                 if (table.Rows.Count > 0)
@@ -33,11 +33,11 @@ namespace urbanbooks
             return OrdersList;
         }
 
-        public Order GetOrder(int OrderID)
+        public Order GetOrder(int orderNo)
         {
             Order order = null;
 
-            SqlParameter[] Params = { new SqlParameter("@OrderID", OrderID) };
+            SqlParameter[] Params = { new SqlParameter("@OrderNo", orderNo) };
             using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewSpecificOrder",
                 CommandType.StoredProcedure, Params))
             {
@@ -45,7 +45,7 @@ namespace urbanbooks
                 {
                     DataRow row = table.Rows[0];
                     order = new Order();
-                    order.OrderNo = Convert.ToInt32(row["OrderNumber"]);
+                    order.OrderNo = Convert.ToInt32(row["OrderNo"]);
                     order.DateCreated = Convert.ToDateTime(row["DateCreated"]);
                     order.DateSent = Convert.ToDateTime(row["DateSent"]);
                     order.DateLastModified = Convert.ToDateTime(row["DateLastModified"]);
@@ -80,11 +80,11 @@ namespace urbanbooks
             return OrderLine;
         }
 
-        public bool DeleteOrder(int OrderNumber)
+        public bool DeleteOrder(int orderNo)
         {
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@OrderNumber", OrderNumber)
+                new SqlParameter("@OrderNumber", orderNo)
             };
             return DataProvider.ExecuteNonQuery("sp_DeleteOrder", CommandType.StoredProcedure,
                 Params);

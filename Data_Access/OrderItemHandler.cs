@@ -10,12 +10,14 @@ namespace urbanbooks
 {
     public class OrderItemHandler
     {
-        public List<OrderItem> GetOrderItemList(int orderID)
+      
+        
+        public List<OrderItem> GetOrderItemList(int orderNo)
         {
             List<OrderItem> orderItems = null;
 
-            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_GetOrderItemList",
-                CommandType.StoredProcedure))
+            SqlParameter [] Params = {new SqlParameter ("OrderNo", orderNo) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_GetOrderItemList",CommandType.StoredProcedure, Params))
             {
                 if (table.Rows.Count > 0)
                 {
@@ -23,7 +25,7 @@ namespace urbanbooks
                     foreach (DataRow row in table.Rows)
                     {
                         OrderItem orderItem = new OrderItem();
-                        orderItem.OrderItemNumber = Convert.ToInt32(row["OrderItemNumber"]);
+                        orderItem.OrderItemNumber = Convert.ToInt32(row["OrderItemNo"]);
                         orderItem.ProductID = Convert.ToInt32(row["ProductID"]);
                         orderItem.Quantity = Convert.ToInt32(row["Quantity"]);
                         orderItem.OrderNo = Convert.ToInt32(row["OrderNo"]);

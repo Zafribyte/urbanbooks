@@ -369,6 +369,7 @@
     <Content Include="Views\Cart\Confirm.cshtml" />
     <Content Include="Views\Book\AdminIndex.cshtml" />
     <Content Include="Views\Cart\Reciept.cshtml" />
+    <Content Include="Views\Order\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />

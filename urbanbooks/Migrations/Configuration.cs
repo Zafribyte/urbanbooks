@@ -30,6 +30,7 @@ namespace urbanbooks.Migrations
                 userManager.Create(user, "password");
                 roleManager.Create(new IdentityRole { Name = "admin" });
                 userManager.AddToRole(user.Id, "admin");
+
             }
         }
     }

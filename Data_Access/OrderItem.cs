@@ -21,10 +21,7 @@ namespace urbanbooks
         public int OrderNo
         { get; set; }
 
-        //Order Details
-
-        public int orderNo{get; set;}
-        public DateTime dateCreated { get; set; }
+        //Order Detail
 
 
     }
