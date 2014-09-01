@@ -20,7 +20,7 @@ else
     string returnUrl = HttpContext.Current.Request.RawUrl;
     <ul class="nav navbar-nav navbar-right">
         <li>@Html.ActionLink("Quick Register", "Register", "Account", new { id = "registerLink" }, new { data_modal = "" })</li>
-        <li>@Html.ActionLink("Register", "FullRegister", "Account", new { returnUrl = returnUrl})</li>
+        <li>@Html.ActionLink("Register", "FullRegister", "Account")</li>
         
         <li>@Html.ActionLink("Log in", "Login", "Account", new { id = "loginLink" }, new { data_modal = "" })</li>
     </ul>
