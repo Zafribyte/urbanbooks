@@ -42,6 +42,12 @@ namespace urbanbooks.Controllers
             Book book = myHandler.GetBook(ProductID);
             return View(book);
         }
+        public ActionResult Details(int ProductID)
+        {
+            myHandler = new BusinessLogicHandler();
+            Book book = myHandler.GetBook(ProductID);
+            return View(book);
+        }
         public ActionResult Create()
         {
             #region Create

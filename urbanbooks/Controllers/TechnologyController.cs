@@ -36,11 +36,18 @@ namespace urbanbooks.Controllers
             return View(myGadgetList);
         }
 
-        public ActionResult Details(int gadgetID)
+        public ActionResult Details(int ProductID)
         {
             myHandler = new BusinessLogicHandler();
             gadget = new Technology();
-            gadget = myHandler.GetTechnologyDetails(gadgetID);
+            gadget = myHandler.GetTechnologyDetails(ProductID);
+            return View(gadget);
+        }
+        public ActionResult AdminDetails(int ProductID)
+        {
+            myHandler = new BusinessLogicHandler();
+            gadget = new Technology();
+            gadget = myHandler.GetTechnologyDetails(ProductID);
             return View(gadget);
         }
 

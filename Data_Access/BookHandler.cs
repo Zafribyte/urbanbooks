@@ -31,7 +31,7 @@ namespace urbanbooks
                         book.Synopsis = row["Synopsis"].ToString();
                         book.SupplierID = Convert.ToInt32(row["SupplierID"].ToString());
                         book.ISBN = row["ISBN"].ToString();
-                        
+                        book.CostPrice = Convert.ToDouble(row["CostPrice"]);
                         book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();

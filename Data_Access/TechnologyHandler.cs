@@ -95,11 +95,11 @@ namespace urbanbooks
 
         #region Admin
 
-        public Technology GetTechnologyDetails(int TechID)
+        public Technology GetTechnologyDetails(int ProductID)
         {
             Technology Techno = null;
 
-            SqlParameter[] Params = { new SqlParameter("@TechID", TechID) };
+            SqlParameter[] Params = { new SqlParameter("@ProductID", ProductID) };
             using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewSpecificTechAdmin",
                 CommandType.StoredProcedure, Params))
             {
@@ -108,14 +108,14 @@ namespace urbanbooks
                     DataRow row = table.Rows[0];
                     Techno = new Technology();
                     Techno.TechID = Convert.ToInt32(row["TechID"]);
-                    //Techno.ProductID = Convert.ToInt32(row["ProductID"]);
+                    Techno.ProductID = Convert.ToInt32(row["ProductID"]);
                     Techno.ModelName = row["ModelName"].ToString();
                     Techno.Specs = row["Specs"].ToString();
                     Techno.ModelNumber = row["ModelNumber"].ToString();
                     Techno.CostPrice = Convert.ToDouble(row["CostPrice"]);
                     Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
-                    //Techno.ManufacturerID = (int)row["ManufacturerID"];
-                    //Techno.TechCategoryID = (int)row["TechCategoryID"];
+                    Techno.ManufacturerID = (int)row["ManufacturerID"];
+                    Techno.TechCategoryID = (int)row["TechCategoryID"];
                     Techno.ImageFront = row["ImageFront"].ToString();
                     Techno.ImageTop = row["ImageTop"].ToString();
                     Techno.ImageSide = row["ImageSide"].ToString();

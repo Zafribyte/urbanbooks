@@ -1,0 +1,60 @@
+﻿@model urbanbooks.Book
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Book</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BookTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookTitle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Synopsis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Synopsis)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ISBN)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CostPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CostPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SellingPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SellingPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CoverImage)
+        </dt>
+
+        <dd>
+            <img src="~/Uploads/Books/@Model.CoverImage" width="200" height="200" />
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { productId = Model.ProductID }) |
+    @Html.ActionLink("Back to List", "AdminIndex", "Book" )
+</p>

@@ -409,6 +409,8 @@
     <Content Include="Views\Cart\Reciept.cshtml" />
     <Content Include="Views\Technology\AdminIndex.cshtml" />
     <Content Include="Views\Author\Create.cshtml" />
+    <Content Include="Views\Book\Details.cshtml" />
+    <Content Include="Views\Technology\AdminDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
