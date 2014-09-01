@@ -36,10 +36,10 @@ namespace urbanbooks.Controllers
             ViewBag.BookTypeBag = myType;
             return View(myBookList);
         }
-        public ActionResult Details(int bookId)
+        public ActionResult CustomerDetails(int ProductID)
         {
             myHandler = new BusinessLogicHandler();
-            Book book = myHandler.GetBook(bookId);
+            Book book = myHandler.GetBook(ProductID);
             return View(book);
         }
         public ActionResult Create()
@@ -167,10 +167,10 @@ namespace urbanbooks.Controllers
             }
         }
 
-        public ActionResult Edit(int bookId)
+        public ActionResult Edit(int productId)
         {
             myHandler = new BusinessLogicHandler();
-            Book book = myHandler.GetBooks().Single(bk => bk.BookID == bookId);
+            Book book = myHandler.GetBooks().Single(bk => bk.ProductID == productId);
             return View(book);
         }
 

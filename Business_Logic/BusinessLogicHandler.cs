@@ -98,10 +98,10 @@ namespace urbanbooks
         #region ADMIN ACTIONS
 
         #region BOOK
-        public Book GetBook(int BookID)
+        public Book GetBook(int ProductID)
         {
             BookHandler myHandler = new BookHandler();
-            return myHandler.GetBookDetails(BookID);
+            return myHandler.GetBookDetails(ProductID);
         }
 
         public bool AddBook(Book book)

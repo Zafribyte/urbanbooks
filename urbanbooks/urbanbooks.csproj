@@ -346,7 +346,7 @@
     <Content Include="Views\Employee\Create.cshtml" />
     <Content Include="Views\Employee\Edit.cshtml" />
     <Content Include="Views\Book\Index.cshtml" />
-    <Content Include="Views\Book\Details.cshtml" />
+    <Content Include="Views\Book\CustomerDetails.cshtml" />
     <Content Include="Views\Book\Create.cshtml" />
     <Content Include="Views\Book\Edit.cshtml" />
     <Content Include="Views\Book\Delete.cshtml" />
