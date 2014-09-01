@@ -16,9 +16,17 @@ namespace urbanbooks.Controllers
         BusinessLogicHandler myHandler;
         //[Authorize(Roles="admin, employee")]
         public ActionResult ManageTechnology()
-        { return View(); } 
+        { return View(); }
 
-
+        public ActionResult AdminIndex()
+        {
+            myHandler = new BusinessLogicHandler();
+            List<Technology> myTechList = new List<Technology>();
+            myTechList = myHandler.GetTechnology();
+            IEnumerable<TechCategory> myType = myHandler.GetTechnologyTypeList();
+            ViewBag.TechTypeBag = myType;
+            return View(myTechList);
+        }
         public ActionResult Index()
         {
             myHandler = new BusinessLogicHandler();
