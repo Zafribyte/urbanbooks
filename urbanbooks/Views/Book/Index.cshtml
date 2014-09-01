@@ -22,7 +22,7 @@
         foreach (var item in Model)
         {
             <div class="col-md-2">
-                <div style="height:350px">
+                <div style="height:450px">
                     <div class="thumbnail" style="text-align:center">
 
                         <img class="img-thumbnail" src="~/Uploads/Books/@item.CoverImage" width="150" height="150" />
@@ -31,7 +31,7 @@
                         <label>Price :</label>&nbsp;@Html.DisplayFor(modelItem => item.SellingPrice)
                         <hr />
                         @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to Wishlist", "Add", "Wishlist", new { productId = item.ProductID, returnUrl }, htmlAttributes: new { @class = "btn" })
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "View", "Details", "Book", new { bookId = item.ProductID }, htmlAttributes: new { @class = "btn" })
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "View", "CustomerDetails", "Book", new { productId = item.ProductID }, htmlAttributes: new { @class = "btn" })
                         @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "AddToCart", "Cart", new { productId = item.ProductID, returnUrl }, htmlAttributes: new { @class = "btn" })
                     </div>
                 </div>

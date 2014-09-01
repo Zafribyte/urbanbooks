@@ -154,6 +154,7 @@ namespace urbanbooks
                 new SqlParameter("@Specs", TechnoProduct.Specs),
                 new SqlParameter("@ManufacturerID", TechnoProduct.ManufacturerID),
                 new SqlParameter("@TechCategoryID", TechnoProduct.TechCategoryID),
+                new SqlParameter("@SupplierID", TechnoProduct.SupplierID),
                 new SqlParameter("@ImageFront", TechnoProduct.ImageFront),
                 new SqlParameter("@ImageTop", TechnoProduct.ImageTop),
                 new SqlParameter("@ImageSide", TechnoProduct.ImageSide)
@@ -162,19 +163,19 @@ namespace urbanbooks
                 Params);
         }
 
-        public bool InsertTechnologyProduct(Technology TechnoProduct)
-        {
+        //public bool InsertTechnologyProduct(Technology TechnoProduct)
+        //{
 
-            SqlParameter[] Params = new SqlParameter[]
-            {
-                new SqlParameter("@CostPrice", TechnoProduct.CostPrice),
-                new SqlParameter("@SellingPrice", TechnoProduct.SellingPrice),
-                new SqlParameter("@DateAdded", TechnoProduct.DateAdded),
-                new SqlParameter("@IsBook", TechnoProduct.IsBook = false)
-            };
-            return DataProvider.ExecuteNonQuery("sp_InsertProduct", CommandType.StoredProcedure,
-                Params);
-        }
+        //    SqlParameter[] Params = new SqlParameter[]
+        //    {
+        //        new SqlParameter("@CostPrice", TechnoProduct.CostPrice),
+        //        new SqlParameter("@SellingPrice", TechnoProduct.SellingPrice),
+        //        new SqlParameter("@DateAdded", TechnoProduct.DateAdded),
+        //        new SqlParameter("@IsBook", TechnoProduct.IsBook = false)
+        //    };
+        //    return DataProvider.ExecuteNonQuery("sp_InsertProduct", CommandType.StoredProcedure,
+        //        Params);
+        //}
 
         public bool UpdateTechnology(Technology TechnoProduct)
         {

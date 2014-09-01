@@ -184,6 +184,13 @@
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\TechnologyController.cs" />
     <Compile Include="Controllers\WishlistController.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -208,6 +215,22 @@
     <Compile Include="Migrations\201408290945339_fix0023.Designer.cs">
       <DependentUpon>201408290945339_fix0023.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408291135008_migration109.cs" />
+    <Compile Include="Migrations\201408291135008_migration109.Designer.cs">
+      <DependentUpon>201408291135008_migration109.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409010733165_fi003.cs" />
+    <Compile Include="Migrations\201409010733165_fi003.Designer.cs">
+      <DependentUpon>201409010733165_fi003.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409010959136_fi004.cs" />
+    <Compile Include="Migrations\201409010959136_fi004.Designer.cs">
+      <DependentUpon>201409010959136_fi004.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409011052383_fi005.cs" />
+    <Compile Include="Migrations\201409011052383_fi005.Designer.cs">
+      <DependentUpon>201409011052383_fi005.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddNewBookViewModel.cs" />
@@ -218,6 +241,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\OrderModels.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
+    <Compile Include="Models\SupplierContext.cs" />
     <Compile Include="Models\WishlistActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -233,8 +257,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\datepicker3.css" />
-    <Content Include="Content\fuelux.css" />
-    <Content Include="Content\fuelux.min.css" />
     <Content Include="Content\images\ui-bg_flat_30_cccccc_40x100.png" />
     <Content Include="Content\images\ui-bg_flat_50_5c5c5c_40x100.png" />
     <Content Include="Content\images\ui-bg_glass_20_555555_1x400.png" />
@@ -253,6 +275,7 @@
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\jquery-ui.structure.min.css" />
     <Content Include="Content\jquery-ui.theme.min.css" />
+    <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontello\css\animation.css" />
     <Content Include="fonts\fontello\css\fontello-codes.css" />
@@ -270,7 +293,6 @@
     <Content Include="fonts\fontello\font\fontello.eot" />
     <Content Include="fonts\fontello\font\fontello.ttf" />
     <Content Include="fonts\fontello\font\fontello.woff" />
-    <Content Include="Content\fuelux.css.map" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -282,6 +304,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <None Include="Properties\PublishProfiles\urbanSyntax.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -337,7 +360,7 @@
     <Content Include="Views\Employee\Create.cshtml" />
     <Content Include="Views\Employee\Edit.cshtml" />
     <Content Include="Views\Book\Index.cshtml" />
-    <Content Include="Views\Book\Details.cshtml" />
+    <Content Include="Views\Book\CustomerDetails.cshtml" />
     <Content Include="Views\Book\Create.cshtml" />
     <Content Include="Views\Book\Edit.cshtml" />
     <Content Include="Views\Book\Delete.cshtml" />
@@ -369,10 +392,13 @@
     <Content Include="Views\Cart\Confirm.cshtml" />
     <Content Include="Views\Book\AdminIndex.cshtml" />
     <Content Include="Views\Cart\Reciept.cshtml" />
-    <Content Include="Views\Order\Details.cshtml" />
+    <Content Include="Views\Technology\AdminIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
+    <Folder Include="Uploads\Tech\ImageFront\" />
+    <Folder Include="Uploads\Tech\ImageSide\" />
+    <Folder Include="Uploads\Tech\ImageTop\" />
     <Folder Include="Views\Author\" />
   </ItemGroup>
   <ItemGroup>
@@ -404,6 +430,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201408290945339_fix0023.resx">
       <DependentUpon>201408290945339_fix0023.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408291135008_migration109.resx">
+      <DependentUpon>201408291135008_migration109.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409010733165_fi003.resx">
+      <DependentUpon>201409010733165_fi003.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409010959136_fi004.resx">
+      <DependentUpon>201409010959136_fi004.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409011052383_fi005.resx">
+      <DependentUpon>201409011052383_fi005.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

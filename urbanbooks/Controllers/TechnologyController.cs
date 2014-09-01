@@ -16,9 +16,17 @@ namespace urbanbooks.Controllers
         BusinessLogicHandler myHandler;
         //[Authorize(Roles="admin, employee")]
         public ActionResult ManageTechnology()
-        { return View(); } 
+        { return View(); }
 
-
+        public ActionResult AdminIndex()
+        {
+            myHandler = new BusinessLogicHandler();
+            List<Technology> myTechList = new List<Technology>();
+            myTechList = myHandler.GetTechnology();
+            IEnumerable<TechCategory> myType = myHandler.GetTechnologyTypeList();
+            ViewBag.TechTypeBag = myType;
+            return View(myTechList);
+        }
         public ActionResult Index()
         {
             myHandler = new BusinessLogicHandler();
@@ -108,8 +116,9 @@ namespace urbanbooks.Controllers
                 gadget.ModelName = collection.GetValue("techs.ModelName").AttemptedValue.ToString();
                 gadget.Specs = collection.GetValue("techs.Specs").AttemptedValue.ToString();
                 gadget.ModelNumber = collection.GetValue("techs.ModelNumber").AttemptedValue.ToString();
-                gadget.ManufacturerID = Convert.ToInt32(collection.GetValue("Name").AttemptedValue);
+                gadget.ManufacturerID = Convert.ToInt32(collection.GetValue("Manufacturer").AttemptedValue);
                 gadget.TechCategoryID = Convert.ToInt32(collection.GetValue("CategoryName").AttemptedValue);
+                gadget.SupplierID = Convert.ToInt32(collection.GetValue("Name").AttemptedValue);
                 gadget.CostPrice = Convert.ToDouble(collection.GetValue("techs.CostPrice").AttemptedValue);
                 gadget.SellingPrice = Convert.ToDouble(collection.GetValue("techs.SellingPrice").AttemptedValue);
                 gadget.IsBook = false;
@@ -135,13 +144,14 @@ namespace urbanbooks.Controllers
                     Technology ta = new Technology();
                     ta = myHandler.AddExperimentTech(gadget);
                     ta.ModelName = gadget.ModelName;
-                    ta.Specs = gadget.Specs;
                     ta.ModelNumber = gadget.ModelNumber;
+                    ta.Specs = gadget.Specs;
                     ta.ManufacturerID = gadget.ManufacturerID;
                     ta.TechCategoryID = gadget.TechCategoryID;
-                    ta.CostPrice = gadget.CostPrice;
-                    ta.SellingPrice = gadget.SellingPrice;
-                    ta.IsBook = gadget.IsBook;
+                    ta.SupplierID = gadget.SupplierID;
+                    //ta.CostPrice = gadget.CostPrice;
+                    //ta.SellingPrice = gadget.SellingPrice;
+                    //ta.IsBook = gadget.IsBook;
                     ta.ImageFront = gadget.ImageFront;
                     ta.ImageTop = gadget.ImageTop;
                     ta.ImageSide = gadget.ImageSide;

@@ -50,9 +50,9 @@
                 <img src="~/Uploads/Books/@item.CoverImage" width="100" height="100" />
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { bookId = item.BookID }) |
-                @Html.ActionLink("Details", "Details", new { bookId = item.BookID }) |
-                @Html.ActionLink("Delete", "Delete", new { bookId = item.BookID })
+                @Html.ActionLink("Edit", "Edit", new { productId = item.ProductID }) |
+                @Html.ActionLink("Details", "Details", new { productId = item.ProductID }) |
+                @Html.ActionLink("Delete", "Delete", new { productId = item.ProductID })
             </td>
         </tr>
     }

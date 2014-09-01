@@ -1,64 +1,41 @@
 ﻿@model IEnumerable<urbanbooks.Technology>
-@using urbanbooks.Models;
+@using urbanbooks.Models
+@using urbanbooks.Helpers;
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Technology Catalogue";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using urbanbooks.Helpers;
+<br />
+<div class="container">
+    <div class="jumbotron">
+    </div>
+</div>
 
-<h2>Technology Catalogue</h2>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ModelName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModelNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageFront)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageTop)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageSide)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SellingPrice)
-        </th>
-    </tr>
+<br />
 
-    @if (Model != null)
+
+@if (Model != null)
+{
+    string returnUrl = HttpContext.Current.Request.RawUrl;
+    foreach (var item in Model)
     {
-        foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModelName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModelNumber)
-                </td>
-                <td>
-                    <img src="~/Uploads/Tech/ImageFront/@item.ImageFront" width="150" height="150" />
-                </td>
-                <td>
-                    <img src="~/Uploads/Tech/ImageTop/@item.ImageTop" width="150" height="150" />
-                </td>
-                <td>
-                    <img src="~/Uploads/Tech/ImageSide/@item.ImageSide" width="150" height="150" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SellingPrice)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
-                </td>
-            </tr>
-        }
-    }
+        <div class="col-md-2">
+            <div style="height:450px">
+                <div class="thumbnail" style="text-align:center">
 
-</table>
+                    <img class="img-thumbnail" src="~/Uploads/Tech/ImageFront/@item.ImageFront" width="100" height="100" />
+                    <h4 class="caption">@Html.DisplayFor(modelItem => item.ModelName)</h4>
+                    <label>Model Number :</label>&nbsp;@Html.DisplayFor(modelItem => item.ModelNumber)<br />
+                    <label>Price :</label>&nbsp;@Html.DisplayFor(modelItem => item.SellingPrice)
+                    <hr />
+                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to Wishlist", "Add", "Wishlist", new { productId = item.ProductID, returnUrl }, htmlAttributes: new { @class = "btn" })
+                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "View", "Details", "Book", new { bookId = item.ProductID }, htmlAttributes: new { @class = "btn" })
+                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "AddToCart", "Cart", new { productId = item.ProductID, returnUrl }, htmlAttributes: new { @class = "btn" })
+                </div>
+            </div>
+        </div>
+    }
+}
+

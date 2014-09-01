@@ -91,7 +91,7 @@ namespace urbanbooks.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<ActionResult> FullRegister(FullRegisterViewModel model)
+        public async Task<ActionResult> FullRegister(FullRegisterViewModel model, string returnUrl)
         {
             CustomerContext context = new CustomerContext();
             if (ModelState.IsValid)
