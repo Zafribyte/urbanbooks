@@ -9,6 +9,7 @@ namespace urbanbooks
 {
     public class Book : Product
     {
+        [Key]
         [ScaffoldColumn(false)]
         public int BookID
         { get; set; }

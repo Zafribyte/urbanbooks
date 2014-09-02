@@ -9,6 +9,7 @@ namespace urbanbooks
 {
     public class Author
     {
+        [Key]
         [ScaffoldColumn(false)]
     [Key]
         public int AuthorID

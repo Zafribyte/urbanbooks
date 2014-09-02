@@ -11,6 +11,7 @@ namespace urbanbooks
 {
     public class Technology : Product
     {
+        [Key]
         [ScaffoldColumn(false)]
         public int TechID
         { get; set; }

@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,6 +10,8 @@ namespace urbanbooks.Models
 {
     public class AddNewTechViewModel
     {
+        [Key]
+        public int theKey { get; set; }
         public List<SelectListItem> techCategories { get; set; }
         public List<SelectListItem> suppliers { get; set; }
         public List<SelectListItem> manufacturers { get; set; }
