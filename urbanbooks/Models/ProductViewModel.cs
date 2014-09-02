@@ -34,6 +34,7 @@ namespace urbanbooks.Models
         public class CartConclude
         {
             [DataType(DataType.Currency)]
+            [Key]
             public double CartTotal { get; set; }
             [DataType(DataType.Currency)]
             public double VatAddedTotal { get; set; }
@@ -43,8 +44,10 @@ namespace urbanbooks.Models
         }
 
     }
+    
     public class Billing
     {
+        
         [StringLength(16, ErrorMessage = "Invalid Credit Card Number")]
         [RegularExpression(@"^.{16,}$", ErrorMessage = "Invalid Credit Card Number")]
         [DataType(DataType.CreditCard)]
