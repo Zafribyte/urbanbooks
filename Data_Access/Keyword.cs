@@ -9,6 +9,7 @@ namespace urbanbooks
 {
     public class Keyword
     {
+        [Key]
         [ScaffoldColumn(false)]
         public int KeywordID 
         { get; set; }

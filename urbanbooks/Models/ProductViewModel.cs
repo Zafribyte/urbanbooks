@@ -9,7 +9,8 @@ namespace urbanbooks.Models
 {
     public class ProductViewModel
     {
-
+        [Key]
+        public int theKey { get; set; }
         public IEnumerable<CartItem> allCartItem { get; set; }
         public IEnumerable<Book> allBook { get; set; }
         public IEnumerable<Technology> allTechnology { get; set; }
