@@ -11,7 +11,6 @@ namespace urbanbooks
     {
         [Key]
         [ScaffoldColumn(false)]
-        [Key]
         public int TechCategoryID 
         { get; set; }
 

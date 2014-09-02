@@ -25,13 +25,17 @@ namespace urbanbooks
         [ScaffoldColumn(false)]
         public int PublisherID 
         { get; set; }
+        public string pubName
+        { get; set; }
         [ScaffoldColumn(false)]
         public int BookCategoryID
+        { get; set; }
+        public string catName
         { get; set; }
         [ScaffoldColumn(false)]
         public int AuthorID
         { get; set; }
-        public string Name
+        public string AuthName
         { get; set; }
         public string CoverImage
         { get; set; }

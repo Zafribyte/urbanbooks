@@ -11,7 +11,6 @@ namespace urbanbooks
     {
         [Key]
         [ScaffoldColumn(false)]
-    [Key]
         public int AuthorID
         { get; set; }
         public string Name

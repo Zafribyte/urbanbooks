@@ -11,7 +11,6 @@ namespace urbanbooks
     {
         [Key]
         [ScaffoldColumn(false)]
-        [Key]
         public int BookCategoryID
         { get; set; }
         [Display(Name="Book Category Description")]

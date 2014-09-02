@@ -195,47 +195,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\MyHelpers.cs" />
-    <Compile Include="Migrations\201408130920591_complex.cs" />
-    <Compile Include="Migrations\201408130920591_complex.Designer.cs">
-      <DependentUpon>201408130920591_complex.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201408261147066_fix005.cs" />
-    <Compile Include="Migrations\201408261147066_fix005.Designer.cs">
-      <DependentUpon>201408261147066_fix005.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201408271240277_fix0.0.cs" />
-    <Compile Include="Migrations\201408271240277_fix0.0.Designer.cs">
-      <DependentUpon>201408271240277_fix0.0.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201408281510339_fix008.cs" />
-    <Compile Include="Migrations\201408281510339_fix008.Designer.cs">
-      <DependentUpon>201408281510339_fix008.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201408290945339_fix0023.cs" />
-    <Compile Include="Migrations\201408290945339_fix0023.Designer.cs">
-      <DependentUpon>201408290945339_fix0023.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201408291135008_migration109.cs" />
-    <Compile Include="Migrations\201408291135008_migration109.Designer.cs">
-      <DependentUpon>201408291135008_migration109.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409010733165_fi003.cs" />
-    <Compile Include="Migrations\201409010733165_fi003.Designer.cs">
-      <DependentUpon>201409010733165_fi003.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409010959136_fi004.cs" />
-    <Compile Include="Migrations\201409010959136_fi004.Designer.cs">
-      <DependentUpon>201409010959136_fi004.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409011052383_fi005.cs" />
-    <Compile Include="Migrations\201409011052383_fi005.Designer.cs">
-      <DependentUpon>201409011052383_fi005.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409011319337_lkj.cs" />
-    <Compile Include="Migrations\201409011319337_lkj.Designer.cs">
-      <DependentUpon>201409011319337_lkj.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddNewBookViewModel.cs" />
     <Compile Include="Models\AddNewTechViewModel.cs" />
@@ -437,48 +396,6 @@
       <Project>{8ebc53e8-302d-4a51-ae39-b1e4631cfb68}</Project>
       <Name>Data_Access</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201408130920591_complex.resx">
-      <DependentUpon>201408130920591_complex.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408261147066_fix005.resx">
-      <DependentUpon>201408261147066_fix005.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408271240277_fix0.0.resx">
-      <DependentUpon>201408271240277_fix0.0.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408281510339_fix008.resx">
-      <DependentUpon>201408281510339_fix008.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408290945339_fix0023.resx">
-      <DependentUpon>201408290945339_fix0023.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408291135008_migration109.resx">
-      <DependentUpon>201408291135008_migration109.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409010733165_fi003.resx">
-      <DependentUpon>201409010733165_fi003.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409010959136_fi004.resx">
-      <DependentUpon>201409010959136_fi004.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409011052383_fi005.resx">
-      <DependentUpon>201409011052383_fi005.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409011319337_lkj.resx">
-      <DependentUpon>201409011319337_lkj.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

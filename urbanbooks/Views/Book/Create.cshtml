@@ -60,7 +60,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.books.SellingPrice, htmlAttributes: new { @class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.books.SellingPrice, new { htmlAttributes = new { @class = "form-control olden", disabled = "disabled", @readonly = "readonly" } })
+                @Html.EditorFor(model => model.books.SellingPrice, new { htmlAttributes = new { @class = "form-control olden", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.books.SellingPrice, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -170,7 +170,6 @@
 
 
 @Scripts.Render("~/bundles/modalform")
-}
 
 @Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/bundles/fuelux")

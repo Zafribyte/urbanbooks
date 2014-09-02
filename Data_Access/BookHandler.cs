@@ -33,7 +33,7 @@ namespace urbanbooks
                         book.ISBN = row["ISBN"].ToString();
                         book.CostPrice = Convert.ToDouble(row["CostPrice"]);
                         book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
-                        book.Name = row["Author"].ToString();
+                        book.AuthName = row["Author"].ToString();
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         BookList.Add(book);
@@ -109,11 +109,11 @@ namespace urbanbooks
                     book.Synopsis = row["Synopsis"].ToString();
                     book.CostPrice = Convert.ToDouble(row["CostPrice"]);
                     book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
-                    book.SupplierID = Convert.ToInt32(row["SupplierID"]);
+                    //book.SupplierID = Convert.ToInt32(row["SupplierID"]);
                     book.ISBN = row["ISBN"].ToString();
-                    book.BookCategoryID = Convert.ToInt32(row["BookCategoryID"]);
-                    book.PublisherID = Convert.ToInt32(row["PublisherID"]);
-                    book.AuthorID = Convert.ToInt32(row["AuthorID"]);
+                    book.catName = row["Category"].ToString();
+                    book.pubName = row["Publisher"].ToString();
+                    book.AuthName = row["Author"].ToString();
                     book.CoverImage = row["CoverImage"].ToString();
                 }
             }
