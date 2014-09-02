@@ -153,11 +153,11 @@ namespace urbanbooks
                 Params);
         }
 
-        public bool DeleteBookProduct(int BookID)
+        public bool DeleteBook(Book book)
         {
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@BookID", BookID)
+                new SqlParameter("@ProductID", book.ProductID)
             };
             return DataProvider.ExecuteNonQuery("sp_DeleteBook", CommandType.StoredProcedure, //procedure
                 Params);

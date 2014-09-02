@@ -132,10 +132,10 @@ namespace urbanbooks
 
             return myHandler.UpdateBookProduct(book);
         }
-        public bool DeleteBook(int BookID)
+        public bool DeleteBook(Book book)
         {
             BookHandler myHandler = new BookHandler();
-            return myHandler.DeleteBookProduct(BookID);
+            return myHandler.DeleteBook(book);
         }
         #endregion
 

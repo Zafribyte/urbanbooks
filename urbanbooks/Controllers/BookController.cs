@@ -223,17 +223,17 @@ namespace urbanbooks.Controllers
                 return Json("Error");
             }
         }
-        public ActionResult Delete(int BookID)
+        public ActionResult Delete(int ProductID)
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Delete(int BookID, FormCollection collection)
+        public ActionResult Delete(int ProductID, FormCollection collection)
         {
             try
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("AdminIndex");
             }
             catch
             {
