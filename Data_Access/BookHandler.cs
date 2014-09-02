@@ -124,10 +124,16 @@ namespace urbanbooks
         {
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@ProductID", book.ProductID ),
+                new SqlParameter("@BookID", book.BookID ),
+                new SqlParameter("@ProductID", book.ProductID),
                 new SqlParameter("@BookTitle", book.BookTitle),
-                new SqlParameter("@isbn", book.ISBN),
-                new SqlParameter("@BookCategoryID", book.BookCategoryID)
+                new SqlParameter("@ISBN", book.ISBN),
+                new SqlParameter("@Synopsis", book.Synopsis),
+                new SqlParameter("@BookCategoryID", book.BookCategoryID),
+                new SqlParameter("@SupplierID", book.SupplierID),
+                new SqlParameter("@PublisherID", book.PublisherID),
+                new SqlParameter("@AuthorID", book.AuthorID),
+                new SqlParameter("@CoverImage", book.CoverImage)
             };
             return DataProvider.ExecuteNonQuery("sp_UpdateBook", CommandType.StoredProcedure,
                 Params);
@@ -138,14 +144,10 @@ namespace urbanbooks
             SqlParameter[] Params = new SqlParameter[]
             {
                 new SqlParameter("@ProductID", book.ProductID ),
-                new SqlParameter("@Title", book.BookTitle),
-                new SqlParameter("@Description", book.Synopsis),
                 new SqlParameter("@CostPrice", book.CostPrice),
-                //new SqlParameter("@MarkUp", company.MarkUp),
                 new SqlParameter("@SellingPrice", book.SellingPrice),
-                new SqlParameter("@SupplierID", book.SupplierID),
-                //new SqlParameter("@EmployeeID", book.EmployeeID),
-                new SqlParameter("@DateAdded", book.DateAdded),
+                new SqlParameter("@IsBook", book.IsBook = true),
+                new SqlParameter("@DateAdded", book.DateAdded = DateTime.Now),
             };
             return DataProvider.ExecuteNonQuery("sp_UpdateProduct", CommandType.StoredProcedure,
                 Params);

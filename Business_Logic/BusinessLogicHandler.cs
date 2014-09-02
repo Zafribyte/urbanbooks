@@ -123,13 +123,15 @@ namespace urbanbooks
         {
             bool mybinder = false;
             BookHandler myHandler = new BookHandler();
-            if (myHandler.UpdateBookProduct(book) == true)
-            { mybinder = true; }
-            else if (myHandler.UpdateBook(book) == false)
-            { mybinder = false; }
-            return mybinder;
+            return myHandler.UpdateBook(book);
         }
+        public bool UpdateBookProduct(Book book)
+        {
+            BookHandler myHandler = new BookHandler();
+            Book bk = new Book();
 
+            return myHandler.UpdateBookProduct(book);
+        }
         public bool DeleteBook(int BookID)
         {
             BookHandler myHandler = new BookHandler();

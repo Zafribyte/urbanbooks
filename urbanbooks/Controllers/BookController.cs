@@ -181,16 +181,18 @@ namespace urbanbooks.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Book b, Book bl)
         {
             try
             {
                 myHandler = new BusinessLogicHandler();
                 book = new Book();
-                TryUpdateModel(book);
+                TryUpdateModel(bl);
+                TryUpdateModel(b);
                 if (ModelState.IsValid)
                 {
-                    myHandler.UpdateBook(book);
+                    myHandler.UpdateBookProduct(b);
+                    myHandler.UpdateBook(bl);
                 }
                 return RedirectToAction("Index");
             }
