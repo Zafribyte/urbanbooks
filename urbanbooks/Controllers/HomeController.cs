@@ -63,5 +63,20 @@ namespace urbanbooks.Controllers
             List<string> complete = books.Where(book => book.BookTitle.StartsWith(search)).Select(title => title.BookTitle).ToList();
             return Json(complete, JsonRequestBehavior.AllowGet);
         }
+        [HttpGet]
+        public ActionResult Search_bookTitle(FormCollection collection)
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Search_bookTitle(FormCollection formdata, SearchModel search, string name)
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Search(FormCollection collect)
+        {
+            return View();
+        }
     }
 }
