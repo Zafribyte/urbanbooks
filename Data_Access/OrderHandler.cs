@@ -14,7 +14,7 @@ namespace urbanbooks
         {
             List<Order> OrdersList = null;
 
-            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewOrders", //*Note
+            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewAllOrders", //*Note
                 CommandType.StoredProcedure))
             {
                 if (table.Rows.Count > 0)

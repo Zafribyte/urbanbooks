@@ -82,7 +82,7 @@ namespace urbanbooks.Controllers
 
             #region Display
             List<SelectListItem> bookCategory = new List<SelectListItem>();
-            bookCategory.Add(new SelectListItem { Text = "Select Category", Value = "", Selected = true });
+            //bookCategory.Add(new SelectListItem { Text = "Select Category", Value = "", Selected = true });
             foreach (var item in typeList)
             {
                 bookCategory.Add(new SelectListItem { Text = item.CategoryName, Value = item.BookCategoryID.ToString() });
@@ -92,7 +92,7 @@ namespace urbanbooks.Controllers
             ViewData["bookCategories"] = bookCategory;
 
             List<SelectListItem> supplier = new List<SelectListItem>();
-            supplier.Add(new SelectListItem { Text = "Select Supplier", Value = "", Selected = true });
+            //supplier.Add(new SelectListItem { Text = "Select Supplier", Value = "", Selected = true });
             foreach (var item in nameList)
             {
                 supplier.Add(new SelectListItem { Text = item.Name, Value = item.SupplierID.ToString() });
@@ -102,7 +102,7 @@ namespace urbanbooks.Controllers
             ViewData["suppliers"] = supplier;
 
             List<SelectListItem> author = new List<SelectListItem>();
-            author.Add(new SelectListItem { Text = "Select Author", Value = "", Selected = true });
+            //author.Add(new SelectListItem { Text = "Select Author", Value = "", Selected = true });
             foreach (var item in authList)
             {
                 author.Add(new SelectListItem { Text = item.Name, Value = item.AuthorID.ToString() });
@@ -112,7 +112,7 @@ namespace urbanbooks.Controllers
             ViewData["authors"] = author;
 
             List<SelectListItem> publisher = new List<SelectListItem>();
-            publisher.Add(new SelectListItem { Text = "Select Publisher", Value = "", Selected = true });
+            //publisher.Add(new SelectListItem { Text = "Select Publisher", Value = "", Selected = true });
             foreach (var item in pubList)
             {
                 publisher.Add(new SelectListItem { Text = item.Name, Value = item.PublisherID.ToString() });

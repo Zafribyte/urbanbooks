@@ -8,6 +8,7 @@ namespace urbanbooks.Models
 {
     public class AddNewBookViewModel
     {
+        
         public List<SelectListItem> bookCategories { get; set; }
         public List<SelectListItem> suppliers { get; set; }
 

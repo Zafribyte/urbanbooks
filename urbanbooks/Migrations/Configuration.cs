@@ -17,18 +17,18 @@ namespace urbanbooks.Migrations
 
         protected override void Seed(urbanbooks.Models.ApplicationDbContext context)
         {
-            if (!context.Users.Any(myUser => myUser.UserName == "info@amazon.com"))
+            if (!context.Users.Any(myUser => myUser.UserName == "info@esquire.co.za"))
             {
                 var userStore = new UserStore<ApplicationUser>(context);
                 var roleStore = new RoleStore<IdentityRole>(context);//
                 var userManager = new UserManager<ApplicationUser>(userStore);
                 var roleManager = new RoleManager<IdentityRole>(roleStore);
 
-                var user = new ApplicationUser { UserName = "info@amazon.com", Email = "info@amazon.com" };
+                var user = new ApplicationUser { UserName = "info@esquire.co.za", Email = "info@esquire.co.za" };
                 user.Wishlists = new Wishlist { Status = false };
                 user.Carts = new Cart { DateLastModified = DateTime.Now };
                 SupplierContext Suppliercontext = new SupplierContext();
-                Supplier suppler = new Supplier { User_Id = user.Id, Name = "Amazon", ContactPerson = "Dave", LastName = "Smith", Fax = "0418756544", Status = false };
+                Supplier suppler = new Supplier { User_Id = user.Id, Name = "Esquire", ContactPerson = "Nicholas", LastName = "Erasmus", ContactPersonNumber = "0126578500", Status = false };
                 context.Suppliers.Add(suppler);
                 context.SaveChanges();
                 userManager.Create(user, "password");

@@ -10,6 +10,7 @@ namespace urbanbooks
     public class Supplier
     {
         [ScaffoldColumn(false)]
+        [Key]
         public int SupplierID
         { get; set; }
         public string Name
