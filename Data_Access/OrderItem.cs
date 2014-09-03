@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace urbanbooks
 {
-    public class OrderItem : Order
+    public class OrderItem
     {
         [ScaffoldColumn(true)]
         [Key]public int OrderItemNumber 
@@ -21,9 +21,7 @@ namespace urbanbooks
         public int OrderNo
         { get; set; }
 
-        //Order Test
-
-        
+        //Order Details
 
 
     }

@@ -9,6 +9,7 @@ namespace urbanbooks
 {
     public class TechCategory
     {
+        [Key]
         [ScaffoldColumn(false)]
         public int TechCategoryID 
         { get; set; }

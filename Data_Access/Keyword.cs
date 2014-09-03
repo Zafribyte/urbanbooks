@@ -9,6 +9,7 @@ namespace urbanbooks
 {
     public class Keyword
     {
+        [Key]
         [ScaffoldColumn(false)]
         public int KeywordID 
         { get; set; }
@@ -18,10 +19,5 @@ namespace urbanbooks
         public string KeywordType
         { get; set; }
 
-        /*  is this the accessor for keyword search */
-
-        [ScaffoldColumn(false)]
-        public int ProductID 
-        { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace urbanbooks
         {
             List<OrderItem> orderItems = null;
 
-            SqlParameter [] Params = {new SqlParameter ("@OrderNo", orderNo) };
+            SqlParameter [] Params = {new SqlParameter ("OrderNo", orderNo) };
             using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_GetOrderItemList",CommandType.StoredProcedure, Params))
             {
                 if (table.Rows.Count > 0)

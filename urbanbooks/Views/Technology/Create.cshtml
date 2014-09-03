@@ -1,6 +1,15 @@
 ﻿@using urbanbooks.Models;
 @model AddNewTechViewModel
 
+<link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/chosen.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/modalform.js"></script>
+@Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/jquery.multiple.select.js"></script>
+<link href="~/Content/multiple-select.css" rel="stylesheet" />
 
 @{
     ViewBag.Title = "Create";
@@ -41,14 +50,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.techs.CostPrice, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.techs.CostPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.techs.CostPrice, new { htmlAttributes = new { @class = "form-control new" } })
                 @Html.ValidationMessageFor(model => model.techs.CostPrice, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.techs.SellingPrice, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.techs.SellingPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.techs.SellingPrice, new { htmlAttributes = new { @class = "form-control olden", @readonly="readonly" } })
                 @Html.ValidationMessageFor(model => model.techs.SellingPrice, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -97,6 +106,23 @@
                 <input id="ImageSide" title="Upload Side Image" type="file" name="file3" />
             </div>
         </fieldset>
+        <script type="text/javascript">
+            $(".new").change(function () {
+                var selectedValue = $(this).val();
+                if (selectedValue != " ") {
+                    $.ajax({
+                        url: '@Url.Action("GetTechMarkUp", "Technology")',
+                        type: 'post',
+                        data: { 'selectedValue': selectedValue },
+                        datatype: 'json',
+                        success: function (response) { $(".olden").val(response); }
+                    })
+                }
+                else {
+                    $(".olden").val(" ");
+                }
+            });
+        </script>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

@@ -195,11 +195,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\MyHelpers.cs" />
-    <Compile Include="Migrations\201409030850004_makingSure.cs" />
-    <Compile Include="Migrations\201409030850004_makingSure.Designer.cs">
-      <DependentUpon>201409030850004_makingSure.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddNewBookViewModel.cs" />
     <Compile Include="Models\AddNewTechViewModel.cs" />
@@ -209,6 +204,8 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\OrderModels.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
+    <Compile Include="Models\SearchModel.cs" />
+    <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Models\SupplierContext.cs" />
     <Compile Include="Models\WishlistActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -400,11 +397,6 @@
       <Project>{8ebc53e8-302d-4a51-ae39-b1e4631cfb68}</Project>
       <Name>Data_Access</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201409030850004_makingSure.resx">
-      <DependentUpon>201409030850004_makingSure.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

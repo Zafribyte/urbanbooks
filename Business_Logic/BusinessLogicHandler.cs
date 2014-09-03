@@ -123,17 +123,19 @@ namespace urbanbooks
         {
             bool mybinder = false;
             BookHandler myHandler = new BookHandler();
-            if (myHandler.UpdateBookProduct(book) == true)
-            { mybinder = true; }
-            else if (myHandler.UpdateBook(book) == false)
-            { mybinder = false; }
-            return mybinder;
+            return myHandler.UpdateBook(book);
         }
-
-        public bool DeleteBook(int BookID)
+        public bool UpdateBookProduct(Book book)
         {
             BookHandler myHandler = new BookHandler();
-            return myHandler.DeleteBookProduct(BookID);
+            Book bk = new Book();
+
+            return myHandler.UpdateBookProduct(book);
+        }
+        public bool DeleteBook(Book book)
+        {
+            BookHandler myHandler = new BookHandler();
+            return myHandler.DeleteBook(book);
         }
         #endregion
 
@@ -155,12 +157,7 @@ namespace urbanbooks
         public bool UpdateTechnology(Technology gadget)
         {
             TechnologyHandler myHandler = new TechnologyHandler();
-            bool myBinder = false;
-
-            if (myHandler.UpdateTechnologyProduct(gadget) == true && myHandler.UpdateTechnology(gadget) == true)
-            { return myBinder = true; }
-            else
-                return myBinder;
+            return myHandler.UpdateTechnology(gadget);
         }
 
         public bool DeleteTechnology(int ProductID)

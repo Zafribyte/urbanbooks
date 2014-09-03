@@ -12,8 +12,10 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
+using System.Data.Entity.Validation;
 using urbanbooks.Models;
 using System.Data.Entity.Core.Objects;
+using System.Diagnostics;
 
 namespace urbanbooks.Controllers
 {
@@ -57,32 +59,33 @@ namespace urbanbooks.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.Email, model.Password);
-                if (user != null)
+                try
                 {
-                    await SignInAsync(user, model.RememberMe);
-                    //return RedirectToLocal(returnUrl);
+                    var user = await UserManager.FindAsync(model.Email, model.Password);
 
-                    if(HttpContext.User.IsInRole("admin"))
+                    if (user != null)
                     {
-                        RedirectToAction("Index", "Admin", null);
-                    }
-                    else if(HttpContext.User.IsInRole("supplier"))
-                    {
-                        RedirectToAction("Index", "Supplier", null);
-                    }
-                    else if (HttpContext.User.IsInRole("employee"))
-                    {
-                        RedirectToAction("Index", "Employee", null);
-                    }
+                        await SignInAsync(user, model.RememberMe);
+                        //return RedirectToLocal(returnUrl);
 
-                    return Json(new { success = true, url = returnUrl });
+                        return Json(new { success = true, url = returnUrl });
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Invalid username or password.");
+                    }
+                    await experiment(user);
                 }
-                else
+                catch (DbEntityValidationException dbx)
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    foreach(var item in dbx.EntityValidationErrors)
+                    {
+                        foreach(var thisThing in item.ValidationErrors)
+                        {
+                            Trace.TraceInformation("Property: {0} Error: {1}", thisThing.PropertyName, thisThing.ErrorMessage);
+                        }
+                    }
                 }
-                await experiment(user);
             }
             return PartialView(model);
         }

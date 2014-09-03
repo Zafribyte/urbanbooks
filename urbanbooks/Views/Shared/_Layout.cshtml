@@ -14,7 +14,8 @@
     <link href="~/Content/jquery-ui.css" rel="stylesheet" />
     <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
     <link href="~/Content/jquery-ui.structure.min.css" rel="stylesheet" />
-
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 </head>
 <body>
     @using urbanbooks.Controllers;
@@ -41,40 +42,58 @@
                 <li>@Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'>  " + Session["wishlistTotal"].ToString() + "</span>", "Wishlist", "Edit", "Wishlist", htmlAttributes: new { @class = "btn" })</li>
             </ul>
             @Html.Partial("_LoginPartial")
-            <div class="navbar-form input-group input-group-sm form-inline">
-
-                <input type="text" placeholder="Search" value="" class="form-control input-sm pull-right" /><span class="input-group-addon glyphicon glyphicon-search btn btn-default"></span>
-                @*
-                @using (Html.BeginForm())
+            <div class="navbar-form input-group form-inline">
+                @using (@Html.BeginForm("Search", "Home", FormMethod.Post, null))
                 {
-                    @Html.TextBox("search", null, new { id = "searchGlobal", placeholder = "Search", @class = "form-control input-sm pull-right" })
-                }*@
+                    @*@Html.TextBox("txt", null, new { htmlAttributes = new { @class = "form-control input-sm input-group-addon", placeholder = "Search" } })*@
+                    <div class="btn-group">
+                        <input type="text" name="query" placeholder="Search" value="" class="form-control input-sm" />
+                        <button type="button" class="btn btn-default dropdown-toggle input-group-addon" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                            <span class="glyphicon glyphicon-search "></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="btn btn-link"><input type="submit" style="width:inherit;" name=" books" value="Search Books" class="btn btn-link btn-sm " /></li>
+                            <li class="btn btn-link"><input type="submit" style="width:inherit;" name=" bookTitle" value="Book Title" class="btn btn-link btn-sm " /></li>
+                            <li class="btn btn-link"><input type="submit" style="width:inherit;" name=" bookCategory" value="Book Category" class="btn btn-link btn-sm " /></li>
+                            <li class="btn btn-link"><input type="submit" style="width:inherit;" name=" bookIsbn" value="ISBN" class="btn btn-link btn-sm " /></li>
+                            <li class="divider"></li>
+                            <li class="btn btn-link"><input type="submit" style="width:inherit;" name=" gadget" value="Search Technology" class="btn btn-link btn-sm " /></li>
+                            <li class="btn btn-link"><input type="submit" style="width:inherit;" name=" gadgetModel" value="Model Name" class="btn btn-link btn-sm " /></li>
+                            <li class="btn btn-link"><input type="submit" style="width:inherit;" name=" gadgetModelNumber" value="Model Number" class="btn btn-link btn-sm " /></li>
+                        </ul>
+                    </div>
+                }
             </div>
         </div>
-
     </div>
     <!--LogIn Modal PlaceHolder-->
     <div id="myModal" class="modal fade in">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div id="myModalContent">
-
                 </div>
             </div>
         </div>
     </div>
-
     <!--Body PlaceHolder-->
     <div class="body-content">
         @RenderBody()
         <hr />
         <!--Footer-->
     </div>
+
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/modalform")
-    <script src="~/Scripts/jquery-ui.js"></script>
-    <script src="~/Scripts/jquery-ui.min.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/modalform")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/fuelux")
     <script src="~/Scripts/jquery-2.1.1.js"></script>
     @RenderSection("scripts", required: false)
 </body>

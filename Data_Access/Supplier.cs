@@ -9,6 +9,7 @@ namespace urbanbooks
 {
     public class Supplier
     {
+        [Key]
         [ScaffoldColumn(false)]
         public int SupplierID
         { get; set; }

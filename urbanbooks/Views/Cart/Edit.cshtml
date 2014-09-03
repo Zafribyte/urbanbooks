@@ -75,11 +75,8 @@
                                             @Html.DisplayFor(modelItem => gadget.ModelName)
                                         </td>
                                         <td width="300px">
-                                            @Html.TextBoxFor(modelItem => item.Quantity, new { htmlAttributes = new { @class = "form-control quants" } })
+                                            @Html.EditorFor(modelItem => item.Quantity, new { htmlAttributes = new { @class = "form-control quants" } })
                                         </td>
-                                        @*                            <td width="400px">
-                                                @Html.DisplayFor(modelItem => gadget.Description)
-                                            </td>*@
                                         <td width="100px" style="text-align:right">
                                             @Html.DisplayFor(modelItem => gadget.SellingPrice)
                                         </td>

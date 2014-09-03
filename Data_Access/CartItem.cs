@@ -9,6 +9,7 @@ namespace urbanbooks
 {
     public class CartItem
     {
+        [Key]
         [ScaffoldColumn(false)]
         public int CartID 
         { get; set; }
