@@ -77,7 +77,7 @@
                                                         <td width="100px" style="text-align:right">
                                                             @Html.DisplayFor(modelItem => item.Quantity)
                                                         </td>
-                                                        <td width="150px" style="text-align:right">
+                                                        <td width="150" style="text-align:right">
                                                             @Html.DisplayFor(modelItem => book.SellingPrice)
                                                         </td>
 
@@ -86,15 +86,13 @@
                                                             <td width="150px" style="text-align:right">
                                                                 @Html.DisplayFor(modelItem => count.TotalPerItem)
                                                             </td>
-                                                                                                        <td width="" style="text-align:center">
+                                                        }
+                                                        <td width="" style="text-align:center">
                                                             @Html.ActionLink("Remove", "_Remove", "Cart", new { id = item.CartItemID }, new { @class = "btn btn-danger" })
                                                         </td>
-                                                        }
-
-                                                    }
                                                     }
                                                 }
-                                                @if (Model.allTechnology != null)
+                                                if (Model.allTechnology != null)
                                                 {
                                                     foreach (var gadget in Model.allTechnology)
                                                     {
@@ -115,15 +113,14 @@
                                                                 <td width="150px">
                                                                     @Html.DisplayFor(modelItem => count.TotalPerItem)
                                                                 </td>
-                                                                                                            <td width="">
-                                                            @Html.ActionLink("Remove", "_Remove", "Cart", new { id = item.CartItemID }, new { @class = "btn btn-danger" })
-                                                        </td>
                                                             }
                                                         }
-
+                                                        <td width="100px">
+                                                            @Html.ActionLink("Remove", "_Remove", "Cart", new { id = item.CartItemID }, new { @class = "btn btn-danger" })
+                                                        </td>
                                                     }
                                                 }
-                                            
+                                            }
                                         </tr>
                                     }
 
