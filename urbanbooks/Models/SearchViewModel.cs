@@ -9,7 +9,7 @@ namespace urbanbooks.Models
     public class SearchViewModel
     {
         [Key]
-        public int theKey { get; set; }
+        public int ID { get; set; }
        public IEnumerable<Book> BookResults { get; set; }
        public IEnumerable<Technology> GadgetResults { get; set; }
        public IEnumerable<BookCategory> BookCategoryResults { get; set; }

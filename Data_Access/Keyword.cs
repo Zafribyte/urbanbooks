@@ -19,10 +19,5 @@ namespace urbanbooks
         public string KeywordType
         { get; set; }
 
-        /*  is this the accessor for keyword search */
-
-        [ScaffoldColumn(false)]
-        public int ProductID 
-        { get; set; }
     }
 }

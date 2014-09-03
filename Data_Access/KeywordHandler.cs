@@ -26,7 +26,7 @@ namespace urbanbooks
                         key.KeywordID = Convert.ToInt32(row["KeywordID"]);
                         key.Keywords = row["Keywords"].ToString();
                         key.KeywordType = row["KeywordType"].ToString();
-                        key.ProductID = Convert.ToInt32(row["ProductID"]);
+                        //key.ProductID = Convert.ToInt32(row["ProductID"]);
                         KeywordsList.Add(key);
                     }
                 }
@@ -50,7 +50,7 @@ namespace urbanbooks
             {
                 new SqlParameter("@Keywords", key.Keywords),
                 new SqlParameter("@KeywordType", key.KeywordType),
-                new SqlParameter("@ProductID", key.ProductID),
+                //new SqlParameter("@ProductID", key.ProductID),
             };
             return DataProvider.ExecuteNonQuery("sp_InsertKeyword", CommandType.StoredProcedure,
                 Params);

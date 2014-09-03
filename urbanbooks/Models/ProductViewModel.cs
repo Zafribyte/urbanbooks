@@ -4,6 +4,7 @@ using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace urbanbooks.Models
 {
@@ -11,12 +12,19 @@ namespace urbanbooks.Models
     {
         [Key]
         public int theKey { get; set; }
+        [NotMapped]
         public IEnumerable<CartItem> allCartItem { get; set; }
+        [NotMapped]
         public IEnumerable<Book> allBook { get; set; }
+        [NotMapped]
         public IEnumerable<Technology> allTechnology { get; set; }
+        [NotMapped]
         public IEnumerable<WishlistItem> allWishlistItems { get; set; }
+        [NotMapped]
         public IEnumerable<CartHelper> secureCart { get; set; }
+        [NotMapped]
         public List<SelectListItem> I_DeliveryList { get; set; }
+        [NotMapped]
         public List<CartConclude> ItsA_wrap { get; set; }
         public ProvideUser UserDetails { get; set; }
         public Billing Bill { get; set; }
@@ -26,7 +34,9 @@ namespace urbanbooks.Models
 
         public class CartHelper
         {
+            [Key]
             public int ProductID { get; set; }
+            public int CartItemID { get; set; }
             [DataType(DataType.Currency)]
             public double TotalPerItem { get; set; }
 
@@ -71,6 +81,7 @@ namespace urbanbooks.Models
     public class DeliveryHelper
     {
         [Required]
+        [Key]
         [Display(Name = "Delivery Address")]
         [DataType(DataType.MultilineText)]
         public string DeliveryAddress
@@ -87,6 +98,7 @@ namespace urbanbooks.Models
     }
     public class ProvideUser
     {
+        [Key]
         public string Name 
         { get; set; }
         public string LName 
