@@ -82,35 +82,36 @@ namespace urbanbooks.Controllers
 
             if(criteria == "books")
             {
-                modelHelper.BookResults = (IEnumerable<Book>)findBook.Where(m => m.BookTitle == query);//contains
+                modelHelper.BookResults = (IEnumerable<Book>)findBook.Where(m => m.BookTitle.StartsWith(query));//contains
             }
             else if (criteria == "gadget")
             {
-                modelHelper.GadgetResults = findGadget.Where(m => m.Specs).Contains(query);//solve
+                modelHelper.GadgetResults = findGadget.Where(m => m.Specs.StartsWith(query)).ToList();//solve
             }
             else if (criteria == " bookTitle")
             {
-                modelHelper.BookResults = (IEnumerable<Book>)findBook.Where(m => m.BookTitle == query);
+                modelHelper.BookResults = (IEnumerable<Book>)findBook.Where(m => m.BookTitle.StartsWith(query));
             }
             else if (criteria == "bookCategory")
-            { 
+            {
+                modelHelper.BookResults = (IEnumerable<Book>)findCategory.Where(m => m.CategoryName.StartsWith(query));
             }
             else if (criteria == "bookIsbn")
             {
-
+                modelHelper.BookResults = (IEnumerable<Book>)findBook.Where(m => m.ISBN.StartsWith(query));
             }
             else if (criteria == "gadgetModel")
             {
-
+                modelHelper.GadgetResults = findGadget.Where(m => m.ModelName.StartsWith(query)).ToList();
             }
             else if (criteria == "gadgetModelNumber")
             {
-
+                modelHelper.GadgetResults = findGadget.Where(m => m.ModelNumber.StartsWith(query)).ToList();
             }
             else
             { }
 
-
+            modelHelper.Query = query;
             #endregion
 
             return View();

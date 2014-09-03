@@ -45,17 +45,9 @@
             <div class="navbar-form input-group form-inline">
                 @using (@Html.BeginForm("Search", "Home", FormMethod.Post, null))
                 {
-<<<<<<< HEAD
                     @*@Html.TextBox("txt", null, new { htmlAttributes = new { @class = "form-control input-sm input-group-addon", placeholder = "Search" } })*@
                     <div class="btn-group">
                         <input type="text" name="query" placeholder="Search" value="" class="form-control input-sm" />
-                        @* @Html.EditorFor(model => model.Query, new { htmlAttributes = new { @class = "form-control input-sm", placeholder = "Search" } })*@
-=======
-                    @*@model urbanbooks.Models.SearchModel*@
-                    <div class="btn-group">
-
-                        @*@Html.EditorFor(model => model.Query, new { htmlAttributes = new { @class = "form-control input-sm", placeholder = "Search" } })*@
->>>>>>> d5a104f58965e981a58a48ed7311d319211495bb
                         <button type="button" class="btn btn-default dropdown-toggle input-group-addon" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
                             <span class="glyphicon glyphicon-search "></span>
                         </button>
@@ -100,10 +92,6 @@
     @Styles.Render("~/Content/themes/base/css")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/modalform")
-<<<<<<< HEAD
-=======
-
->>>>>>> d5a104f58965e981a58a48ed7311d319211495bb
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/fuelux")
     <script src="~/Scripts/jquery-2.1.1.js"></script>

@@ -195,14 +195,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\MyHelpers.cs" />
-<<<<<<< HEAD
-    <Compile Include="Migrations\201409021847564_mgs.cs" />
-    <Compile Include="Migrations\201409021847564_mgs.Designer.cs">
-      <DependentUpon>201409021847564_mgs.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-=======
->>>>>>> d5a104f58965e981a58a48ed7311d319211495bb
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddNewBookViewModel.cs" />
     <Compile Include="Models\AddNewTechViewModel.cs" />
@@ -384,6 +376,7 @@
     <Content Include="Views\Author\Create.cshtml" />
     <Content Include="Views\Book\Details.cshtml" />
     <Content Include="Views\Technology\AdminDetails.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
@@ -405,14 +398,6 @@
       <Name>Data_Access</Name>
     </ProjectReference>
   </ItemGroup>
-<<<<<<< HEAD
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201409021847564_mgs.resx">
-      <DependentUpon>201409021847564_mgs.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-=======
->>>>>>> d5a104f58965e981a58a48ed7311d319211495bb
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
