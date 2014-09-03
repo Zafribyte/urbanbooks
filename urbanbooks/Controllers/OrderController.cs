@@ -24,22 +24,22 @@ namespace urbanbooks.Controllers
         }
         public ActionResult Details(int orderNo)
         {
-            myHandler = new BusinessLogicHandler();
-            IEnumerable<OrderItem> orderItem = myHandler.GetOrderItemsList(orderNo);
-            IEnumerable<Order> order = myHandler.GetOrdersList();
-            IEnumerable<Book> bookOrder = myHandler.GetBooks();
-            IEnumerable<Technology> techOrder = myHandler.GetTechnology();
+            //myHandler = new BusinessLogicHandler();
+            //IEnumerable<OrderItem> orderItem = myHandler.GetOrderItemsList(orderNo);
+            //IEnumerable<Order> order = myHandler.GetOrdersList();
+            //IEnumerable<Book> bookOrder = myHandler.GetBooks();
+            //IEnumerable<Technology> techOrder = myHandler.GetTechnology();
 
-            OrderViewModel viewOrder = new OrderViewModel();
-            viewOrder.books = bookOrder;
-            viewOrder.tech = techOrder;
-            viewOrder.orderItems = orderItem;
-            viewOrder.orders = order;
+            //OrderViewModel viewOrder = new OrderViewModel();
+            //viewOrder.books = bookOrder;
+            //viewOrder.tech = techOrder;
+            //viewOrder.orderItems = orderItem;
+            //viewOrder.orders = order;
 
-            int count = 0;
-            Session["OrderNo"] = orderNo;                     
-            //List<OrderItem> itemList = myHandler.GetOrderItemsList(orderNo);
-            return View(viewOrder);
+            //int count = 0;
+            //Session["OrderNo"] = orderNo;                     
+            ////List<OrderItem> itemList = myHandler.GetOrderItemsList(orderNo);
+            return View();
 
         }
 

@@ -195,7 +195,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\MyHelpers.cs" />
-    <Compile Include="Migrations\201409021847564_mgs.cs" />
     <Compile Include="Migrations\201409030850004_makingSure.cs" />
     <Compile Include="Migrations\201409030850004_makingSure.Designer.cs">
       <DependentUpon>201409030850004_makingSure.cs</DependentUpon>
@@ -210,8 +209,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\OrderModels.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
-    <Compile Include="Models\SearchModel.cs" />
-    <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Models\SupplierContext.cs" />
     <Compile Include="Models\WishlistActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

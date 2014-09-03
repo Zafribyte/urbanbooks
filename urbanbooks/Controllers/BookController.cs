@@ -193,7 +193,7 @@ namespace urbanbooks.Controllers
                 TryUpdateModel(b);
                 if (ModelState.IsValid)
                 {
-                    myHandler.UpdateBookProduct(b);
+                    //myHandler.UpdateBookProduct(b);
                     myHandler.UpdateBook(bl);
                 }
                 return RedirectToAction("Index");

@@ -63,6 +63,19 @@ namespace urbanbooks.Controllers
                     await SignInAsync(user, model.RememberMe);
                     //return RedirectToLocal(returnUrl);
 
+                    if(HttpContext.User.IsInRole("admin"))
+                    {
+                        RedirectToAction("Index", "Admin", null);
+                    }
+                    else if(HttpContext.User.IsInRole("supplier"))
+                    {
+                        RedirectToAction("Index", "Supplier", null);
+                    }
+                    else if (HttpContext.User.IsInRole("employee"))
+                    {
+                        RedirectToAction("Index", "Employee", null);
+                    }
+
                     return Json(new { success = true, url = returnUrl });
                 }
                 else
