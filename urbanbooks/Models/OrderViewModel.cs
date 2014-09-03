@@ -9,8 +9,8 @@ namespace urbanbooks.Models
     {
         public IEnumerable<Order> orders { get; set; }
         public IEnumerable<OrderItem> orderItems { get; set; }
+        public IEnumerable<Supplier> supplier { get; set; }
         public IEnumerable<Book> books { get; set; }
         public IEnumerable<Technology> tech { get; set; }
-        public IEnumerable<Supplier> suppliers { get; set; }
     }
 }
