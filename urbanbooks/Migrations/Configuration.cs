@@ -36,7 +36,6 @@ namespace urbanbooks.Migrations
                 userManager.AddToRole(user.Id, "admin");
 
             }
-
         }
     }
 }

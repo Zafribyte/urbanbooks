@@ -7,13 +7,13 @@ namespace urbanbooks.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class fix005 : IMigrationMetadata
+    public sealed partial class mgs : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(fix005));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(mgs));
         
         string IMigrationMetadata.Id
         {
-            get { return "201408261147066_fix005"; }
+            get { return "201409021847564_mgs"; }
         }
         
         string IMigrationMetadata.Source

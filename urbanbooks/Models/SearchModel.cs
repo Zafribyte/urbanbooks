@@ -9,7 +9,7 @@ namespace urbanbooks.Models
     public class SearchModel
     {
         [Key]
-        public int theKey { get; set; }
-        public String Query { get; set; }
+        public int ID { get; set; }
+        public string Query { get; set; }
     }
 }

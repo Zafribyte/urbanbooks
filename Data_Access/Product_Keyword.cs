@@ -14,7 +14,5 @@ namespace urbanbooks
         public int ProductID { get; set; }
         public int KeywordID { get; set; }
 
-        public List<Keyword> KeywordList { get; set; }
-        public List<Product> ProductList { get; set; }
     }
 }

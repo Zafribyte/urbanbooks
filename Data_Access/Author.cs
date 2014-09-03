@@ -18,9 +18,5 @@ namespace urbanbooks
         public string Surname
         { get; set; }
 
-        //BOOK
-
-        public List<Book> Book
-        { get; set; }
     }
 }

@@ -43,25 +43,26 @@
             </ul>
             @Html.Partial("_LoginPartial")
             <div class="navbar-form input-group form-inline">
-                @using (Ajax.BeginForm("Sear", new AjaxOptions { HttpMethod = "POST" }))
+                @using (@Html.BeginForm("Search", "Home", FormMethod.Post, null))
                 {
-                    @model urbanbooks.Models.SearchModel
+                    @*@Html.TextBox("txt", null, new { htmlAttributes = new { @class = "form-control input-sm input-group-addon", placeholder = "Search" } })*@
                     <div class="btn-group">
-
-                        @Html.EditorFor(model => model.Query, new { htmlAttributes = new { @class = "form-control input-sm", placeholder = "Search" } })
+                        <input type="text" name="query" placeholder="Search" value="" class="form-control input-sm" />
+                        @* @Html.EditorFor(model => model.Query, new { htmlAttributes = new { @class = "form-control input-sm", placeholder = "Search" } })*@
                         <button type="button" class="btn btn-default dropdown-toggle input-group-addon" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
                             <span class="glyphicon glyphicon-search "></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Search Books", "Books", "Details", new { }, new { @class = "success" })</li>
-                        <li>@Ajax.ActionLink("Book_Title", "Search", new AjaxOptions { HttpMethod = "POST" })</li>
-                        <li>@Html.ActionLink("Book Category", "Edit", new { }, new { @class = "success" })</li>
-                        <li class="divider"></li>
-                        <li>@Html.ActionLink("Search Technology", "Delete", new { }, new { })</li>
-                        <li>@Html.ActionLink("Model Name", "Edit", new { }, new { data_modal = "" })</li>
-                        <li>@Html.ActionLink("Model Number", "Edit", new { }, new { data_modal = "" })</li>
-                    </ul>
-                </div>
+                            <li class="btn btn-link"><input type="submit" style="width:inherit;" name=" books" value="Search Books" class="btn btn-link btn-sm " /></li>
+                            <li class="btn btn-link"><input type="submit" style="width:inherit;" name=" bookTitle" value="Book Title" class="btn btn-link btn-sm " /></li>
+                            <li class="btn btn-link"><input type="submit" style="width:inherit;" name=" bookCategory" value="Book Category" class="btn btn-link btn-sm " /></li>
+                            <li class="btn btn-link"><input type="submit" style="width:inherit;" name=" bookIsbn" value="ISBN" class="btn btn-link btn-sm " /></li>
+                            <li class="divider"></li>
+                            <li class="btn btn-link"><input type="submit" style="width:inherit;" name=" gadget" value="Search Technology" class="btn btn-link btn-sm " /></li>
+                            <li class="btn btn-link"><input type="submit" style="width:inherit;" name=" gadgetModel" value="Model Name" class="btn btn-link btn-sm " /></li>
+                            <li class="btn btn-link"><input type="submit" style="width:inherit;" name=" gadgetModelNumber" value="Model Number" class="btn btn-link btn-sm " /></li>
+                        </ul>
+                    </div>
                 }
             </div>
         </div>
@@ -81,6 +82,8 @@
         <hr />
         <!--Footer-->
     </div>
+
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/modalform")
@@ -89,11 +92,7 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/themes/base/css")
     @Scripts.Render("~/bundles/bootstrap")
-
-
     @Scripts.Render("~/bundles/modalform")
-    }
-
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/fuelux")
     <script src="~/Scripts/jquery-2.1.1.js"></script>
