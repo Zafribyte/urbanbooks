@@ -66,7 +66,6 @@ namespace urbanbooks.Controllers
                     if (user != null)
                     {
                         await SignInAsync(user, model.RememberMe);
-                        //return RedirectToLocal(returnUrl);
 
                         return Json(new { success = true, url = returnUrl });
                     }

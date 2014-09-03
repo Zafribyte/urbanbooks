@@ -18,6 +18,22 @@ namespace urbanbooks.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                #region Check iDentity
+                if (HttpContext.User.IsInRole("admin"))
+                {
+                   return  RedirectToAction("Index", "Admin");
+                }
+                else if (HttpContext.User.IsInRole("supplier"))
+                {
+                  return  RedirectToAction("Index", "Supplier");
+                }
+                else if (HttpContext.User.IsInRole("employee"))
+                {
+                  return  RedirectToAction("Index", "Employee");
+                }
+                #endregion
+
+
                 CartActions act = new CartActions();
                 WishlistActions wish = new WishlistActions();
                 ApplicationDbContext mycontext = new ApplicationDbContext();
