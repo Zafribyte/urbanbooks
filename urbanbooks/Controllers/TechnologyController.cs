@@ -130,22 +130,22 @@ namespace urbanbooks.Controllers
                 gadget.SellingPrice = Convert.ToDouble(collection.GetValue("techs.SellingPrice").AttemptedValue);
                 gadget.IsBook = false;
                 
-                TryUpdateModel(gadget);
+                
                 if (ModelState.IsValid)
                 {
                     if (file != null)
                     {
-                        file.SaveAs(HttpContext.Server.MapPath("~/Uploads/Tech/ImageFront") + file.FileName);
+                        file.SaveAs(HttpContext.Server.MapPath("~/Uploads/Tech/") + file.FileName);
                         gadget.ImageFront = file.FileName;
                     }
                     if (file2 != null)
                     {
-                        file2.SaveAs(HttpContext.Server.MapPath("~/Uploads/Tech/ImageTop") + file2.FileName);
+                        file2.SaveAs(HttpContext.Server.MapPath("~/Uploads/Tech/") + file2.FileName);
                         gadget.ImageTop = file2.FileName;
                     }
                     if (file3 != null)
                     {
-                        file3.SaveAs(HttpContext.Server.MapPath("~/Uploads/Tech/ImageSide") + file3.FileName);
+                        file3.SaveAs(HttpContext.Server.MapPath("~/Uploads/Tech/") + file3.FileName);
                         gadget.ImageSide = file3.FileName;
                     }
                     Technology ta = new Technology();
