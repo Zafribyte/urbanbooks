@@ -25,7 +25,8 @@ namespace urbanbooks
                         Order order = new Order();
                         order.OrderNo = Convert.ToInt32(row["OrderNo"]);
                         order.DateCreated = Convert.ToDateTime(row["DateCreated"]);
-                        order.DateLastModified = Convert.ToDateTime(row["DateLastModified"]);
+                        order.InvoiceID = Convert.ToInt32(row["InvoiceID"]);
+                        order.Status = Convert.ToBoolean(row["Status"]);
                         OrdersList.Add(order);
                     }
                 }
@@ -64,7 +65,6 @@ namespace urbanbooks
             OrderItem OrderLine;
             SqlParameter[] Params = { new SqlParameter("@DateCreated", order.DateCreated),
                                       new SqlParameter("@DateLastModified", order.DateLastModified),
-                                      new SqlParameter("@InvoiceID", order.InvoiceID),
                                       new SqlParameter("@Status", order.Status),
                                       new SqlParameter("@SupplierID",order.SupplierID)
                                     };

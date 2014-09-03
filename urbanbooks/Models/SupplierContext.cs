@@ -8,9 +8,10 @@ namespace urbanbooks.Models
 {
     public class SupplierContext:DbContext
     {
-        public SupplierContext():base("DataSocket")
+        public SupplierContext()
+            : base("DataSocket")
         { }
+
         DbSet<Supplier> Suppliers { get; set; }
-        
     }
 }

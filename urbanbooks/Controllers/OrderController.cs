@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using urbanbooks.Models;
+using System.Web.ModelBinding;
 
 namespace urbanbooks.Controllers
 {
@@ -18,26 +20,34 @@ namespace urbanbooks.Controllers
             
             myHandler = new BusinessLogicHandler();
             List<Order> orderslist = myHandler.GetOrdersList();
-            
             return View(orderslist);
         }
-
         public ActionResult Details(int orderNo)
         {
-            
             myHandler = new BusinessLogicHandler();
-            //order = new Order();
-            //OrderItem orderItem = new OrderItem();
-            //order = myHandler.GetOrder(orderNo);
-            List<OrderItem> itemList = myHandler.GetOrderItemsList(orderNo);
-            return View(itemList);
+            IEnumerable<OrderItem> orderItem = myHandler.GetOrderItemsList(orderNo);
+            IEnumerable<Order> order = myHandler.GetOrdersList();
+            IEnumerable<Book> bookOrder = myHandler.GetBooks();
+            IEnumerable<Technology> techOrder = myHandler.GetTechnology();
+
+            OrderViewModel viewOrder = new OrderViewModel();
+            viewOrder.books = bookOrder;
+            viewOrder.tech = techOrder;
+            viewOrder.orderItems = orderItem;
+            viewOrder.orders = order;
+
+            int count = 0;
+            Session["OrderNo"] = orderNo;                     
+            //List<OrderItem> itemList = myHandler.GetOrderItemsList(orderNo);
+            return View(viewOrder);
+
         }
 
 
-        public ActionResult AddOrderItems(OrderItem item)
+        public async Task<ActionResult> AddOrderItems(OrderItem item)
         {
             List<Order> myOrderList = new List<Order>();
-          //  await order = myHandler.GetOrdersList().Single(ord => ord.DataModified == DateTime.Now);
+            //await order = myHandler.GetOrdersList().Single(ord => ord.DataModified == DateTime.Now);
             TryUpdateModel(item);
             myHandler = new BusinessLogicHandler();
             myHandler.AddOrderItem(item);

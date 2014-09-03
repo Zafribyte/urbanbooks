@@ -12,11 +12,13 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ModelName)
+            @Html.DisplayNameFor(model => model.ManufacturerID)
         </dt>
+
         <dd>
-            @Html.DisplayFor(model => model.ModelName)
+            @Html.DisplayFor(model => model.ManufacturerID)
         </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.ModelNumber)
         </dt>
@@ -24,6 +26,15 @@
         <dd>
             @Html.DisplayFor(model => model.ModelNumber)
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CostPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CostPrice)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.SellingPrice)
         </dt>
@@ -31,26 +42,9 @@
         <dd>
             @Html.DisplayFor(model => model.SellingPrice)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageFront)
-        </dt>
-        <dd>
-            <img src="~/Uploads/Tech/ImageFront/@Model.ImageFront" width="200" height="200" />
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageTop)
-        </dt>
-        <dd>
-            <img src="~/Uploads/Tech/ImageTop/@Model.ImageTop" width="200" height="200" />
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageSide)
-        </dt>
-        <dd>
-            <img src="~/Uploads/Tech/ImageSide/@Model.ImageSide" width="350" height="200" />
-        </dd>
     </dl>
 </div>
 <p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TechID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

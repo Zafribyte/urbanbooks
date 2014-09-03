@@ -77,6 +77,7 @@ namespace urbanbooks.Models
         public bool Status
         { get; set; }
 
+        IEnumerable<CartItem> CartItems { get; set; }
     }
 
 
@@ -115,9 +116,37 @@ namespace urbanbooks.Models
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
         }
 
-       public DbSet<Supplier> Suppliers { get; set; }
+        public System.Data.Entity.DbSet<Employee> Employees { get; set; }
+
+        //public DbSet<Customer> Customer { get; set; }
+
+        public System.Data.Entity.DbSet<urbanbooks.Book> Books { get; set; }
+
+        public System.Data.Entity.DbSet<Cart> Carts { get; set; }
+
+        public System.Data.Entity.DbSet<urbanbooks.Special> Specials { get; set; }
+
+        public System.Data.Entity.DbSet<urbanbooks.Technology> Technologies { get; set; }
+
+        public System.Data.Entity.DbSet<Wishlist> Wishlists { get; set; }
+
+        public System.Data.Entity.DbSet<urbanbooks.Supplier> Suppliers { get; set; }
+
+        public System.Data.Entity.DbSet<urbanbooks.BookCategory> BookTypes { get; set; }
+
+        public System.Data.Entity.DbSet<urbanbooks.Models.FullRegisterViewModel> FullRegisterViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<urbanbooks.Product> Products { get; set; }
+
+        public System.Data.Entity.DbSet<urbanbooks.CartItem> CartItems { get; set; }
+
+        public System.Data.Entity.DbSet<urbanbooks.Company> Company { get; set; }
+
+        public System.Data.Entity.DbSet<urbanbooks.WishlistItem> WishlistItems { get; set; }
+
+        public System.Data.Entity.DbSet<urbanbooks.Order> Orders { get; set; }
+
+        public System.Data.Entity.DbSet<urbanbooks.Author> Authors { get; set; }
 
     }
 }
-
-        

@@ -1,14 +1,7 @@
 ﻿@using urbanbooks.Models;
 @model AddNewBookViewModel
 
-<link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
-<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-<link href="~/Content/chosen.min.css" rel="stylesheet" />
-<script src="~/Scripts/jquery-2.1.1.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
-<script src="~/Scripts/modalform.js"></script>
-<script src="~/Scripts/jquery.multiple.select.js"></script>
-<link href="~/Content/multiple-select.css" rel="stylesheet" />
+
 
 @{
     ViewBag.Title = "Create";
@@ -58,9 +51,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.books.SellingPrice, htmlAttributes: new { @class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.books.SellingPrice, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.books.SellingPrice, new { htmlAttributes = new { @class = "form-control olden", @readonly = "readonly" } })
+                @Html.EditorFor(model => model.books.SellingPrice, new { htmlAttributes = new { @class = "form-control olden" } })
                 @Html.ValidationMessageFor(model => model.books.SellingPrice, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -74,20 +67,16 @@
                 </div>
             </div>
         </div>
-        
-
-
 
         <div class="form-group">
             <div>
-                <label class="control-label col-md-2">Publisher</label>
+                <label class="control-label col-md-2" >Publisher</label>
                 <div class="col-md-10 dropdown">
-                    @Html.DropDownList("PublisherName", Model.publishers, new { @class = "form-control" })
+                    @Html.DropDownList("PublisherName", Model.publishers, new { @class = "form-control " })
                     @Html.ActionLink("Add a Publisher", "Create", "Publisher")
                 </div>
             </div>
         </div>
-
 
         <div class="form-group">
             <div>
@@ -100,42 +89,40 @@
         <div class="form-group">
             <div>
                 <label class="control-label col-md-2">Author</label>
-                <div class="col-md-10 dropdown">
-                @Html.DropDownList("FullName", Model.authors, new { @class = "form-control", id="authors" })
-                @Html.ActionLink("Add an Author", "Create", "Author")
-                    <script>
-                        $('#authors').multipleSelect({
-                        filter: true});
-                    </script>
-                </div>
+                @*<div class="col-md-10 dropdown">*@
+                    @*@Html.DropDownList("FullName", Model.authors, new { @class = "form-control" })*@
+                    
+                @*</div>*@
             </div>
         </div>
+        
+        @Html.ActionLink("Add an Author", "Create", "Author", htmlAttributes: new { data_modal = "" })
         <fieldset>
             <legend>Image</legend>
             <div class="editor-label">
                 @Html.LabelFor(model => model.books.CoverImage)
             </div>
             <div class="editor-field">
-                <input id="CoverImage" title="Upload Book Cover" type="file" name="file" accept="image/*" />
+                <input id="CoverImage" title="Upload Book Cover" type="file" name="file" accept="image/*"/>
             </div>
         </fieldset>
         <script type="text/javascript">
-            $(".new").change(function () {
-                var selectedValue = $(this).val();
-                if (selectedValue != " ") {
-                    $.ajax({
-                        url: '@Url.Action("GetBookMarkUp", "Book")',
-                        type: 'post',
-                        data: { 'selectedValue': selectedValue },
-                        datatype: 'json',
-                        success: function (response) { $(".olden").val(response); }
-                    })
-                }
-                else {
-                    $(".olden").val(" ");
-                }
-            });
-        </script>
+                $(".new").change(function () {
+                    var selectedValue = $(this).val();
+                    if (selectedValue != " ") {
+                        $.ajax({
+                            url: '@Url.Action("GetBookMarkUp", "Book")',
+                            type: 'post',
+                            data: { 'selectedValue': selectedValue },
+                            datatype: 'json',
+                            success: function (response) { $(".olden").val(response); }
+                        })
+                    }
+                    else {
+                        $(".olden").val(" ");
+                    }
+                });
+    </script>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -161,15 +148,3 @@
 <div>
     @Html.ActionLink("Back to List", "AdminIndex")
 </div>
-
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/jqueryui")
-@Styles.Render("~/Content/css")
-@Styles.Render("~/Content/themes/base/css")
-@Scripts.Render("~/bundles/bootstrap")
-
-
-@Scripts.Render("~/bundles/modalform")
-
-@Scripts.Render("~/bundles/jqueryval")
-@Scripts.Render("~/bundles/fuelux")

@@ -9,7 +9,6 @@ namespace urbanbooks
 {
     public class Author
     {
-        [Key]
         [ScaffoldColumn(false)]
         public int AuthorID
         { get; set; }
@@ -18,5 +17,9 @@ namespace urbanbooks
         public string Surname
         { get; set; }
 
+        //BOOK
+
+        public List<Book> Book
+        { get; set; }
     }
 }

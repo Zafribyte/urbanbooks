@@ -415,7 +415,7 @@ namespace urbanbooks.Controllers
                                 else
                                 {
                                     suppliers.Add(supplierId);
-                                    ord = new Order { DateCreated = DateTime.Now.Date, SupplierID = supplierId, InvoiceID = (int)Session["InvoiceID"], DateLastModified = DateTime.Now.Date, Status = false };
+                                    ord = new Order { DateCreated = DateTime.Now.Date, SupplierID = supplierId, DateLastModified = DateTime.Now.Date, Status = false };
                                     orderLine = myHandler.AddOrder(ord);
                                     orders.Add(orderLine.OrderNo);
                                     orderLine.ProductID = item.ProductID;
@@ -434,7 +434,7 @@ namespace urbanbooks.Controllers
                                 else
                                 {
                                     suppliers.Add(supplierId);
-                                    ord = new Order { DateCreated = DateTime.Now.Date, SupplierID = supplierId, InvoiceID = (int)Session["InvoiceID"], DateLastModified = DateTime.Now.Date, Status = false };
+                                    ord = new Order { DateCreated = DateTime.Now.Date, DateLastModified = DateTime.Now.Date, Status = false };
                                     orderLine = myHandler.AddOrder(ord);
                                     orders.Add(orderLine.OrderNo);
                                 }
@@ -662,6 +662,12 @@ namespace urbanbooks.Controllers
             List<CartItem> myItems = (List<CartItem>)Session["myItems"];
             model = (ProductViewModel)Session["deliverData"];
 
+            #region Clear the cart
+
+            
+
+            #endregion
+
             #region Calculate
 
             List<ProductViewModel.CartHelper> itemList = new List<ProductViewModel.CartHelper>();
@@ -671,12 +677,11 @@ namespace urbanbooks.Controllers
                 var revised = from rev in ifBooks
                               join item in myItems on rev.ProductID equals item.ProductID
                               where rev.ProductID == item.ProductID
-                              select new { rev.ProductID, rev.SellingPrice, item.Quantity, item.CartItemID };
+                              select new { rev.ProductID, rev.SellingPrice, item.Quantity };
                 foreach (var ite in revised)
                 {
                     cartHelp = new ProductViewModel.CartHelper();
                     cartHelp.ProductID = ite.ProductID;
-                    cartHelp.CartItemID = ite.CartItemID;
                     cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
                     itemList.Add(cartHelp);
                 }
@@ -688,12 +693,11 @@ namespace urbanbooks.Controllers
                     var revised = from rev in ifGadget
                                   join item in myItems on rev.ProductID equals item.ProductID
                                   where rev.ProductID == item.ProductID
-                                  select new { rev.ProductID, rev.SellingPrice, item.Quantity, item.CartItemID };
+                                  select new { rev.ProductID, rev.SellingPrice, item.Quantity };
                     foreach (var ite in revised)
                     {
                         cartHelp = new ProductViewModel.CartHelper();
                         cartHelp.ProductID = ite.ProductID;
-                        cartHelp.CartItemID = ite.CartItemID;
                         cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
                         itemList.Add(cartHelp);
                     }
@@ -742,7 +746,6 @@ namespace urbanbooks.Controllers
             #region Push Invoice nfo
             model.recieptData = new Invoice();
             model.recieptData.DateCreated = DateTime.Now.Date;
-            model.recieptData = new Invoice();
             model.recieptData.InvoiceID = (int)Session["InvoiceID"];
 
             #endregion
@@ -753,15 +756,6 @@ namespace urbanbooks.Controllers
             model.company = new Company();
             model.company = myHandler.GetCompanyDetail();
 
-            #endregion
-
-            #region Clear the cart
-            foreach (var item in itemList)
-            {
-                myHandler = new BusinessLogicHandler();
-                myHandler.DeleteCartItem(item.CartItemID);
-            }
-            
             #endregion
 
             return View(model);

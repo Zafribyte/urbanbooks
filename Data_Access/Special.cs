@@ -9,7 +9,6 @@ namespace urbanbooks
 {
     public class Special
     {
-        [Key]
         [ScaffoldColumn(false)]
         public int SpecialID 
         { get; set; }

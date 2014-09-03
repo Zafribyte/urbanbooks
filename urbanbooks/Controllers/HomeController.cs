@@ -66,61 +66,12 @@ namespace urbanbooks.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Search(FormCollection collect)
+        public ActionResult GlobalSearch(string search)
         {
-            #region Get Search Term
-            string query = collect.GetValue("query").AttemptedValue;
-            string criteria = collect.AllKeys[1];
-            #endregion
-
-            #region init search
             BusinessLogicHandler myHandler = new BusinessLogicHandler();
-            IEnumerable<Book> findBook = myHandler.GetBooks();
-            IEnumerable<Technology> findGadget = myHandler.GetTechnology();
-            IEnumerable<BookCategory> findCategory = myHandler.GetBookCategoryList();
-            IEnumerable<TechCategory> findGadgetCategory = myHandler.GetTechnologyTypeList();
-            SearchViewModel modelHelper = new SearchViewModel();
-            #endregion
-
-            #region execute search
-
-
-            if(criteria == " books")
-            {
-                modelHelper.BookResults = (IEnumerable<Book>)findBook.Where(m => m.BookTitle.StartsWith(query));//contains
-            }
-            else if (criteria == " gadget")
-            {
-                modelHelper.GadgetResults = findGadget.Where(m => m.Specs.StartsWith(query)).ToList();//solve
-            }
-            else if (criteria == " bookTitle")
-            {
-                modelHelper.BookResults = (IEnumerable<Book>)findBook.Where(m => m.BookTitle.StartsWith(query));
-            }
-            else if (criteria == " bookCategory")
-            {
-                modelHelper.BookResults = (IEnumerable<Book>)findCategory.Where(m => m.CategoryName.StartsWith(query));
-            }
-            else if (criteria == " bookIsbn")
-            {
-                modelHelper.BookResults = (IEnumerable<Book>)findBook.Where(m => m.ISBN.StartsWith(query));
-            }
-            else if (criteria == " gadgetModel")
-            {
-                modelHelper.GadgetResults = findGadget.Where(m => m.ModelName.StartsWith(query)).ToList();
-            }
-            else if (criteria == " gadgetModelNumber")
-            {
-                modelHelper.GadgetResults = findGadget.Where(m => m.ModelNumber.StartsWith(query)).ToList();
-            }
-            else
-            { }
-
-            modelHelper.Query = query;
-            #endregion
-
-            return View(modelHelper);
+            IEnumerable<Book> books = myHandler.GetBooks();
+            List<string> complete = books.Where(book => book.BookTitle.StartsWith(search)).Select(title => title.BookTitle).ToList();
+            return Json(complete, JsonRequestBehavior.AllowGet);
         }
     }
 }

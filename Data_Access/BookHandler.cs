@@ -31,9 +31,8 @@ namespace urbanbooks
                         book.Synopsis = row["Synopsis"].ToString();
                         book.SupplierID = Convert.ToInt32(row["SupplierID"].ToString());
                         book.ISBN = row["ISBN"].ToString();
-                        book.CostPrice = Convert.ToDouble(row["CostPrice"]);
+                        
                         book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
-                        book.AuthName = row["Author"].ToString();
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         BookList.Add(book);
@@ -109,11 +108,11 @@ namespace urbanbooks
                     book.Synopsis = row["Synopsis"].ToString();
                     book.CostPrice = Convert.ToDouble(row["CostPrice"]);
                     book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
-                    //book.SupplierID = Convert.ToInt32(row["SupplierID"]);
+                    book.SupplierID = Convert.ToInt32(row["SupplierID"]);
                     book.ISBN = row["ISBN"].ToString();
-                    book.catName = row["Category"].ToString();
-                    book.pubName = row["Publisher"].ToString();
-                    book.AuthName = row["Author"].ToString();
+                    book.BookCategoryID = Convert.ToInt32(row["BookCategoryID"]);
+                    book.PublisherID = Convert.ToInt32(row["PublisherID"]);
+                    book.AuthorID = Convert.ToInt32(row["AuthorID"]);
                     book.CoverImage = row["CoverImage"].ToString();
                 }
             }
@@ -124,16 +123,10 @@ namespace urbanbooks
         {
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@BookID", book.BookID ),
-                new SqlParameter("@ProductID", book.ProductID),
+                new SqlParameter("@ProductID", book.ProductID ),
                 new SqlParameter("@BookTitle", book.BookTitle),
-                new SqlParameter("@ISBN", book.ISBN),
-                new SqlParameter("@Synopsis", book.Synopsis),
-                new SqlParameter("@BookCategoryID", book.BookCategoryID),
-                new SqlParameter("@SupplierID", book.SupplierID),
-                new SqlParameter("@PublisherID", book.PublisherID),
-                new SqlParameter("@AuthorID", book.AuthorID),
-                new SqlParameter("@CoverImage", book.CoverImage)
+                new SqlParameter("@isbn", book.ISBN),
+                new SqlParameter("@BookCategoryID", book.BookCategoryID)
             };
             return DataProvider.ExecuteNonQuery("sp_UpdateBook", CommandType.StoredProcedure,
                 Params);
@@ -144,20 +137,24 @@ namespace urbanbooks
             SqlParameter[] Params = new SqlParameter[]
             {
                 new SqlParameter("@ProductID", book.ProductID ),
+                new SqlParameter("@Title", book.BookTitle),
+                new SqlParameter("@Description", book.Synopsis),
                 new SqlParameter("@CostPrice", book.CostPrice),
+                //new SqlParameter("@MarkUp", company.MarkUp),
                 new SqlParameter("@SellingPrice", book.SellingPrice),
-                new SqlParameter("@IsBook", book.IsBook = true),
-                new SqlParameter("@DateAdded", book.DateAdded = DateTime.Now),
+                new SqlParameter("@SupplierID", book.SupplierID),
+                //new SqlParameter("@EmployeeID", book.EmployeeID),
+                new SqlParameter("@DateAdded", book.DateAdded),
             };
             return DataProvider.ExecuteNonQuery("sp_UpdateProduct", CommandType.StoredProcedure,
                 Params);
         }
 
-        public bool DeleteBook(Book book)
+        public bool DeleteBookProduct(int BookID)
         {
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@ProductID", book.ProductID)
+                new SqlParameter("@BookID", BookID)
             };
             return DataProvider.ExecuteNonQuery("sp_DeleteBook", CommandType.StoredProcedure, //procedure
                 Params);

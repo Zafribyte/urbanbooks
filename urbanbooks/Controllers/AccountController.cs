@@ -12,10 +12,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
-using System.Data.Entity.Validation;
 using urbanbooks.Models;
 using System.Data.Entity.Core.Objects;
-using System.Diagnostics;
 
 namespace urbanbooks.Controllers
 {
@@ -59,33 +57,19 @@ namespace urbanbooks.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
+                var user = await UserManager.FindAsync(model.Email, model.Password);
+                if (user != null)
                 {
-                    var user = await UserManager.FindAsync(model.Email, model.Password);
+                    await SignInAsync(user, model.RememberMe);
+                    //return RedirectToLocal(returnUrl);
 
-                    if (user != null)
-                    {
-                        await SignInAsync(user, model.RememberMe);
-                        //return RedirectToLocal(returnUrl);
-
-                        return Json(new { success = true, url = returnUrl });
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Invalid username or password.");
-                    }
-                    await experiment(user);
+                    return Json(new { success = true, url = returnUrl });
                 }
-                catch (DbEntityValidationException dbx)
+                else
                 {
-                    foreach(var item in dbx.EntityValidationErrors)
-                    {
-                        foreach(var thisThing in item.ValidationErrors)
-                        {
-                            Trace.TraceInformation("Property: {0} Error: {1}", thisThing.PropertyName, thisThing.ErrorMessage);
-                        }
-                    }
+                    ModelState.AddModelError("", "Invalid username or password.");
                 }
+                await experiment(user);
             }
             return PartialView(model);
         }

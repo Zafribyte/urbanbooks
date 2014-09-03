@@ -9,7 +9,6 @@ namespace urbanbooks
 {
     public class Delivery
     {
-        [Key]
         [ScaffoldColumn(false)]
         public int DeliveryServiceID 
         { get; set; }

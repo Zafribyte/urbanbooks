@@ -4,14 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
 
 namespace urbanbooks
 {
     public class Technology : Product
     {
-        [Key]
         [ScaffoldColumn(false)]
         public int TechID
         { get; set; }
@@ -22,7 +19,6 @@ namespace urbanbooks
         public string ModelName
         { get; set; }
         [ScaffoldColumn(true)]
-        [DataType(DataType.MultilineText)]
         public string Specs
         { get; set; }
         public string ModelNumber
@@ -44,11 +40,10 @@ namespace urbanbooks
         { get; set; }
 
         [Display(Name = "Cost Price")]
-        [DataType(DataType.Currency)]
         public override double CostPrice
         { get; set; }
 
-        [Display(Name = "Selling Price")]
+        [Display(Name = "Price")]
         [DataType(DataType.Currency)]
         public override double SellingPrice
         { get; set; }
@@ -61,15 +56,6 @@ namespace urbanbooks
         public override int SupplierID
         { get; set; }
 
-
-        public List<SelectListItem> techCategories { get; set; }
-        public List<SelectListItem> suppliers { get; set; }
-        public List<SelectListItem> manufacturers { get; set; }
-        public IEnumerable<TechCategory> techCategory { get; set; }
-        public IEnumerable<Manufacturer> manufacturer { get; set; }
-        public IEnumerable<Technology> tech { get; set; }
-        public Technology techs { get; set; }
-        public Manufacturer mans { get; set; }
 
     }
 }

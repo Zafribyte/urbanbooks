@@ -9,7 +9,6 @@ namespace urbanbooks
 {
     public class WishlistItem
     {
-        [Key]
         [ScaffoldColumn(false)]
         public int WishlistID 
         { get; set; }
