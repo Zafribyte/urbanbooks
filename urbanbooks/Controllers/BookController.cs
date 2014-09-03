@@ -48,6 +48,7 @@ namespace urbanbooks.Controllers
             Book book = myHandler.GetBook(ProductID);
             return View(book);
         }
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             #region Create
@@ -123,6 +124,7 @@ namespace urbanbooks.Controllers
             #endregion
             return View(bookM);
         }
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Create(FormCollection collection, HttpPostedFileBase file)
         {
@@ -172,14 +174,14 @@ namespace urbanbooks.Controllers
                 return View();
             }
         }
-
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int productId)
         {
             myHandler = new BusinessLogicHandler();
             Book book = myHandler.GetBooks().Single(bk => bk.ProductID == productId);
             return View(book);
         }
-
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Edit(Book b, Book bl)
         {
@@ -223,11 +225,12 @@ namespace urbanbooks.Controllers
                 return Json("Error");
             }
         }
+        [Authorize(Roles = "admin")]
         public ActionResult Delete(int ProductID)
         {
             return View();
         }
-
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Delete(int ProductID, FormCollection collection)
         {

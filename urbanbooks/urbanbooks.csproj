@@ -195,6 +195,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\MyHelpers.cs" />
+    <Compile Include="Migrations\201409021847564_mgs.cs" />
+    <Compile Include="Migrations\201409030850004_makingSure.cs" />
+    <Compile Include="Migrations\201409030850004_makingSure.Designer.cs">
+      <DependentUpon>201409030850004_makingSure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddNewBookViewModel.cs" />
     <Compile Include="Models\AddNewTechViewModel.cs" />
@@ -397,6 +403,11 @@
       <Project>{8ebc53e8-302d-4a51-ae39-b1e4631cfb68}</Project>
       <Name>Data_Access</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201409030850004_makingSure.resx">
+      <DependentUpon>201409030850004_makingSure.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
