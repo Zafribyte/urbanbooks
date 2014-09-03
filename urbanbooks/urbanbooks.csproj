@@ -235,6 +235,14 @@
     <Compile Include="Migrations\201409011319337_lkj.Designer.cs">
       <DependentUpon>201409011319337_lkj.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409021315505_fix006.cs" />
+    <Compile Include="Migrations\201409021315505_fix006.Designer.cs">
+      <DependentUpon>201409021315505_fix006.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409021440076_fix9.cs" />
+    <Compile Include="Migrations\201409021440076_fix9.Designer.cs">
+      <DependentUpon>201409021440076_fix9.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddNewBookViewModel.cs" />
@@ -244,6 +252,7 @@
     <Compile Include="Models\EmployeeContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\OrderModels.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\SupplierContext.cs" />
     <Compile Include="Models\WishlistActions.cs" />
@@ -398,6 +407,7 @@
     <Content Include="Views\Cart\Reciept.cshtml" />
     <Content Include="Views\Technology\AdminIndex.cshtml" />
     <Content Include="Views\Author\Create.cshtml" />
+    <Content Include="Views\Order\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
@@ -449,6 +459,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409011319337_lkj.resx">
       <DependentUpon>201409011319337_lkj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409021315505_fix006.resx">
+      <DependentUpon>201409021315505_fix006.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409021440076_fix9.resx">
+      <DependentUpon>201409021440076_fix9.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<urbanbooks.Order>
-
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+    
 }
 @using urbanbooks.Helpers;
 
@@ -11,15 +11,11 @@
 <hr/>
 <ul>
     <li>@Html.ActionLink("Create New", "Create")</li>
-
-    <li>@Html.ActionLink("View All Orders", "ViewAllOrders")</li>
-
-    <li>@Html.ActionLink("View Removed Orders", "DeletedOrders")</li>
 </ul>
             
  
 <hr/>
-<p>*Not Recieved</p>
+
 <table class="table">
     <tr>
         <th>
@@ -27,6 +23,12 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DateCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
         </th>
     </tr>
 
@@ -40,10 +42,23 @@
             @Html.DisplayFor(modelItem => item.DateCreated)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.InvoiceID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
             @Html.ActionLink("Details", "Details", new { OrderNo = item.OrderNo })|
+        </td>
+        <td>
+            @if (item.Status == true)
+            {
+                <p style="color:green;">*RECEIVED*</p>
+            }
         </td>
 
     </tr>
 }
+
 
 </table>

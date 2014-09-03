@@ -1,6 +1,8 @@
-﻿@model IEnumerable<urbanbooks.OrderItem>
+﻿@using urbanbooks.Models
+@model OrderViewModel
 
-@using urbanbooks.Models
+
+
 
 @{
     ViewBag.Title = "Details";
@@ -9,61 +11,75 @@
 
 <h2>Details</h2>
 
-<table class="table">
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.OrderNo)</th>
-    </tr>
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.DateCreated)</th>
-    </tr>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderItemNumber)
-        </th>
-        
-        <th>
-            @Html.DisplayNameFor(model => model.InvoiceID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-    </tr>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 
-    @foreach (var item in Model)
+<table class="table">
+
+
+    @foreach (var order in Model.orders)
     {
+       <tr>
+            <th><strong>Order No</strong></th>
+            <td>@Html.DisplayFor(modelItem => order.OrderNo)</td>
+        </tr>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderItemNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InvoiceID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.ValueFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.OrderItemNumber })|
-                @Html.ActionLink("Delete", "Delete", new { id = item.OrderItemNumber })|
-            </td>
+            <th><strong>Date Created</strong></th>
+            <td>@Html.DisplayFor(modelItem => order.DateCreated)</td>
+        </tr>
+    }
+
+        <tr style="height:35px;"></tr>
+        <tr>
+            <th>
+                <strong>Order Item Number</strong>)
+            </th>
+            <th>
+                <strong>Product ID</strong>)
+            </th>
+            <th>
+                <strong>Product Name</strong>
+            </th>
+            <th>
+                <strong>Quantity</strong>
+            </th>
         </tr>
 
+        @foreach (var item in Model.orderItems)
+    {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderItemNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductID)
+                </td>
+                @foreach (var book in Model.books)
+            {
+                if (item.ProductID == book.ProductID)
+                {
+                    <td> @Html.DisplayFor(modelItem => book.BookTitle)</td>
+                }
+                foreach (var tech in Model.tech)
+                {
+                    if (item.ProductID == tech.ProductID)
+                    {
+                        <td>@Html.DisplayFor(modelItem => tech.ModelName)</td>
+                    }
+                }
+            }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.OrderItemNumber }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.OrderItemNumber }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.OrderItemNumber })
+                </td>
+            </tr>
     }
-    
-        
-    
-</table>
 
-
+    </table>
 

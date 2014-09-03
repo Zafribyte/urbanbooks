@@ -14,7 +14,7 @@ namespace urbanbooks
         {
             List<Order> OrdersList = null;
 
-            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewOrders", //*Note
+            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewAllOrders", //*Note
                 CommandType.StoredProcedure))
             {
                 if (table.Rows.Count > 0)
@@ -25,7 +25,8 @@ namespace urbanbooks
                         Order order = new Order();
                         order.OrderNo = Convert.ToInt32(row["OrderNo"]);
                         order.DateCreated = Convert.ToDateTime(row["DateCreated"]);
-                        order.DateLastModified = Convert.ToDateTime(row["DateLastModified"]);
+                        order.InvoiceID = Convert.ToInt32(row["InvoiceID"]);
+                        order.Status = Convert.ToBoolean(row["Status"]);
                         OrdersList.Add(order);
                     }
                 }
