@@ -10,7 +10,7 @@
 @if (Model != null)
 {
     <table>
-        if(Model.BookResults != null)
+        @if(Model.BookResults != null)
         {
         <tr>
             @foreach (var bookItem in Model.BookResults)
@@ -34,7 +34,10 @@
         }
     </table>
 }
+else
+{
 <p>No results found</p>
+}
 
 
 

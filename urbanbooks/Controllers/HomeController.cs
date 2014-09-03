@@ -70,21 +70,17 @@ namespace urbanbooks.Controllers
             IEnumerable<Technology> findGadget = myHandler.GetTechnology();
             IEnumerable<BookCategory> findCategory = myHandler.GetBookCategoryList();
             IEnumerable<TechCategory> findGadgetCategory = myHandler.GetTechnologyTypeList();
-            Book book;
-            TechCategory gadgetCategory;
-            Technology gadget;
-            BookCategory bookCategory;
             SearchViewModel modelHelper = new SearchViewModel();
             #endregion
 
             #region execute search
 
 
-            if(criteria == "books")
+            if(criteria == " books")
             {
                 modelHelper.BookResults = (IEnumerable<Book>)findBook.Where(m => m.BookTitle.StartsWith(query));//contains
             }
-            else if (criteria == "gadget")
+            else if (criteria == " gadget")
             {
                 modelHelper.GadgetResults = findGadget.Where(m => m.Specs.StartsWith(query)).ToList();//solve
             }
@@ -92,19 +88,19 @@ namespace urbanbooks.Controllers
             {
                 modelHelper.BookResults = (IEnumerable<Book>)findBook.Where(m => m.BookTitle.StartsWith(query));
             }
-            else if (criteria == "bookCategory")
+            else if (criteria == " bookCategory")
             {
                 modelHelper.BookResults = (IEnumerable<Book>)findCategory.Where(m => m.CategoryName.StartsWith(query));
             }
-            else if (criteria == "bookIsbn")
+            else if (criteria == " bookIsbn")
             {
                 modelHelper.BookResults = (IEnumerable<Book>)findBook.Where(m => m.ISBN.StartsWith(query));
             }
-            else if (criteria == "gadgetModel")
+            else if (criteria == " gadgetModel")
             {
                 modelHelper.GadgetResults = findGadget.Where(m => m.ModelName.StartsWith(query)).ToList();
             }
-            else if (criteria == "gadgetModelNumber")
+            else if (criteria == " gadgetModelNumber")
             {
                 modelHelper.GadgetResults = findGadget.Where(m => m.ModelNumber.StartsWith(query)).ToList();
             }
@@ -114,7 +110,7 @@ namespace urbanbooks.Controllers
             modelHelper.Query = query;
             #endregion
 
-            return View();
+            return View(modelHelper);
         }
     }
 }
