@@ -64,6 +64,7 @@ namespace urbanbooks
             OrderItem OrderLine;
             SqlParameter[] Params = { new SqlParameter("@DateCreated", order.DateCreated),
                                       new SqlParameter("@DateLastModified", order.DateLastModified),
+                                      new SqlParameter("@InvoiceID", order.InvoiceID),
                                       new SqlParameter("@Status", order.Status),
                                       new SqlParameter("@SupplierID",order.SupplierID)
                                     };
