@@ -415,7 +415,7 @@ namespace urbanbooks.Controllers
                                 else
                                 {
                                     suppliers.Add(supplierId);
-                                    ord = new Order { DateCreated = DateTime.Now.Date, SupplierID = supplierId, DateLastModified = DateTime.Now.Date, Status = false };
+                                    ord = new Order { DateCreated = DateTime.Now.Date, SupplierID = supplierId, InvoiceID=(int)Session["InvoiceID"], DateLastModified = DateTime.Now.Date, Status = false };
                                     orderLine = myHandler.AddOrder(ord);
                                     orders.Add(orderLine.OrderNo);
                                     orderLine.ProductID = item.ProductID;
@@ -434,7 +434,7 @@ namespace urbanbooks.Controllers
                                 else
                                 {
                                     suppliers.Add(supplierId);
-                                    ord = new Order { DateCreated = DateTime.Now.Date, DateLastModified = DateTime.Now.Date, Status = false };
+                                    ord = new Order { DateCreated = DateTime.Now.Date, SupplierID =supplierId, InvoiceID=(int)Session["InvoiceID"], DateLastModified = DateTime.Now.Date, Status = false };
                                     orderLine = myHandler.AddOrder(ord);
                                     orders.Add(orderLine.OrderNo);
                                 }

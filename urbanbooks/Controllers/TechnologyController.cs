@@ -204,7 +204,7 @@ namespace urbanbooks.Controllers
         }
         [HttpPost]
         public ActionResult GetTechMarkup(string selectedValue)
-        {
+            {
             double s = 0;
             double t = 0;
 

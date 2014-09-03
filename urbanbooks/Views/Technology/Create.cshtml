@@ -56,7 +56,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.techs.SellingPrice, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.techs.SellingPrice, new { htmlAttributes = new { @class = "form-control olden", disabled="disabled", @readonly="readonly" } })
+                @Html.EditorFor(model => model.techs.SellingPrice, new { htmlAttributes = new { @class = "form-control olden", @readonly="readonly" } })
                 @Html.ValidationMessageFor(model => model.techs.SellingPrice, "", new { @class = "text-danger" })
             </div>
         </div>
