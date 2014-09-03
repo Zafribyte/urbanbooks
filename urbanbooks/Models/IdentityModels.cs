@@ -114,6 +114,9 @@ namespace urbanbooks.Models
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
         }
+
+       public DbSet<Supplier> Suppliers { get; set; }
+
     }
 }
 

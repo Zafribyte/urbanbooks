@@ -1,0 +1,40 @@
+﻿@using urbanbooks.Models
+@model SearchViewModel
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Search Results for :@Html.DisplayFor(m => m.Query) </h4>
+
+@if (Model != null)
+{
+    <table>
+        if(Model.BookResults != null)
+        {
+        <tr>
+            @foreach (var bookItem in Model.BookResults)
+            {
+                <td>@Html.DisplayFor(model => bookItem.ISBN)</td>
+                <td>@Html.DisplayFor(model => bookItem.BookTitle)</td>
+                <td>@Html.DisplayFor(model => bookItem.SellingPrice)</td>
+            }
+        </tr>
+        }
+        @if (Model.GadgetResults != null)
+        {
+            <tr>
+                @foreach (var bookItem in Model.GadgetResults)
+                {
+                    <td>@Html.DisplayFor(model => bookItem.ModelName)</td>
+                    <td>@Html.DisplayFor(model => bookItem.ModelNumber)</td>
+                    <td>@Html.DisplayFor(model => bookItem.SellingPrice)</td>
+                }
+            </tr>
+        }
+    </table>
+}
+<p>No results found</p>
+
+
+

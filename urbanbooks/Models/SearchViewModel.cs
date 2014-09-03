@@ -10,6 +10,7 @@ namespace urbanbooks.Models
     {
         [Key]
         public int ID { get; set; }
+        public string Query { get; set; }
        public IEnumerable<Book> BookResults { get; set; }
        public IEnumerable<Technology> GadgetResults { get; set; }
        public IEnumerable<BookCategory> BookCategoryResults { get; set; }
