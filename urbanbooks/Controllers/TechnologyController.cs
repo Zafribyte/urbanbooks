@@ -14,7 +14,6 @@ namespace urbanbooks.Controllers
     {
         Technology gadget;
         BusinessLogicHandler myHandler;
-        AddNewTechViewModel techA;
         //[Authorize(Roles="admin, employee")]
         public ActionResult ManageTechnology()
         { return View(); }
@@ -201,6 +200,28 @@ namespace urbanbooks.Controllers
             catch
             {
                 return View();
+            }
+        }
+        [HttpPost]
+        public ActionResult GetTechMarkup(string selectedValue)
+        {
+            double s = 0;
+            double t = 0;
+
+            List<Company> company = new List<Company>(); BusinessLogicHandler myHandler = new BusinessLogicHandler();
+            company = myHandler.GetCompanyDetails();
+            double vat = 0;
+            foreach (var item in company)
+            { vat = item.TechMarkUp; }
+            try
+            {
+                s = Convert.ToDouble(selectedValue);
+                t = (s * vat) + s;
+                return Json(t);
+            }
+            catch
+            {
+                return Json("Error");
             }
         }
 

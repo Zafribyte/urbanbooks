@@ -13,6 +13,8 @@ namespace urbanbooks
         [ScaffoldColumn(false)]
         public int BookID
         { get; set; }
+        [StringLength(13, ErrorMessage = "Incorrect ISBN number")]
+        [RegularExpression(@"^[0-9-].{10,13}", ErrorMessage = "Incorrect ISBN Number")]
         public string ISBN
         { get; set; }
         public string BookTitle 
@@ -23,11 +25,17 @@ namespace urbanbooks
         [ScaffoldColumn(false)]
         public int PublisherID 
         { get; set; }
+        public string pubName
+        { get; set; }
         [ScaffoldColumn(false)]
         public int BookCategoryID
         { get; set; }
+        public string catName
+        { get; set; }
         [ScaffoldColumn(false)]
         public int AuthorID
+        { get; set; }
+        public string AuthName
         { get; set; }
         public string CoverImage
         { get; set; }
@@ -38,6 +46,8 @@ namespace urbanbooks
         public override int ProductID
         { get; set; }
         [ScaffoldColumn(false)]
+        [DataType(DataType.Currency)]
+        [Display(Name = "Cost Price")]
         public override double CostPrice
         { get; set; }       
         [DataType(DataType.Currency)]

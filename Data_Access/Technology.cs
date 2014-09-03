@@ -22,6 +22,7 @@ namespace urbanbooks
         public string ModelName
         { get; set; }
         [ScaffoldColumn(true)]
+        [DataType(DataType.MultilineText)]
         public string Specs
         { get; set; }
         public string ModelNumber
@@ -43,10 +44,11 @@ namespace urbanbooks
         { get; set; }
 
         [Display(Name = "Cost Price")]
+        [DataType(DataType.Currency)]
         public override double CostPrice
         { get; set; }
 
-        [Display(Name = "Price")]
+        [Display(Name = "Selling Price")]
         [DataType(DataType.Currency)]
         public override double SellingPrice
         { get; set; }

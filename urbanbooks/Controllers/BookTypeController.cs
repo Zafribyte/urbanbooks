@@ -63,16 +63,16 @@ namespace urbanbooks.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(BookCategory bc)
         {
             try
             {
                 myHandler = new BusinessLogicHandler();
                 typeOf = new BookCategory();
-                TryUpdateModel(typeOf);
+                TryUpdateModel(bc);
                 if (ModelState.IsValid)
                 {
-                    myHandler.UpdateBookType(typeOf);
+                    myHandler.UpdateBookType(bc);
                 }
                 return RedirectToAction("Index");
             }
