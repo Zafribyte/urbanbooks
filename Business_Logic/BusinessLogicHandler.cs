@@ -10,7 +10,12 @@ namespace urbanbooks
     {
 
         #region COMMON ACTIONS
-
+        public List<Author> AuthorGlobalSearch(string query)
+        { AuthorHandler myHandler = new AuthorHandler(); return myHandler.AuthorGlobalSearch(query); }
+        public List<BookCategory> BookCategoryGlobalSearch(string query)
+        { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.BookCategoryGlobalSearch(query); }
+        public List<Book> BookGlobalSearch(string query)
+        { BookHandler myHandler = new BookHandler(); return myHandler.GloabalSearch(query); }
         public List<Manufacturer> GetManufacturers()
         { ManufacturerHandler myHandler = new ManufacturerHandler(); return myHandler.GetManufacturerList(); }
         public List<Supplier> GetSuppliers()

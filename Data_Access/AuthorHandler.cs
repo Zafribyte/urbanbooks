@@ -32,6 +32,32 @@ namespace urbanbooks
             return AuthorList;
         }
 
+        public List<Author> AuthorGlobalSearch(string query)
+        {
+            List<Author> AuthorList = null;
+            SqlParameter[] Params = new SqlParameter[]
+            {
+                new SqlParameter("@Search", query) ///SEARCH
+            };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_AuthorGlobalSearch",
+                CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    AuthorList = new List<Author>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Author author = new Author();
+                        author.AuthorID = Convert.ToInt32(row["AuthorID"]);
+                        author.Name = row["Name"].ToString();
+                        author.Surname = row["Surname"].ToString();
+                        AuthorList.Add(author);
+                    }
+                }
+            }
+            return AuthorList;
+        }
+
         public Author GetAuthorDetails(int AuthorID)
         {
             Author author = null;

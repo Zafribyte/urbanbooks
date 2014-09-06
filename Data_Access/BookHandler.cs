@@ -10,7 +10,6 @@ namespace urbanbooks
 {
     public class BookHandler
     {
-        Company company = new Company();
         public List<Book> GetBookList()
         {
             List<Book> BookList = null;
@@ -36,6 +35,37 @@ namespace urbanbooks
                         book.AuthName = row["Author"].ToString();
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> GloabalSearch(string query)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { new SqlParameter("@Search", query) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_BookGloabalSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.Synopsis = row["Synopsis"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
                         BookList.Add(book);
 
 

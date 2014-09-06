@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace urbanbooks
         [RegularExpression(@"^[0-9-].{10,13}", ErrorMessage = "Incorrect ISBN Number")]
         public string ISBN
         { get; set; }
+        [Display(Name="Book Title")]
         public string BookTitle 
         { get; set; }
         [DataType(DataType.MultilineText)]
@@ -37,6 +39,7 @@ namespace urbanbooks
         { get; set; }
         public string AuthName
         { get; set; }
+        [Display(Name="Cover")]
         public string CoverImage
         { get; set; }
 
@@ -64,9 +67,8 @@ namespace urbanbooks
         public override int SupplierID 
         { get; set; }
 
-        //BOOKTYPE
 
-
-
+        [NotMapped]
+        List<Publisher> Publisher { get; set; }
     }
 }

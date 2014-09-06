@@ -438,6 +438,7 @@
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Search\Advanced.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\Account\Restricted.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />

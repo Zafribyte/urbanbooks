@@ -89,6 +89,61 @@ namespace urbanbooks.Controllers
             return PartialView(model);
         }
 
+
+
+
+
+
+        [AllowAnonymous]
+        public ActionResult Restricted(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View("Restricted");
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Restricted(LoginViewModel model, string ReturnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var user = await UserManager.FindAsync(model.Email, model.Password);
+
+                    if (user != null)
+                    {
+                        await SignInAsync(user, model.RememberMe);
+                        return Redirect(ReturnUrl);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Invalid username or password.");
+                    }
+                    await experiment(user);
+                }
+                catch (DbEntityValidationException dbx)
+                {
+                    foreach (var item in dbx.EntityValidationErrors)
+                    {
+                        foreach (var thisThing in item.ValidationErrors)
+                        {
+                            Trace.TraceInformation("Property: {0} Error: {1}", thisThing.PropertyName, thisThing.ErrorMessage);
+                        }
+                    }
+                }
+            }
+            return View(model);
+        }
+
+
+
+
+
+
+
+
         private async Task experiment(ApplicationUser user)
         {
             CartActions act = new CartActions();

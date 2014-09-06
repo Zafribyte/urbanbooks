@@ -34,6 +34,36 @@ namespace urbanbooks
             return bookCategoryList;
         }
 
+
+
+
+        public List<BookCategory> BookCategoryGlobalSearch(string query)
+        {
+            List<BookCategory> bookCategoryList = null;
+
+            SqlParameter[] Params = { new SqlParameter("@Search", query) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_BookCategoryGlobalSearch",
+                CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    bookCategoryList = new List<BookCategory>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        BookCategory bookCategory = new BookCategory();
+                        bookCategory.BookCategoryID = Convert.ToInt32(row["BookCategoryID"]);
+                        bookCategory.CategoryName = row["CategoryName"].ToString();
+                        bookCategory.CategoryDescription = row["CategoryDescription"].ToString();
+                        bookCategoryList.Add(bookCategory);
+                    }
+                }
+            }
+            return bookCategoryList;
+        }
+
+
+
+
         public BookCategory GetBookCategory(int BookCategoryID)
         {
             BookCategory bookCategory = null;

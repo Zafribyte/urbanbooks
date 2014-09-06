@@ -8,6 +8,7 @@
         @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("FAQs", "FAQs", "Help")</li>
             <li>
                 @Html.ActionLink("Hello " + User.Identity.Name + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
@@ -19,6 +20,7 @@ else
 {
     string returnUrl = HttpContext.Current.Request.RawUrl;
     <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("FAQs", "FAQs", "Help")</li>
         <li>@Html.ActionLink("Quick Register", "Register", "Account", new { id = "registerLink" }, new { data_modal = "" })</li>
         <li>@Html.ActionLink("Register", "FullRegister", "Account")</li>
         
