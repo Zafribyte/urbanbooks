@@ -254,6 +254,10 @@
     <Compile Include="Migrations\201409031400328_justGotUp.Designer.cs">
       <DependentUpon>201409031400328_justGotUp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409071518202_dmv.cs" />
+    <Compile Include="Migrations\201409071518202_dmv.Designer.cs">
+      <DependentUpon>201409071518202_dmv.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddNewBookViewModel.cs" />
@@ -441,7 +445,9 @@
     <Content Include="Views\Search\Advanced.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\Account\Restricted.cshtml" />
-    <Content Include="Views\Search\Device_Advanced.cshtml" />
+    <Content Include="Views\Search\Devices.cshtml" />
+    <Content Include="Views\Search\Books.cshtml" />
+    <Content Include="Views\Search\BooksAdvanced.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
@@ -506,6 +512,9 @@
     <EmbeddedResource Include="Migrations\201409021440076_fix9.resx" />
     <EmbeddedResource Include="Migrations\201409031400328_justGotUp.resx">
       <DependentUpon>201409031400328_justGotUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409071518202_dmv.resx">
+      <DependentUpon>201409071518202_dmv.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -15,7 +15,7 @@ namespace urbanbooks.Models
         [Display(Name="Device Category")]
         public bool Category 
         { get; set; }
-        [Display(Name="Name")]
+        [Display(Name="Device Name")]
         public bool ModelName 
         { get; set; }
         [Display(Name="Model Number")]
@@ -27,10 +27,10 @@ namespace urbanbooks.Models
         public string Query 
         { get; set; }
         [Display(Name="From")]
-        public double RangeFrom 
+        public double? RangeFrom 
         { get; set; }
         [Display(Name="To")]
-        public double RangeTo 
+        public double? RangeTo 
         { get; set; }
 
     }

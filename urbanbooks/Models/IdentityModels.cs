@@ -117,6 +117,10 @@ namespace urbanbooks.Models
 
        public DbSet<Supplier> Suppliers { get; set; }
 
+       public System.Data.Entity.DbSet<urbanbooks.Models.Device_Advanced> Device_Advanced { get; set; }
+
+       public System.Data.Entity.DbSet<urbanbooks.Models.Book_Advanced> Book_Advanced { get; set; }
+
     }
 }
 

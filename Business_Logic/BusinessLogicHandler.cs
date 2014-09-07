@@ -10,6 +10,46 @@ namespace urbanbooks
     {
 
         #region COMMON ACTIONS
+        public List<Book> CategoryBETWEENQueryBookSeach(string query, double FromPrice, double ToPrice)
+        { BookHandler myHandler = new BookHandler(); return myHandler.CategoryBETWEENQueryBookSearch(query, ToPrice, FromPrice); }
+        public List<Book> ISBNBETWEENQueryBookSearch(string query, double FromPrice, double ToPrice)
+        { BookHandler myHandler = new BookHandler(); return myHandler.ISBNBETWEENQueryBookSearch(query, ToPrice, FromPrice); }
+        public List<Book> PublisherBETWEENQueryBookSearch(string query, double FromPrice, double ToPrice)
+        { BookHandler myHandler = new BookHandler(); return myHandler.PublisherBETWEENQueryBookSearch(query, ToPrice, FromPrice); }
+        public List<Book> BookTitleBETWEENQueryBookSearch(string query, double FromPrice, double ToPrice)
+        { BookHandler myHandler = new BookHandler(); return myHandler.BookTitleBETWEENQueryBookSearch(query, ToPrice, FromPrice); }
+        public List<Book> AuthorBETWEENQueryBookSearch(string query, double FromPrice, double ToPrice)
+        { BookHandler myhandler = new BookHandler(); return myhandler.AuthorBETWEENQueryBookSearch(query, ToPrice, FromPrice); }
+        public List<Book> AuthorToQueryBookSearch(string query, double ToPrice)
+        { BookHandler myHandler = new BookHandler(); return myHandler.AuthorToQueryBookSearch(query, ToPrice); }
+        public List<Book> CategoryToQueryBookSearch(string query, double ToPrice)
+        { BookHandler myHandler = new BookHandler(); return myHandler.CategoryToQueryBookSearch(query, ToPrice); }
+        public List<Book> BookTitleToQueryBookSearch(string query, double ToPrice)
+        { BookHandler myHandler = new BookHandler(); return myHandler.BookTitleToQueryBookSearch(query, ToPrice); }
+        public List<Book> PublisherToQueryBookSearch(string query, double ToPrice)
+        { BookHandler myHandler = new BookHandler(); return myHandler.PublisherToQueryBookSearch(query, ToPrice); }
+        public List<Book> ISBNToQueryBookSearch(string query, double ToPrice)
+        { BookHandler myHandler = new BookHandler(); return myHandler.ISBNToQueryBookSearch(query, ToPrice); }
+        public List<Book> PublisherFromQueryBookSearch(string query, double FromPrice)
+        { BookHandler myHandler = new BookHandler(); return myHandler.PublisherFromQueryBookSearch(query, FromPrice); }
+        public List<Book> CategoryFromQueryBookSearch(string query, double FromPrice)
+        { BookHandler myHandler = new BookHandler(); return myHandler.CategoryFromQueryBookSearch(query, FromPrice); }
+        public List<Book> AuthorFromQueryBookSearch(string query, double FromPrice)
+        { BookHandler myHandler = new BookHandler(); return myHandler.AuthorFromQueryBookSearch(query, FromPrice); }
+        public List<Book> ISBNFromQueryBookSearch(string query, double FromPrice)
+        { BookHandler myHandler = new BookHandler(); return myHandler.ISBNFromQueryBookSearch(query, FromPrice); }
+        public List<Book> BookTitleFromQueryBookSearch(string query, double FromPrice)
+        { BookHandler myHandler = new BookHandler(); return myHandler.BookTitleFromQueryBookSearch(query, FromPrice); }
+        public List<Book> CategoryBookSearch(string query)
+        { BookHandler myHandler = new BookHandler(); return myHandler.CategoryBookSearch(query); }
+        public List<Book> AuthorBookSearch (string query)
+        { BookHandler myHandler = new BookHandler(); return myHandler.AuthorBookSearch(query); }
+        public List<Book> PublisherBookSearch(string query)
+        { BookHandler myHandler = new BookHandler(); return myHandler.PublisherBookSearch(query); }
+        public List<Book> ISBNBookSearch(string query)
+        { BookHandler myHandler = new BookHandler(); return myHandler.ISBNBookSearch(query); }
+        public List<Book> BookTitleBookSearch(string query)
+        { BookHandler myHandler = new BookHandler(); return myHandler.BookTitleBookSearch(query); }
         public List<TechCategory> DeviceGlobalSearch(string query)
         { TechCategoryHandler myHandler = new TechCategoryHandler(); return myHandler.TechnologyCategoryGloablSearch(query); }
         public List<Technology> TechnologyGlobalSearch(string query)

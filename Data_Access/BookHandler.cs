@@ -44,6 +44,7 @@ namespace urbanbooks
             return BookList;
         }
 
+        #region SEARCH
         public List<Book> GloabalSearch(string query)
         {
             List<Book> BookList = null;
@@ -74,6 +75,658 @@ namespace urbanbooks
             }
             return BookList;
         }
+
+        public List<Book> AuthorBookSearch(string query)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { new SqlParameter("@Search", query) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_AuthorBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> BookTitleBookSearch(string query)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { new SqlParameter("@Search", query) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_BookTitleBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> ISBNBookSearch(string query)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { new SqlParameter("@Search", query) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ISBNBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> PublisherBookSearch(string query)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { new SqlParameter("@Search", query) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_PublisherBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> CategoryBookSearch(string query)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { new SqlParameter("@Search", query) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_CategoryBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> BookTitleFromQueryBookSearch(string query, double fromPrice)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query) ,
+                                        new SqlParameter("@FromPrice", fromPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_BookTitleQueryFromBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> AuthorFromQueryBookSearch(string query, double fromPrice)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query) ,
+                                        new SqlParameter("@FromPrice", fromPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_AuthorQueryFromBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> PublisherFromQueryBookSearch(string query, double fromPrice)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query) ,
+                                        new SqlParameter("@FromPrice", fromPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_PublisherQueryFromBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> CategoryFromQueryBookSearch(string query, double fromPrice)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query) ,
+                                        new SqlParameter("@FromPrice", fromPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_CategoryQueryFromBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> ISBNFromQueryBookSearch(string query, double fromPrice)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query) ,
+                                        new SqlParameter("@FromPrice", fromPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ISBNQueryFromBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> ISBNToQueryBookSearch(string query, double ToPrice)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query) ,
+                                        new SqlParameter("@ToPrice", ToPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ISBNQueryToBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> CategoryToQueryBookSearch(string query, double ToPrice)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query) ,
+                                        new SqlParameter("@ToPrice", ToPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_CategoryQueryToBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> PublisherToQueryBookSearch(string query, double ToPrice)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query) ,
+                                        new SqlParameter("@ToPrice", ToPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_PublisherQueryToBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> BookTitleToQueryBookSearch(string query, double ToPrice)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query) ,
+                                        new SqlParameter("@ToPrice", ToPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_BookTitleQueryToBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> AuthorToQueryBookSearch(string query, double ToPrice)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query) ,
+                                        new SqlParameter("@ToPrice", ToPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_AuthorQueryToBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> AuthorBETWEENQueryBookSearch(string query, double ToPrice, double FromPrice)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query) ,
+                                        new SqlParameter("@ToPrice", ToPrice),
+                                        new SqlParameter("@FromPrice", FromPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_AuthorQueryBETWEENBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> BookTitleBETWEENQueryBookSearch(string query, double ToPrice, double FromPrice)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query) ,
+                                        new SqlParameter("@ToPrice", ToPrice),
+                                        new SqlParameter("@FromPrice", FromPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_BookTitleQueryBETWEENBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> PublisherBETWEENQueryBookSearch(string query, double ToPrice, double FromPrice)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query) ,
+                                        new SqlParameter("@ToPrice", ToPrice),
+                                        new SqlParameter("@FromPrice", FromPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_PublisherQueryBETWEENBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> ISBNBETWEENQueryBookSearch(string query, double ToPrice, double FromPrice)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query) ,
+                                        new SqlParameter("@ToPrice", ToPrice),
+                                        new SqlParameter("@FromPrice", FromPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ISBNQueryBETWEENBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        public List<Book> CategoryBETWEENQueryBookSearch(string query, double ToPrice, double FromPrice)
+        {
+            List<Book> BookList = null;
+
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query) ,
+                                        new SqlParameter("@ToPrice", ToPrice),
+                                        new SqlParameter("@FromPrice", FromPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_CategoryQueryBETWEENBookSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.ISBN = row["ISBN"].ToString();
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.PublisherID = (int)row["PublisherID"];
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
+        }
+
+        #endregion
 
         #region User
         public Book UGetBookDetails(int ProductID)

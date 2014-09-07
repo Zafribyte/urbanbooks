@@ -12,7 +12,7 @@ namespace urbanbooks.Models
         [Key]
         public int Id 
         { get; set; }
-        [Display(Name = "Device Category")]
+        [Display(Name = "Book Category")]
         public bool Category
         { get; set; }
         [Display(Name = "Book Title")]
@@ -28,10 +28,10 @@ namespace urbanbooks.Models
         public string Query
         { get; set; }
         [Display(Name = "From")]
-        public double RangeFrom
+        public double? RangeFrom
         { get; set; }
         [Display(Name = "To")]
-        public double RangeTo
+        public double? RangeTo
         { get; set; }
     }
 }
