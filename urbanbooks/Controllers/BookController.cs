@@ -27,6 +27,7 @@ namespace urbanbooks.Controllers
             ViewBag.BookTypeBag = myType;
             return View(myBookList);
         }
+        [Authorize(Roles="admin, employee")]
         public ActionResult AdminIndex()
         {
             myHandler = new BusinessLogicHandler();

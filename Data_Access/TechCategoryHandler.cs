@@ -33,6 +33,31 @@ namespace urbanbooks
             return TechCategoryList;
         }
 
+
+        public List<TechCategory> TechnologyCategoryGloablSearch(string query)
+        {
+            List<TechCategory> TechCategoryList = null;
+
+            SqlParameter[] Params = { new SqlParameter("@Search", query) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_TechnologyCategoryGloablSearch",
+                CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechCategoryList = new List<TechCategory>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        TechCategory category = new TechCategory();
+                        category.TechCategoryID = Convert.ToInt32(row["TechCategoryID"]);
+                        category.CategoryName = row["CategoryName"].ToString();
+                        category.CategoryDescription = row["CategoryDescription"].ToString();
+                        TechCategoryList.Add(category);
+                    }
+                }
+            }
+            return TechCategoryList;
+        }
+
         public TechCategory GetTechCategoryDetails(int TechCategoryID)
         {
             TechCategory category = null;

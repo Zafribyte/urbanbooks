@@ -10,6 +10,10 @@ namespace urbanbooks
     {
 
         #region COMMON ACTIONS
+        public List<TechCategory> DeviceGlobalSearch(string query)
+        { TechCategoryHandler myHandler = new TechCategoryHandler(); return myHandler.TechnologyCategoryGloablSearch(query); }
+        public List<Technology> TechnologyGlobalSearch(string query)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.TechnologyGlobalSearch(query); }
         public List<Author> AuthorGlobalSearch(string query)
         { AuthorHandler myHandler = new AuthorHandler(); return myHandler.AuthorGlobalSearch(query); }
         public List<BookCategory> BookCategoryGlobalSearch(string query)
@@ -175,7 +179,6 @@ namespace urbanbooks
         #endregion
 
         #region SUPPLIER
-
         public bool AddSupplier(Supplier supplier)
         {
             SupplierHandler myHandler = new SupplierHandler();
