@@ -258,8 +258,10 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddNewBookViewModel.cs" />
     <Compile Include="Models\AddNewTechViewModel.cs" />
+    <Compile Include="Models\Book_Advanced.cs" />
     <Compile Include="Models\CartActions.cs" />
     <Compile Include="Models\CustomerContext.cs" />
+    <Compile Include="Models\Device_Advanced.cs" />
     <Compile Include="Models\EmployeeContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\OrderModels.cs" />
@@ -439,6 +441,7 @@
     <Content Include="Views\Search\Advanced.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\Account\Restricted.cshtml" />
+    <Content Include="Views\Search\Device_Advanced.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />

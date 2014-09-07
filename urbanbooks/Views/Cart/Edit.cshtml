@@ -22,7 +22,7 @@
 
 
 
-<div class="row" style="text-align:center"><h3>Cart <a href="#" tabindex="0" class="btn btn-lg btn-danger" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Dismissible popover</a> </h3><hr style="width:200px" /></div>
+<div class="row" style="text-align:center"><h3>Cart</h3><hr style="width:200px" /></div>
 <br />
 
 <table class="table table-striped">
@@ -149,6 +149,9 @@
 @Html.NoEncodeActionLink("<span>Checkout <span class='glyphicon glyphicon-circle-arrow-right'></span></span>", "Proceed to Checkout", "Checkout", "Cart", new { }, htmlAttributes: new { @class = "btn btn-default" })
 
 @Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/modalform")
 <script type="text/javascript">$('#help').popover()</script>
 
 <script type="text/javascript">
