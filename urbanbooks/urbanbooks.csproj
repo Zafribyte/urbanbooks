@@ -256,10 +256,6 @@
     <Compile Include="Migrations\201409031400328_justGotUp.Designer.cs">
       <DependentUpon>201409031400328_justGotUp.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201409071518202_dmv.cs" />
-    <Compile Include="Migrations\201409071518202_dmv.Designer.cs">
-      <DependentUpon>201409071518202_dmv.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddNewBookViewModel.cs" />
@@ -346,7 +342,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Less\bootstrap-multiselect.less" />
     <Content Include="App_Data\App_Data.rar" />
     <None Include="Properties\PublishProfiles\urbanSyntax.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -457,6 +452,7 @@
     <Content Include="Views\Book\ByCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Less\" />
     <Folder Include="Uploads\Books\" />
     <Folder Include="Uploads\Tech\ImageFront\" />
     <Folder Include="Uploads\Tech\ImageSide\" />
@@ -519,9 +515,6 @@
     <EmbeddedResource Include="Migrations\201409021440076_fix9.resx" />
     <EmbeddedResource Include="Migrations\201409031400328_justGotUp.resx">
       <DependentUpon>201409031400328_justGotUp.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409071518202_dmv.resx">
-      <DependentUpon>201409071518202_dmv.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
