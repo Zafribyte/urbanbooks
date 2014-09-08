@@ -11,7 +11,7 @@
 <ul>
     @foreach (var item in Model.GadgetCategoryResults)
     {
-        <li>@Html.ActionLink("" + item.CategoryName, "RefCategory", "Technology", new { CategoryID = item.TechCategoryID}, null)</li>
+        <li>@Html.ActionLink("" + item.CategoryName, "ByCategory", "Technology", new { CategoryID = item.TechCategoryID}, null)</li>
     }
 </ul>
 

@@ -15,7 +15,7 @@
 @if (Model.GadgetResults != null)
 {
     string returnUrl = HttpContext.Current.Request.RawUrl;
-    @foreach (var item in Model.GadgetResults)
+    foreach (var item in Model.GadgetResults)
     {
         <div class="col-md-2">
             <div style="height:450px">

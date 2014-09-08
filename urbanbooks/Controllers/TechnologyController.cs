@@ -51,12 +51,12 @@ namespace urbanbooks.Controllers
                 model.GadgetResults = myHandler.CategoryDeviceSearch(name);
                 model.TCategory = new TechCategory();
                 helper = (Technology)model.GadgetResults.Take(1).FirstOrDefault();
-                model.BCategory = myHandler.GetBookType(helper.TechCategoryID);
+                model.TCategory = myHandler.GetTechnologyType(helper.TechCategoryID);
 
             }
             else if (CategoryID != 0)
             {
-                model.BookResults = myHandler.GetBooksByCategory(CategoryID);
+                model.BookResults = myHandler.GetBooksByCategory(CategoryID);//Replace
                 model.BCategory = new BookCategory();
                 model.BCategory = myHandler.GetBookType(CategoryID);
             }

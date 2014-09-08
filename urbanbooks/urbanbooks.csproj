@@ -178,6 +178,7 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\SearchController.cs">
@@ -456,6 +457,7 @@
     <Content Include="Views\Book\Categories.cshtml" />
     <Content Include="Views\Book\ByCategory.cshtml" />
     <Content Include="Views\Technology\ByCategory.cshtml" />
+    <Content Include="Views\Help\FAQs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
