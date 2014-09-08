@@ -38,12 +38,12 @@
                     <ul class="dropdown-menu" role="menu">
                         <li>@Html.ActionLink("All Books", "Index", "Book")</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("Textbooks", "Index", "Book")</li>
-                        <li>@Html.ActionLink("Fiction", "Index", "Book")</li>
-                        <li>@Html.ActionLink("Non Fiction", "Index", "Book")</li>
-                        <li>@Html.ActionLink("Children's", "Index", "Book")</li>
+                        <li>@Html.ActionLink("Textbooks", "ByCategory", "Book", new { name="textbook"})</li>
+                        <li>@Html.ActionLink("Fiction", "ByCategory", "Book")</li>
+                        <li>@Html.ActionLink("Non Fiction", "ByCategory", "Book")</li>
+                        <li>@Html.ActionLink("Children's", "ByCategory", "Book", new { name = "children" })</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("More Categories", "Index", "Book")</li>
+                        <li>@Html.ActionLink("More Categories", "Categories", "Book")</li>
                     </ul>
                 </li>
                 <li class="dropdown">

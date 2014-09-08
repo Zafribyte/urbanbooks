@@ -174,6 +174,55 @@ namespace urbanbooks.Controllers
             }
         }
 
+        public ActionResult Categories()
+        {
+            #region Init Categories
+
+            BusinessLogicHandler myHandler = new BusinessLogicHandler();
+            SearchViewModel model = new SearchViewModel();
+
+            #endregion
+
+            #region Get Categories From db
+
+            model.BookCategoryResults = myHandler.GetBookCategoryList();
+
+            #endregion
+
+            return View(model);
+        }
+
+        public ActionResult ByCategory(string name, int CategoryID)
+        {
+
+            #region Init
+
+            BusinessLogicHandler myHandler = new BusinessLogicHandler();
+            SearchViewModel model = new SearchViewModel();
+
+            #endregion
+
+            #region Get Books By Category 
+
+            if(name != null)
+            {
+                model.BookResults = myHandler.CategoryBookSearch(name);
+                model.BCategory = new BookCategory();
+                int z = model.BookResults.Select(m => m.BookCategoryID).Single();
+                model.BCategory = myHandler.GetBookType(z);
+
+            }
+            else if(CategoryID != 0)
+            {
+                model.BookResults = myHandler.GetBooksByCategory(CategoryID);
+                model.BCategory = new BookCategory();
+                model.BCategory = myHandler.GetBookType(CategoryID);
+            }
+
+            #endregion
+
+            return View(model);
+        }
         public ActionResult Edit(int productId)
         {
             myHandler = new BusinessLogicHandler();

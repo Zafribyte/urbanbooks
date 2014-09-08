@@ -453,6 +453,8 @@
     <Content Include="Views\Account\Restricted.cshtml" />
     <Content Include="Views\Search\BooksAdvanced.cshtml" />
     <Content Include="Views\Technology\Categories.cshtml" />
+    <Content Include="Views\Book\Categories.cshtml" />
+    <Content Include="Views\Book\ByCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />

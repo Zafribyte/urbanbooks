@@ -10,6 +10,8 @@ namespace urbanbooks
     {
 
         #region COMMON ACTIONS
+        public List<Book> GetBooksByCategory(int CategoryID)
+        { BookHandler myHandler = new BookHandler(); return myHandler.BooksByCategory(CategoryID); }
         public List<Technology> ModelNameBETWEENQueryDeviceSearch(string query, double FromPrice, double ToPrice)
         { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.DeviceModelNameBETWEENQuerySearch(query, FromPrice, ToPrice); }
         public List<Technology> ModelNumberBETWEENQueryDeviceSearch(string query, double FromPrice, double ToPrice)

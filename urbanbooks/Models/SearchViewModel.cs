@@ -22,5 +22,9 @@ namespace urbanbooks.Models
         public IEnumerable<TechCategory> GadgetCategoryResults { get; set; }
         [NotMapped]
         public IEnumerable<Author> AuthorResults { get; set; }
+        [NotMapped]
+        public BookCategory BCategory { get; set; }
+        [NotMapped]
+        public TechCategory TCategory { get; set; }
     }
 }
