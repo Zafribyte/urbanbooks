@@ -35,9 +35,35 @@ namespace urbanbooks.Controllers
             return View(model);
         }
 
-        public ActionResult RefCategory (int CategoryID)
+        public ActionResult ByCategory (string name, int CategoryID)
         {
-            return View();
+            #region Init
+
+            BusinessLogicHandler myHandler = new BusinessLogicHandler();
+            SearchViewModel model = new SearchViewModel();
+            Technology helper = new Technology();
+            #endregion
+
+            #region Get Books By Category
+
+            if (name != null)
+            {
+                model.GadgetResults = myHandler.CategoryDeviceSearch(name);
+                model.TCategory = new TechCategory();
+                helper = (Technology)model.GadgetResults.Take(1).FirstOrDefault();
+                model.BCategory = myHandler.GetBookType(helper.TechCategoryID);
+
+            }
+            else if (CategoryID != 0)
+            {
+                model.BookResults = myHandler.GetBooksByCategory(CategoryID);
+                model.BCategory = new BookCategory();
+                model.BCategory = myHandler.GetBookType(CategoryID);
+            }
+
+            #endregion
+
+            return View(model);
         }
 
         public ActionResult AdminIndex()

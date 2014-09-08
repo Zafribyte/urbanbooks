@@ -455,6 +455,7 @@
     <Content Include="Views\Technology\Categories.cshtml" />
     <Content Include="Views\Book\Categories.cshtml" />
     <Content Include="Views\Book\ByCategory.cshtml" />
+    <Content Include="Views\Technology\ByCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />

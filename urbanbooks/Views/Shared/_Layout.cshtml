@@ -51,10 +51,10 @@
                     <ul class="dropdown-menu" role="menu">
                         <li>@Html.ActionLink("All Devices", "Index", "Technology")</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("Laptops", "Index", "Book")</li>
-                        <li>@Html.ActionLink("Tablets", "Index", "Book")</li>
-                        <li>@Html.ActionLink("Accessories", "Index", "Book")</li>
-                        <li>@Html.ActionLink("Software", "Index", "Book")</li>
+                        <li>@Html.ActionLink("Laptops", "ByCategory", "Technology", new { name="Laptop", CategoryID=0}, null)</li>
+                        <li>@Html.ActionLink("Tablets", "ByCategory", "Technology", new { name = "Tablet", CategoryID = 0 }, null)</li>
+                        <li>@Html.ActionLink("Accessories", "ByCategory", "Technology", new { name = "Accesor", CategoryID = 0 }, null)</li>
+                        <li>@Html.ActionLink("Software", "ByCategory", "Technology", new { name = "Software", CategoryID = 0 }, null)</li>
                         <li class="divider"></li>
                         <li>@Html.ActionLink("More Categories", "Categories", "Technology")</li>
                     </ul>
