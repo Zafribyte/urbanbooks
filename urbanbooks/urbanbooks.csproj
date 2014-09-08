@@ -348,6 +348,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="App_Data\App_Data.rar" />
+    <Content Include="Less\bootstrap-multiselect.less" />
     <None Include="Properties\PublishProfiles\urbanSyntax.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
@@ -459,7 +460,6 @@
     <Content Include="Views\Help\FAQs.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Less\" />
     <Folder Include="Uploads\Books\" />
     <Folder Include="Uploads\Tech\ImageFront\" />
     <Folder Include="Uploads\Tech\ImageSide\" />
