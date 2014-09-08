@@ -68,8 +68,8 @@ namespace urbanbooks
         {
             BookCategory bookCategory = null;
 
-            SqlParameter[] Params = { new SqlParameter("@BookCategoryID", BookCategoryID) };
-            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewSpecificBookType",
+            SqlParameter[] Params = { new SqlParameter("@CategoryID", BookCategoryID) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewSpecificBookCategory",
                 CommandType.StoredProcedure, Params))
             {
                 if (table.Rows.Count == 1)
@@ -77,6 +77,7 @@ namespace urbanbooks
                     DataRow row = table.Rows[0];
                     bookCategory = new BookCategory();
                     bookCategory.BookCategoryID = Convert.ToInt32(row["BookCategoryID"]);
+                    bookCategory.CategoryName = row["CategoryName"].ToString();
                     bookCategory.CategoryDescription = row["CategoryDescription"].ToString();
                 }
             }

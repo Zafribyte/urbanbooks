@@ -1,0 +1,37 @@
+﻿@using urbanbooks.Models
+@using urbanbooks.Helpers
+@model SearchViewModel
+@{
+    ViewBag.Title = "ByCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.BCategory != null)
+{ <h3>Books for Category :&nbsp; @Html.DisplayFor(m => m.BCategory.CategoryName)</h3>}
+@if (Model.BookResults != null)
+{
+    string returnUrl = HttpContext.Current.Request.RawUrl;
+    foreach (var item in Model.BookResults)
+    {
+        <div class="col-md-2">
+            <div style="height:450px">
+                <div class="thumbnail" style="text-align:center">
+                    <img class="img-thumbnail" src="~/Uploads/Books/@item.CoverImage" width="150" height="150" />
+                    <label class="caption">@Html.DisplayFor(modelItem => item.BookTitle)</label>
+                    <label>ISBN :</label>&nbsp;@Html.DisplayFor(modelItem => item.ISBN)<br />
+                    <label>Price :</label>&nbsp;@Html.DisplayFor(modelItem => item.SellingPrice)
+                    <hr />
+                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to Wishlist", "Add", "Wishlist", new { productId = item.ProductID, returnUrl }, htmlAttributes: new { @class = "btn" })
+                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "View", "CustomerDetails", "Book", new { productId = item.ProductID }, htmlAttributes: new { @class = "btn" })
+                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "AddToCart", "Cart", new { productId = item.ProductID, returnUrl }, htmlAttributes: new { @class = "btn" })
+                </div>
+            </div>
+        </div>
+    }
+}
+@if(Model == null)
+{
+    <br />
+    <h3> Sorry No Books Were Found</h3>
+}
+

@@ -199,7 +199,7 @@ namespace urbanbooks.Controllers
 
             BusinessLogicHandler myHandler = new BusinessLogicHandler();
             SearchViewModel model = new SearchViewModel();
-
+            Book helper = new Book();
             #endregion
 
             #region Get Books By Category 
@@ -208,8 +208,8 @@ namespace urbanbooks.Controllers
             {
                 model.BookResults = myHandler.CategoryBookSearch(name);
                 model.BCategory = new BookCategory();
-                int z = model.BookResults.Select(m => m.BookCategoryID).Single();
-                model.BCategory = myHandler.GetBookType(z);
+                helper = (Book)model.BookResults.Take(1).FirstOrDefault();
+                model.BCategory = myHandler.GetBookType(helper.BookCategoryID);
 
             }
             else if(CategoryID != 0)
