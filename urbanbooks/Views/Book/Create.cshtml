@@ -1,14 +1,11 @@
 ﻿@using urbanbooks.Models;
 @model AddNewBookViewModel
 
-<link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
-<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-<link href="~/Content/chosen.min.css" rel="stylesheet" />
-<script src="~/Scripts/jquery-2.1.1.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
-<script src="~/Scripts/modalform.js"></script>
-<script src="~/Scripts/jquery.multiple.select.js"></script>
-<link href="~/Content/multiple-select.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-2.1.1.min.js" type="text/javascript"></script>
+<link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/bootstrap.min.js" type="text/javascript"></script>
+<script src="~/Scripts/bootstrap-multiselect.js" type="text/javascript"></script>
 
 @{
     ViewBag.Title = "Create";
@@ -58,7 +55,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.books.SellingPrice, htmlAttributes: new { @class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.books.SellingPrice, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.books.SellingPrice, new { htmlAttributes = new { @class = "form-control olden", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.books.SellingPrice, "", new { @class = "text-danger" })
@@ -74,7 +71,7 @@
                 </div>
             </div>
         </div>
-        
+
 
 
 
@@ -93,7 +90,7 @@
             <div>
                 <label class="control-label col-md-2">Supplier</label>
                 <div class="col-md-10 dropdown">
-                    @Html.DropDownList("Name", Model.suppliers, new { @class = "form-control" })<br />
+                    @Html.DropDownList("Name", Model.suppliers, new { @class = "form-control"  })<br />
                 </div>
             </div>
         </div>
@@ -101,15 +98,14 @@
             <div>
                 <label class="control-label col-md-2">Author</label>
                 <div class="col-md-10 dropdown">
-                @Html.DropDownList("FullName", Model.authors, new { @class = "form-control", id="authors" })
-                @Html.ActionLink("Add an Author", "Create", "Author")
-                    <script>
-                        $('#authors').multipleSelect({
-                        filter: true});
-                    </script>
+                    @Html.DropDownList("FullName", Model.authors, new { @class = "form-control multiselect", multiple = "multiple" })
+                    @Html.ActionLink("Add an Author", "Create", "Author")
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+                $('.multiselect').multiselect({ enableFiltering: true});
+        </script>
         <fieldset>
             <legend>Image</legend>
             <div class="editor-label">
