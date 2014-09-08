@@ -448,6 +448,8 @@
     <Content Include="Views\Search\Devices.cshtml" />
     <Content Include="Views\Search\Books.cshtml" />
     <Content Include="Views\Search\BooksAdvanced.cshtml" />
+    <Content Include="Views\Search\DevicesAdvanced.cshtml" />
+    <Content Include="Views\Technology\Categories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />

@@ -10,6 +10,38 @@ namespace urbanbooks
     {
 
         #region COMMON ACTIONS
+        public List<Technology> ModelNameBETWEENQueryDeviceSearch(string query, double FromPrice, double ToPrice)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.DeviceModelNameBETWEENQuerySearch(query, FromPrice, ToPrice); }
+        public List<Technology> ModelNumberBETWEENQueryDeviceSearch(string query, double FromPrice, double ToPrice)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.DeviceModelNumberBETWEENQuerySearch(query, FromPrice, ToPrice); }
+        public List<Technology> ManufacturerBETWEENQueryDeviceSearch(string query, double FromPrice, double ToPrice)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.DeviceManufacturerBETWEENQuerySearch(query, FromPrice, ToPrice); }
+        public List<Technology> CategoryBETWEENQueryDeviceSearch(string query, double FromPrice, double ToPrice)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.DeviceCategoryBETWEENQuerySearch(query, FromPrice, ToPrice); }
+        public List<Technology> CategoryToQueryDeviceSearch(string query, double ToPrice)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.DeviceCategoryToQuerySearch(query, ToPrice); }
+        public List<Technology> ManufacturerToQueryDeviceSearch(string query, double ToPrice)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.DeviceManufacturerToQuerySearch(query, ToPrice); }
+        public List<Technology> ModelNumberToQueryDeviceSearch(string query, double ToPrice)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.DeviceModelNumberToQuerySearch(query, ToPrice); }
+        public List<Technology> ModelNameToQueryDeviceSearch(string query, double ToPrice)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.DeviceModelNameToQuerySearch(query, ToPrice); }
+        public List<Technology> ModelNameFromQueryDeviceSearch(string query, double FromPrice)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.DeviceModelNameFromQuerySearch(query, FromPrice); }
+        public List<Technology> ModelNumberFromQueryDeviceSearch(string query, double FromPrice)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.DeviceModelNumberFromQuerySearch(query, FromPrice); }
+        public List<Technology> ManufacturerFromQueryDeviceSearch(string query, double FromPrice)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.DeviceManufacturerFromQuerySearch(query, FromPrice); }
+        public List<Technology> CategoryFromQueryDeviceSeach(string query, double FromPrice)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.DeviceCategoryFromQuerySearch(query, FromPrice); }
+        public List<Technology> CategoryDeviceSearch(string query)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.DeviceCategorySearch(query); }
+        public List<Technology> ManufacturerDeviceSearch(string query)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.ManufacturerDeviceSearch(query); }
+        public List<Technology> ModelNumberSearch(string query)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.ModelNumberDeviceSearch(query); }
+        public List<Technology> ModelNameDeviceSearch(string query)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.ModelNameDeviceSearch(query); }
         public List<Book> CategoryBETWEENQueryBookSeach(string query, double FromPrice, double ToPrice)
         { BookHandler myHandler = new BookHandler(); return myHandler.CategoryBETWEENQueryBookSearch(query, ToPrice, FromPrice); }
         public List<Book> ISBNBETWEENQueryBookSearch(string query, double FromPrice, double ToPrice)

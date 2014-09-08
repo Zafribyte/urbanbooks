@@ -1,0 +1,19 @@
+﻿@using urbanbooks.Models;
+@model SearchViewModel
+@{
+    ViewBag.Title = "Categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Device Categories</h2>
+<hr />
+<br />
+<ul>
+    @foreach (var item in Model.GadgetCategoryResults)
+    {
+        <li>@Html.ActionLink("" + item.CategoryName, "RefCategory", "Technology", new { CategoryID = item.TechCategoryID}, null)</li>
+    }
+</ul>
+
+
+

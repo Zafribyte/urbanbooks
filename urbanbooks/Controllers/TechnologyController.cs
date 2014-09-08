@@ -18,6 +18,28 @@ namespace urbanbooks.Controllers
         public ActionResult ManageTechnology()
         { return View(); }
 
+        public ActionResult Categories()
+        {
+            #region Categories Init
+
+            BusinessLogicHandler myHandler = new BusinessLogicHandler();
+            SearchViewModel model = new SearchViewModel();
+
+            #endregion
+
+            #region Get Categories From db
+
+            model.GadgetCategoryResults = myHandler.GetTechnologyTypeList();
+
+            #endregion
+            return View(model);
+        }
+
+        public ActionResult RefCategory (int CategoryID)
+        {
+            return View();
+        }
+
         public ActionResult AdminIndex()
         {
             myHandler = new BusinessLogicHandler();

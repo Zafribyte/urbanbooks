@@ -56,7 +56,7 @@
                         <li>@Html.ActionLink("Accessories", "Index", "Book")</li>
                         <li>@Html.ActionLink("Software", "Index", "Book")</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("More Categories", "Index", "Book")</li>
+                        <li>@Html.ActionLink("More Categories", "Categories", "Technology")</li>
                     </ul>
                 </li>
                 <li>@Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'>  R" + Session["cartTotal"].ToString() + "</span>", "Cart", "Edit", "Cart", htmlAttributes: new { @class = "btn" })</li>

@@ -42,7 +42,7 @@ namespace urbanbooks
             return TechnologyList;
         }
 
-
+        #region Search
         public List<Technology> TechnologyGlobalSearch(string query)
         {
             List<Technology> TechnologyList = null;
@@ -71,7 +71,480 @@ namespace urbanbooks
             return TechnologyList;
         }
 
+        public List<Technology> ModelNameDeviceSearch(string query)
+        {
+            List<Technology> TechnologyList = null;
+            SqlParameter[] Params = { new SqlParameter("@Search", query) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_DeviceModelNameSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechnologyList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology Techno = new Technology();
+                        Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
+                        Techno.ModelName = row["ModelName"].ToString();
+                        Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.ManufacturerID = (int)row["ManufacturerID"];
+                        Techno.TechCategoryID = (int)row["TechCategoryID"];
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        TechnologyList.Add(Techno);
+                    }
+                }
+            }
+            return TechnologyList;
+        }
 
+        public List<Technology> ModelNumberDeviceSearch(string query)
+        {
+            List<Technology> TechnologyList = null;
+            SqlParameter[] Params = { new SqlParameter("@Search", query) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_DeviceModelNumberSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechnologyList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology Techno = new Technology();
+                        Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
+                        Techno.ModelName = row["ModelName"].ToString();
+                        Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.ManufacturerID = (int)row["ManufacturerID"];
+                        Techno.TechCategoryID = (int)row["TechCategoryID"];
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        TechnologyList.Add(Techno);
+                    }
+                }
+            }
+            return TechnologyList;
+        }
+
+        public List<Technology> ManufacturerDeviceSearch(string query)
+        {
+            List<Technology> TechnologyList = null;
+            SqlParameter[] Params = { new SqlParameter("@Search", query) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_DeviceManufacturerSearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechnologyList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology Techno = new Technology();
+                        Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
+                        Techno.ModelName = row["ModelName"].ToString();
+                        Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.ManufacturerID = (int)row["ManufacturerID"];
+                        Techno.TechCategoryID = (int)row["TechCategoryID"];
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        TechnologyList.Add(Techno);
+                    }
+                }
+            }
+            return TechnologyList;
+        }
+
+        public List<Technology> DeviceCategorySearch(string query)
+        {
+            List<Technology> TechnologyList = null;
+            SqlParameter[] Params = { new SqlParameter("@Search", query) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_DeviceCategorySearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechnologyList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology Techno = new Technology();
+                        Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
+                        Techno.ModelName = row["ModelName"].ToString();
+                        Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.ManufacturerID = (int)row["ManufacturerID"];
+                        Techno.TechCategoryID = (int)row["TechCategoryID"];
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        TechnologyList.Add(Techno);
+                    }
+                }
+            }
+            return TechnologyList;
+        }
+
+        public List<Technology> DeviceCategoryFromQuerySearch(string query, double FromPrice)
+        {
+            List<Technology> TechnologyList = null;
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query),
+                                        new SqlParameter("@FromPrice", FromPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_DeviceCategoryFromQuerySearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechnologyList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology Techno = new Technology();
+                        Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
+                        Techno.ModelName = row["ModelName"].ToString();
+                        Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.ManufacturerID = (int)row["ManufacturerID"];
+                        Techno.TechCategoryID = (int)row["TechCategoryID"];
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        TechnologyList.Add(Techno);
+                    }
+                }
+            }
+            return TechnologyList;
+        }
+
+        public List<Technology> DeviceManufacturerFromQuerySearch(string query, double FromPrice)
+        {
+            List<Technology> TechnologyList = null;
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query),
+                                        new SqlParameter("@FromPrice", FromPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_DeviceManufacturerFromQuerySearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechnologyList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology Techno = new Technology();
+                        Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
+                        Techno.ModelName = row["ModelName"].ToString();
+                        Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.ManufacturerID = (int)row["ManufacturerID"];
+                        Techno.TechCategoryID = (int)row["TechCategoryID"];
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        TechnologyList.Add(Techno);
+                    }
+                }
+            }
+            return TechnologyList;
+        }
+
+        public List<Technology> DeviceModelNumberFromQuerySearch(string query, double FromPrice)
+        {
+            List<Technology> TechnologyList = null;
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query),
+                                        new SqlParameter("@FromPrice", FromPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_DeviceModelNumberFromQuerySearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechnologyList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology Techno = new Technology();
+                        Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
+                        Techno.ModelName = row["ModelName"].ToString();
+                        Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.ManufacturerID = (int)row["ManufacturerID"];
+                        Techno.TechCategoryID = (int)row["TechCategoryID"];
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        TechnologyList.Add(Techno);
+                    }
+                }
+            }
+            return TechnologyList;
+        }
+
+        public List<Technology> DeviceModelNameFromQuerySearch(string query, double FromPrice)
+        {
+            List<Technology> TechnologyList = null;
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query),
+                                        new SqlParameter("@FromPrice", FromPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_DeviceModelNameFromQuerySearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechnologyList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology Techno = new Technology();
+                        Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
+                        Techno.ModelName = row["ModelName"].ToString();
+                        Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.ManufacturerID = (int)row["ManufacturerID"];
+                        Techno.TechCategoryID = (int)row["TechCategoryID"];
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        TechnologyList.Add(Techno);
+                    }
+                }
+            }
+            return TechnologyList;
+        }
+
+        public List<Technology> DeviceModelNameToQuerySearch(string query, double ToPrice)
+        {
+            List<Technology> TechnologyList = null;
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query),
+                                        new SqlParameter("@ToPrice", ToPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_DeviceModelNameToQuerySearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechnologyList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology Techno = new Technology();
+                        Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
+                        Techno.ModelName = row["ModelName"].ToString();
+                        Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.ManufacturerID = (int)row["ManufacturerID"];
+                        Techno.TechCategoryID = (int)row["TechCategoryID"];
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        TechnologyList.Add(Techno);
+                    }
+                }
+            }
+            return TechnologyList;
+        }
+
+        public List<Technology> DeviceModelNumberToQuerySearch(string query, double ToPrice)
+        {
+            List<Technology> TechnologyList = null;
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query),
+                                        new SqlParameter("@ToPrice", ToPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_DeviceModelNumberToQuerySearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechnologyList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology Techno = new Technology();
+                        Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
+                        Techno.ModelName = row["ModelName"].ToString();
+                        Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.ManufacturerID = (int)row["ManufacturerID"];
+                        Techno.TechCategoryID = (int)row["TechCategoryID"];
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        TechnologyList.Add(Techno);
+                    }
+                }
+            }
+            return TechnologyList;
+        }
+
+        public List<Technology> DeviceManufacturerToQuerySearch(string query, double ToPrice)
+        {
+            List<Technology> TechnologyList = null;
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query),
+                                        new SqlParameter("@ToPrice", ToPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_DeviceManufacturerToQuerySearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechnologyList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology Techno = new Technology();
+                        Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
+                        Techno.ModelName = row["ModelName"].ToString();
+                        Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.ManufacturerID = (int)row["ManufacturerID"];
+                        Techno.TechCategoryID = (int)row["TechCategoryID"];
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        TechnologyList.Add(Techno);
+                    }
+                }
+            }
+            return TechnologyList;
+        }
+
+        public List<Technology> DeviceCategoryToQuerySearch(string query, double ToPrice)
+        {
+            List<Technology> TechnologyList = null;
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query),
+                                        new SqlParameter("@ToPrice", ToPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_DeviceCategoryToQuerySearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechnologyList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology Techno = new Technology();
+                        Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
+                        Techno.ModelName = row["ModelName"].ToString();
+                        Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.ManufacturerID = (int)row["ManufacturerID"];
+                        Techno.TechCategoryID = (int)row["TechCategoryID"];
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        TechnologyList.Add(Techno);
+                    }
+                }
+            }
+            return TechnologyList;
+        }
+
+        public List<Technology> DeviceCategoryBETWEENQuerySearch(string query,double FromPrice, double ToPrice)
+        {
+            List<Technology> TechnologyList = null;
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query),
+                                        new SqlParameter("@FromPrice", FromPrice),
+                                        new SqlParameter("@ToPrice", ToPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_DeviceCategoryBETWEENQuerySearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechnologyList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology Techno = new Technology();
+                        Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
+                        Techno.ModelName = row["ModelName"].ToString();
+                        Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.ManufacturerID = (int)row["ManufacturerID"];
+                        Techno.TechCategoryID = (int)row["TechCategoryID"];
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        TechnologyList.Add(Techno);
+                    }
+                }
+            }
+            return TechnologyList;
+        }
+
+        public List<Technology> DeviceManufacturerBETWEENQuerySearch(string query, double FromPrice, double ToPrice)
+        {
+            List<Technology> TechnologyList = null;
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query),
+                                        new SqlParameter("@FromPrice", FromPrice),
+                                        new SqlParameter("@ToPrice", ToPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_DeviceManufacturerBETWEENQuerySearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechnologyList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology Techno = new Technology();
+                        Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
+                        Techno.ModelName = row["ModelName"].ToString();
+                        Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.ManufacturerID = (int)row["ManufacturerID"];
+                        Techno.TechCategoryID = (int)row["TechCategoryID"];
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        TechnologyList.Add(Techno);
+                    }
+                }
+            }
+            return TechnologyList;
+        }
+
+        public List<Technology> DeviceModelNumberBETWEENQuerySearch(string query, double FromPrice, double ToPrice)
+        {
+            List<Technology> TechnologyList = null;
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query),
+                                        new SqlParameter("@FromPrice", FromPrice),
+                                        new SqlParameter("@ToPrice", ToPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_DeviceModelNumberBETWEENQuerySearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechnologyList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology Techno = new Technology();
+                        Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
+                        Techno.ModelName = row["ModelName"].ToString();
+                        Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.ManufacturerID = (int)row["ManufacturerID"];
+                        Techno.TechCategoryID = (int)row["TechCategoryID"];
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        TechnologyList.Add(Techno);
+                    }
+                }
+            }
+            return TechnologyList;
+        }
+
+        public List<Technology> DeviceModelNameBETWEENQuerySearch(string query, double FromPrice, double ToPrice)
+        {
+            List<Technology> TechnologyList = null;
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@Search", query),
+                                        new SqlParameter("@FromPrice", FromPrice),
+                                        new SqlParameter("@ToPrice", ToPrice)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_DeviceModelNameBETWEENQuerySearch", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechnologyList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology Techno = new Technology();
+                        Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
+                        Techno.ModelName = row["ModelName"].ToString();
+                        Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.ManufacturerID = (int)row["ManufacturerID"];
+                        Techno.TechCategoryID = (int)row["TechCategoryID"];
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        TechnologyList.Add(Techno);
+                    }
+                }
+            }
+            return TechnologyList;
+        }
+
+
+        #endregion
 
         #region User
         public Technology UGetTechnologyDetails(int ProductID)
@@ -239,4 +712,3 @@ namespace urbanbooks
         #endregion
     }
 }
-
