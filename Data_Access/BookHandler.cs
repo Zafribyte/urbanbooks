@@ -32,7 +32,6 @@ namespace urbanbooks
                         book.ISBN = row["ISBN"].ToString();
                         book.CostPrice = Convert.ToDouble(row["CostPrice"]);
                         book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
-                        book.AuthName = row["Author"].ToString();
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         BookList.Add(book);
@@ -777,12 +776,14 @@ namespace urbanbooks
                     book.ISBN = row["ISBN"].ToString();
                     book.BookCategoryID = Convert.ToInt32(row["BookCategoryID"]);
                     book.PublisherID = Convert.ToInt32(row["Publisher"]);
-                    book.AuthorID = Convert.ToInt32(row["AuthorID"]);
                 }
             }
             return book;
         }
         #endregion
+
+        #region Experiments
+
         public Book experimentalBook(Book book)
         {
             Book bk;
@@ -802,6 +803,35 @@ namespace urbanbooks
             }
             return bk;
         }
+
+        public BookAuthor TrailInsertBook(Book book)
+        {
+            BookAuthor bookAuthor = new BookAuthor();
+            SqlParameter[] Params = new SqlParameter[]
+            {
+                new SqlParameter("@ProductID", book.ProductID),
+                new SqlParameter("@BookTitle", book.BookTitle),
+                new SqlParameter("@Synopsis", book.Synopsis),
+                new SqlParameter("@ISBN", book.ISBN),
+                new SqlParameter("@BookCategoryID", book.BookCategoryID),
+                new SqlParameter("@PublisherID", book.PublisherID),
+                new SqlParameter("@SupplierID", book.SupplierID),
+                new SqlParameter("@CoverImage", book.CoverImage)
+            };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_Insert_Book", CommandType.StoredProcedure, Params))
+            {
+                
+                if (table.Rows.Count == 1)
+                {
+                    DataRow row = table.Rows[0];
+                    bookAuthor.BookID = Convert.ToInt32(row["BookID"]);
+                }
+            }
+            return bookAuthor;
+        }
+
+        #endregion
+
         #region Admin
 
         public Book GetBookDetails(int ProductID)
@@ -826,7 +856,6 @@ namespace urbanbooks
                     book.ISBN = row["ISBN"].ToString();
                     book.catName = row["Category"].ToString();
                     book.pubName = row["Publisher"].ToString();
-                    book.AuthName = row["Author"].ToString();
                     book.CoverImage = row["CoverImage"].ToString();
                 }
             }
@@ -845,7 +874,6 @@ namespace urbanbooks
                 new SqlParameter("@BookCategoryID", book.BookCategoryID),
                 new SqlParameter("@SupplierID", book.SupplierID),
                 new SqlParameter("@PublisherID", book.PublisherID),
-                new SqlParameter("@AuthorID", book.AuthorID),
                 new SqlParameter("@CoverImage", book.CoverImage)
             };
             return DataProvider.ExecuteNonQuery("sp_UpdateBook", CommandType.StoredProcedure,
@@ -899,7 +927,6 @@ namespace urbanbooks
                 new SqlParameter("@BookCategoryID", book.BookCategoryID),
                 new SqlParameter("@PublisherID", book.PublisherID),
                 new SqlParameter("@SupplierID", book.SupplierID),
-                new SqlParameter("@AuthorID", book.AuthorID),
                 new SqlParameter("@CoverImage", book.CoverImage)
             };
             return DataProvider.ExecuteNonQuery("sp_InsertBook", CommandType.StoredProcedure,

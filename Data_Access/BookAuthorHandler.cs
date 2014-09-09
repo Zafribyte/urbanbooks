@@ -10,12 +10,12 @@ namespace urbanbooks
 {
     public class BookAuthorHandler
     {
-        public bool DeleteBookAuthor(int BookID, int AuthorID)
+        public bool DeleteBookAuthor(BookAuthor bookAuthor)
         {
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@BookID", BookID),
-                new SqlParameter("@AuthorID", AuthorID)
+                new SqlParameter("@BookID", bookAuthor.BookID),
+                new SqlParameter("@AuthorID", bookAuthor.AuthorID)
             };
             return DataProvider.ExecuteNonQuery("sp_DeleteBook_Author", CommandType.StoredProcedure,
                 Params);

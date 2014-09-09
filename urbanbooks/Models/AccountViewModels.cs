@@ -146,4 +146,58 @@ namespace urbanbooks.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
+    public class RegisterSupplier
+    {
+        [Key]
+        [ScaffoldColumn(false)]
+        public int SupplierID
+        { get; set; }
+        [Required]
+        public string Name
+        { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [ScaffoldColumn(false)]
+        public string User_Id
+        { get; set; }
+        [Display(Name = "Address")]
+        [DataType(DataType.MultilineText)]
+        [StringLength(150, MinimumLength = 10)]
+        public string Address
+        { get; set; }
+        [Required]
+        [Display(Name = "Contact Person Name")]
+        public string ContactPerson
+        { get; set; }
+        [Required]
+        [Display(Name = "Contact Person Last Name")]
+        public string LastName
+        { get; set; }
+        [Required]
+        [StringLength(10)]
+        public string Fax
+        { get; set; }
+        [Display(Name = "Telephone")]
+        [StringLength(10)]
+        [Required]
+        public string ContactPersonNumber
+        { get; set; }
+        [ScaffoldColumn(false)]
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+    }
 }

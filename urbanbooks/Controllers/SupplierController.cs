@@ -1,14 +1,19 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web;
 using System.Web.Mvc;
+using urbanbooks.Models;
 
 namespace urbanbooks.Controllers
 {
     [Authorize(Roles="admin, supplier")]
     public class SupplierController : Controller
     {
+        private ApplicationUserManager _userManager;
         BusinessLogicHandler myHandler;
         Supplier logistics;
         public ActionResult Index()
@@ -27,19 +32,25 @@ namespace urbanbooks.Controllers
         {
             return View();
         }
-
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public async Task<ActionResult> Create(RegisterSupplier model)
         {
+            ApplicationDbContext dataSocket = new ApplicationDbContext();
+            UserStore<ApplicationUser> myStore = new UserStore<ApplicationUser>(dataSocket);
+            ApplicationUserManager userMgr = new ApplicationUserManager(myStore);
             try
             {
-                myHandler = new BusinessLogicHandler();
-                logistics = new Supplier();
-                if (ModelState.IsValid)
-                {
-                    myHandler.AddSupplier(logistics);
-                }
-                return RedirectToAction("Index");
+                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, Address = model.Address, PhoneNumber = model.ContactPersonNumber };
+                Models.Supplier supplier = new Models.Supplier { Name = model.Name, ContactPerson = model.ContactPerson, Fax = model.Fax, ContactPersonNumber = model.ContactPersonNumber, LastName = model.LastName, User_Id = user.Id };
+                user.Carts = new Cart { DateLastModified = DateTime.Now };
+                user.Wishlists = new Wishlist { Status = false };
+                IdentityResult result = await userMgr.CreateAsync(user, model.Password);
+                dataSocket.Suppliers.Add(supplier);
+
+                dataSocket.SaveChanges();
+
+                return View();
+
             }
             catch
             {

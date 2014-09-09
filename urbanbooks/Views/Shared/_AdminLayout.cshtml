@@ -26,11 +26,60 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.NoEncodeActionLink("<span class='glyphicon glyphicon-user'></span>", "Manage Employee", "Index", "Employee", htmlAttributes: new { @class = "btn" })</li>
-                <li>@Html.NoEncodeActionLink("<i class='icon-book'></i>", "Manage Books", "ManageBooks", "Book", htmlAttributes: new { @class = "btn" })</li>
-                <li>@Html.NoEncodeActionLink("<span class='icon-laptop'></span>", "Manage Technology", "ManageTechnology", "Technology", htmlAttributes: new { @class = "btn" })</li>
-                <li>@Html.NoEncodeActionLink("<span class='glyphicon glyphicon-stats'></span>", "Manage Reports", "Index", "Admin", htmlAttributes: new { @class = "btn" })</li>
-                <li>@Html.NoEncodeActionLink("<span class='glyphicon glyphicon-certificate'></span>", "Manage Specials", "ManageSpecial", "Special", htmlAttributes: new { @class = "btn" })</li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Suppliers</a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("Register new Supplier", "Create", "Supplier")</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Technology Suppliers", "Technology", "Supplier")</li>
+                        <li>@Html.ActionLink("Book Suppliers", "Book", "Supplier")</li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="icon-book"></span> Books </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("Add new", "Create", "Book")</li>
+                        <li>@Html.ActionLink("Manage books", "Create", "Book")</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Add new Category", "Create", "BookType")</li>
+                        <li>@Html.ActionLink("Manage Categories Category", "Index", "BookType")</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Add new Publisher", "Index", "BookType")</li>
+                        <li>@Html.ActionLink("Manage Publishers", "Index", "BookType")</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Add new Author", "Create", "Author")</li>
+                        <li>@Html.ActionLink("Manage Authors", "Index", "Author")</li>
+
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="icon-laptop"></span> Devices </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("Add new", "Create", "Technology")</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Manage Devices", "Create", "Book")</li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-stats"></span> Reports </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="divider"></li>
+                        <li>Sales Reports</li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-certificate"></span> Specials </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>Create Special</li>
+                        <li>Manage Specials</li>
+                    </ul>
+                </li>
+
             </ul>
             @Html.Partial("_LoginPartial")
         </div>
@@ -57,6 +106,14 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/modalform")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/modalform")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/fuelux")
     @RenderSection("scripts", required: false)
 </body>
 </html>

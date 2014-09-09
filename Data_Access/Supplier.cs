@@ -13,19 +13,27 @@ namespace urbanbooks
         [ScaffoldColumn(false)]
         public int SupplierID
         { get; set; }
+        [Required]
         public string Name
         { get; set; }
-        public string User_Id { get; set; }
+        [ScaffoldColumn(false)]
+        public string User_Id 
+        { get; set; }
+        [Required]
+        [Display(Name = "Contact Person Name")]
+        public string ContactPerson
+        { get; set; }
+        [Required]
+        [Display(Name="Contact Person Last Name")]
         public string LastName
         { get; set; }
+        [Required]
         [StringLength(10)]
         public string Fax
         { get; set; }
-        [Display(Name="Contact Person")]
-        public string ContactPerson
-        { get; set; }
         [Display(Name="Telephone")]
         [StringLength(10)]
+        [Required]
         public string ContactPersonNumber
         { get; set; }
         [ScaffoldColumn(false)]

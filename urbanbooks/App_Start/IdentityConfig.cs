@@ -4,6 +4,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using urbanbooks.Models;
+using System.Net.Mail;
+using System.Net;
 
 namespace urbanbooks
 {
@@ -61,8 +63,13 @@ namespace urbanbooks
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            MailMessage email = new MailMessage("urbansyntax@hotmail.com", message.Destination);
+            email.Subject = message.Subject;
+            email.Body = message.Body;
+            email.IsBodyHtml = true;
+            var mailClient = new SmtpClient("smtp.live.com", 587) { Credentials = new NetworkCredential("urbansyntax@hotmail.com", "password"), EnableSsl = true };
+            return mailClient.SendMailAsync(email);
+            //return Task.FromResult(0);
         }
     }
 

@@ -49,6 +49,7 @@ namespace urbanbooks.Controllers
             Book book = myHandler.GetBook(ProductID);
             return View(book);
         }
+        [RestoreModelStateFromTempData]
         public ActionResult Create()
         {
             #region Create
@@ -125,7 +126,8 @@ namespace urbanbooks.Controllers
             return View(bookM);
         }
         [HttpPost]
-        public ActionResult Create(FormCollection collection, HttpPostedFileBase file)
+        [SetTempDataModelState]
+        public ActionResult Create(FormCollection collection, HttpPostedFileBase file, AddNewBookViewModel model)
         {
 
             try
@@ -138,12 +140,13 @@ namespace urbanbooks.Controllers
                 book.BookCategoryID = Convert.ToInt32(collection.GetValue("CategoryName").AttemptedValue);
                 book.PublisherID = Convert.ToInt32(collection.GetValue("PublisherName").AttemptedValue);
                 book.SupplierID = Convert.ToInt32(collection.GetValue("Name").AttemptedValue);
-                book.AuthorID = Convert.ToInt32(collection.GetValue("FullName").AttemptedValue);
+                //book.AuthorID = Convert.ToInt32(collection.GetValue("FullName").AttemptedValue);
+                string[] Authors =(string[])collection.GetValue("FullName").RawValue; 
                 book.CostPrice = Convert.ToDouble(collection.GetValue("books.CostPrice").AttemptedValue);
                 book.SellingPrice = Convert.ToDouble(collection.GetValue("books.SellingPrice").AttemptedValue);
                 book.DateAdded = DateTime.Now;
 
-                TryUpdateModel(book);
+                TryUpdateModel(book); //CONSIDER REMOVING THIS..!
                 if (ModelState.IsValid)
                 {
                     if (file != null)
@@ -153,6 +156,7 @@ namespace urbanbooks.Controllers
                     }
 
                     Book ba = new Book();
+                    BookAuthor bookAuthors = new BookAuthor();
 
                     ba = myHandler.AddExperimentBook(book);
                     ba.BookTitle = book.BookTitle;
@@ -161,12 +165,19 @@ namespace urbanbooks.Controllers
                     ba.BookCategoryID = book.BookCategoryID;
                     ba.PublisherID = book.PublisherID;
                     ba.SupplierID = book.SupplierID;
-                    ba.AuthorID = book.AuthorID;
                     ba.CoverImage = book.CoverImage;
 
-                    myHandler.AddBook(ba);
+                    //myHandler.AddBook(ba);
+                    bookAuthors = myHandler.TrialInsertBook(ba);
+
+                    foreach (var item in Authors) //INSERTING BOOK AUTHORS
+                    {
+                        bookAuthors.AuthorID = Convert.ToInt32(item);
+                        myHandler.InsertBookAuthor(bookAuthors);
+                    }
                 }
-                return RedirectToAction("Index", "Book", book);
+                //return RedirectToAction("Index", "Book", book);
+                return RedirectToAction("Create","Book" , null); //REDIRECT TO GET ACTION METHOD #INCASE THEY WANT TO INSERT ANOTHER BOOK :)
             }
             catch
             {

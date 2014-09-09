@@ -184,6 +184,8 @@
     <Compile Include="Controllers\SearchController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\RestoreModelStateFromTempDataAttribute.cs" />
+    <Compile Include="Models\SetTempDataModelStateAttribute.cs" />
     <Compile Include="Controllers\SpecialController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\TechnologyController.cs" />
@@ -260,6 +262,26 @@
     <Compile Include="Migrations\201409081211563_DaveIsCool.cs" />
     <Compile Include="Migrations\201409081211563_DaveIsCool.Designer.cs">
       <DependentUpon>201409081211563_DaveIsCool.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409091633181_supplierInterface.cs" />
+    <Compile Include="Migrations\201409091633181_supplierInterface.Designer.cs">
+      <DependentUpon>201409091633181_supplierInterface.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409091648430_supplierInterface1.cs" />
+    <Compile Include="Migrations\201409091648430_supplierInterface1.Designer.cs">
+      <DependentUpon>201409091648430_supplierInterface1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409091649531_supplierInterfaceprep.cs" />
+    <Compile Include="Migrations\201409091649531_supplierInterfaceprep.Designer.cs">
+      <DependentUpon>201409091649531_supplierInterfaceprep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409091849202_tibs.cs" />
+    <Compile Include="Migrations\201409091849202_tibs.Designer.cs">
+      <DependentUpon>201409091849202_tibs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409091902468_tibsx.cs" />
+    <Compile Include="Migrations\201409091902468_tibsx.Designer.cs">
+      <DependentUpon>201409091902468_tibsx.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -525,6 +547,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409081211563_DaveIsCool.resx">
       <DependentUpon>201409081211563_DaveIsCool.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409091633181_supplierInterface.resx">
+      <DependentUpon>201409091633181_supplierInterface.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409091648430_supplierInterface1.resx">
+      <DependentUpon>201409091648430_supplierInterface1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409091649531_supplierInterfaceprep.resx">
+      <DependentUpon>201409091649531_supplierInterfaceprep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409091849202_tibs.resx">
+      <DependentUpon>201409091849202_tibs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409091902468_tibsx.resx">
+      <DependentUpon>201409091902468_tibsx.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -34,9 +34,6 @@ namespace urbanbooks
         { get; set; }
         public string catName
         { get; set; }
-        [ScaffoldColumn(false)]
-        public int AuthorID
-        { get; set; }
         public string AuthName
         { get; set; }
         [Display(Name="Cover")]

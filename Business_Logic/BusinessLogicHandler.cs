@@ -183,12 +183,12 @@ namespace urbanbooks
         #region ADMIN ACTIONS
 
         #region BOOK
+
         public Book GetBook(int ProductID)
         {
             BookHandler myHandler = new BookHandler();
             return myHandler.GetBookDetails(ProductID);
         }
-
         public bool AddBook(Book book)
         {
             BookHandler myHandler = new BookHandler();
@@ -203,7 +203,6 @@ namespace urbanbooks
 
             return b;
         }
-
         public bool UpdateBook(Book book)
         {
             bool mybinder = false;
@@ -222,6 +221,9 @@ namespace urbanbooks
             BookHandler myHandler = new BookHandler();
             return myHandler.DeleteBook(book);
         }
+        public BookAuthor TrialInsertBook(Book book)
+        { BookHandler myHandler = new BookHandler(); return myHandler.TrailInsertBook(book); }
+
         #endregion
 
         #region Book Author
@@ -229,8 +231,8 @@ namespace urbanbooks
         public bool InsertBookAuthor(BookAuthor bookAuthor)
         { BookAuthorHandler myHandler = new BookAuthorHandler(); return myHandler.InsertBookAuthor(bookAuthor); }
 
-        public bool DeleteBookAuthor(int BookID, int AuthorID)
-        { BookAuthorHandler myHandler = new BookAuthorHandler(); return myHandler.DeleteBookAuthor(BookID, AuthorID); }
+        public bool DeleteBookAuthor(BookAuthor bookAuthor)
+        { BookAuthorHandler myHandler = new BookAuthorHandler(); return myHandler.DeleteBookAuthor(bookAuthor); }
 
         #endregion
 

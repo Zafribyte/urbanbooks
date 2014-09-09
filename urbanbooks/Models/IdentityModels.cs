@@ -90,6 +90,39 @@ namespace urbanbooks.Models
         { get; set; }
     }
 
+    public class Supplier
+    {
+        [Key]
+        [ScaffoldColumn(false)]
+        public int SupplierID
+        { get; set; }
+        [Required]
+        public string Name
+        { get; set; }
+        public string User_Id
+        { get; set; }
+        [Required]
+        [Display(Name = "Contact Person Name")]
+        public string ContactPerson
+        { get; set; }
+        [Required]
+        [Display(Name = "Contact Person Last Name")]
+        public string LastName
+        { get; set; }
+        [Required]
+        [StringLength(10)]
+        public string Fax
+        { get; set; }
+        [Display(Name = "Telephone")]
+        [StringLength(10)]
+        [Required]
+        public string ContactPersonNumber
+        { get; set; }
+        [ScaffoldColumn(false)]
+        public bool Status
+        { get; set; }
+    }
+
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -120,6 +153,8 @@ namespace urbanbooks.Models
        public System.Data.Entity.DbSet<urbanbooks.Models.Device_Advanced> Device_Advanced { get; set; }
 
        public System.Data.Entity.DbSet<urbanbooks.Models.Book_Advanced> Book_Advanced { get; set; }
+
+       public System.Data.Entity.DbSet<urbanbooks.Models.RegisterSupplier> RegisterSuppliers { get; set; }
 
     }
 }
