@@ -10,6 +10,8 @@ namespace urbanbooks
     {
 
         #region COMMON ACTIONS
+        public List<BookAuthor> GetBookAuthors(int BookID)
+        { BookAuthorHandler myHandler = new BookAuthorHandler(); return myHandler.GetBookAuthors(BookID); }
         public List<Book> GetBooksByCategory(int CategoryID)
         { BookHandler myHandler = new BookHandler(); return myHandler.BooksByCategory(CategoryID); }
         public List<Technology> ModelNameBETWEENQueryDeviceSearch(string query, double FromPrice, double ToPrice)
@@ -220,6 +222,16 @@ namespace urbanbooks
             BookHandler myHandler = new BookHandler();
             return myHandler.DeleteBook(book);
         }
+        #endregion
+
+        #region Book Author
+
+        public bool InsertBookAuthor(BookAuthor bookAuthor)
+        { BookAuthorHandler myHandler = new BookAuthorHandler(); return myHandler.InsertBookAuthor(bookAuthor); }
+
+        public bool DeleteBookAuthor(int BookID, int AuthorID)
+        { BookAuthorHandler myHandler = new BookAuthorHandler(); return myHandler.DeleteBookAuthor(BookID, AuthorID); }
+
         #endregion
 
         #region TECHNOLOGY

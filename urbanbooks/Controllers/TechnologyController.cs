@@ -44,7 +44,7 @@ namespace urbanbooks.Controllers
             Technology helper = new Technology();
             #endregion
 
-            #region Get Books By Category
+            #region Get Devices By Category
 
             if (name != null)
             {

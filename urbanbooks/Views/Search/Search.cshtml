@@ -45,7 +45,7 @@
             @foreach (var item in Model.BookCategoryResults)
             {
                 <li>
-                    @Html.ActionLink("" + item.CategoryName, "RefCategory", "Book", new { categoryId = item.BookCategoryID})
+                    @Html.ActionLink("" + item.CategoryName, "ByCategory", "Book", new { CategoryID = item.BookCategoryID }, null)
                 </li>
             }
         </ul>
@@ -85,7 +85,7 @@
         <ul>
             @foreach (var item in Model.GadgetCategoryResults)
             {
-                <li>@Html.ActionLink("" + item.CategoryName, "ByCategory", "Technology")</li>
+                <li>@Html.ActionLink("" + item.CategoryName, "ByCategory", "Technology", new { CategoryID = item.TechCategoryID})</li>
             }
         </ul>
     </div>
@@ -113,4 +113,21 @@
 }
 
 <br />
-<p>Please consider trying our @Html.ActionLink("Advance Search", "Advanced", "Search") </p>
+<p>Please consider trying our @Html.ActionLink("Advanced Search", "Advanced", "Search") </p>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modalform")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @Scripts.Render("~/bundles/modalform")
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/fuelux")
+}

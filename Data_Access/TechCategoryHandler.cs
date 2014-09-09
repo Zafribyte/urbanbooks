@@ -62,7 +62,7 @@ namespace urbanbooks
         {
             TechCategory category = null;
 
-            SqlParameter[] Params = { new SqlParameter("@TechnologyTypeID", TechCategoryID) };
+            SqlParameter[] Params = { new SqlParameter("@TechCategoryID", TechCategoryID) };
             using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewSpecificTechType",
                 CommandType.StoredProcedure, Params))
             {

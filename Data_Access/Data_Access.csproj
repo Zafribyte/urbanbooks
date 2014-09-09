@@ -79,6 +79,7 @@
     <Compile Include="AuthorHandler.cs" />
     <Compile Include="Book.cs" />
     <Compile Include="BookAuthor.cs" />
+    <Compile Include="BookAuthorHandler.cs" />
     <Compile Include="BookHandler.cs" />
     <Compile Include="BookCategory.cs" />
     <Compile Include="BookCategoryHandler.cs" />

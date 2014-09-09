@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace urbanbooks
 {
-    class BookAuthor
+    public class BookAuthor
     {
         [Key]
         public int BookID
