@@ -10,6 +10,8 @@ namespace urbanbooks
     {
 
         #region COMMON ACTIONS
+        public List<Technology> DevicesByCategory(int CategoryID)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.TechnologyByCategory(CategoryID); }
         public List<BookAuthor> GetBookAuthors(int BookID)
         { BookAuthorHandler myHandler = new BookAuthorHandler(); return myHandler.GetBookAuthors(BookID); }
         public List<Book> GetBooksByCategory(int CategoryID)

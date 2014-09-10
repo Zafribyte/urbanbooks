@@ -85,7 +85,7 @@
         <ul>
             @foreach (var item in Model.GadgetCategoryResults)
             {
-                <li>@Html.ActionLink("" + item.CategoryName, "ByCategory", "Technology", new { CategoryID = item.TechCategoryID})</li>
+                <li>@Html.ActionLink("" + item.CategoryName, "ByCategory", "Technology", new { CategoryID = item.TechCategoryID}, null)</li>
             }
         </ul>
     </div>

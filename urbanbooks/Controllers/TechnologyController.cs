@@ -56,9 +56,9 @@ namespace urbanbooks.Controllers
             }
             else if (CategoryID != 0)
             {
-                model.BookResults = myHandler.GetBooksByCategory(CategoryID);//Replace
-                model.BCategory = new BookCategory();
-                model.BCategory = myHandler.GetBookType(CategoryID);
+                model.GadgetResults = myHandler.DevicesByCategory(CategoryID);//Replace
+                model.TCategory = new TechCategory();
+                model.TCategory = myHandler.GetTechnologyType(CategoryID);
             }
 
             #endregion
