@@ -349,6 +349,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\bookandJumboTron.jpg" />
     <Content Include="Images\dots.png" />
+    <Content Include="Images\FAQs\Home.PNG" />
+    <Content Include="Images\FAQs\Home_urban.PNG" />
+    <Content Include="Images\FAQs\Loggedin.PNG" />
     <Content Include="Images\FAQs\Login01.PNG" />
     <Content Include="Images\FAQs\Login02.PNG" />
     <Content Include="Images\FAQs\Login03.PNG" />
