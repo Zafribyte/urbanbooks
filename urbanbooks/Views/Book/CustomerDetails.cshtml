@@ -1,58 +1,16 @@
-﻿@model urbanbooks.Book
+﻿@using urbanbooks.Models
+@model AddNewBookViewModel
 @{
-    ViewBag.Title = "CustomerDetails";
+    ViewBag.Title = "Book Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h3>@Html.DisplayFor(model => model.books.BookTitle)</h3>
 
-<div>
-    <h4>Book</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.BookTitle)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BookTitle)
-        </dd>
-        
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ISBN)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ISBN)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Synopsis)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Synopsis)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SellingPrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SellingPrice)
-        </dd>
-
-        <dt>
-                @Html.DisplayNameFor(model => model.CoverImage)
-            </dt>
-
-            <dd>
-                <img src="~/Uploads/Books/@Model.CoverImage" width="200" height="200"/>
-            </dd>
-
-    </dl>
+<div class="col-md-4">
+    @Html.Partial("Img")
 </div>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
-
+<div class="col-md-8">
+    @Html.Partial("Book")
+</div>
 

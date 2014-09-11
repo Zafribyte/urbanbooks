@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace urbanbooks
 {
-    public class Publisher : Book
+    public class Publisher 
     {
         [Key]
+        [ScaffoldColumn(false)]
         public int PublisherID { get; set; }
+        [Display(Name="Publisher")]
         public string Name { get; set; }
 
     }

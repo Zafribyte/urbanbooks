@@ -770,12 +770,15 @@ namespace urbanbooks
                 {
                     DataRow row = table.Rows[0];
                     book = new Book();
-                    book.BookTitle = row["ProductTitle"].ToString();
-                    book.Synopsis = row["Description"].ToString();
+                    book.ProductID = Convert.ToInt32(row["ProductID"]);
+                    book.BookID = Convert.ToInt32(row["BookID"]);
+                    book.BookTitle = row["BookTitle"].ToString();
+                    book.Synopsis = row["Synopsis"].ToString();
                     book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
                     book.ISBN = row["ISBN"].ToString();
                     book.BookCategoryID = Convert.ToInt32(row["BookCategoryID"]);
-                    book.PublisherID = Convert.ToInt32(row["Publisher"]);
+                    book.PublisherID = Convert.ToInt32(row["PublisherID"]);
+                    book.CoverImage = row["CoverImage"].ToString();
                 }
             }
             return book;

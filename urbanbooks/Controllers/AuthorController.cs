@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using urbanbooks.Models;
 
 namespace urbanbooks.Controllers
 {
@@ -46,6 +47,50 @@ namespace urbanbooks.Controllers
                 return View();
             }
         }
+
+
+
+
+        [Authorize(Roles = "admin, employee")]
+        public ActionResult New()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "admin, employee")]
+        [HttpPost]
+        public ActionResult New(Author author)
+        {
+            
+
+            try
+            {
+                myHandler = new BusinessLogicHandler();
+                if (ModelState.IsValid)
+                {
+                    myHandler.AddAuthor(author);
+                }
+                return RedirectToAction("Create", "Book", null);
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
+
+
+        public ActionResult Books(int AuthourID)
+        {
+
+            return View();
+        }
+
+
+
+
+
         [Authorize(Roles = "admin, employee")]
         public ActionResult Edit(int id)
         {

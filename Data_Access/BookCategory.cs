@@ -16,7 +16,7 @@ namespace urbanbooks
         [Display(Name="Book Category Description")]
         public string CategoryDescription
         { get; set; }
-        [Display(Name="Book category Name")]
+        [Display(Name="Book Category")]
         public string CategoryName 
         { get; set; }
     }

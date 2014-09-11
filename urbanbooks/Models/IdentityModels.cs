@@ -156,6 +156,8 @@ namespace urbanbooks.Models
 
        public System.Data.Entity.DbSet<urbanbooks.Models.RegisterSupplier> RegisterSuppliers { get; set; }
 
+       public System.Data.Entity.DbSet<urbanbooks.Author> Authors { get; set; }
+
     }
 }
 

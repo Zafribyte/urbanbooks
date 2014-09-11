@@ -10,6 +10,8 @@ namespace urbanbooks
     {
 
         #region COMMON ACTIONS
+        public List<Author> GetAuthorsPerBook(int BookID)
+        { AuthorHandler myHandler = new AuthorHandler(); return myHandler.GetAuthorsPerBook(BookID); }
         public List<Technology> DevicesByCategory(int CategoryID)
         { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.TechnologyByCategory(CategoryID); }
         public List<BookAuthor> GetBookAuthors(int BookID)
@@ -302,6 +304,13 @@ namespace urbanbooks
 
         public Author GetAuthorDetails(int AuthorID)
         { AuthorHandler myHandler = new AuthorHandler(); return myHandler.GetAuthorDetails(AuthorID); }
+
+        #endregion
+
+        #region PUBLISHER
+
+        public Publisher GetPublisher(int PublisherID)
+        { PublisherHandler myHandler = new PublisherHandler(); return myHandler.GetPublisherDeatils(PublisherID); }
 
         #endregion
 

@@ -21,13 +21,15 @@ namespace urbanbooks.Models
         [NotMapped]
         public List<SelectListItem> publishers { get; set; }
         [NotMapped]
-        public IEnumerable<Author> Author { get; set; }
+        public List<Author> Author { get; set; }
         [NotMapped]
-        public IEnumerable<BookCategory> bookCategory { get; set; }
+        public List<BookCategory> bookCategory { get; set; }
         [NotMapped]
-        public IEnumerable<Book> book { get; set; }
+        public List<Book> book { get; set; }
         public BookCategory bc
         { get; set; }
         public Book books { get; set; }
+
+        public Publisher publisher { get; set; }
     }
 }

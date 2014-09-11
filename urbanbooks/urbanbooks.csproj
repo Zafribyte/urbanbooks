@@ -181,8 +181,15 @@
     <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\PublisherController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\SearchController.cs">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Migrations\201409102241297_mte.cs" />
+    <Compile Include="Migrations\201409102241297_mte.Designer.cs">
+      <DependentUpon>201409102241297_mte.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\RestoreModelStateFromTempDataAttribute.cs" />
     <Compile Include="Models\SetTempDataModelStateAttribute.cs" />
@@ -349,6 +356,12 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\bookandJumboTron.jpg" />
     <Content Include="Images\dots.png" />
+    <Content Include="Images\FAQs\Books01.png" />
+    <Content Include="Images\FAQs\Cart01.png" />
+    <Content Include="Images\FAQs\Devices01.PNG" />
+    <Content Include="Images\FAQs\DevicesAll.png" />
+    <Content Include="Images\FAQs\DevicesCategory.png" />
+    <Content Include="Images\FAQs\DevicesCategoryAll.png" />
     <Content Include="Images\FAQs\Home.PNG" />
     <Content Include="Images\FAQs\Home_urban.PNG" />
     <Content Include="Images\FAQs\Loggedin.PNG" />
@@ -362,6 +375,8 @@
     <Content Include="Images\FAQs\Register01.PNG" />
     <Content Include="Images\FAQs\Register02.PNG" />
     <Content Include="Images\FAQs\Register03.PNG" />
+    <Content Include="Images\FAQs\Wishlist01.png" />
+    <Content Include="Images\jambotron.jpg" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="fonts\fontello\font\fontello.eot" />
     <Content Include="fonts\fontello\font\fontello.ttf" />
@@ -493,12 +508,16 @@
     <Content Include="Views\Book\ByCategory.cshtml" />
     <Content Include="Views\Technology\ByCategory.cshtml" />
     <Content Include="Views\Help\FAQs.cshtml" />
+    <Content Include="Views\Author\New.cshtml" />
+    <Content Include="Views\Book\Book.cshtml" />
+    <Content Include="Views\Book\Img.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
     <Folder Include="Uploads\Tech\ImageFront\" />
     <Folder Include="Uploads\Tech\ImageSide\" />
     <Folder Include="Uploads\Tech\ImageTop\" />
+    <Folder Include="Views\Publisher\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -575,6 +594,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409091902468_tibsx.resx">
       <DependentUpon>201409091902468_tibsx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409102241297_mte.resx">
+      <DependentUpon>201409102241297_mte.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
