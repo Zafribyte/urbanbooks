@@ -511,6 +511,7 @@
     <Content Include="Views\Author\New.cshtml" />
     <Content Include="Views\Book\Book.cshtml" />
     <Content Include="Views\Book\Img.cshtml" />
+    <Content Include="Views\Author\Books.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />

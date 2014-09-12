@@ -99,7 +99,7 @@
         <ul>
             @foreach (var item in Model.AuthorResults)
             {
-                <li>@Html.ActionLink("" + item.Name + " " + item.Surname, "RefAuthor", "Book", new { authorId = item.AuthorID})</li>
+                <li>@Html.ActionLink("" + item.Name + " " + item.Surname, "Books", "Author", new { AuthorID = item.AuthorID}, null)</li>
             }
         </ul>
 

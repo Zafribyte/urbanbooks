@@ -27,5 +27,6 @@ namespace urbanbooks.Models
         public IEnumerable<Technology> tech { get; set; }
         public Technology techs { get; set; }
         public Manufacturer mans { get; set; }
+        public TechCategory Category { get; set; }
     }
 }

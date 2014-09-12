@@ -1,57 +1,111 @@
-﻿@model urbanbooks.Technology
+﻿@using urbanbooks.Models
+@model  AddNewTechViewModel
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+@{
+    string returnUrl = HttpContext.Current.Request.RawUrl;
+}
+<br />
+<h3>@Html.DisplayFor(model => model.techs.ModelName)</h3>
+<br /><br />
+<ul class="nav nav-tabs" role="tablist">
+    <li class="active"><a href="#home" role="tab" data-toggle="tab">Details</a></li>
+    <li><a href="#profile" role="tab" data-toggle="tab">Images</a></li>
+    <li class="dropdown">
+        <a href="#"  class="dropdown-toggle" data-toggle="dropdown">Actions <span class="caret"></span></a>
+        <ol class="dropdown-menu" role="menu">
+            <li>@Html.ActionLink("Add to cart", "AddToCart", "Cart", new { productId = Model.techs.ProductID, returnUrl }, null)</li>
+            <li>@Html.ActionLink("Add to wishlist", "Add", "Wishlist", new { productId = Model.techs.ProductID, returnUrl }, null)</li>
+        </ol>
+    </li>
+</ul>
 
-<div>
-    <h4>Technology</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ModelName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ModelName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ModelNumber)
-        </dt>
+<div class="tab-content">
 
-        <dd>
-            @Html.DisplayFor(model => model.ModelNumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SellingPrice)
-        </dt>
+    <div class="tab-pane fade in active" id="home">
+        <br /><br />
+        <div class="container">
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.techs.ModelNumber)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.techs.ModelNumber)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.techs.Specs)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.techs.Specs)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.SellingPrice)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageFront)
-        </dt>
-        <dd>
-            <img src="~/Uploads/Tech/ImageFront/@Model.ImageFront" width="200" height="200" />
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageTop)
-        </dt>
-        <dd>
-            <img src="~/Uploads/Tech/ImageTop/@Model.ImageTop" width="200" height="200" />
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageSide)
-        </dt>
-        <dd>
-            <img src="~/Uploads/Tech/ImageSide/@Model.ImageSide" width="350" height="200" />
-        </dd>
-    </dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.mans.Name)
+                </dt>
+                <dd>
+                    @Html.ActionLink("" + @Html.DisplayFor(model => model.mans.Name), "ByManufacturer", "Technology", new { ManufacturerID = @Html.ValueFor(model => model.mans.ManufacturerID) }, null)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Category.CategoryName)
+                </dt>
+                <dd>
+                    @Html.ActionLink("" + @Html.DisplayFor(model => model.Category.CategoryName), "ByCategory", "Technology", new { CategoryID = @Html.ValueFor(model => model.Category.TechCategoryID) }, null)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.techs.SellingPrice)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.techs.SellingPrice)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="profile">
+        <br /><br />
+        <div class="container">
+            <div class="col-md-3">
+                @Html.DisplayNameFor(mode => mode.techs.ImageFront) <br />
+                <img src="~/Uploads/Tech/ImageFront/@Model.techs.ImageFront" width="200" height="200" />
+            </div>
+            <div class="col-md-3">
+                @Html.DisplayNameFor(mode => mode.techs.ImageSide) <br />
+                <img src="~/Uploads/Tech/ImageFront/@Model.techs.ImageSide" width="200" height="200" />
+            </div>
+            <div class="col-md-3">
+                @Html.DisplayNameFor(mode => mode.techs.ImageTop) <br />
+                <img src="~/Uploads/Tech/ImageFront/@Model.techs.ImageTop" width="200" height="200" />
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="messages">...</div>
 </div>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
 
+<script type="text/javascript">
+    $('#myTab a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modalform")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @Scripts.Render("~/bundles/modalform")
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/fuelux")
+}

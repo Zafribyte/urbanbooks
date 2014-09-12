@@ -96,7 +96,7 @@ namespace urbanbooks
                 {
                     DataRow row = table.Rows[0];
                     author = new Author();
-                    author.AuthorID = Convert.ToInt32(row["AuthorID"]);
+                    //author.AuthorID = Convert.ToInt32(row["AuthorID"]);
                     author.Name = row["Name"].ToString();
                     author.Surname = row["Surname"].ToString();
                 }

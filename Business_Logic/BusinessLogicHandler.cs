@@ -10,6 +10,8 @@ namespace urbanbooks
     {
 
         #region COMMON ACTIONS
+        public List<Book>  GetBooksByAuthor(int AuthorID)
+        { BookHandler myHandler = new BookHandler(); return myHandler.BooksByAuthor(AuthorID); }
         public List<Author> GetAuthorsPerBook(int BookID)
         { AuthorHandler myHandler = new AuthorHandler(); return myHandler.GetAuthorsPerBook(BookID); }
         public List<Technology> DevicesByCategory(int CategoryID)
@@ -353,6 +355,13 @@ namespace urbanbooks
 
         public bool DeleteOrder(int orderNo)
         { OrderHandler myHandler = new OrderHandler(); return myHandler.DeleteOrder(orderNo); }
+
+        #endregion
+
+        #region Manufacturer
+
+        public Manufacturer GetManufacturer(int ManufacturerID)
+        { ManufacturerHandler myHandler = new ManufacturerHandler(); return myHandler.GetManufacturerDetails(ManufacturerID); }
 
         #endregion
 

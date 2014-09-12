@@ -81,14 +81,31 @@ namespace urbanbooks.Controllers
 
 
 
-        public ActionResult Books(int AuthourID)
+        public ActionResult Books(int AuthorID)
         {
+            #region Prep Utilities
+            
+            myHandler = new BusinessLogicHandler();
+            AddNewBookViewModel model = new AddNewBookViewModel();
 
-            return View();
+            #endregion
+
+            #region Get Books
+
+            model.book = new List<Book>();
+            model.book = myHandler.GetBooksByAuthor(AuthorID);
+
+            #endregion
+
+            #region Get Author Data
+
+            model.author = new Author();
+            model.author = myHandler.GetAuthorDetails(AuthorID);
+
+            #endregion
+
+            return View(model);
         }
-
-
-
 
 
         [Authorize(Roles = "admin, employee")]

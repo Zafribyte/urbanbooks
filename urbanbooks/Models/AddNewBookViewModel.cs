@@ -29,7 +29,7 @@ namespace urbanbooks.Models
         public BookCategory bc
         { get; set; }
         public Book books { get; set; }
-
+        public Author author { get; set; }
         public Publisher publisher { get; set; }
     }
 }

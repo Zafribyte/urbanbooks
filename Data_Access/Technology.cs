@@ -19,20 +19,26 @@ namespace urbanbooks
         public int TechCategoryID
         { get; set; }
         [ScaffoldColumn(true)]
+        [Display(Name="Name")]
         public string ModelName
         { get; set; }
         [ScaffoldColumn(true)]
         [DataType(DataType.MultilineText)]
+        [Display(Name="Specifications")]
         public string Specs
         { get; set; }
+        [Display(Name="Model Number")]
         public string ModelNumber
         { get; set; }
         public int ManufacturerID
         { get; set; }
+        [Display(Name="Front")]
         public string ImageFront
         { get; set; }
+        [Display(Name="Top")]
         public string ImageTop
         { get; set; }
+        [Display(Name="Side")]
         public string ImageSide
         { get; set; }
 
@@ -48,7 +54,7 @@ namespace urbanbooks
         public override double CostPrice
         { get; set; }
 
-        [Display(Name = "Selling Price")]
+        [Display(Name = "Price")]
         [DataType(DataType.Currency)]
         public override double SellingPrice
         { get; set; }

@@ -14,7 +14,7 @@ namespace urbanbooks.Controllers
     {
         Technology gadget;
         BusinessLogicHandler myHandler;
-        //[Authorize(Roles="admin, employee")]
+        [Authorize(Roles="admin, employee")]
         public ActionResult ManageTechnology()
         { return View(); }
 
@@ -65,7 +65,7 @@ namespace urbanbooks.Controllers
 
             return View(model);
         }
-
+        [Authorize(Roles="admin")]
         public ActionResult AdminIndex()
         {
             myHandler = new BusinessLogicHandler();
@@ -86,10 +86,35 @@ namespace urbanbooks.Controllers
 
         public ActionResult Details(int ProductID)
         {
+            #region Prep Utilities
+
             myHandler = new BusinessLogicHandler();
-            gadget = new Technology();
-            gadget = myHandler.GetTechnologyDetails(ProductID);
-            return View(gadget);
+            AddNewTechViewModel model = new AddNewTechViewModel();
+
+            #endregion
+
+            #region Get Device Data
+
+            model.techs = new Technology();
+            model.techs = myHandler.GetTechnologyDetails(ProductID);
+
+            #endregion
+
+            #region Get Category Data
+
+            model.Category = new TechCategory();
+            model.Category = myHandler.GetTechnologyType(model.techs.TechCategoryID);
+
+            #endregion
+
+            #region Get Manufacturer Data
+
+            model.mans = new Manufacturer();
+            model.mans = myHandler.GetManufacturer(model.techs.ManufacturerID);
+
+            #endregion
+
+            return View(model);
         }
         public ActionResult AdminDetails(int ProductID)
         {
@@ -99,7 +124,7 @@ namespace urbanbooks.Controllers
             return View(gadget);
         }
 
-        //[Authorize(Roles = "admin, employee")]
+        [Authorize(Roles = "admin, employee")]
         public ActionResult Create()
         {
             AddNewTechViewModel techM = new AddNewTechViewModel();
@@ -157,7 +182,7 @@ namespace urbanbooks.Controllers
         
         }
 
-        //[Authorize(Roles = "admin, employee")]
+        [Authorize(Roles = "admin, employee")]
         [HttpPost]
         public ActionResult Create(FormCollection collection, HttpPostedFileBase file, HttpPostedFileBase file2, HttpPostedFileBase file3)
         {
@@ -221,7 +246,7 @@ namespace urbanbooks.Controllers
             }
         }
 
-        //[Authorize(Roles = "admin, employee")]
+        [Authorize(Roles = "admin, employee")]
         public ActionResult Edit(int ProductID)
         {
             myHandler = new BusinessLogicHandler();
@@ -230,7 +255,7 @@ namespace urbanbooks.Controllers
             return View(gadget);
         }
 
-        //[Authorize(Roles = "admin, employee")]
+        [Authorize(Roles = "admin, employee")]
         [HttpPost]
         public ActionResult Edit(int ProductID, FormCollection collection)
         {
@@ -273,13 +298,13 @@ namespace urbanbooks.Controllers
             }
         }
 
-        //[Authorize(Roles = "admin, employee")]
+        [Authorize(Roles = "admin, employee")]
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        //[Authorize(Roles = "admin, employee")]
+        [Authorize(Roles = "admin, employee")]
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

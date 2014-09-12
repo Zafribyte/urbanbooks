@@ -53,5 +53,24 @@ namespace urbanbooks
             return DataProvider.ExecuteNonQuery("sp_InsertManufacturer", CommandType.StoredProcedure,
                 Params);
         }
+
+        public Manufacturer GetManufacturerDetails(int ManufacturerID)
+        {
+            Manufacturer manufacturer = null;
+
+            SqlParameter[] Params = { new SqlParameter("@ManufacturerID", ManufacturerID) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewSpecificManufacturer",
+                CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count == 1)
+                {
+                    DataRow row = table.Rows[0];
+                    manufacturer = new Manufacturer();
+                    manufacturer.ManufacturerID = Convert.ToInt32(row["ManufacturerID"]);
+                    manufacturer.Name = row["Name"].ToString();
+                }
+            }
+            return manufacturer;
+        }
     }
 }
