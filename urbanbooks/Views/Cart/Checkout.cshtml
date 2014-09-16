@@ -92,7 +92,8 @@
                                                         </td>
                                                     }
                                                 }
-                                                if (Model.allTechnology != null)
+                                                }
+                                                @if (Model.allTechnology != null)
                                                 {
                                                     foreach (var gadget in Model.allTechnology)
                                                     {
@@ -114,13 +115,14 @@
                                                                     @Html.DisplayFor(modelItem => count.TotalPerItem)
                                                                 </td>
                                                             }
-                                                        }
                                                         <td width="100px">
                                                             @Html.ActionLink("Remove", "_Remove", "Cart", new { id = item.CartItemID }, new { @class = "btn btn-danger" })
                                                         </td>
+                                                        }
+
                                                     }
                                                 }
-                                            }
+                                            
                                         </tr>
                                     }
 
@@ -163,13 +165,14 @@
     </div>
 
     <br />
-    <script type="text/javascript"> $(document).tooltip(options)</script>
+    <script type="text/javascript"> $(document).tooltip('show')</script>
    
     <div class="row" style="text-align:center"><h3>Shipping Information</h3><hr style="width:300px; color:black" /></div>
     <br />
     
     <div class="row">
         <div class="form-horizontal  container">
+            
             <div class="form-group">
                 <label class="control-label col-md-2">Delivery Address</label>
                 <div class="col-md-10">
@@ -182,7 +185,7 @@
                 <label class="control-label col-md-2">Delivery Type</label>
 
                 <div class="col-md-10">
-                    @Html.DropDownList("ServiceName", Model.I_DeliveryList, new { @class = "form-control new", data_toggle = "tooltip", data_placement = "left", title = "Please select a Delivery Service in the dropdown menu" })
+                    @Html.DropDownList("I_DeliveryList", Model.I_DeliveryList, new { @class = "form-control new", data_toggle = "tooltip", data_placement = "left", title = "Please select a Delivery Service in the dropdown menu" })
                 </div>
             </div>
             <script type="text/javascript">
@@ -207,6 +210,7 @@
                 <div class="col-md-10">
                     
                     @Html.EditorFor(model => model.deliveryHelper.DeliveryServicePrice, new { htmlAttributes = new { @class = "form-control olden currency-align form-control-static", disabled = "disabled", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.deliveryHelper.DeliveryServicePrice, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -225,7 +229,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Bill.CreditCardNumber, htmlAttributes: new { @class = "control-label col-md-2"})
                     <div class="col-md-10">
-                            @Html.EditorFor(model => model.Bill.CreditCardNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "16 Digit Credit Card Number", data_toggle = "tooltip", data_placement = "left", title = "Take care to enter the full 16 digit Credit card number found on the front of your Card" } })
+                            @Html.EditorFor(model => model.Bill.CreditCardNumber, new { htmlAttributes = new { @class = "form-control", id="cCard", @placeholder = "16 Digit Credit Card Number", data_toggle="popover", title="What is this Credit Card Number?", data_content="16 Digit code found in front of your credit card. For more info head over to our FAQs"} })
                         @Html.ValidationMessageFor(model => model.Bill.CreditCardNumber, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -245,7 +249,7 @@
 
                     <div class="col-md-10">
                     
-                        @Html.EditorFor(model => model.Bill.ExpiryDate, new { htmlAttributes = new { @class = "form-control datep", id="killed" } })
+                        @Html.EditorFor(model => model.Bill.ExpiryDate, new { htmlAttributes = new { @class = "form-control datep",placeholder="MM/YYYY" ,id="killed", data_toggle="popover", title="How do i find this Exp Date?", data_content="In front the of the card, its a month and a year. Head over to our FAQs for more info"} })
 
                         @Html.ValidationMessageFor(model => model.Bill.ExpiryDate, "", new { @class = "text-danger" })
                     </div>
@@ -262,9 +266,11 @@
     <input type="submit" value="Checkout" class="btn btn-success" />
     <script type="text/javascript">
         $('.datep').datepicker({
-            format: 'mm/dd/yyyy',
+            format: 'dd/mm/yyyy',
             startDate: '-3d'
         });
+        $('#cCard').focus($('#cCard').popover());
+        $('#killed').focus($('#killed').popover());
     </script>
 
     @Scripts.Render("~/bundles/jquery")

@@ -6,4 +6,23 @@
 
 <p>Use this area to provide additional information.</p>
 
+<a href="#" id="example" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Browse</a>
+<input type="text" name="name" id="write" value=" " data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?" />
+<script type="text/javascript">
+    $('#example').popover('show');
+    $('#write').focus($('#write').popover());
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modalform")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @Scripts.Render("~/bundles/modalform")
+}
 

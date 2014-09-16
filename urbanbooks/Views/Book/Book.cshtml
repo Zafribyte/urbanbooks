@@ -1,0 +1,57 @@
+﻿@using urbanbooks.Models
+@using urbanbooks.Helpers
+@model AddNewBookViewModel
+
+
+<div class="container">
+    <br /><br />
+    <dl class="">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.books.ISBN)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.books.ISBN)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.books.Synopsis)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.books.Synopsis)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.books.SellingPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.books.SellingPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.bc.CategoryName)
+        </dt>
+        <dd>
+            @foreach (var item in Model.bookCategory)
+            {
+                @Html.ActionLink("" + item.CategoryName, "ByCategory", "Book", new { CategoryID = item.BookCategoryID }, null)}
+        </dd>
+        <dt>
+            Author(s)
+        </dt>
+        <dd>
+            @foreach (var item in Model.Author)
+            {
+                @Html.ActionLink("" + item.Name + " " + item.Surname, "Books", "Author", new { AuthorID = item.AuthorID }, null)
+                <span>, </span>
+            }
+        </dd>
+        <dt>
+            @Html.DisplayFor(model => model.publisher.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.publisher.Name)
+        </dd>
+        <dt></dt>
+        <dd>
+
+        </dd>
+    </dl>
+</div>

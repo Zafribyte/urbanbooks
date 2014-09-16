@@ -45,6 +45,7 @@
 
     @if (Model.allCartItem != null)
     {
+        string returnUrl = HttpContext.Current.Request.RawUrl;
         foreach (var item in Model.allCartItem)
         {
             Session["myBooks"] = Model.allBook; Session["myGadget"] = Model.allTechnology; Session["myItems"] = Model.allCartItem; Session["myHelper"] = Model.ItsA_wrap;
@@ -110,8 +111,8 @@
                         }
 
                         <td style="text-align:center">
-                            @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'> </span>", "Add to wishlist", "Add", "Wishlist", new { productId = item.ProductID, CartItemID = item.CartItemID }, htmlAttributes: new { @class = "btn btn-default" })
-                            @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'> </span>", "View Product Details", "Details", "Book", new { bookId = item.ProductID }, htmlAttributes: new { @class = "btn btn-default" })
+                            @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'> </span>", "Add to wishlist", "Add", "Wishlist", new { productId = item.ProductID, CartItemID = item.CartItemID, returnUrl }, htmlAttributes: new { @class = "btn btn-default" })
+                            @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'> </span>", "View Product Details", "CustomerDetails", "Book", new { ProductID = item.ProductID }, htmlAttributes: new { @class = "btn btn-default" })
                             @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-remove'> </span>", "Remove from cart", "Delete", "Cart", new { CartItemID = item.CartItemID }, htmlAttributes: new { @class = "btn btn-default" })
                         </td>
                     </tr>

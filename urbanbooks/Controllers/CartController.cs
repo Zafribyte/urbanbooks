@@ -178,9 +178,10 @@ namespace urbanbooks.Controllers
 
             return RedirectToAction("Edit");
         }
-
+        [RestoreModelStateFromTempData]
         public async Task<ActionResult> Checkout()
         {
+
             #region Data to Display
             CartActions act = new CartActions(); WishlistActions wishAct = new WishlistActions();
             ApplicationDbContext dataSocket = new ApplicationDbContext();
@@ -191,36 +192,22 @@ namespace urbanbooks.Controllers
             Session["cartTotal"] = act.GetTotalAsync(Id);
             Session["wishlistTotal"] = wishAct.GetWishlistTotal(thisUser.Wishlists.WishlistID);
             //List<CartItem> myItems = new List<CartItem>(); 
-            IEnumerable<CartItem> myItems = act.GetCartItemsAsync(Id);
-
-            myHandler = new BusinessLogicHandler();
-            IEnumerable<Book> ifBooks = myHandler.GetBooks();
-            IEnumerable<Technology> ifGadget = myHandler.GetTechnology();
             ProductViewModel myNewModel = new ProductViewModel();
-            myNewModel.allBook = ifBooks;
-            myNewModel.allCartItem = myItems;
-            myNewModel.allTechnology = ifGadget;
-            List<ProductViewModel.CartHelper> itemList = new List<ProductViewModel.CartHelper>();
-            ProductViewModel.CartHelper cartHelp;
+            IEnumerable<CartItem> myItems = act.GetCartItemsAsync(Id);
             if (myItems != null)
             {
-                var revised = from rev in ifBooks
-                              join item in myItems on rev.ProductID equals item.ProductID
-                              where rev.ProductID == item.ProductID
-                              select new { rev.ProductID, rev.SellingPrice, item.Quantity };
-                foreach (var ite in revised)
+                myHandler = new BusinessLogicHandler();
+                IEnumerable<Book> ifBooks = myHandler.GetBooks();
+                IEnumerable<Technology> ifGadget = myHandler.GetTechnology();
+                
+                myNewModel.allBook = ifBooks;
+                myNewModel.allCartItem = myItems;
+                myNewModel.allTechnology = ifGadget;
+                List<ProductViewModel.CartHelper> itemList = new List<ProductViewModel.CartHelper>();
+                ProductViewModel.CartHelper cartHelp;
+                if (myItems != null)
                 {
-                    cartHelp = new ProductViewModel.CartHelper();
-                    cartHelp.ProductID = ite.ProductID;
-                    cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
-                    itemList.Add(cartHelp);
-                }
-            }
-            if (myItems != null)
-            {
-                if (ifGadget != null)
-                {
-                    var revised = from rev in ifGadget
+                    var revised = from rev in ifBooks
                                   join item in myItems on rev.ProductID equals item.ProductID
                                   where rev.ProductID == item.ProductID
                                   select new { rev.ProductID, rev.SellingPrice, item.Quantity };
@@ -232,23 +219,42 @@ namespace urbanbooks.Controllers
                         itemList.Add(cartHelp);
                     }
                 }
-            }
-            double cartTotal = Convert.ToDouble(Session["cartTotal"].ToString());
-            List<Company> company = myHandler.GetCompanyDetails();
-            double vat = 0;
-            foreach (var item in company)
-            { vat = item.VATPercentage; }
-            vat = vat + 1;
-            double subTotal = cartTotal / vat;
-            double vatAmount = cartTotal - subTotal;
-            ProductViewModel.CartConclude finishing = new ProductViewModel.CartConclude();
-            finishing.CartTotal = cartTotal;
-            finishing.VatAddedTotal = vatAmount;
-            finishing.SubTotal = subTotal;
-            myNewModel.ItsA_wrap = new List<ProductViewModel.CartConclude>();
-            myNewModel.ItsA_wrap.Add(finishing);
+                if (myItems != null)
+                {
+                    if (ifGadget != null)
+                    {
+                        var revised = from rev in ifGadget
+                                      join item in myItems on rev.ProductID equals item.ProductID
+                                      where rev.ProductID == item.ProductID
+                                      select new { rev.ProductID, rev.SellingPrice, item.Quantity };
+                        foreach (var ite in revised)
+                        {
+                            cartHelp = new ProductViewModel.CartHelper();
+                            cartHelp.ProductID = ite.ProductID;
+                            cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
+                            itemList.Add(cartHelp);
+                        }
+                    }
+                }
+                double cartTotal = Convert.ToDouble(Session["cartTotal"].ToString());
+                List<Company> company = myHandler.GetCompanyDetails();
+                double vat = 0;
+                foreach (var item in company)
+                { vat = item.VATPercentage; }
+                vat = vat + 1;
+                double subTotal = cartTotal / vat;
+                double vatAmount = cartTotal - subTotal;
+                ProductViewModel.CartConclude finishing = new ProductViewModel.CartConclude();
+                finishing.CartTotal = cartTotal;
+                finishing.VatAddedTotal = vatAmount;
+                finishing.SubTotal = subTotal;
+                myNewModel.ItsA_wrap = new List<ProductViewModel.CartConclude>();
+                myNewModel.ItsA_wrap.Add(finishing);
 
-            myNewModel.secureCart = itemList;
+                myNewModel.secureCart = itemList;
+            }
+            else
+            {return RedirectToAction("Edit"); }
 
             #endregion
 
@@ -277,6 +283,7 @@ namespace urbanbooks.Controllers
         }
 
         [HttpPost]
+        [SetTempDataModelState]
         public ActionResult Checkout(ProductViewModel helperModel, FormCollection collection)
         {
             Delivery shipping = new Delivery();
@@ -284,79 +291,14 @@ namespace urbanbooks.Controllers
             IEnumerable<Technology> ifGadget = (IEnumerable<Technology>)Session["myGadget"];
             List<CartItem> myItems = (List<CartItem>)Session["myItems"];
             myHandler = new BusinessLogicHandler();
-            shipping = myHandler.GetDeliveryDetails(Convert.ToInt32(collection[1].ToString()));
-
-            #region Feed The Model
-
-
-            CartItem thishereItem = new CartItem();
             try
             {
-                ProductViewModel.CartHelper cartHelp;
-                List<ProductViewModel.CartHelper> itemList = new List<ProductViewModel.CartHelper>();
-                // if (myItems.Count == 0)
-                // { return RedirectToAction("Edit"); }
-                double cartTotal = 0;
-                if (myItems != null)
-                {
-                    if (ifBooks != null)
-                    {
-                        var revised = from rev in ifBooks
-                                      join item in myItems on rev.ProductID equals item.ProductID
-                                      where rev.ProductID == item.ProductID
-                                      select new { rev.ProductID, rev.SellingPrice, item.Quantity };
-                        foreach (var ite in revised)
-                        {
-                            cartHelp = new ProductViewModel.CartHelper();
-                            cartHelp.ProductID = ite.ProductID;
-                            cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
-                            cartTotal += (ite.SellingPrice * ite.Quantity);
-                            itemList.Add(cartHelp);
-                        }
-                    }
-                    if (ifGadget != null)
-                    {
-                        var revised = from rev in ifGadget
-                                      join item in myItems on rev.ProductID equals item.ProductID
-                                      where rev.ProductID == item.ProductID
-                                      select new { rev.ProductID, rev.SellingPrice, item.Quantity };
-                        foreach (var ite in revised)
-                        {
-                            cartHelp = new ProductViewModel.CartHelper();
-                            cartHelp.ProductID = ite.ProductID;
-                            cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
-                            cartTotal += (ite.SellingPrice * ite.Quantity);
-                            itemList.Add(cartHelp);
-                        }
-                    }
-                }
-                List<Company> company = new List<Company>(); myHandler = new BusinessLogicHandler();
-                company = myHandler.GetCompanyDetails();
-                double vat = 0;
-                foreach (var item in company)
-                { vat = item.VATPercentage; }
-                //calc
-                double vatAmount = (cartTotal * vat);
-                double subTotal = (cartTotal - vatAmount);
-                ProductViewModel.CartConclude finishing = new ProductViewModel.CartConclude();
-                finishing.CartTotal = cartTotal;
-                finishing.VatAddedTotal = vatAmount;
-                finishing.SubTotal = subTotal;
-                helperModel.ItsA_wrap = new List<ProductViewModel.CartConclude>();
-                helperModel.ItsA_wrap.Add(finishing);
-
-                helperModel.deliveryHelper.DeliveryServiceName = shipping.ServiceName;
-                helperModel.deliveryHelper.DeliveryServicePrice = shipping.Price;
-                helperModel.deliveryHelper.DeliveryServiceType = shipping.ServiceType;
-
-                helperModel.secureCart = itemList;
-                helperModel.allBook = ifBooks;
-                helperModel.allCartItem = myItems;
-
-                helperModel.allTechnology = ifGadget;
+                shipping = myHandler.GetDeliveryDetails(Convert.ToInt32(collection[1].ToString()));
             }
-            catch { }
-            #endregion
+            catch
+            { ModelState.AddModelError("deliveryHelper.DeliveryServicePrice", "Please select a delivery service from dropdown !"); }
+
+            var error = ModelState.Values.SelectMany(e => e.Errors);
 
             if (ModelState.IsValid)
             {
@@ -450,7 +392,97 @@ namespace urbanbooks.Controllers
                 return RedirectToAction("Reciept");
             }
             else
-            { return View(helperModel); }
+            {
+                #region Feed The Model
+
+
+                CartItem thishereItem = new CartItem();
+                try
+                {
+                    ProductViewModel.CartHelper cartHelp;
+                    List<ProductViewModel.CartHelper> itemList = new List<ProductViewModel.CartHelper>();
+                    // if (myItems.Count == 0)
+                    // { return RedirectToAction("Edit"); }
+                    double cartTotal = 0;
+                    if (myItems != null)
+                    {
+                        if (ifBooks != null)
+                        {
+                            var revised = from rev in ifBooks
+                                          join item in myItems on rev.ProductID equals item.ProductID
+                                          where rev.ProductID == item.ProductID
+                                          select new { rev.ProductID, rev.SellingPrice, item.Quantity };
+                            foreach (var ite in revised)
+                            {
+                                cartHelp = new ProductViewModel.CartHelper();
+                                cartHelp.ProductID = ite.ProductID;
+                                cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
+                                cartTotal += (ite.SellingPrice * ite.Quantity);
+                                itemList.Add(cartHelp);
+                            }
+                        }
+                        if (ifGadget != null)
+                        {
+                            var revised = from rev in ifGadget
+                                          join item in myItems on rev.ProductID equals item.ProductID
+                                          where rev.ProductID == item.ProductID
+                                          select new { rev.ProductID, rev.SellingPrice, item.Quantity };
+                            foreach (var ite in revised)
+                            {
+                                cartHelp = new ProductViewModel.CartHelper();
+                                cartHelp.ProductID = ite.ProductID;
+                                cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
+                                cartTotal += (ite.SellingPrice * ite.Quantity);
+                                itemList.Add(cartHelp);
+                            }
+                        }
+                    }
+                    List<Company> company = new List<Company>(); myHandler = new BusinessLogicHandler();
+                    company = myHandler.GetCompanyDetails();
+                    double vat = 0;
+                    foreach (var item in company)
+                    { vat = item.VATPercentage; }
+                    //calc
+                    double vatAmount = (cartTotal * vat);
+                    double subTotal = (cartTotal - vatAmount);
+                    ProductViewModel.CartConclude finishing = new ProductViewModel.CartConclude();
+                    finishing.CartTotal = cartTotal;
+                    finishing.VatAddedTotal = vatAmount;
+                    finishing.SubTotal = subTotal;
+                    helperModel.ItsA_wrap = new List<ProductViewModel.CartConclude>();
+                    helperModel.ItsA_wrap.Add(finishing);
+
+                    helperModel.deliveryHelper.DeliveryServiceName = shipping.ServiceName;
+                    helperModel.deliveryHelper.DeliveryServicePrice = shipping.Price;
+                    helperModel.deliveryHelper.DeliveryServiceType = shipping.ServiceType;
+
+                    helperModel.secureCart = itemList;
+                    helperModel.allBook = ifBooks;
+                    helperModel.allCartItem = myItems;
+
+                    helperModel.allTechnology = ifGadget;
+                }
+                catch { }
+                #endregion
+
+                #region Drop down data
+                DeliveryHandler deliver = new DeliveryHandler();
+                IEnumerable<Delivery> delivery = (IEnumerable<Delivery>)deliver.GetDeliveryList();
+                var dataStore = from name in delivery
+                                select new { Value = name.DeliveryServiceID, Text = name.ServiceName };
+                ViewBag.DeliveryList = new SelectList(dataStore.ToList());
+
+                List<SelectListItem> deliveryI = new List<SelectListItem>();
+                deliveryI.Add(new SelectListItem { Text = "Delivery Service", Value = "", Selected = true });
+                foreach (var item in delivery)
+                { deliveryI.Add(new SelectListItem { Text = item.ServiceName, Value = item.DeliveryServiceID.ToString() }); }
+                helperModel.I_DeliveryList = new List<SelectListItem>();
+                helperModel.I_DeliveryList = deliveryI;
+                ViewData["I_Delivery"] = deliveryI;
+                #endregion
+
+                return View(helperModel); 
+            }
         }
 
         public async Task<ActionResult> _AddToCart(int ProductID, int wishID, string returnUrl)
