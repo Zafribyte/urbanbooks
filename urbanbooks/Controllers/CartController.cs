@@ -283,8 +283,7 @@ namespace urbanbooks.Controllers
         }
 
         [HttpPost]
-        [SetTempDataModelState]
-        public ActionResult Checkout(ProductViewModel helperModel, FormCollection collection)
+        public ActionResult Checkout(FormCollection collection, ProductViewModel model)
         {
             Delivery shipping = new Delivery();
             IEnumerable<Book> ifBooks = (IEnumerable<Book>)Session["myBooks"];
@@ -294,11 +293,18 @@ namespace urbanbooks.Controllers
             try
             {
                 shipping = myHandler.GetDeliveryDetails(Convert.ToInt32(collection[1].ToString()));
+
+                if (ModelState.ContainsKey("I_DeliveryList"))
+                    ModelState["I_DeliveryList"].Errors.Clear();
             }
             catch
             { ModelState.AddModelError("deliveryHelper.DeliveryServicePrice", "Please select a delivery service from dropdown !"); }
 
-            var error = ModelState.Values.SelectMany(e => e.Errors);
+    //        var error = ModelState.Values.SelectMany(e => e.Errors);
+    //        var errors = ModelState
+    //.Where(x => x.Value.Errors.Count > 0)
+    //.Select(x => new { x.Key, x.Value.Errors })
+    //.ToArray();
 
             if (ModelState.IsValid)
             {
@@ -313,7 +319,7 @@ namespace urbanbooks.Controllers
                 try
                 {
                     #region Creating the reciept/invoice
-                    Invoice reciept = new Invoice { User_Id = user.Id, DateCreated = DateTime.Now, DeliveryAddress = helperModel.deliveryHelper.DeliveryAddress, DeliveryServiceID = Convert.ToInt32(collection[1].ToString()), Status = false };
+                    Invoice reciept = new Invoice { User_Id = user.Id, DateCreated = DateTime.Now, DeliveryAddress = model.deliveryHelper.DeliveryAddress, DeliveryServiceID = Convert.ToInt32(collection[1].ToString()), Status = false };
                     try
                     {
                         InvoiceItem invoiceLine = new InvoiceItem();
@@ -388,7 +394,7 @@ namespace urbanbooks.Controllers
                 }
                 catch
                 {/*Navigate to custom error page*/ }
-                Session["deliverData"] = helperModel;
+                Session["deliverData"] = model ;
                 return RedirectToAction("Reciept");
             }
             else
@@ -449,18 +455,18 @@ namespace urbanbooks.Controllers
                     finishing.CartTotal = cartTotal;
                     finishing.VatAddedTotal = vatAmount;
                     finishing.SubTotal = subTotal;
-                    helperModel.ItsA_wrap = new List<ProductViewModel.CartConclude>();
-                    helperModel.ItsA_wrap.Add(finishing);
+                    model.ItsA_wrap = new List<ProductViewModel.CartConclude>();
+                    model.ItsA_wrap.Add(finishing);
 
-                    helperModel.deliveryHelper.DeliveryServiceName = shipping.ServiceName;
-                    helperModel.deliveryHelper.DeliveryServicePrice = shipping.Price;
-                    helperModel.deliveryHelper.DeliveryServiceType = shipping.ServiceType;
+                    model.deliveryHelper.DeliveryServiceName = shipping.ServiceName;
+                    model.deliveryHelper.DeliveryServicePrice = shipping.Price;
+                    model.deliveryHelper.DeliveryServiceType = shipping.ServiceType;
 
-                    helperModel.secureCart = itemList;
-                    helperModel.allBook = ifBooks;
-                    helperModel.allCartItem = myItems;
+                    model.secureCart = itemList;
+                    model.allBook = ifBooks;
+                    model.allCartItem = myItems;
 
-                    helperModel.allTechnology = ifGadget;
+                    model.allTechnology = ifGadget;
                 }
                 catch { }
                 #endregion
@@ -476,12 +482,12 @@ namespace urbanbooks.Controllers
                 deliveryI.Add(new SelectListItem { Text = "Delivery Service", Value = "", Selected = true });
                 foreach (var item in delivery)
                 { deliveryI.Add(new SelectListItem { Text = item.ServiceName, Value = item.DeliveryServiceID.ToString() }); }
-                helperModel.I_DeliveryList = new List<SelectListItem>();
-                helperModel.I_DeliveryList = deliveryI;
+                model.I_DeliveryList = new List<SelectListItem>();
+                model.I_DeliveryList = deliveryI;
                 ViewData["I_Delivery"] = deliveryI;
                 #endregion
 
-                return View(helperModel); 
+                return View(model); 
             }
         }
 
