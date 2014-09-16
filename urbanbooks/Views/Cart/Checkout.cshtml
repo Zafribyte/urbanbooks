@@ -267,7 +267,9 @@
     <script type="text/javascript">
         $('.datep').datepicker({
             format: 'dd/mm/yyyy',
-            startDate: '-3d'
+            startDate: '-3d',
+            viewMode: "months",
+            minViewMode: "months"
         });
         $('#cCard').focus($('#cCard').popover());
         $('#killed').focus($('#killed').popover());
