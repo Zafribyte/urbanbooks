@@ -67,7 +67,7 @@ namespace urbanbooks
             email.Subject = message.Subject;
             email.Body = message.Body;
             email.IsBodyHtml = true;
-            var mailClient = new SmtpClient("smtp.live.com", 587) { Credentials = new NetworkCredential("urbansyntax@hotmail.com", "password"), EnableSsl = true };
+            var mailClient = new SmtpClient("smtp.live.com", 587) { Credentials = new NetworkCredential("urbansyntax@hotmail.com", "#trojanhorse"), EnableSsl = true };
             return mailClient.SendMailAsync(email);
             //return Task.FromResult(0);
         }
