@@ -191,6 +191,10 @@
     <Compile Include="Migrations\201409102241297_mte.Designer.cs">
       <DependentUpon>201409102241297_mte.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409162037261_mvc.cs" />
+    <Compile Include="Migrations\201409162037261_mvc.Designer.cs">
+      <DependentUpon>201409162037261_mvc.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\RestoreModelStateFromTempDataAttribute.cs" />
     <Compile Include="Models\SetTempDataModelStateAttribute.cs" />
     <Compile Include="Controllers\SpecialController.cs" />
@@ -512,13 +516,16 @@
     <Content Include="Views\Book\Book.cshtml" />
     <Content Include="Views\Book\Img.cshtml" />
     <Content Include="Views\Author\Books.cshtml" />
+    <Content Include="Views\Publisher\Create.cshtml" />
+    <Content Include="Views\Publisher\Index.cshtml" />
+    <Content Include="Views\Publisher\Details.cshtml" />
+    <Content Include="Views\Publisher\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
     <Folder Include="Uploads\Tech\ImageFront\" />
     <Folder Include="Uploads\Tech\ImageSide\" />
     <Folder Include="Uploads\Tech\ImageTop\" />
-    <Folder Include="Views\Publisher\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -598,6 +605,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409102241297_mte.resx">
       <DependentUpon>201409102241297_mte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409162037261_mvc.resx">
+      <DependentUpon>201409162037261_mvc.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

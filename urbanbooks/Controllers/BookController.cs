@@ -92,7 +92,6 @@ namespace urbanbooks.Controllers
             Book book = myHandler.GetBook(ProductID);
             return View(book);
         }
-        [RestoreModelStateFromTempData]
         public ActionResult Create()
         {
             #region Create
@@ -166,71 +165,64 @@ namespace urbanbooks.Controllers
             bookM.publishers = publisher;
             ViewData["publishers"] = publisher;
             #endregion
+
             return View(bookM);
         }
         [HttpPost]
-        [SetTempDataModelState]
-        public ActionResult Create(FormCollection collection, HttpPostedFileBase file, AddNewBookViewModel model, string tempS)
+        public ActionResult Create(FormCollection collection, HttpPostedFileBase file)
         {
-            if(tempS == "author")
+            try
             {
-                return RedirectToAction("New", "Author", null);
-            }
-            else
-            {
-                try
-                {
-                    myHandler = new BusinessLogicHandler();
-                    book = new Book();
-                    book.BookTitle = collection.GetValue("books.BookTitle").AttemptedValue.ToString();
-                    book.Synopsis = collection.GetValue("books.Synopsis").AttemptedValue.ToString();
-                    book.ISBN = collection.GetValue("books.ISBN").AttemptedValue.ToString();
-                    book.BookCategoryID = Convert.ToInt32(collection.GetValue("CategoryName").AttemptedValue);
-                    book.PublisherID = Convert.ToInt32(collection.GetValue("PublisherName").AttemptedValue);
-                    book.SupplierID = Convert.ToInt32(collection.GetValue("Name").AttemptedValue);
-                    //book.AuthorID = Convert.ToInt32(collection.GetValue("FullName").AttemptedValue);
-                    string[] Authors = (string[])collection.GetValue("FullName").RawValue;
-                    book.CostPrice = Convert.ToDouble(collection.GetValue("books.CostPrice").AttemptedValue);
-                    book.SellingPrice = Convert.ToDouble(collection.GetValue("books.SellingPrice").AttemptedValue);
-                    book.DateAdded = DateTime.Now;
+                myHandler = new BusinessLogicHandler();
+                book = new Book();
+                book.BookTitle = collection.GetValue("books.BookTitle").AttemptedValue.ToString();
+                book.Synopsis = collection.GetValue("books.Synopsis").AttemptedValue.ToString();
+                book.ISBN = collection.GetValue("books.ISBN").AttemptedValue.ToString();
+                book.BookCategoryID = Convert.ToInt32(collection.GetValue("CategoryName").AttemptedValue);
+                book.PublisherID = Convert.ToInt32(collection.GetValue("PublisherName").AttemptedValue);
+                book.SupplierID = Convert.ToInt32(collection.GetValue("Name").AttemptedValue);
+                //book.AuthorID = Convert.ToInt32(collection.GetValue("FullName").AttemptedValue);
+                string[] Authors = (string[])collection.GetValue("FullName").RawValue;
+                book.CostPrice = Convert.ToDouble(collection.GetValue("books.CostPrice").AttemptedValue);
+                book.SellingPrice = Convert.ToDouble(collection.GetValue("books.SellingPrice").AttemptedValue);
+                book.DateAdded = DateTime.Now;
 
-                    TryUpdateModel(book); //CONSIDER REMOVING THIS..!
-                    if (ModelState.IsValid)
+                //TryUpdateModel(book); //CONSIDER REMOVING THIS..!
+                if (ModelState.IsValid)
+                {
+                    if (file != null)
                     {
-                        if (file != null)
-                        {
-                            file.SaveAs(HttpContext.Server.MapPath("~/Uploads/Books/") + file.FileName);
-                            book.CoverImage = file.FileName;
-                        }
-
-                        Book ba = new Book();
-                        BookAuthor bookAuthors = new BookAuthor();
-
-                        ba = myHandler.AddExperimentBook(book);
-                        ba.BookTitle = book.BookTitle;
-                        ba.Synopsis = book.Synopsis;
-                        ba.ISBN = book.ISBN;
-                        ba.BookCategoryID = book.BookCategoryID;
-                        ba.PublisherID = book.PublisherID;
-                        ba.SupplierID = book.SupplierID;
-                        ba.CoverImage = book.CoverImage;
-
-                        //myHandler.AddBook(ba);
-                        bookAuthors = myHandler.TrialInsertBook(ba);
-
-                        foreach (var item in Authors) //INSERTING BOOK AUTHORS
-                        {
-                            bookAuthors.AuthorID = Convert.ToInt32(item);
-                            myHandler.InsertBookAuthor(bookAuthors);
-                        }
+                        file.SaveAs(HttpContext.Server.MapPath("~/Uploads/Books/") + file.FileName);
+                        book.CoverImage = file.FileName;
                     }
-                    //return RedirectToAction("Index", "Book", book);
-                    return RedirectToAction("Create", "Book", null); //REDIRECT TO GET ACTION METHOD #INCASE THEY WANT TO INSERT ANOTHER BOOK :)
+
+                    Book ba = new Book();
+                    BookAuthor bookAuthors = new BookAuthor();
+
+                    ba = myHandler.AddExperimentBook(book);
+                    ba.BookTitle = book.BookTitle;
+                    ba.Synopsis = book.Synopsis;
+                    ba.ISBN = book.ISBN;
+                    ba.BookCategoryID = book.BookCategoryID;
+                    ba.PublisherID = book.PublisherID;
+                    ba.SupplierID = book.SupplierID;
+                    ba.CoverImage = book.CoverImage;
+
+                    //myHandler.AddBook(ba);
+                    bookAuthors = myHandler.TrialInsertBook(ba);
+
+                    foreach (var item in Authors) //INSERTING BOOK AUTHORS
+                    {
+                        bookAuthors.AuthorID = Convert.ToInt32(item);
+                        myHandler.InsertBookAuthor(bookAuthors);
+                    }
                 }
-                catch
-                {
-                    return View();
-                }
+                //return RedirectToAction("Index", "Book", book);
+                return RedirectToAction("Create", "Book", null); //REDIRECT TO GET ACTION METHOD #INCASE THEY WANT TO INSERT ANOTHER BOOK :)
+            }
+            catch
+            {
+                return View();
             }
         }
 

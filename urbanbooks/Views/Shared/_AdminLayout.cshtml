@@ -46,8 +46,8 @@
                         <li>@Html.ActionLink("Add new Category", "Create", "BookType")</li>
                         <li>@Html.ActionLink("Manage Categories Category", "Index", "BookType")</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("Add new Publisher", "Index", "BookType")</li>
-                        <li>@Html.ActionLink("Manage Publishers", "Index", "BookType")</li>
+                        <li>@Html.ActionLink("Add new Publisher", "Create", "Publisher")</li>
+                        <li>@Html.ActionLink("Manage Publishers", "Index", "Publisher")</li>
                         <li class="divider"></li>
                         <li>@Html.ActionLink("Add new Author", "Create", "Author")</li>
                         <li>@Html.ActionLink("Manage Authors", "Index", "Author")</li>
@@ -59,8 +59,13 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="icon-laptop"></span> Devices </a>
                     <ul class="dropdown-menu" role="menu">
                         <li>@Html.ActionLink("Add new", "Create", "Technology")</li>
-                        <li class="divider"></li>
                         <li>@Html.ActionLink("Manage Devices", "Create", "Book")</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Add new category", "Create", "Book")</li>
+                        <li>@Html.ActionLink("Manage categories", "Create", "Book")</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Add new manufacturer", "Create", "Book")</li>
+                        <li>@Html.ActionLink("Manage manufacturers", "Create", "Book")</li>
                     </ul>
                 </li>
 

@@ -10,6 +10,8 @@ namespace urbanbooks
     {
 
         #region COMMON ACTIONS
+        public List<Publisher> GetPublishers()
+        { PublisherHandler myHandler = new PublisherHandler(); return myHandler.GetPublisherList(); }
         public List<Book>  GetBooksByAuthor(int AuthorID)
         { BookHandler myHandler = new BookHandler(); return myHandler.BooksByAuthor(AuthorID); }
         public List<Author> GetAuthorsPerBook(int BookID)
@@ -313,6 +315,12 @@ namespace urbanbooks
 
         public Publisher GetPublisher(int PublisherID)
         { PublisherHandler myHandler = new PublisherHandler(); return myHandler.GetPublisherDeatils(PublisherID); }
+
+        public bool UpdatePublisher(Publisher publisher)
+        { PublisherHandler myHandler = new PublisherHandler(); return myHandler.UpdatePublisher(publisher); }
+
+        public bool AddPublisher(Publisher publisher)
+        { PublisherHandler myHandler = new PublisherHandler(); return myHandler.InsertPublisher(publisher); }
 
         #endregion
 

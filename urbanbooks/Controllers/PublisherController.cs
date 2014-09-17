@@ -11,13 +11,17 @@ namespace urbanbooks.Controllers
         // GET: Publisher
         public ActionResult Index()
         {
-            return View();
+            BusinessLogicHandler myHandler = new BusinessLogicHandler();
+            IEnumerable<Publisher> Publishers = myHandler.GetPublishers();
+            return View(Publishers);
         }
 
-        // GET: Publisher/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            BusinessLogicHandler myHandler = new BusinessLogicHandler();
+            Publisher publisher = new Publisher();
+            publisher = myHandler.GetPublisher(id);
+            return View(publisher);
         }
 
         // GET: Publisher/Create
@@ -28,12 +32,12 @@ namespace urbanbooks.Controllers
 
         // POST: Publisher/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Publisher publisher)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                BusinessLogicHandler myHandler = new BusinessLogicHandler();
+                myHandler.AddPublisher(publisher);
                 return RedirectToAction("Index");
             }
             catch
@@ -42,20 +46,17 @@ namespace urbanbooks.Controllers
             }
         }
 
-        // GET: Publisher/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
-
-        // POST: Publisher/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Publisher publisher)
         {
             try
             {
-                // TODO: Add update logic here
-
+                BusinessLogicHandler myHandler = new BusinessLogicHandler();
+                myHandler.UpdatePublisher(publisher);
                 return RedirectToAction("Index");
             }
             catch

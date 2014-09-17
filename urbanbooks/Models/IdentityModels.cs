@@ -158,6 +158,8 @@ namespace urbanbooks.Models
 
        public System.Data.Entity.DbSet<urbanbooks.Author> Authors { get; set; }
 
+       public System.Data.Entity.DbSet<urbanbooks.Publisher> Publishers { get; set; }
+
     }
 }
 
