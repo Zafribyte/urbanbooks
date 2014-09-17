@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using urbanbooks.Models;
 
 namespace urbanbooks.Controllers
 {
-    //[Authorize(Roles = "admin, employee")]
+    [Authorize(Roles = "admin, employee")]
     public class OrderController : Controller
     {
         BusinessLogicHandler myHandler;
@@ -15,20 +16,35 @@ namespace urbanbooks.Controllers
         OrderItem item;
         public ActionResult Index()
         {
-            
+            #region Prep Utilities
+
+            OrderModels model = new OrderModels();
             myHandler = new BusinessLogicHandler();
-            List<Order> orderslist = myHandler.GetOrdersList();
-            
-            return View(orderslist);
+
+            #endregion
+
+            #region Get Orders
+
+            model.AllOrders = myHandler.GetOrdersList();
+            model.Pending = myHandler.GetAllPendingOrders();
+            model.Completed = myHandler.GetAllCompletedOrders();
+
+            #endregion
+
+            return View(model);
         }
 
         public ActionResult Details(int orderNo)
         {
-            
+            #region Prep Utilities
+
             myHandler = new BusinessLogicHandler();
-            //order = new Order();
-            //OrderItem orderItem = new OrderItem();
-            //order = myHandler.GetOrder(orderNo);
+
+            #endregion
+
+            #region Get Order Details
+            #endregion
+
             List<OrderItem> itemList = myHandler.GetOrderItemsList(orderNo);
             return View(itemList);
         }

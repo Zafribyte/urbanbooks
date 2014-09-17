@@ -113,5 +113,55 @@ namespace urbanbooks
                 Params);
         }
 
+        public List<Order> GetAllCompletedOrders()
+        {
+            List<Order> OrdersList = null;
+
+            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewAllCompletedOrders", //*Note
+                CommandType.StoredProcedure))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    OrdersList = new List<Order>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Order order = new Order();
+                        order.OrderNo = Convert.ToInt32(row["OrderNo"]);
+                        order.DateCreated = Convert.ToDateTime(row["DateCreated"]);
+                        order.DateLastModified = Convert.ToDateTime(row["DateLastModified"]);
+                        order.InvoiceID = Convert.ToInt32(row["InvoiceID"]);
+                        order.Status = Convert.ToBoolean(row["Status"]);
+                        OrdersList.Add(order);
+                    }
+                }
+            }
+            return OrdersList;
+        }
+
+        public List<Order> GetAllPendingOrders()
+        {
+            List<Order> OrdersList = null;
+
+            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewAllPendingOrders", //*Note
+                CommandType.StoredProcedure))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    OrdersList = new List<Order>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Order order = new Order();
+                        order.OrderNo = Convert.ToInt32(row["OrderNo"]);
+                        order.DateCreated = Convert.ToDateTime(row["DateCreated"]);
+                        order.DateLastModified = Convert.ToDateTime(row["DateLastModified"]);
+                        order.InvoiceID = Convert.ToInt32(row["InvoiceID"]);
+                        order.Status = Convert.ToBoolean(row["Status"]);
+                        OrdersList.Add(order);
+                    }
+                }
+            }
+            return OrdersList;
+        }
+
     }
 }

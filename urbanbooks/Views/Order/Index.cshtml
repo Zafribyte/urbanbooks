@@ -1,49 +1,97 @@
-﻿@model IEnumerable<urbanbooks.Order>
+﻿@using urbanbooks.Models
+@model OrderModels
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-@using urbanbooks.Helpers;
 
-<h2>Order List</h2>
-<br/>
-<hr/>
-<ul>
-    <li>@Html.ActionLink("Create New", "Create")</li>
-
-    <li>@Html.ActionLink("View All Orders", "ViewAllOrders")</li>
-
-    <li>@Html.ActionLink("View Removed Orders", "DeletedOrders")</li>
+       
+<ul class="nav nav-tabs" role="tablist">
+    <li class="active"><a href="#Pending" role="tab" data-toggle="tab">Pending Orders</a></li>
+    <li><a href="#Completed" role="tab" data-toggle="tab">Completed Orders</a></li>
+    <li><a href="#AllOrders" role="tab" data-toggle="tab">All Orders</a></li>
 </ul>
-            
- 
-<hr/>
-<p>*Not Recieved</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderNo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateCreated)
-        </th>
-    </tr>
 
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateCreated)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { OrderNo = item.OrderNo })|
-        </td>
 
-    </tr>
-}
+<div class="tab-content">
 
-</table>
+    <div class="tab-pane active" id="Pending">
+        <table>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Order.DateCreated)</th>
+                <th>@Html.DisplayNameFor(model => model.Order.InvoiceID)</th>
+                <th>@Html.DisplayNameFor(model => model.Order.Status)</th>
+                <th>Actions</th>
+            </tr>
+            @foreach (var item in Model.Pending)
+            {
+
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.DateCreated)</td>
+                    <td>@Html.DisplayFor(modelItem => item.InvoiceID)</td>
+                    @if(item.Status == false)
+                    {<td class="alert alert-warning">Pending</td> }
+                    else { }
+                    <td>@Html.ActionLink("View Details", "Details", new { productId = item.OrderNo }, new{htmlAttributes= new { @class="btn btn-default" }})</td>
+                </tr>
+
+            }
+        </table>
+    </div>
+
+
+    <div class="tab-pane" id="Completed">
+        <table>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Order.DateCreated)</th>
+                <th>@Html.DisplayNameFor(model => model.Order.InvoiceID)</th>
+                <th>@Html.DisplayNameFor(model => model.Order.Status)</th>
+                <th>Actions</th>
+            </tr>
+            @foreach (var item in Model.Completed)
+            {
+
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.DateCreated)</td>
+                    <td>@Html.DisplayFor(modelItem => item.InvoiceID)</td>
+                    @if (item.Status == false)
+                    {
+                    <td class="alert alert-warning">Pending</td> }
+                    else { }
+                    <td>@Html.ActionLink("View Details", "Details", new { productId = item.OrderNo }, new { htmlAttributes = new { @class = "btn btn-default" } })</td>
+                </tr>
+
+            }
+        </table>
+    </div>
+
+
+    <div class="tab-pane" id="AllOrders">
+        <table>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Order.DateCreated)</th>
+                <th>@Html.DisplayNameFor(model => model.Order.InvoiceID)</th>
+                <th>@Html.DisplayNameFor(model => model.Order.Status)</th>
+                <th>Actions</th>
+            </tr>
+            @foreach (var item in Model.AllOrders)
+            {
+
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.DateCreated)</td>
+                    <td>@Html.DisplayFor(modelItem => item.InvoiceID)</td>
+                    @if (item.Status == false)
+                    {
+                    <td class="alert alert-warning">Pending</td> }
+                    else { }
+                    <td>@Html.ActionLink("View Details", "Details", new { productId = item.OrderNo }, new { htmlAttributes = new { @class = "btn btn-default" } })</td>
+                </tr>
+
+            }
+        </table>
+    </div>
+
+
+</div> 
+

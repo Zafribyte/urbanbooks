@@ -358,6 +358,12 @@ namespace urbanbooks
         public OrderItem AddOrder(Order order)
         { OrderHandler myHandler = new OrderHandler(); return myHandler.CreateOrder(order); }
 
+        public List<Order> GetAllCompletedOrders()
+        { OrderHandler myHandler = new OrderHandler(); return myHandler.GetAllCompletedOrders(); }
+
+        public List<Order> GetAllPendingOrders()
+        { OrderHandler myHandler = new OrderHandler(); return myHandler.GetAllPendingOrders(); }
+
         public Order GetOrder(int orderNo)
         { OrderHandler myHandler = new OrderHandler(); return myHandler.GetOrder(orderNo); }
 
