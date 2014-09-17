@@ -160,6 +160,8 @@ namespace urbanbooks.Models
 
        public System.Data.Entity.DbSet<urbanbooks.Publisher> Publishers { get; set; }
 
+       public System.Data.Entity.DbSet<urbanbooks.Manufacturer> Manufacturers { get; set; }
+
     }
 }
 
