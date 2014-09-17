@@ -180,6 +180,7 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManufacturerController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PublisherController.cs">
       <SubType>Code</SubType>
@@ -520,6 +521,8 @@
     <Content Include="Views\Publisher\Index.cshtml" />
     <Content Include="Views\Publisher\Details.cshtml" />
     <Content Include="Views\Publisher\Edit.cshtml" />
+    <Content Include="Views\Manufacturer\Index.cshtml" />
+    <Content Include="Views\Manufacturer\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />

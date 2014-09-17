@@ -46,11 +46,19 @@ namespace urbanbooks
         {
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@ManufactureID", manu.ManufacturerID),
-                new SqlParameter("@Name", manu.Name),
-              //  new SqlParameter("@ProductID", manu.ProductID),
+                new SqlParameter("@Name", manu.Name)
             };
             return DataProvider.ExecuteNonQuery("sp_InsertManufacturer", CommandType.StoredProcedure,
+                Params);
+        }
+        public bool UpdateManufacturer(Manufacturer manufacturer)
+        {
+            SqlParameter[] Params = new SqlParameter[]
+            {
+                new SqlParameter("@PublisherID", manufacturer.ManufacturerID ),
+                new SqlParameter("@Name", manufacturer.Name)
+            };
+            return DataProvider.ExecuteNonQuery("sp_UpdateManufacturer", CommandType.StoredProcedure,
                 Params);
         }
 

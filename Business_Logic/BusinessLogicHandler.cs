@@ -371,7 +371,14 @@ namespace urbanbooks
         public Manufacturer GetManufacturer(int ManufacturerID)
         { ManufacturerHandler myHandler = new ManufacturerHandler(); return myHandler.GetManufacturerDetails(ManufacturerID); }
 
+        public bool AddManufacturer(Manufacturer manufacturer)
+        { ManufacturerHandler myHandler = new ManufacturerHandler(); return myHandler.InsertManufacturer(manufacturer); }
+
+        public bool UpdateManufacturer(Manufacturer manufacturer)
+        { ManufacturerHandler myHandler = new ManufacturerHandler(); return myHandler.UpdateManufacturer(manufacturer); }
+
         #endregion
+
 
         #region KEYWORD
 
