@@ -201,6 +201,7 @@
     <Compile Include="Controllers\SearchController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\TechCategoryController.cs" />
     <Compile Include="Migrations\201409102241297_mte.cs" />
     <Compile Include="Migrations\201409102241297_mte.Designer.cs">
       <DependentUpon>201409102241297_mte.cs</DependentUpon>
@@ -437,6 +438,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Manufacturer\Edit.cshtml" />
     <Content Include="Views\Search\Advanced.cshtml" />
     <Content Include="Views\Search\Books.cshtml" />
     <Content Include="Views\Search\Devices.cshtml" />
@@ -536,6 +538,9 @@
     <Content Include="Views\Publisher\Edit.cshtml" />
     <Content Include="Views\Manufacturer\Index.cshtml" />
     <Content Include="Views\Manufacturer\Create.cshtml" />
+    <Content Include="Views\Manufacturer\Delete.cshtml" />
+    <Content Include="Views\TechCategory\Index.cshtml" />
+    <Content Include="Views\TechCategory\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
