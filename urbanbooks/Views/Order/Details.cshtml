@@ -1,69 +1,15 @@
-﻿@model IEnumerable<urbanbooks.OrderItem>
-
-@using urbanbooks.Models
-
-@{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
-}
-
-<h2>Details</h2>
-
-<table class="table">
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.OrderNo)</th>
-    </tr>
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.DateCreated)</th>
-    </tr>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderItemNumber)
-        </th>
-        
-        <th>
-            @Html.DisplayNameFor(model => model.InvoiceID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderItemNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InvoiceID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.ValueFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.OrderItemNumber })|
-                @Html.ActionLink("Delete", "Delete", new { id = item.OrderItemNumber })|
-            </td>
-        </tr>
-
-    }
-    
-        
-    
-</table>
+﻿@using urbanbooks.Models
+@model LoginViewModel
 
 
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel" style="align-content:center">Log in</h4>
+</div>
 
+<div class="modal-body">
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" data-dismiss="modal">Close</button>
+</div>

@@ -190,6 +190,14 @@ namespace urbanbooks
 
         #region ADMIN ACTIONS
 
+        #region COMPANY
+
+        public bool UpdateCompany(Company company)
+        { CompanyHandler myHandler = new CompanyHandler(); return myHandler.UpdateCompany(company); }
+
+
+        #endregion
+
         #region BOOK
 
         public Book GetBook(int ProductID)

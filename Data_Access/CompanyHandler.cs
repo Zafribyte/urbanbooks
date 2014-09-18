@@ -50,13 +50,38 @@ namespace urbanbooks
                     DataRow row = table.Rows[0];
                     company = new Company();
                     company.Address = row["PhysicalAddress"].ToString();
+                    company.VATRegistrationNumber = row["VatRegistrationNumber"].ToString();
+                    company.TaxRefferenceNumber = row["TaxReferenceNumber"].ToString();
                     company.Email = row["Email"].ToString();
                     company.Name = row["Name"].ToString();
+                    company.TechMarkUp = Convert.ToDouble(row["TechnologyMarkup"].ToString());
+                    company.BookMarkUp = Convert.ToDouble(row["BookMarkup"].ToString());
+                    company.VATPercentage = Convert.ToDouble(row["VatPercentage"].ToString());
                     company.Telephone = row["Telephone"].ToString();
                     company.Fax = row["Fax"].ToString();
                 }
             }
             return company;
+        }
+
+        public bool UpdateCompany(Company company)
+        {
+            SqlParameter[] Params = new SqlParameter[]
+            {
+                new SqlParameter("@Name", company.Name),
+                new SqlParameter("@TaxReferenceNumber",company.TaxRefferenceNumber),
+                new SqlParameter("@PhysicalAddress",company.Address),
+                new SqlParameter("@Telephone",company.Telephone),
+                new SqlParameter("@Fax", company.Fax),
+                new SqlParameter("@Email",company.Email),
+                new SqlParameter("@VatRegistrationNumber",company.VATRegistrationNumber),
+                new SqlParameter("@VATPercentage",company.VATPercentage),
+                new SqlParameter("@BookMarkUp", company.BookMarkUp),
+                new SqlParameter("@TechnologyMarkUp", company.TechMarkUp)
+
+            };
+            return DataProvider.ExecuteNonQuery("sp_UpdateCompany", CommandType.StoredProcedure,
+                Params);
         }
     }
 }

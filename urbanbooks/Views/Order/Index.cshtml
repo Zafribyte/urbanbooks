@@ -33,7 +33,7 @@
                     @if(item.Status == false)
                     {<td class="alert alert-warning">Pending</td> }
                     else { }
-                    <td>@Html.ActionLink("View Details", "Details", new { productId = item.OrderNo }, new{htmlAttributes= new { @class="btn btn-default" }})</td>
+                    <td>@Html.ActionLink("View Details", "Details", new { OrderNumber = item.OrderNo }, new{htmlAttributes= new { @class="btn btn-default" }})</td>
                 </tr>
 
             }

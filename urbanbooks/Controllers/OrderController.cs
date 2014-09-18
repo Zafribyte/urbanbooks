@@ -34,19 +34,24 @@ namespace urbanbooks.Controllers
             return View(model);
         }
 
-        public ActionResult Details(int orderNo)
+        public ActionResult Details(int OrderNumber)
         {
             #region Prep Utilities
 
             myHandler = new BusinessLogicHandler();
+            OrderLineModel model = new OrderLineModel();
 
             #endregion
 
             #region Get Order Details
+
+            model.OrderLineDetails = myHandler.GetOrderItemsList(OrderNumber);
+            model.OrderDetails = myHandler.GetOrder(OrderNumber);
+            model.SupplierDetails = myHandler.GetSupplier(model.OrderDetails.SupplierID);
+
             #endregion
 
-            List<OrderItem> itemList = myHandler.GetOrderItemsList(orderNo);
-            return View(itemList);
+            return View(model);
         }
 
 
