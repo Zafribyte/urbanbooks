@@ -36,22 +36,22 @@ namespace urbanbooks.Controllers
 
         public ActionResult Details(int OrderNumber)
         {
-            #region Prep Utilities
+           // #region Prep Utilities
 
-            myHandler = new BusinessLogicHandler();
-            OrderLineModel model = new OrderLineModel();
+           // myHandler = new BusinessLogicHandler();
+           //// OrderLineModel model = new OrderLineModel();
 
-            #endregion
+           // #endregion
 
-            #region Get Order Details
+           // #region Get Order Details
 
-            model.OrderLineDetails = myHandler.GetOrderItemsList(OrderNumber);
-            model.OrderDetails = myHandler.GetOrder(OrderNumber);
-            model.SupplierDetails = myHandler.GetSupplier(model.OrderDetails.SupplierID);
+           // model.OrderLineDetails = myHandler.GetOrderItemsList(OrderNumber);
+           // model.OrderDetails = myHandler.GetOrder(OrderNumber);
+           // model.SupplierDetails = myHandler.GetSupplier(model.OrderDetails.SupplierID);
 
-            #endregion
+           // #endregion
 
-            return View(model);
+           return View();
         }
 
 
