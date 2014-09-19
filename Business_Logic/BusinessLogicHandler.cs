@@ -221,7 +221,6 @@ namespace urbanbooks
         }
         public bool UpdateBook(Book book)
         {
-            bool mybinder = false;
             BookHandler myHandler = new BookHandler();
             return myHandler.UpdateBook(book);
         }

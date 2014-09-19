@@ -89,28 +89,6 @@ namespace urbanbooks.Controllers
         }
 
 
-        //public ActionResult Edit(int CartItemID)
-        //{
-        //    CartItem item = new CartItem();
-        //    Cart cart = new Cart();
-        //    BusinessLogicHandler myHandler = new BusinessLogicHandler();
-        //    try
-        //    {
-        //        TryUpdateModel(cart);
-        //        TryUpdateModel(item);
-        //        if (ModelState.IsValid)
-        //        {
-        //            //myHandler.UpdateCart(cart);
-        //            myHandler.UpdateCartItem(item);
-        //        }
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
         ApplicationUserManager userMgr;
 
         public async Task<ActionResult> AddToCart(int ProductID, string returnUrl)
@@ -158,7 +136,7 @@ namespace urbanbooks.Controllers
             item.CartID = user.Carts.CartID;
             item.Quantity = Convert.ToInt32(quantity);
             if (myHandler.UpdateCartItem(item))
-            { return Json(new { success = true }); }
+            { return Redirect("/Cart/Edit"); }
             else
             { return Json("Error updating quantity"); }//
         }
@@ -290,6 +268,8 @@ namespace urbanbooks.Controllers
             IEnumerable<Technology> ifGadget = (IEnumerable<Technology>)Session["myGadget"];
             List<CartItem> myItems = (List<CartItem>)Session["myItems"];
             myHandler = new BusinessLogicHandler();
+
+            #region Get Shipping Data
             try
             {
                 shipping = myHandler.GetDeliveryDetails(Convert.ToInt32(collection[1].ToString()));
@@ -299,13 +279,16 @@ namespace urbanbooks.Controllers
             }
             catch
             { ModelState.AddModelError("deliveryHelper.DeliveryServicePrice", "Please select a delivery service from dropdown !"); }
+            #endregion
 
-    //        var error = ModelState.Values.SelectMany(e => e.Errors);
+            #region Cathing model errors
+            //        var error = ModelState.Values.SelectMany(e => e.Errors);
     //        var errors = ModelState
     //.Where(x => x.Value.Errors.Count > 0)
     //.Select(x => new { x.Key, x.Value.Errors })
-    //.ToArray();
-
+            //.ToArray();
+            #endregion
+            int? IID = 0;
             if (ModelState.IsValid)
             {
                 #region Get User
@@ -329,9 +312,25 @@ namespace urbanbooks.Controllers
                             invoiceLine.CartItemID = item.CartItemID;
                             invoiceLine.ProductID = item.ProductID;
                             invoiceLine.Quantity = item.Quantity;
+
+                            #region Get Product Price
+
+                            try {
+                                Book book = new Book();
+                                book = myHandler.GetBook(item.ProductID);
+                                invoiceLine.Price = book.SellingPrice;
+                            }
+                            catch
+                            {
+                                Technology device = new Technology();
+                                device = myHandler.GetTechnologyDetails(item.ProductID);
+                                invoiceLine.Price = device.SellingPrice;
+                            }
+                            #endregion
+
                             myHandler.AddinvoiceItem(invoiceLine);
                         }
-                        Session["InvoiceID"] = invoiceLine.InvoiceID;
+                         IID = invoiceLine.InvoiceID;
 
                     }
                     catch { }
@@ -395,7 +394,7 @@ namespace urbanbooks.Controllers
                 catch
                 {/*Navigate to custom error page*/ }
                 Session["deliverData"] = model ;
-                return RedirectToAction("Reciept");
+                return RedirectToAction("Reciept", new { IID = IID });
             }
             else
             {
@@ -693,12 +692,83 @@ namespace urbanbooks.Controllers
             return PartialView(helperModel);
         }
 
-        public ActionResult Reciept(ProductViewModel model)
+        public ActionResult Reciept(int? IID)
         {
-            IEnumerable<Book> ifBooks = (IEnumerable<Book>)Session["myBooks"];
-            IEnumerable<Technology> ifGadget = (IEnumerable<Technology>)Session["myGadget"];
-            List<CartItem> myItems = (List<CartItem>)Session["myItems"];
+            List<CartItem> myItems = new List<CartItem>();
+            myItems = (List<CartItem>)Session["myItems"];
+            ProductViewModel model = new ProductViewModel();
+            myHandler = new BusinessLogicHandler();
             model = (ProductViewModel)Session["deliverData"];
+
+            #region Get Cart Items
+
+            List<Book> ifBooks = new List<Book>();
+            List<Technology> ifGadget = new List<Technology>();
+
+            foreach(var item in myItems)
+            {
+                try
+                {
+                    Book book = new Book();
+                    book = myHandler.GetBook(item.ProductID);
+                    ifBooks.Add(book);
+                }
+                catch
+                {
+                    Technology gadget = new Technology();
+                    gadget = myHandler.GetTechnologyDetails(item.ProductID);
+                    ifGadget.Add(gadget);
+                }
+            }
+
+            model.allTechnology = ifGadget;
+            model.allBook = ifBooks;
+
+            #endregion
+
+            #region Push User Details
+
+            string userName = User.Identity.GetUserName();
+            ApplicationDbContext dataSocket = new ApplicationDbContext();
+            UserStore<ApplicationUser> myStore = new UserStore<ApplicationUser>(dataSocket);
+            userMgr = new ApplicationUserManager(myStore);
+            var user = userMgr.FindByEmail(userName);
+
+            model.UserDetails = new ProvideUser();
+            model.UserDetails.Address = user.Address;
+            model.UserDetails.email = user.Email;
+            model.UserDetails.PhoneNumber = user.PhoneNumber;
+            CustomerContext customer = new CustomerContext();
+            Customer thisCust = new Customer();
+            thisCust = customer.Customers.FirstOrDefault(cust => cust.User_Id == user.Id);
+            model.UserDetails.LName = thisCust.LastName;
+            model.UserDetails.Name = thisCust.FirstName;
+            #endregion
+
+            #region Push Invoice nfo
+            model.recieptData = new Invoice();
+            model.recieptData = myHandler.GetInvoice(IID.GetValueOrDefault());
+
+            #endregion
+
+            #region Push Company nfo
+
+            myHandler = new BusinessLogicHandler();
+            model.company = new Company();
+            model.company = myHandler.GetCompanyDetail();
+
+            #endregion
+
+            #region Push Delivery nfo
+
+            Delivery shipping = new Delivery();
+            myHandler = new BusinessLogicHandler();
+            shipping = myHandler.GetDeliveryDetails(model.recieptData.DeliveryServiceID);
+            model.deliveryHelper.DeliveryServiceName = shipping.ServiceName;
+            model.deliveryHelper.DeliveryServicePrice = shipping.Price;
+            model.deliveryHelper.DeliveryServiceType = shipping.ServiceType;
+
+            #endregion
 
             #region Calculate
 
@@ -706,17 +776,20 @@ namespace urbanbooks.Controllers
             ProductViewModel.CartHelper cartHelp;
             if (myItems != null)
             {
-                var revised = from rev in ifBooks
-                              join item in myItems on rev.ProductID equals item.ProductID
-                              where rev.ProductID == item.ProductID
-                              select new { rev.ProductID, rev.SellingPrice, item.Quantity, item.CartItemID };
-                foreach (var ite in revised)
+                if (ifBooks != null)
                 {
-                    cartHelp = new ProductViewModel.CartHelper();
-                    cartHelp.ProductID = ite.ProductID;
-                    cartHelp.CartItemID = ite.CartItemID;
-                    cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
-                    itemList.Add(cartHelp);
+                    var revised = from rev in ifBooks
+                                  join item in myItems on rev.ProductID equals item.ProductID
+                                  where rev.ProductID == item.ProductID
+                                  select new { rev.ProductID, rev.SellingPrice, item.Quantity, item.CartItemID };
+                    foreach (var ite in revised)
+                    {
+                        cartHelp = new ProductViewModel.CartHelper();
+                        cartHelp.ProductID = ite.ProductID;
+                        cartHelp.CartItemID = ite.CartItemID;
+                        cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
+                        itemList.Add(cartHelp);
+                    }
                 }
             }
             if (myItems != null)
@@ -756,41 +829,6 @@ namespace urbanbooks.Controllers
             model.ItsA_wrap.Add(finishing);
 
             model.secureCart = itemList;
-            #endregion
-
-            #region Push User Details
-
-            string userName = User.Identity.GetUserName();
-            ApplicationDbContext dataSocket = new ApplicationDbContext();
-            UserStore<ApplicationUser> myStore = new UserStore<ApplicationUser>(dataSocket);
-            userMgr = new ApplicationUserManager(myStore);
-            var user = userMgr.FindByEmail(userName);
-
-            model.UserDetails = new ProvideUser();
-            model.UserDetails.Address = user.Address;
-            model.UserDetails.email = user.Email;
-            model.UserDetails.PhoneNumber = user.PhoneNumber;
-            CustomerContext customer = new CustomerContext();
-            Customer thisCust = new Customer();
-            thisCust = customer.Customers.FirstOrDefault(cust => cust.User_Id == user.Id);
-            model.UserDetails.LName = thisCust.LastName;
-            model.UserDetails.Name = thisCust.FirstName;
-            #endregion
-
-            #region Push Invoice nfo
-            model.recieptData = new Invoice();
-            model.recieptData.DateCreated = DateTime.Now.Date;
-            model.recieptData = new Invoice();
-            model.recieptData.InvoiceID = (int)Session["InvoiceID"];
-
-            #endregion
-
-            #region Push Company nfo
-
-            myHandler = new BusinessLogicHandler();
-            model.company = new Company();
-            model.company = myHandler.GetCompanyDetail();
-
             #endregion
 
             #region Clear the cart

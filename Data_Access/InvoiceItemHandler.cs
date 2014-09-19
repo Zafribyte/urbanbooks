@@ -15,7 +15,7 @@ namespace urbanbooks
         {
             List<InvoiceItem> invoiceItems = null;
 
-            using (DataTable table = DataProvider.ExecuteSelectCommand("uspViewInvoiceItems",
+            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewInvoiceItems",
                 CommandType.StoredProcedure))
             {
                 if (table.Rows.Count > 0)
@@ -28,6 +28,7 @@ namespace urbanbooks
                         invoiceItem.ProductID = Convert.ToInt32(row["ProductID"]);
                         invoiceItem.InvoiceID = Convert.ToInt32(row["InvoiceID"]);
                         invoiceItem.CartItemID = Convert.ToInt32(row["CartItemID"]);
+                        invoiceItem.Price = Convert.ToDouble(row["Price"]);
                         invoiceItems.Add(invoiceItem);
                     }
                 }
@@ -42,7 +43,8 @@ namespace urbanbooks
                 new SqlParameter("@Quantity", item.Quantity),
                 new SqlParameter("@ProductID", item.ProductID),
                 new SqlParameter("@CartItemID", item.CartItemID),
-                new SqlParameter("@InvoiceID", item.InvoiceID)
+                new SqlParameter("@InvoiceID", item.InvoiceID),
+                new SqlParameter("@Price", item.Price)
             };
             return DataProvider.ExecuteNonQuery("sp_InsertInvoiceItems", CommandType.StoredProcedure,
                 Params);

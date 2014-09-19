@@ -61,7 +61,7 @@ namespace urbanbooks
             Invoice invoice = null;
 
             SqlParameter[] Params = { new SqlParameter("@InvoiceID", InvoiceID) };
-            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_InsertInvoice",
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewSpecificInvoice",
                 CommandType.StoredProcedure, Params))
             {
                 if (table.Rows.Count == 1)
@@ -69,7 +69,7 @@ namespace urbanbooks
                     DataRow row = table.Rows[0];
                     invoice = new Invoice();
                     invoice.InvoiceID = Convert.ToInt32(row["InvoiceID"]);
-                    invoice.DateCreated = Convert.ToDateTime(row["DateCreated"]);
+                    invoice.DateCreated = Convert.ToDateTime(row["DateIssued"]);
                     invoice.User_Id = row["User_Id"].ToString();
                     invoice.DeliveryServiceID = Convert.ToInt32(row["DeliveryServiceID"]);
                     invoice.DeliveryAddress = row["DeliveryAddress"].ToString();

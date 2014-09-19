@@ -214,6 +214,10 @@
     <Compile Include="Migrations\201409172004354_bs.Designer.cs">
       <DependentUpon>201409172004354_bs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409181923055_mft.cs" />
+    <Compile Include="Migrations\201409181923055_mft.Designer.cs">
+      <DependentUpon>201409181923055_mft.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\OrderLineModel.cs" />
     <Compile Include="Models\RestoreModelStateFromTempDataAttribute.cs" />
     <Compile Include="Models\SetTempDataModelStateAttribute.cs" />
@@ -635,6 +639,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409172004354_bs.resx">
       <DependentUpon>201409172004354_bs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409181923055_mft.resx">
+      <DependentUpon>201409181923055_mft.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

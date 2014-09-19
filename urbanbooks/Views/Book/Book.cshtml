@@ -44,14 +44,19 @@
             }
         </dd>
         <dt>
-            @Html.DisplayFor(model => model.publisher.Name)
+            @Html.DisplayNameFor(model => model.publisher.Name)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.publisher.Name)
         </dd>
-        <dt></dt>
+        <dt>Actions</dt>
         <dd>
-
+            @foreach (var item in Model.book) {
+            string returnUrl = HttpContext.Current.Request.RawUrl;
+            @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to Wishlist", "Add", "Wishlist", new { productId = item.ProductID, returnUrl }, htmlAttributes: new { @class = "btn btn-default" }) 
+             <span>&nbsp;</span>
+            @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "AddToCart", "Cart", new { productId = item.ProductID, returnUrl }, htmlAttributes: new { @class = "btn btn-default" })
+            }
         </dd>
     </dl>
 </div>
