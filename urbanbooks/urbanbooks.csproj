@@ -189,7 +189,6 @@
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\BookTypeController.cs" />
     <Compile Include="Controllers\CartController.cs" />
-    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HelpController.cs" />
@@ -202,6 +201,7 @@
     <Compile Include="Controllers\SearchController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\TechCategoryController.cs" />
     <Compile Include="Migrations\201409102241297_mte.cs" />
     <Compile Include="Migrations\201409102241297_mte.Designer.cs">
       <DependentUpon>201409102241297_mte.cs</DependentUpon>
@@ -210,15 +210,6 @@
     <Compile Include="Migrations\201409162037261_mvc.Designer.cs">
       <DependentUpon>201409162037261_mvc.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201409172004354_bs.cs" />
-    <Compile Include="Migrations\201409172004354_bs.Designer.cs">
-      <DependentUpon>201409172004354_bs.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409181923055_mft.cs" />
-    <Compile Include="Migrations\201409181923055_mft.Designer.cs">
-      <DependentUpon>201409181923055_mft.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OrderLineModel.cs" />
     <Compile Include="Models\RestoreModelStateFromTempDataAttribute.cs" />
     <Compile Include="Models\SetTempDataModelStateAttribute.cs" />
     <Compile Include="Controllers\SpecialController.cs" />
@@ -447,6 +438,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Manufacturer\Edit.cshtml" />
     <Content Include="Views\Search\Advanced.cshtml" />
     <Content Include="Views\Search\Books.cshtml" />
     <Content Include="Views\Search\Devices.cshtml" />
@@ -546,8 +538,9 @@
     <Content Include="Views\Publisher\Edit.cshtml" />
     <Content Include="Views\Manufacturer\Index.cshtml" />
     <Content Include="Views\Manufacturer\Create.cshtml" />
-    <Content Include="Views\Order\Details.cshtml" />
-    <Content Include="Views\Company\Edit.cshtml" />
+    <Content Include="Views\Manufacturer\Delete.cshtml" />
+    <Content Include="Views\TechCategory\Index.cshtml" />
+    <Content Include="Views\TechCategory\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
@@ -636,12 +629,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409162037261_mvc.resx">
       <DependentUpon>201409162037261_mvc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409172004354_bs.resx">
-      <DependentUpon>201409172004354_bs.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409181923055_mft.resx">
-      <DependentUpon>201409181923055_mft.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

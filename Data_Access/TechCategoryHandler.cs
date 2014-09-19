@@ -115,7 +115,8 @@ namespace urbanbooks
         {
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@Name", categor.CategoryName )
+                new SqlParameter("@CategoryName", categor.CategoryName ),
+                new SqlParameter("@CategoryDescription", categor.CategoryDescription)
             };
             return DataProvider.ExecuteNonQuery("sp_InsertTechCategory", CommandType.StoredProcedure,
                 Params);
