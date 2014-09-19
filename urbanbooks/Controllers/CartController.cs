@@ -288,6 +288,7 @@ namespace urbanbooks.Controllers
     //.Select(x => new { x.Key, x.Value.Errors })
             //.ToArray();
             #endregion
+
             int? IID = 0;
             if (ModelState.IsValid)
             {
@@ -340,18 +341,27 @@ namespace urbanbooks.Controllers
                     #region Placing the order
                     try
                     {
+
+                        #region Prep Utilities
+
                         Order ord;
+                        Book book = new Book();
+                        Technology gadget = new Technology();
                         int supplierId = 0;
                         OrderItem orderLine = new OrderItem();
                         myHandler = new BusinessLogicHandler();
                         List<int> orders = new List<int>();
                         List<int> suppliers = new List<int>();
+
+                        #endregion
+
                         foreach (var item in myItems)
                         {
                             try
                             {
-                                supplierId = ifBooks.SingleOrDefault(m => m.ProductID == item.ProductID).SupplierID;
-                                if (suppliers.Contains(supplierId))
+                                book = myHandler.GetBook(item.ProductID);
+                                supplierId = book.SupplierID;
+                                if (suppliers.Contains(book.SupplierID))
                                 {
                                     int x = suppliers.IndexOf(supplierId);
                                     orderLine.OrderNo = orders.ElementAt(x);
@@ -362,7 +372,7 @@ namespace urbanbooks.Controllers
                                 else
                                 {
                                     suppliers.Add(supplierId);
-                                    ord = new Order { DateCreated = DateTime.Now.Date, SupplierID = supplierId, InvoiceID = (int)Session["InvoiceID"], DateLastModified = DateTime.Now.Date, Status = false };
+                                    ord = new Order { DateCreated = DateTime.Now.Date, SupplierID = supplierId, InvoiceID = IID.GetValueOrDefault(), DateLastModified = DateTime.Now.Date, Status = false };
                                     orderLine = myHandler.AddOrder(ord);
                                     orders.Add(orderLine.OrderNo);
                                     orderLine.ProductID = item.ProductID;
@@ -381,7 +391,7 @@ namespace urbanbooks.Controllers
                                 else
                                 {
                                     suppliers.Add(supplierId);
-                                    ord = new Order { DateCreated = DateTime.Now.Date, SupplierID = supplierId, InvoiceID = (int)Session["InvoiceID"], DateLastModified = DateTime.Now.Date, Status = false };
+                                    ord = new Order { DateCreated = DateTime.Now.Date, SupplierID = supplierId, InvoiceID = IID.GetValueOrDefault(), DateLastModified = DateTime.Now.Date, Status = false };
                                     orderLine = myHandler.AddOrder(ord);
                                     orders.Add(orderLine.OrderNo);
                                 }

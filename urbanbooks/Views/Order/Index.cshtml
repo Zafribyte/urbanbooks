@@ -6,7 +6,10 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-       
+<br /><br />
+<h4 style="text-align:center">Orders</h4>  
+<br /><br />
+
 <ul class="nav nav-tabs" role="tablist">
     <li class="active"><a href="#Pending" role="tab" data-toggle="tab">Pending Orders</a></li>
     <li><a href="#Completed" role="tab" data-toggle="tab">Completed Orders</a></li>
@@ -17,7 +20,8 @@
 <div class="tab-content">
 
     <div class="tab-pane active" id="Pending">
-        <table>
+        <br /><br /><br />
+        <table class="table">
             <tr>
                 <th>@Html.DisplayNameFor(model => model.Order.DateCreated)</th>
                 <th>@Html.DisplayNameFor(model => model.Order.InvoiceID)</th>
@@ -31,7 +35,7 @@
                     <td>@Html.DisplayFor(modelItem => item.DateCreated)</td>
                     <td>@Html.DisplayFor(modelItem => item.InvoiceID)</td>
                     @if(item.Status == false)
-                    {<td class="alert alert-warning">Pending</td> }
+                    {<td><label class="alert alert-warning">Pending</label></td> }
                     else { }
                     <td>@Html.ActionLink("View Details", "Details", new { OrderNumber = item.OrderNo }, new{htmlAttributes= new { @class="btn btn-default" }})</td>
                 </tr>
@@ -42,33 +46,38 @@
 
 
     <div class="tab-pane" id="Completed">
-        <table>
+        <br /><br /><br />
+        <table class="table">
             <tr>
                 <th>@Html.DisplayNameFor(model => model.Order.DateCreated)</th>
                 <th>@Html.DisplayNameFor(model => model.Order.InvoiceID)</th>
                 <th>@Html.DisplayNameFor(model => model.Order.Status)</th>
                 <th>Actions</th>
             </tr>
-            @foreach (var item in Model.Completed)
+            @if (Model.Completed != null)
             {
+                foreach (var item in Model.Completed)
+                {
 
                 <tr>
                     <td>@Html.DisplayFor(modelItem => item.DateCreated)</td>
                     <td>@Html.DisplayFor(modelItem => item.InvoiceID)</td>
                     @if (item.Status == false)
                     {
-                    <td class="alert alert-warning">Pending</td> }
+                    <td><label class="alert alert-warning">Pending</label></td> }
                     else { }
                     <td>@Html.ActionLink("View Details", "Details", new { productId = item.OrderNo }, new { htmlAttributes = new { @class = "btn btn-default" } })</td>
                 </tr>
 
+                }
             }
         </table>
     </div>
 
 
     <div class="tab-pane" id="AllOrders">
-        <table>
+        <br /><br /><br />
+        <table class="table">
             <tr>
                 <th>@Html.DisplayNameFor(model => model.Order.DateCreated)</th>
                 <th>@Html.DisplayNameFor(model => model.Order.InvoiceID)</th>
@@ -83,7 +92,7 @@
                     <td>@Html.DisplayFor(modelItem => item.InvoiceID)</td>
                     @if (item.Status == false)
                     {
-                    <td class="alert alert-warning">Pending</td> }
+                    <td><label class="alert alert-warning">Pending</label></td> }
                     else { }
                     <td>@Html.ActionLink("View Details", "Details", new { productId = item.OrderNo }, new { htmlAttributes = new { @class = "btn btn-default" } })</td>
                 </tr>
@@ -95,3 +104,18 @@
 
 </div> 
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modalform")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @Scripts.Render("~/bundles/modalform")
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/fuelux")
+}

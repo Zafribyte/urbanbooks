@@ -214,6 +214,7 @@
     <Compile Include="Migrations\201409190901088_pps.Designer.cs">
       <DependentUpon>201409190901088_pps.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderLineModel.cs" />
     <Compile Include="Models\RestoreModelStateFromTempDataAttribute.cs" />
     <Compile Include="Models\SetTempDataModelStateAttribute.cs" />
     <Compile Include="Controllers\SpecialController.cs" />
