@@ -723,6 +723,7 @@ namespace urbanbooks.Controllers
 
             model.allTechnology = ifGadget;
             model.allBook = ifBooks;
+            model.allCartItem = myItems;
 
             #endregion
 

@@ -210,6 +210,10 @@
     <Compile Include="Migrations\201409162037261_mvc.Designer.cs">
       <DependentUpon>201409162037261_mvc.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409190901088_pps.cs" />
+    <Compile Include="Migrations\201409190901088_pps.Designer.cs">
+      <DependentUpon>201409190901088_pps.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\RestoreModelStateFromTempDataAttribute.cs" />
     <Compile Include="Models\SetTempDataModelStateAttribute.cs" />
     <Compile Include="Controllers\SpecialController.cs" />
@@ -629,6 +633,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409162037261_mvc.resx">
       <DependentUpon>201409162037261_mvc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409190901088_pps.resx">
+      <DependentUpon>201409190901088_pps.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
