@@ -140,8 +140,8 @@ namespace urbanbooks
         public bool DeleteInvoice(int InvoiceID)
         { InvoiceHandler myHandler = new InvoiceHandler(); return myHandler.DeleteInvoice(InvoiceID); } //USER
 
-        public List<InvoiceItem> GetInvoiceItems()
-        { InvoiceItemHandler myHandler = new InvoiceItemHandler(); return myHandler.GetInvoiceItemList(); } //SYSTEM & ADMIN! USER
+        public List<InvoiceItem> GetInvoiceItems(int InvoiceID)
+        { InvoiceItemHandler myHandler = new InvoiceItemHandler(); return myHandler.GetInvoiceItemList(InvoiceID); } //SYSTEM & ADMIN! USER
 
         public List<OrderItem> GetOrderItemsList(int orderNo)
         { OrderItemHandler myHandler = new OrderItemHandler(); return myHandler.GetOrderItemList(orderNo); } //SYSTEM & ADMIN
@@ -361,6 +361,9 @@ namespace urbanbooks
         #endregion
 
         #region ORDER
+
+        public List<Order> GetAllOrdersForInvoice(int InvoiceID)
+        { OrderHandler myHandler = new OrderHandler(); return myHandler.GetOrdersForInvoice(InvoiceID); }
 
         public OrderItem AddOrder(Order order)
         { OrderHandler myHandler = new OrderHandler(); return myHandler.CreateOrder(order); }

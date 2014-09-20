@@ -11,12 +11,12 @@ namespace urbanbooks
     public class InvoiceItemHandler
     {
 
-        public List<InvoiceItem> GetInvoiceItemList()
+        public List<InvoiceItem> GetInvoiceItemList(int InvoiceID)
         {
             List<InvoiceItem> invoiceItems = null;
 
-            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewInvoiceItems",
-                CommandType.StoredProcedure))
+            SqlParameter[] Params = { new SqlParameter("@InvoiceID", InvoiceID) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewInvoiceItems", CommandType.StoredProcedure, Params))
             {
                 if (table.Rows.Count > 0)
                 {
@@ -24,9 +24,10 @@ namespace urbanbooks
                     foreach (DataRow row in table.Rows)
                     {
                         InvoiceItem invoiceItem = new InvoiceItem();
-                        invoiceItem.InvoiceLineID = Convert.ToInt32(row["InvoiceLineID"]);
+                        invoiceItem.InvoiceLineID = Convert.ToInt32(row["InvoiceLineNo"]);
                         invoiceItem.ProductID = Convert.ToInt32(row["ProductID"]);
                         invoiceItem.InvoiceID = Convert.ToInt32(row["InvoiceID"]);
+                        invoiceItem.Quantity = Convert.ToInt32(row["Quantity"]);
                         invoiceItem.CartItemID = Convert.ToInt32(row["CartItemID"]);
                         invoiceItem.Price = Convert.ToDouble(row["Price"]);
                         invoiceItems.Add(invoiceItem);

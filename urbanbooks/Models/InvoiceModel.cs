@@ -11,15 +11,14 @@ namespace urbanbooks.Models
     {
         [Key]
         public int TheKey { get; set; }
-
         public Invoice myInvoice { get; set; }
         [NotMapped]
         public List<InvoiceItem> InvoiceLine { get; set; }
-
-        public Order Order { get; set; }
+        [NotMapped]
+        public List<Order> Orders { get; set; }
         [NotMapped]
         public List<OrderItem> OrderLine { get; set; }
-
-        public int MyProperty { get; set; }
+        [NotMapped]
+        public List<urbanbooks.Supplier> Suppliers { get; set; }
     }
 }

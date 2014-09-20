@@ -1,0 +1,70 @@
+﻿@using urbanbooks.Models
+@model InvoiceModel
+@{
+    ViewBag.Title = "Invoice";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Invoice</h2>
+<br />
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#home" data-toggle="tab">Invoice</a></li>
+    <li><a href="#profile" data-toggle="tab">Suppliers Involved</a></li>
+    <li><a href="#messages" data-toggle="tab">Order by Supplier</a></li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade in active" id="home">
+        <br /><br />
+        <label>@Html.DisplayNameFor(m => m.myInvoice.InvoiceID) :</label> @Html.DisplayFor(m => m.myInvoice.InvoiceID) <br />
+        <label>@Html.DisplayNameFor(m => m.myInvoice.DeliveryAddress) : </label>@Html.DisplayFor(m => m.myInvoice.DeliveryAddress) <br />
+        <label>@Html.DisplayNameFor(m => m.myInvoice.DateCreated) :</label> @Html.DisplayFor(m => m.myInvoice.DateCreated) <br />
+
+        <br /><br /><br />
+                <table class="table">
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                    @foreach (var item in Model.InvoiceLine)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(m => item.ProductID)</td>
+                            <td>@Html.DisplayFor(m => item.Quantity)</td>
+                            <td>@Html.DisplayFor(m => item.Price)</td>
+                        </tr>
+                    }
+                </table>
+
+</div>
+
+
+    <div class="tab-pane fade" id="profile">
+        <br /><br />
+        @foreach (var item in Model.Suppliers)
+        {
+            <dl>
+                <dt>@Html.DisplayNameFor(m => item.Name)</dt>
+                <dd>@Html.DisplayFor(m => item.Name)</dd>
+                <dt>@Html.DisplayNameFor(m => item.Fax)</dt>
+                <dd>@Html.DisplayFor(m => item.Fax)</dd>
+                <dt>@Html.DisplayNameFor(m => item.ContactPerson)</dt>
+                <dd>@Html.DisplayFor(m => item.ContactPerson)</dd>
+                <dt>@Html.DisplayNameFor(m => item.LastName)</dt>
+                <dd>@Html.DisplayFor(m => item.LastName)</dd>
+                <dt>@Html.DisplayNameFor(m => item.ContactPersonNumber)</dt>
+                <dd>@Html.DisplayFor(m => item.ContactPersonNumber)</dd>
+            </dl>
+            <br />
+        }
+
+    </div>
+
+
+    <div class="tab-pane fade" id="messages">
+
+    </div>
+
+
+</div>

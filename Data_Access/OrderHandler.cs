@@ -186,5 +186,31 @@ namespace urbanbooks
             return SupplierOrders;
         }
 
+        public List<Order> GetOrdersForInvoice(int InvoiceID)
+        {
+            List<Order> SupplierOrders = null;
+
+            SqlParameter[] Params = { new SqlParameter("@InvoiceID", InvoiceID) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewAllInvoiceOrders",
+                CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    SupplierOrders = new List<Order>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Order order = new Order();
+                        order.OrderNo = Convert.ToInt32(row["OrderNo"]);
+                        order.Status = Convert.ToBoolean(row["Status"]);
+                        order.DateCreated = Convert.ToDateTime(row["DateCreated"]);
+                        order.InvoiceID = Convert.ToInt32(row["InvoiceID"]);
+                        order.SupplierID = Convert.ToInt32(row["SupplierID"]);
+                        SupplierOrders.Add(order);
+                    }
+                }
+            }
+            return SupplierOrders;
+        }
+
     }
 }

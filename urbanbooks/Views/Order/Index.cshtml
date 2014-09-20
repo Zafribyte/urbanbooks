@@ -50,7 +50,7 @@
                     else { }
                     <td>
                         @Html.ActionLink("View Details", "Details", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default", data_modal = "" }) <br />
-                        @Html.ActionLink("View Invoice", "Invoice", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default" })
+                        @Html.ActionLink("View Invoice", "Invoice", new { OrderNumber = item.OrderNo, InvoiceID = item.InvoiceID }, new { @class = "btn btn-default" })
                 </td>
 
                 </tr>
@@ -83,7 +83,7 @@
                     else { }
                     <td>
                         @Html.ActionLink("View Details", "Details", new { OrderNumber = item.OrderNo }, new { htmlAttributes = new { @class = "btn btn-default", data_modal = "" } }) <br />
-                        @Html.ActionLink("View Invoice", "Invoice", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default" })
+                        @Html.ActionLink("View Invoice", "Invoice", new { OrderNumber = item.OrderNo, InvoiceID = item.InvoiceID }, new { @class = "btn btn-default" })
                 </td>
                 </tr>
 
@@ -114,7 +114,7 @@
                     else { }
                     <td>
                         @Html.ActionLink("View Details", "Details", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default", data_modal = "" }) <br />
-                        @Html.ActionLink("View Invoice", "Invoice", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default" })
+                        @Html.ActionLink("View Invoice", "Invoice", new { OrderNumber = item.OrderNo, InvoiceID = item.InvoiceID }, new { @class = "btn btn-default" })
                 </td>
 
                 </tr>

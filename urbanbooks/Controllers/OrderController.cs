@@ -67,16 +67,56 @@ namespace urbanbooks.Controllers
             return Json(new { success = true });
         }
 
-        public ActionResult Invoice(int InvoiceID)
+        public ActionResult Invoice(int OrderNumber, int InvoiceID)
         {
             #region Prep Utilities
 
             myHandler = new BusinessLogicHandler();
-
+            InvoiceModel model = new InvoiceModel();
 
             #endregion
 
-            return View();
+            #region Get Invoice Data
+            model.myInvoice = new Invoice();
+            model.myInvoice = myHandler.GetInvoice(InvoiceID);
+            #endregion
+
+            #region Get Invoice Lines
+            model.InvoiceLine = new List<InvoiceItem>();
+            model.InvoiceLine = myHandler.GetInvoiceItems(InvoiceID);
+
+            #endregion
+
+            #region Get Order
+
+            model.Orders = new List<Order>();
+            model.Orders = myHandler.GetAllOrdersForInvoice(InvoiceID);
+
+            #endregion
+
+            #region Get Order Lines
+
+            model.OrderLine = new List<OrderItem>();
+
+            foreach(var item in model.Orders)
+            {
+                model.OrderLine.AddRange(myHandler.GetOrderItemsList(item.OrderNo));
+            }
+
+            #endregion
+
+            #region View Supplier Involved
+
+            model.Suppliers = new List<urbanbooks.Supplier>();
+
+            foreach(var item in model.Orders)
+            {
+                model.Suppliers.Add(myHandler.GetSupplier(item.SupplierID));
+            }
+
+            #endregion
+
+            return View(model);
         }
 
         public ActionResult Unprocessed()
