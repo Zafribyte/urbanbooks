@@ -49,7 +49,7 @@
                         <li>@Html.ActionLink("Add new Publisher", "Create", "Publisher")</li>
                         <li>@Html.ActionLink("Manage Publishers", "Index", "Publisher")</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("Add new Author", "Create", "Author")</li>
+                        <li>@Html.ActionLink("Add new Author", "Create", "Author", null, new {data_modal = "" })</li>
                         <li>@Html.ActionLink("Manage Authors", "Index", "Author")</li>
 
                     </ul>
@@ -59,13 +59,13 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="icon-laptop"></span> Devices </a>
                     <ul class="dropdown-menu" role="menu">
                         <li>@Html.ActionLink("Add new", "Create", "Technology")</li>
-                        <li>@Html.ActionLink("Manage Devices", "Create", "Book")</li>
+                        <li>@Html.ActionLink("Manage Devices", "AdminIndex", "Technology")</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("Add new category", "Create", "Book")</li>
-                        <li>@Html.ActionLink("Manage categories", "Create", "Book")</li>
+                        <li>@Html.ActionLink("Add new category", "Create", "TechCategory")</li>
+                        <li>@Html.ActionLink("Manage categories", "Index", "TechCategory")</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("Add new manufacturer", "Create", "Book")</li>
-                        <li>@Html.ActionLink("Manage manufacturers", "Create", "Book")</li>
+                        <li>@Html.ActionLink("Add new manufacturer", "Create", "Manufacturer")</li>
+                        <li>@Html.ActionLink("Manage manufacturers", "Index", "Manufacturer")</li>
                     </ul>
                 </li>
 
@@ -93,7 +93,7 @@
                         <li>@Html.ActionLink("Manage Company Details", "Edit", "Company")</li>
                     </ul>
                 </li>
-
+                <li>@Html.NoEncodeActionLink("<span class='glyphicon glyphicon-tasks'></span> Orders", "Orders", "Index", "Order", htmlAttributes: new { @class = "btn" })</li>
             </ul>
             @Html.Partial("_LoginPartial")
         </div>

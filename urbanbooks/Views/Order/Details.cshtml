@@ -1,13 +1,49 @@
 ﻿@using urbanbooks.Models
-@model LoginViewModel
+@model OrderLineModel
 
 
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title" id="myModalLabel" style="align-content:center">Log in</h4>
+    <h4 class="modal-title" id="myModalLabel" style="align-content:center">Order Details</h4>
 </div>
 
 <div class="modal-body">
+
+    <div class="col-md-6">
+        @Html.DisplayNameFor(model => model.OrderDetails.OrderNo) <span>&nbsp;</span> @Html.DisplayFor(model => model.OrderDetails.OrderNo) <br />
+        @Html.DisplayNameFor(model => model.OrderDetails.DateCreated) <span>&nbsp;</span> @Html.DisplayFor(model => model.OrderDetails.DateCreated) <br />
+        @Html.DisplayNameFor(model => model.OrderDetails.InvoiceID) <span>&nbsp;</span> @Html.DisplayFor(model => model.OrderDetails.InvoiceID) <br />
+    </div>
+
+    <div class="col-md-6">
+        <label><strong>Supplier Details :</strong></label> <br />
+        @Html.DisplayNameFor(model => model.SupplierDetails.Name) <span>&nbsp;</span> @Html.DisplayFor(model => model.SupplierDetails.Name) <br />
+        @Html.DisplayNameFor(model => model.SupplierDetails.Fax) <span>&nbsp;</span> @Html.DisplayFor(model => model.SupplierDetails.Fax) <br />
+        <label>Contact Person Details :</label> <br />
+        @Html.DisplayNameFor(model => model.SupplierDetails.ContactPerson) <span>&nbsp;</span> @Html.DisplayFor(model => model.SupplierDetails.ContactPerson) <br />
+        @Html.DisplayNameFor(model => model.SupplierDetails.LastName) <span>&nbsp;</span> @Html.DisplayFor(model => model.SupplierDetails.LastName) <br />
+        @Html.DisplayNameFor(model => model.SupplierDetails.ContactPersonNumber) <span>&nbsp;</span> @Html.DisplayFor(model => model.SupplierDetails.ContactPersonNumber) <br />
+        <br /><br />
+    </div>
+
+    <br /><br />
+
+    <table class="table">
+        <tr>
+            <td>Product ID</td>
+            <td>Quantity</td>
+        </tr>
+        @foreach (var item in Model.OrderLineDetails)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => item.ProductID)</td>
+                <td>@Html.DisplayFor(model => item.Quantity)</td>
+            </tr>
+        }
+    </table>
+
+
+
 </div>
 
 <div class="modal-footer">

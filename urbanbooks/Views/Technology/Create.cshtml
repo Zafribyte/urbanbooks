@@ -4,16 +4,12 @@
 <link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 <link href="~/Content/chosen.min.css" rel="stylesheet" />
-<script src="~/Scripts/jquery-2.1.1.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
-<script src="~/Scripts/modalform.js"></script>
-@Scripts.Render("~/bundles/jqueryval")
 <script src="~/Scripts/jquery.multiple.select.js"></script>
 <link href="~/Content/multiple-select.css" rel="stylesheet" />
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h2>Create</h2>
@@ -136,3 +132,20 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modalform")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @Scripts.Render("~/bundles/modalform")
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/fuelux")
+}

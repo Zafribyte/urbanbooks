@@ -25,7 +25,7 @@ namespace urbanbooks.Controllers
                 }
                 else if (HttpContext.User.IsInRole("supplier"))
                 {
-                  return  RedirectToAction("Index", "Supplier");
+                  return  RedirectToAction("Home", "Supplier");
                 }
                 else if (HttpContext.User.IsInRole("employee"))
                 {

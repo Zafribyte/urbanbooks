@@ -10,7 +10,7 @@ namespace urbanbooks.Models
     {
         public SupplierContext():base("DataSocket")
         { }
-        DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
         
     }
 }

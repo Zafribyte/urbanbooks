@@ -52,7 +52,7 @@ namespace urbanbooks.Controllers
 
             #endregion
 
-           return View();
+            return PartialView(model);
         }
 
 

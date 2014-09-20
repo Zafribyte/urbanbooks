@@ -501,5 +501,15 @@ namespace urbanbooks
         { OrderHandler myHandler = new OrderHandler(); return myHandler.UpdateOrder(order); }
 
         #endregion
+
+        #region SUPPLIER ACTIONS
+
+        public List<Order> GetSupplierOrders(int SupplierID)
+        { OrderHandler myHandler = new OrderHandler(); return myHandler.GetOrdersForSupplier(SupplierID); }
+
+        public Supplier GetSupplier(string User_Id)
+        { SupplierHandler myHandler = new SupplierHandler(); return myHandler.GetSupplier(User_Id); }
+
+        #endregion
     }
 }

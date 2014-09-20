@@ -10,6 +10,17 @@
 <h4 style="text-align:center">Orders</h4>  
 <br /><br />
 
+<!--LogIn Modal PlaceHolder-->
+<div id="myModal" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="myModalContent">
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <ul class="nav nav-tabs" role="tablist">
     <li class="active"><a href="#Pending" role="tab" data-toggle="tab">Pending Orders</a></li>
     <li><a href="#Completed" role="tab" data-toggle="tab">Completed Orders</a></li>
@@ -37,7 +48,11 @@
                     @if(item.Status == false)
                     {<td><label class="alert alert-warning">Pending</label></td> }
                     else { }
-                    <td>@Html.ActionLink("View Details", "Details", new { OrderNumber = item.OrderNo }, new{htmlAttributes= new { @class="btn btn-default" }})</td>
+                    <td>
+                        @Html.ActionLink("View Details", "Details", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default", data_modal = "" }) <br />
+                        @Html.ActionLink("View Invoice", "Invoice", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default" })
+                </td>
+
                 </tr>
 
             }
@@ -66,7 +81,10 @@
                     {
                     <td><label class="alert alert-warning">Pending</label></td> }
                     else { }
-                    <td>@Html.ActionLink("View Details", "Details", new { productId = item.OrderNo }, new { htmlAttributes = new { @class = "btn btn-default" } })</td>
+                    <td>
+                        @Html.ActionLink("View Details", "Details", new { OrderNumber = item.OrderNo }, new { htmlAttributes = new { @class = "btn btn-default", data_modal = "" } }) <br />
+                        @Html.ActionLink("View Invoice", "Invoice", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default" })
+                </td>
                 </tr>
 
                 }
@@ -94,7 +112,11 @@
                     {
                     <td><label class="alert alert-warning">Pending</label></td> }
                     else { }
-                    <td>@Html.ActionLink("View Details", "Details", new { productId = item.OrderNo }, new { htmlAttributes = new { @class = "btn btn-default" } })</td>
+                    <td>
+                        @Html.ActionLink("View Details", "Details", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default", data_modal = "" }) <br />
+                        @Html.ActionLink("View Invoice", "Invoice", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default" })
+                </td>
+
                 </tr>
 
             }

@@ -25,7 +25,7 @@ namespace urbanbooks.Controllers
         [Authorize(Roles="admin, employee")]
         public ActionResult Create()
         {
-                return View();
+            return PartialView();
         }
 
         [Authorize(Roles = "admin, employee")]

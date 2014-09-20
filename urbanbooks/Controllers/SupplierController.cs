@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web;
 using System.Web.Mvc;
 using urbanbooks.Models;
+using System.Collections;
 
 namespace urbanbooks.Controllers
 {
@@ -28,6 +29,41 @@ namespace urbanbooks.Controllers
             return View();
         }
 
+        [Authorize(Roles="supplier")]
+        public ActionResult Home()
+        {
+            #region Prep Utilities
+
+            myHandler = new BusinessLogicHandler();
+            Supplier supplier = new Supplier();
+
+            #endregion
+
+            #region Get User(Supplier)
+
+            string userName = User.Identity.GetUserName();
+            ApplicationDbContext dataSocket = new ApplicationDbContext();
+            UserStore<ApplicationUser> myStore = new UserStore<ApplicationUser>(dataSocket);
+            _userManager = new ApplicationUserManager(myStore);
+            var user = _userManager.FindByEmail(userName);
+
+            #endregion
+
+            #region Get Supplier Details
+
+            supplier = myHandler.GetSupplier(user.Id);
+
+            #endregion
+
+            #region Get Orders For Supplier
+
+            IEnumerable<Order> orders = myHandler.GetSupplierOrders(supplier.SupplierID);
+
+            #endregion
+
+            return View(orders);
+        }
+
         public ActionResult Create()
         {
             return View();
@@ -35,19 +71,37 @@ namespace urbanbooks.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(RegisterSupplier model)
         {
-            ApplicationDbContext dataSocket = new ApplicationDbContext();
-            UserStore<ApplicationUser> myStore = new UserStore<ApplicationUser>(dataSocket);
+            #region Prep Utilities
+            SupplierContext dataSocket = new SupplierContext();
+            ApplicationDbContext context = new ApplicationDbContext();
+            var roleStore = new RoleStore<IdentityRole>(context);
+            UserStore<ApplicationUser> myStore = new UserStore<ApplicationUser>(context);
             ApplicationUserManager userMgr = new ApplicationUserManager(myStore);
+            var roleManager = new RoleManager<IdentityRole>(roleStore);
+            #endregion
+
             try
             {
-                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, Address = model.Address, PhoneNumber = model.ContactPersonNumber };
-                Models.Supplier supplier = new Models.Supplier { Name = model.Name, ContactPerson = model.ContactPerson, Fax = model.Fax, ContactPersonNumber = model.ContactPersonNumber, LastName = model.LastName, User_Id = user.Id };
-                user.Carts = new Cart { DateLastModified = DateTime.Now };
-                user.Wishlists = new Wishlist { Status = false };
-                IdentityResult result = await userMgr.CreateAsync(user, model.Password);
-                dataSocket.Suppliers.Add(supplier);
+                if (ModelState.IsValid)
+                {
+                    #region Register Supplier
 
-                dataSocket.SaveChanges();
+                    var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, Address = model.Address, PhoneNumber = model.ContactPersonNumber };
+                    Models.Supplier supplier = new Models.Supplier { Name = model.Name, ContactPerson = model.ContactPerson, Fax = model.Fax, ContactPersonNumber = model.ContactPersonNumber, LastName = model.LastName, User_Id = user.Id };
+                    user.Carts = new Cart { DateLastModified = DateTime.Now };
+                    user.Wishlists = new Wishlist { Status = false };
+                    IdentityResult result = await userMgr.CreateAsync(user, model.Password);
+                    roleManager.Create(new IdentityRole { Name = "supplier" });
+                    userMgr.AddToRole(user.Id, "supplier");
+                    //dataSocket.Suppliers.Add(supplier);
+                    dataSocket.Suppliers.Add(supplier);
+
+                    dataSocket.SaveChanges();
+
+                     #endregion
+
+                    return View("Home");
+                }
 
                 return View();
 

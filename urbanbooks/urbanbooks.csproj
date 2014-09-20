@@ -214,6 +214,10 @@
     <Compile Include="Migrations\201409190901088_pps.Designer.cs">
       <DependentUpon>201409190901088_pps.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409201138226_context.cs" />
+    <Compile Include="Migrations\201409201138226_context.Designer.cs">
+      <DependentUpon>201409201138226_context.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\OrderLineModel.cs" />
     <Compile Include="Models\RestoreModelStateFromTempDataAttribute.cs" />
     <Compile Include="Models\SetTempDataModelStateAttribute.cs" />
@@ -480,7 +484,7 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
-    <Content Include="Views\Shared\_EmployeeLayout.cshtml" />
+    <Content Include="Views\Shared\_SupplierLayout.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
@@ -546,6 +550,8 @@
     <Content Include="Views\Manufacturer\Delete.cshtml" />
     <Content Include="Views\TechCategory\Index.cshtml" />
     <Content Include="Views\TechCategory\Create.cshtml" />
+    <Content Include="Views\Order\Details.cshtml" />
+    <Content Include="Views\Supplier\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
@@ -637,6 +643,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409190901088_pps.resx">
       <DependentUpon>201409190901088_pps.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409201138226_context.resx">
+      <DependentUpon>201409201138226_context.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

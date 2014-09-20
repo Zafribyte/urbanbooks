@@ -49,10 +49,7 @@ namespace urbanbooks
                     order = new Order();
                     order.OrderNo = Convert.ToInt32(row["OrderNo"]);
                     order.DateCreated = Convert.ToDateTime(row["DateCreated"]);
-                    order.DateSent = Convert.ToDateTime(row["DateSent"]);
-                    order.DateLastModified = Convert.ToDateTime(row["DateLastModified"]);
                     order.SupplierID = Convert.ToInt32(row["SupplierID"]);
-                    order.EmployeeID = Convert.ToInt32(row["EmployeeID"]);
                     order.InvoiceID = Convert.ToInt32(row["InvoiceID"]);
                     order.Status = Convert.ToBoolean(row["Status"]);
 
@@ -163,6 +160,30 @@ namespace urbanbooks
                 }
             }
             return OrdersList;
+        }
+
+        public List<Order> GetOrdersForSupplier(int SupplierID)
+        {
+            List<Order> SupplierOrders = null;
+
+            SqlParameter[] Params = { new SqlParameter("@SupplierID", SupplierID) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewAllSupplierOrders",
+                CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    SupplierOrders = new List<Order>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Order order = new Order();
+                        order.OrderNo = Convert.ToInt32(row["OrderNo"]);
+                        order.Status = Convert.ToBoolean(row["Status"]);
+                        order.DateCreated = Convert.ToDateTime(row["DateCreated"]);
+                        SupplierOrders.Add(order);
+                    }
+                }
+            }
+            return SupplierOrders;
         }
 
     }
