@@ -38,9 +38,9 @@
                     <ul class="dropdown-menu" role="menu">
                         <li>@Html.ActionLink("All Books", "Index", "Book")</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("Textbooks", "ByCategory", "Book", new { name="textbook", CategoryID=0}, null)</li>
-                        <li>@Html.ActionLink("Fiction", "ByCategory", "Book")</li>
-                        <li>@Html.ActionLink("Non Fiction", "ByCategory", "Book")</li>
+                        <li>@Html.ActionLink("Textbooks", "ByCategory", "Book", new { name="textbook", CategoryID=10}, null)</li>
+                        <li>@Html.ActionLink("Cook books", "ByCategory", "Book", new { name = "cookbook", CategoryID = 0 }, null)</li>
+                        <li>@Html.ActionLink("Sports", "ByCategory", "Book", new { name = "sports", CategoryID = 0 }, null)</li>
                         <li>@Html.ActionLink("Children's", "ByCategory", "Book", new { name = "children", CategoryID=0 }, null)</li>
                         <li class="divider"></li>
                         <li>@Html.ActionLink("More Categories", "Categories", "Book")</li>

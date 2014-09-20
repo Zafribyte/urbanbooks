@@ -363,5 +363,11 @@ namespace urbanbooks.Controllers
 
             return View(SModel);
         }
+
+        [HttpPost]
+        public ActionResult AdminSearch(FormCollection collection)
+        {
+            return View();
+        }
     }
 }

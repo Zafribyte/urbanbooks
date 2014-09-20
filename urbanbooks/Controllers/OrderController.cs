@@ -66,8 +66,23 @@ namespace urbanbooks.Controllers
             
             return Json(new { success = true });
         }
-        
-        
+
+
+        public ActionResult Unprocessed()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Unprocessed(FormCollection collection)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Search()
+        {
+            return View();
+        }
 
         public ActionResult Edit(int id)
         {
