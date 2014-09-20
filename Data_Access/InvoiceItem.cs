@@ -22,9 +22,9 @@ namespace urbanbooks
         [ScaffoldColumn(false)]
         public int CartItemID 
         { get; set; }
-        [ScaffoldColumn(false)]
         public int Quantity 
         { get; set; }
+        [DataType(DataType.Currency)]
         public double Price 
         { get; set; }
 

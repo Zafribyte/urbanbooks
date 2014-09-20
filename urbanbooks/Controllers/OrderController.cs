@@ -8,7 +8,7 @@ using urbanbooks.Models;
 
 namespace urbanbooks.Controllers
 {
-    [Authorize(Roles = "admin, employee")]
+    [Authorize(Roles = "admin, supplier")]
     public class OrderController : Controller
     {
         BusinessLogicHandler myHandler;
@@ -34,7 +34,6 @@ namespace urbanbooks.Controllers
 
             return View(model);
         }
-
         public ActionResult Details(int OrderNumber)
         {
             #region Prep Utilities

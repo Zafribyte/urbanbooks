@@ -63,7 +63,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.books.ISBN, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.books.ISBN, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.books.ISBN, new { htmlAttributes = new { @class = "form-control",id="isbn", @placeholder = "10 or 13 Digit ISBN", data_toggle = "popover", title = "What is this ISBN?", data_content = "10 or 13 Digit Code found on the back of a book. Head over to our FAQs for more info " } })
                 @Html.ValidationMessageFor(model => model.books.ISBN, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -153,6 +153,7 @@
                     $(".olden").val(" ");
                 }
             });
+            $('#isbn').focus($('#isbn').popover());
         </script>
 
         <div class="form-group">

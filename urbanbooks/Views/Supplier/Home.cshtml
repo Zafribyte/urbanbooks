@@ -5,63 +5,195 @@
     Layout = "~/Views/Shared/_SupplierLayout.cshtml";
 }
 
+<div id="myModal" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="myModalContent">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br /><br />
 <h4>New orders</h4>
+<br /><br />
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.DateCreated)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateLastModified)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateSent)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InvoiceID)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateCreated)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateLastModified)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateSent)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InvoiceID)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.OrderNo }) |
-            @Html.ActionLink("Details", "Details", new { id=item.OrderNo }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.OrderNo })
-        </td>
-    </tr>
-}
 
-</table>
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#home" data-toggle="tab">Orders Placed Today</a></li>
+    <li><a href="#profile" data-toggle="tab">Pending Orders</a></li>
+    <li><a href="#messages" data-toggle="tab">Complete Orders</a></li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade in active" id="home">
+        <br /><br />
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateCreated)
+                </th>
+                <th>
+                    Actions
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                string returnUrl = HttpContext.Current.Request.RawUrl;
+                if (item.DateCreated == DateTime.Today.Date)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateCreated)
+                        </td>
+                        <td>
+                            @Html.ActionLink("View Details", "Details","Order", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default", data_modal = "" })
+                        </td>
+                        @if (item.Status == false)
+                        {
+                            <td>
+                                <label class="alert alert-warning">Pending</label>
+                            </td>
+                        }
+                        <td>
+                            @Html.ActionLink("Complete", "ProcessOrder", "Order", new { id = item.OrderNo, returnUrl =  returnUrl }, new { @class = "btn btn-default btn-success" })
+                        </td>
+                    </tr>
+                }
+            }
+
+        </table>
+
+    </div>
+
+
+    <div class="tab-pane fade" id="profile">
+        <br /><br />
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateCreated)
+                </th>
+                <th>
+                    Actions
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                string returnUrl = HttpContext.Current.Request.RawUrl;
+                if (item.DateCreated < DateTime.Today.Date && item.Status == false)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateCreated)
+                        </td>
+                        <td>
+                            @Html.ActionLink("View Details", "Details", "Order", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default", data_modal = "" })
+                        </td>
+                        @if (item.Status == false)
+                        {
+                            <td>
+                                <label class="alert alert-warning">Pending</label>
+                            </td>
+                        }
+                        <td>
+                            @Html.ActionLink("Complete", "ProcessOrder", "Order", new { id = item.OrderNo, returnUrl = returnUrl }, new { @class = "btn btn-default btn-success" })
+                        </td>
+                    </tr>
+                }
+            }
+
+        </table>
+
+
+    </div>
+
+
+    <div class="tab-pane fade" id="messages">
+        <br /><br /><br />
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateCreated)
+                </th>
+                <th>
+                    Actions
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                string returnUrl = HttpContext.Current.Request.RawUrl;
+                if (item.Status == true)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateCreated)
+                        </td>
+                        <td>
+                           @Html.ActionLink("View Details", "Details", "Order", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default", data_modal = "" })
+                        </td>
+                        @if (item.Status == false)
+                        {
+                            <td>
+                                <label class="alert alert-warning">Pending</label>
+                            </td>
+                        }
+                        <td>
+                            @Html.ActionLink("Complete", "ProcessOrder", "Order", new { id = item.OrderNo, returnUrl = returnUrl }, new { @class = "btn btn-default btn-success" })
+                        </td>
+                    </tr>
+                }
+            }
+
+        </table>
+
+    </div>
+</div>
 
 
 
 
 @section Scripts {
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/modalform")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/themes/base/css")
