@@ -67,16 +67,27 @@ namespace urbanbooks.Controllers
             return Json(new { success = true });
         }
 
+        public ActionResult Invoice(int InvoiceID)
+        {
+            #region Prep Utilities
+
+            myHandler = new BusinessLogicHandler();
+
+
+            #endregion
+
+            return View();
+        }
 
         public ActionResult Unprocessed()
         {
             return View();
-        }
+        } //SUPPLIER
         [HttpPost]
         public ActionResult Unprocessed(FormCollection collection)
         {
             return View();
-        }
+        } //SUPPLIER
 
         [HttpPost]
         public ActionResult Search()

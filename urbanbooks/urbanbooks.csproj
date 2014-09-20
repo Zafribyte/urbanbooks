@@ -218,6 +218,7 @@
     <Compile Include="Migrations\201409201138226_context.Designer.cs">
       <DependentUpon>201409201138226_context.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\InvoiceModel.cs" />
     <Compile Include="Models\OrderLineModel.cs" />
     <Compile Include="Models\RestoreModelStateFromTempDataAttribute.cs" />
     <Compile Include="Models\SetTempDataModelStateAttribute.cs" />
@@ -528,7 +529,6 @@
     <Content Include="Views\Author\Create.cshtml" />
     <Content Include="Views\Book\Details.cshtml" />
     <Content Include="Views\Technology\AdminDetails.cshtml" />
-    <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\Account\Restricted.cshtml" />
     <Content Include="Views\Search\BooksAdvanced.cshtml" />

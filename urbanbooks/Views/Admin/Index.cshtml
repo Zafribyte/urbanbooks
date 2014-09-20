@@ -4,5 +4,26 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2 style="text-align:center">Welcome : </h2>
 
+<div class="row">
+    <br />
+    <div class="col-md-6">
+        <div class="thumbnail" style="text-align:center">
+            <label class="caption">Total Book Sales</label><br />
+            @Html.ActionLink("Learn More", "Controller", null, new { @class="btn btn-default"})
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="thumbnail" style="text-align:center">
+            <label class="caption">Total Technology Sales</label><br />
+            @Html.ActionLink("Learn More", "Controller", null, new { @class = "btn btn-default" })
+        </div>
+    </div>
+</div>
+
+<br /><br />
+
+<div class="row">
+    <h4 style="text-align:center">Total Sales</h4>
+</div>
