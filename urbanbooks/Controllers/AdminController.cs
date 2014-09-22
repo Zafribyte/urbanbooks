@@ -32,7 +32,7 @@ namespace urbanbooks.Controllers
         [HttpPost]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         [WebMethod]
-        public ActionResult BookSales()
+        public JsonResult BookSales()
         {
 
             #region Prep Utilities
@@ -57,7 +57,7 @@ namespace urbanbooks.Controllers
                           select new {soldT.Price, soldT.Quantity, category.CategoryName };
 
             var chartData  = new object[dataSet.Count()+1];
-            chartData[0] = new object[] {"Book Category", "Total Sales" };
+            chartData[0] = new object[] {"BookCategory", "TotalSales" };
             int count = 0;
 
             foreach(var item in dataSet)
