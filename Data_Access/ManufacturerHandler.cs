@@ -10,6 +10,30 @@ namespace urbanbooks
 {
     public class ManufacturerHandler
     {
+
+        public List<Manufacturer> ManufacturerGlobalSearch(string query)
+        {
+            List<Manufacturer> manufacturerList = null;
+
+            SqlParameter[] Params = { new SqlParameter("@Search", query) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ManufacturerGlobalSearch",
+                CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    manufacturerList = new List<Manufacturer>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Manufacturer manufacturer = new Manufacturer();
+                        manufacturer.ManufacturerID = Convert.ToInt32(row["ManufacturerID"]);
+                        manufacturer.Name = row["Name"].ToString();
+                        manufacturerList.Add(manufacturer);
+                    }
+                }
+            }
+            return manufacturerList;
+        }
+
         public List<Manufacturer> GetManufacturerList()
         {
             List<Manufacturer> ManufacturerList = null;

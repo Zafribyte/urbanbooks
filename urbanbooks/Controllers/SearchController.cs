@@ -33,6 +33,8 @@ namespace urbanbooks.Controllers
             result.AuthorResults = myHandler.AuthorGlobalSearch(query);
             result.GadgetResults = myHandler.TechnologyGlobalSearch(query);
             result.GadgetCategoryResults = myHandler.DeviceGlobalSearch(query);
+            result.ManufacturerResults = myHandler.ManufacturerGlobalSearch(query);
+            result.PublisherResults = myHandler.PublisherGlobalSearch(query);
             #endregion
 
             return View(result);
@@ -363,11 +365,62 @@ namespace urbanbooks.Controllers
 
             return View(SModel);
         }
-
+        [Authorize(Roles="admin")]
         [HttpPost]
-        public ActionResult AdminSearch(FormCollection collection)
+        public ActionResult AdminBookSearch(FormCollection collection)
         {
-            return View();
+            #region Get Search Query
+
+            string query = collection.GetValue("query").AttemptedValue;
+
+            #endregion
+
+            #region Prep Utilities
+
+            BusinessLogicHandler myHandler = new BusinessLogicHandler();
+            SearchViewModel model = new SearchViewModel();
+
+            #endregion
+
+            #region Execute Search
+
+            model.Query = query;
+            model.BookResults = myHandler.BookGlobalSearch(query);
+            model.BookCategoryResults = myHandler.BookCategoryGlobalSearch(query);
+            model.AuthorResults = myHandler.AuthorGlobalSearch(query);
+            model.PublisherResults = myHandler.PublisherGlobalSearch(query);
+
+            #endregion
+
+            return View(model);
+        }
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public ActionResult AdminDeviceSearch(FormCollection collection)
+        {
+            #region Get Search Query
+
+            string query = collection.GetValue("query").AttemptedValue;
+
+            #endregion
+
+            #region Prep Utilities
+
+            BusinessLogicHandler myHandler = new BusinessLogicHandler();
+            SearchViewModel model = new SearchViewModel();
+
+            #endregion
+
+            #region Execute Search
+
+            model.Query = query;
+            model.GadgetResults = myHandler.TechnologyGlobalSearch(query);
+            model.GadgetCategoryResults = myHandler.DeviceGlobalSearch(query);
+            model.ManufacturerResults = myHandler.ManufacturerGlobalSearch(query);
+
+            #endregion
+
+            return View(model);
         }
     }
 }

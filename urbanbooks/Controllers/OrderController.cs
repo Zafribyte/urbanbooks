@@ -128,6 +128,22 @@ namespace urbanbooks.Controllers
             return View();
         } //SUPPLIER
 
+        public ActionResult ProcessOrder(int OrderNumber, string returnUrl) 
+        {
+            if(OrderNumber != 0)
+            {
+                myHandler = new BusinessLogicHandler();
+                order = new Order();
+                order.OrderNo = OrderNumber;
+                order.DateLastModified = DateTime.Now;
+                myHandler.UpdateOrder(order);
+
+               return Redirect(returnUrl);
+            }
+
+            return Redirect(returnUrl);
+        }
+
         [HttpPost]
         public ActionResult Search()
         {

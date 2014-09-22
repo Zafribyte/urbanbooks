@@ -32,6 +32,29 @@ namespace urbanbooks
             return PublisherList;
         }
 
+        public List<Publisher> PublisherGlobalSearch(string query)
+        {
+            List<Publisher> publisherList = null;
+
+            SqlParameter[] Params = { new SqlParameter("@Search", query) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_PublisherGlobalSearch",
+                CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    publisherList = new List<Publisher>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Publisher publisher = new Publisher();
+                        publisher.PublisherID = Convert.ToInt32(row["PublisherID"]);
+                        publisher.Name = row["Name"].ToString();
+                        publisherList.Add(publisher);
+                    }
+                }
+            }
+            return publisherList;
+        }
+
         public Publisher GetPublisherDeatils(int SpecialID)
         {
             Publisher publisher = null;

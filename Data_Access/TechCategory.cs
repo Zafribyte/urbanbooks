@@ -13,9 +13,13 @@ namespace urbanbooks
         [ScaffoldColumn(false)]
         public int TechCategoryID 
         { get; set; }
+        [Required]
         [Display(Name="Category")]
         public string CategoryName 
         { get; set; }
+        [Required]
+        [DataType(DataType.MultilineText)]
+        [Display(Name="Category Description")]
         public string CategoryDescription 
         { get; set; }
     }

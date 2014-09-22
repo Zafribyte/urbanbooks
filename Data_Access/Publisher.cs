@@ -13,6 +13,7 @@ namespace urbanbooks
         [ScaffoldColumn(false)]
         public int PublisherID { get; set; }
         [Display(Name="Publisher")]
+        [Required]
         public string Name { get; set; }
 
     }

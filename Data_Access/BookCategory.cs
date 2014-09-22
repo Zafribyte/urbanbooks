@@ -14,8 +14,11 @@ namespace urbanbooks
         public int BookCategoryID
         { get; set; }
         [Display(Name="Book Category Description")]
+        [DataType(DataType.MultilineText)]
+        [Required]
         public string CategoryDescription
         { get; set; }
+        [Required]
         [Display(Name="Book Category")]
         public string CategoryName 
         { get; set; }

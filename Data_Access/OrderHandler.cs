@@ -94,8 +94,9 @@ namespace urbanbooks
         {
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@DateModified", order.DateLastModified),
-                new SqlParameter("@EmployeeID", order.EmployeeID )
+                new SqlParameter("@OrderNo", order.OrderNo),
+                new SqlParameter("@DateLastModified", order.DateLastModified ),
+                new SqlParameter("@Status", true)
             };
             return DataProvider.ExecuteNonQuery("sp_UpdateOrder", CommandType.StoredProcedure,
                 Params);

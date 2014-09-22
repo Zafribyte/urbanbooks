@@ -26,6 +26,8 @@ namespace urbanbooks.Models
         public List<BookCategory> bookCategory { get; set; }
         [NotMapped]
         public List<Book> book { get; set; }
+        [NotMapped]
+        public List<Publisher> Publishers { get; set; }
         public BookCategory bc
         { get; set; }
         public Book books { get; set; }

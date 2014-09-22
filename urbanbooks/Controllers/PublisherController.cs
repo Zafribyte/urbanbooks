@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using urbanbooks.Models;
 using System.Web.Mvc;
 
 namespace urbanbooks.Controllers
 {
     public class PublisherController : Controller
     {
-        // GET: Publisher
+        
         public ActionResult Index()
         {
             BusinessLogicHandler myHandler = new BusinessLogicHandler();
@@ -23,14 +24,12 @@ namespace urbanbooks.Controllers
             publisher = myHandler.GetPublisher(id);
             return View(publisher);
         }
-
-        // GET: Publisher/Create
+        [Authorize(Roles="admin")]
         public ActionResult Create()
         {
             return View();
         }
-
-        // POST: Publisher/Create
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Create(Publisher publisher)
         {
@@ -45,11 +44,12 @@ namespace urbanbooks.Controllers
                 return View();
             }
         }
-
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int id)
         {
             return View();
         }
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Edit(Publisher publisher)
         {
@@ -64,14 +64,26 @@ namespace urbanbooks.Controllers
                 return View();
             }
         }
+        [AllowAnonymous]
+        public ActionResult Books(int PublisherID)
+        {
 
-        // GET: Publisher/Delete/5
+            #region Prep Utilities
+            BusinessLogicHandler myHandler = new BusinessLogicHandler();
+            SearchViewModel model = new SearchViewModel();
+            #endregion
+
+            #region Get Publisher Books
+            model.BookResults = myHandler.GetBooksByPublisher(PublisherID);
+            #endregion
+            return View(model);
+        }
+        [Authorize(Roles = "admin")]
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Publisher/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

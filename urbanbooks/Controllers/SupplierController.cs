@@ -58,7 +58,7 @@ namespace urbanbooks.Controllers
             #region Get Orders For Supplier
 
             IEnumerable<Order> orders = myHandler.GetSupplierOrders(supplier.SupplierID);
-
+            orders.OrderBy(m => m.DateCreated);
             #endregion
 
             return View(orders);

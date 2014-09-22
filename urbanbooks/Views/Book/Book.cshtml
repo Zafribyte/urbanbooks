@@ -47,7 +47,9 @@
             @Html.DisplayNameFor(model => model.publisher.Name)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.publisher.Name)
+            @foreach (var item in Model.Publishers)
+            {
+                @Html.ActionLink("" + item.Name, "Books", "Publisher", new { PublisherID = item.PublisherID }, null)}
         </dd>
         <dt>Actions</dt>
         <dd>

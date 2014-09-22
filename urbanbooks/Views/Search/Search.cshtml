@@ -105,10 +105,36 @@
 
     </div>
 }
+@if(Model.ManufacturerResults != null)
+{
+    <hr />
+    <h4>Device Manufacturers</h4>
+    <div class="row">
+        <ul>
+            @foreach (var item in Model.ManufacturerResults)
+            {
+                <li>@Html.ActionLink("" + item.Name, "ByCategory", "Technology", new { ManufacturerID = item.ManufacturerID}, null)</li>
+            }
+        </ul>
+    </div>
+}
+@if(Model.PublisherResults != null)
+{
+    <hr />
+    <h4>Publishers</h4>
+    <div class="row">
+        <ul>
+            @foreach (var item in Model.PublisherResults)
+            {
+                <li>@Html.ActionLink("" + item.Name, "Books", "Publisher", new { PublisherID = item.PublisherID}, null)</li>
+            }
+        </ul>
+    </div>
+}
 @if(Model == null)
 {
     <div class="row">
-        <p>Sorry ! No results matching your query where found</p>
+        <p>Sorry ! No results matching your query where found :(</p>
     </div>
 }
 

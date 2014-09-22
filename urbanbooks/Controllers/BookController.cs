@@ -75,6 +75,8 @@ namespace urbanbooks.Controllers
             pub = myHandler.GetPublisher(book.PublisherID);
             model.publisher = new Publisher();
             model.publisher = pub;
+            model.Publishers = new List<Publisher>();
+            model.Publishers.Add(pub);
 
             #endregion
 

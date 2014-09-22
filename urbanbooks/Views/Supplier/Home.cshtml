@@ -122,7 +122,7 @@
                             </td>
                         }
                         <td>
-                            @Html.ActionLink("Complete", "ProcessOrder", "Order", new { id = item.OrderNo, returnUrl = returnUrl }, new { @class = "btn btn-default btn-success" })
+                            @Html.ActionLink("Complete", "ProcessOrder", "Order", new { OrderNumber = item.OrderNo, returnUrl = returnUrl }, new { @class = "btn btn-default btn-success" })
                         </td>
                     </tr>
                 }
@@ -150,7 +150,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Status)
                 </th>
-                <th></th>
+                <th>
+                    Date Completed
+                </th>
             </tr>
 
             @foreach (var item in Model)
@@ -166,7 +168,7 @@
                             @Html.DisplayFor(modelItem => item.DateCreated)
                         </td>
                         <td>
-                           @Html.ActionLink("View Details", "Details", "Order", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default", data_modal = "" })
+                            @Html.ActionLink("View Details", "Details", "Order", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default", data_modal = "" })
                         </td>
                         @if (item.Status == false)
                         {
@@ -175,7 +177,10 @@
                             </td>
                         }
                         <td>
-                            @Html.ActionLink("Complete", "ProcessOrder", "Order", new { id = item.OrderNo, returnUrl = returnUrl }, new { @class = "btn btn-default btn-success" })
+                            <label class="alert alert-success">Complete</label>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateLastModified)
                         </td>
                     </tr>
                 }

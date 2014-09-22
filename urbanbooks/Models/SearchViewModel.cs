@@ -23,8 +23,22 @@ namespace urbanbooks.Models
         [NotMapped]
         public IEnumerable<Author> AuthorResults { get; set; }
         [NotMapped]
+        public IEnumerable<Publisher> PublisherResults { get; set; }
+        [NotMapped]
+        public IEnumerable<Manufacturer> ManufacturerResults { get; set; }
+        [NotMapped]
         public BookCategory BCategory { get; set; }
         [NotMapped]
         public TechCategory TCategory { get; set; }
+        [NotMapped]
+        public Publisher Publisher { get; set; }
+        [NotMapped]
+        public Manufacturer Manufacturer { get; set; }
+        [NotMapped]
+        public Author Author { get; set; }
+        [NotMapped]
+        public Technology Gadget { get; set; }
+        [NotMapped]
+        public Book Book { get; set; }
     }
 }
