@@ -12,6 +12,8 @@ namespace urbanbooks
         #region COMMON ACTIONS
 
 
+        public List<InvoiceItem> Sales()
+        { InvoiceItemHandler myHandler = new InvoiceItemHandler(); return myHandler.InvoiceItems(); }
         public List<Book> GetBooksByPublisher(int PublisherId)
         { BookHandler myHandler = new BookHandler(); return myHandler.GetPublisherBooks(PublisherId); }
         public List<Publisher> PublisherGlobalSearch(string query)

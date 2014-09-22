@@ -3,20 +3,113 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+
+
+<script src="~/Scripts/jqPlot/jquery.jqplot.min.js"></script>
+<script src="~/Scripts/jqPlot/jquery.jqplot.js"></script>
+<link href="~/Scripts/jqPlot/jquery.jqplot.min.css" rel="stylesheet" />
+<link href="~/Scripts/jqPlot/jquery.jqplot.css" rel="stylesheet" />
+
+
+<script src="~/Scripts/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Work', 11],
+          ['Eat', 2],
+          ['Commute', 2],
+          ['Watch TV', 2],
+          ['Sleep', 7]
+        ]);
+
+        var options = {
+            title: '',
+            legend: { position: 'none' },
+            'width': 600,
+            'height': 600
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('bookSales'));
+
+        chart.draw(data, options);
+    }
+</script>
+
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Work', 13],
+          ['Eat', 1],
+          ['Commute', 3],
+          ['Watch TV', 1],
+          ['Sleep', 6]
+        ]);
+
+        var options = {
+            title: '',
+            legend: { position: 'none' },
+            'width': 600,
+            'height': 600
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('deviceSales'));
+
+        chart.draw(data, options);
+    }
+</script>
+
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Genre', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General',
+           'Western', 'Literature', { role: 'annotation' }],
+          ['2010', 10, 24, 20, 32, 18, 5, ''],
+          ['2020', 16, 22, 23, 30, 16, 9, ''],
+          ['2030', 28, 19, 29, 30, 12, 13, '']
+        ]);
+
+        var options = {
+            width: 600,
+            height: 400,
+            legend: { position: 'none' },
+            bar: { groupWidth: '75%' },
+            isStacked: true
+        };
+        var chart = new google.visualization.BarChart(document.getElementById("yearLy"));
+        chart.draw(data, options);
+    }
+</script>
+
+
+
 
 <h2 style="text-align:center">Welcome : </h2>
-
 <div class="row">
     <br />
     <div class="col-md-6">
-        <div class="thumbnail" style="text-align:center">
+        <div class="thumbnail" style="text-align:center; align-content:center">
             <label class="caption">Total Book Sales</label><br />
+            <div id="bookSales"></div>
             @Html.ActionLink("Learn More", "Controller", null, new { @class="btn btn-default"})
         </div>
     </div>
     <div class="col-md-6">
         <div class="thumbnail" style="text-align:center">
             <label class="caption">Total Technology Sales</label><br />
+            <div id="deviceSales"></div>
             @Html.ActionLink("Learn More", "Controller", null, new { @class = "btn btn-default" })
         </div>
     </div>
@@ -26,4 +119,6 @@
 
 <div class="row">
     <h4 style="text-align:center">Total Sales</h4>
+    <div id="yearLy"></div>
 </div>
+

@@ -11,6 +11,34 @@ namespace urbanbooks
     public class InvoiceItemHandler
     {
 
+        public List<InvoiceItem> InvoiceItems()
+        {
+            List<InvoiceItem> invoiceItemList = null;
+
+            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_InvoiceItems_Sales",
+                CommandType.StoredProcedure))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    invoiceItemList = new List<InvoiceItem>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        InvoiceItem item = new InvoiceItem();
+                        item.CartItemID = (int)row["CartItemID"];
+                        item.ProductID = (int)row["ProductID"];
+                        item.InvoiceID = Convert.ToInt32(row["InvoiceID"]);
+                        item.InvoiceLineID = Convert.ToInt32(row["InvoiceLineNo"]);
+                        item.Price = Convert.ToDouble(row["Price"]);
+                        item.Quantity = Convert.ToInt32(row["Quantity"]);
+                        invoiceItemList.Add(item);
+
+
+                    }
+                }
+            }
+            return invoiceItemList;
+        }
+
         public List<InvoiceItem> GetInvoiceItemList(int InvoiceID)
         {
             List<InvoiceItem> invoiceItems = null;
