@@ -12,5 +12,9 @@ namespace urbanbooks.Controllers
         {
             return View();
         }
+        public ActionResult Documentation()
+        {
+            return View();
+        }
     }
 }

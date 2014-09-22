@@ -560,6 +560,7 @@
     <Content Include="Views\Search\AdminBookSearch.cshtml" />
     <Content Include="Views\Search\AdminDeviceSearch.cshtml" />
     <Content Include="Views\Publisher\Books.cshtml" />
+    <Content Include="Views\Help\Documentation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
