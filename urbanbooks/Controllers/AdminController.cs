@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Script.Services;
+using System.Web.Services;
 
 namespace urbanbooks.Controllers
 {
@@ -27,8 +29,48 @@ namespace urbanbooks.Controllers
         {
             return View();
         }
+        [HttpPost]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        [WebMethod]
+        public ActionResult BookSales()
+        {
 
-        // POST: Admin/Create
+            #region Prep Utilities
+
+            BusinessLogicHandler myHandler = new BusinessLogicHandler();
+
+            #endregion
+
+            #region Get Data
+
+            IEnumerable<InvoiceItem> soldItems = myHandler.Sales();
+            IEnumerable<Book> books = myHandler.GetBooks();
+            IEnumerable<BookCategory> categories = myHandler.GetBookCategoryList();
+
+            #endregion
+
+            #region Build Data Set
+
+            var dataSet = from soldT in soldItems
+                          join book in books on soldT.ProductID equals book.ProductID
+                          join category in categories on book.BookCategoryID equals category.BookCategoryID
+                          select new {soldT.Price, soldT.Quantity, category.CategoryName };
+
+            var chartData  = new object[dataSet.Count()+1];
+            chartData[0] = new object[] {"Book Category", "Total Sales" };
+            int count = 0;
+
+            foreach(var item in dataSet)
+            {
+                count++;
+                chartData[count] = new object[] { item.CategoryName, item.Price*item.Quantity };
+            }
+
+            #endregion
+
+            return Json(chartData);
+        }
+
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -44,13 +86,11 @@ namespace urbanbooks.Controllers
             }
         }
 
-        // GET: Admin/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Admin/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {

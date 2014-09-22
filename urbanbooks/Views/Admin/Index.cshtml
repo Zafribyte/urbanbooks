@@ -3,14 +3,81 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+
+
+<script src="~/Scripts/jqPlot/jquery.jqplot.min.js"></script>
+<script src="~/Scripts/jqPlot/jquery.jqplot.js"></script>
+<link href="~/Scripts/jqPlot/jquery.jqplot.min.css" rel="stylesheet" />
+<link href="~/Scripts/jqPlot/jquery.jqplot.css" rel="stylesheet" />
+
+
+<script src="~/Scripts/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script type="text/javascript">
+
+    var chatData;
+    google.load("visualization", "1", { packeges: ["corechart"] });
+
+    google.setOnLoadCallback(drawChart);
+
+    $(document).ready(function () {
+
+        $.ajax({
+            url: '@Url.Action("BookSales", "Admin")',
+            data: '',
+            dataType: 'json',
+            type: 'post',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                chatData = data
+            },
+            error: function () {
+                alert("error loading chart");
+            }
+        }).done(function () {
+            var plot1 = jQuery.jqplot('bookSales', [chatData],
+    {
+        seriesDefaults: {
+            // Make this a pie chart.
+            renderer: jQuery.jqplot.PieRenderer,
+            rendererOptions: {
+                // Put data labels on the pie slices.
+                // By default, labels show the percentage of the slice.
+                showDataLabels: true
+            }
+        },
+        legend: { show: true, location: 'e' }
+    }
+  );
+        });
+    });
+
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable(chartData);
+        var options = {
+            'title': 'Book Sales',
+            'pointSize':5
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(chatData, options);
+
+    };
+
+</script>
+
 
 <h2 style="text-align:center">Welcome : </h2>
-
+<div id="bookSales"></div>
 <div class="row">
     <br />
     <div class="col-md-6">
         <div class="thumbnail" style="text-align:center">
             <label class="caption">Total Book Sales</label><br />
+            <div id="bookSaes"></div>
             @Html.ActionLink("Learn More", "Controller", null, new { @class="btn btn-default"})
         </div>
     </div>
@@ -27,3 +94,4 @@
 <div class="row">
     <h4 style="text-align:center">Total Sales</h4>
 </div>
+
