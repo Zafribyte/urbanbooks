@@ -1,0 +1,139 @@
+﻿@using urbanbooks.Models
+@model SearchViewModel
+@{
+    ViewBag.Title = "AdminBookSearch";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row" style="text-align:center">
+    <label>Search Results for: </label> @Html.DisplayFor(model => model.Query)
+</div>
+<br />
+<hr />
+<br />
+@if(Model.AuthorResults != null)
+{
+    
+}
+@if (Model.BookCategoryResults != null)
+{
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BCategory.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BCategory.CategoryDescription)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.BookCategoryResults)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryDescription)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.BookCategoryID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.BookCategoryID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.BookCategoryID })
+                </td>
+            </tr>
+        }
+    </table>
+    
+    <br /><br />
+
+}
+@if (Model.BookResults != null)
+{
+
+    <table class="table">
+        <tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Book.BookTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book.ISBN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book.CostPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book.SellingPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book.CoverImage)
+            </th>
+        </tr>
+        @foreach (var item in Model.BookResults)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ISBN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CostPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SellingPrice)
+                </td>
+                <td>
+                    <img src="~/Uploads/Books/@item.CoverImage" width="100" height="100" />
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { productId = item.ProductID }) |
+                    @Html.ActionLink("Details", "Details", new { productId = item.ProductID }) |
+                    @Html.ActionLink("Delete", "Delete", new { ProductId = item.ProductID })
+                </td>
+            </tr>
+        }
+    </table>
+    
+    <br /><br />
+
+}
+@if (Model.PublisherResults != null)
+{
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Publisher.Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.PublisherResults)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.PublisherID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.PublisherID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.PublisherID })
+                </td>
+            </tr>
+        }
+
+    </table>
+    
+    <br /><br />
+
+}
+else
+{
+    <p>
+        Sorry no results were found :(
+    </p> 
+}

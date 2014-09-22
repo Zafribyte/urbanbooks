@@ -1,0 +1,138 @@
+﻿@using urbanbooks.Models
+@model SearchViewModel
+@{
+    ViewBag.Title = "AdminDeviceSearch";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<div class="row" style="text-align:center">
+    <label>Search Results for : </label> @Html.DisplayFor(model => model.Query)
+</div>
+<br />
+<hr />
+<br />
+@if (Model.GadgetCategoryResults != null)
+{
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TCategory.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TCategory.CategoryDescription)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.GadgetCategoryResults)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryDescription)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.TechCategoryID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.TechCategoryID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.TechCategoryID })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <br /><br />
+}
+@if (Model.GadgetResults != null)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Gadget.ModelName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gadget.ModelNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gadget.ImageFront)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gadget.ImageTop)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gadget.ImageSide)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gadget.SellingPrice)
+            </th>
+        </tr>
+        @if (Model != null)
+        {
+            foreach (var item in Model.GadgetResults)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModelName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModelNumber)
+                    </td>
+                    <td>
+                        <img src="~/Uploads/Tech/ImageFront/@item.ImageFront" width="100" height="100" />
+                    </td>
+                    <td>
+                        <img src="~/Uploads/Tech/ImageTop/@item.ImageTop" width="100" height="100" />
+                    </td>
+                    <td>
+                        <img src="~/Uploads/Tech/ImageSide/@item.ImageSide" width="280" height="100" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SellingPrice)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { ProductID = item.ProductID }) |
+                        @Html.ActionLink("Details", "Details", new { ProductID = item.ProductID }) |
+                        @Html.ActionLink("Delete", "Delete", new { ProductID = item.ProductID })
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    
+    <br /><br />
+}
+@if (Model.ManufacturerResults != null)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Manufacturer.Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.ManufacturerResults)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ManufacturerID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ManufacturerID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ManufacturerID })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <p>
+        Sorry No Results were found :(
+    </p>
+}
