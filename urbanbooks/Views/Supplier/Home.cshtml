@@ -1,9 +1,17 @@
-﻿@model IEnumerable<urbanbooks.Order>
+﻿@using urbanbooks.Models
+@model RangeViewModel
 
 @{
     ViewBag.Title = "Home";
     Layout = "~/Views/Shared/_SupplierLayout.cshtml";
 }
+
+
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+<link href="~/Content/datepicker.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+
 
 <div id="myModal" class="modal fade in">
     <div class="modal-dialog">
@@ -16,10 +24,33 @@
 
 
 <br /><br />
-<h4>New orders</h4>
+<div class="row">
+    <div class="col-md-9">
+        <h4>New orders</h4>
+    </div>
+
+    <div class="col-md-3">
+        <div class="navbar-form input-group form-inline pull-right">
+            @using (@Html.BeginForm("AdminDeviceSearch", "Search", FormMethod.Post, null))
+            {
+                @*@Html.TextBox("txt", null, new { htmlAttributes = new { @class = "form-control input-sm input-group-addon", placeholder = "Search" } })*@
+                <div class="btn-group">
+                    <input type="text" name="query" placeholder="Search" value="" class="form-control input-sm" />
+                    <button type="submit" class="btn btn-default input-group-addon" data-close-others="true">
+                        <span class="glyphicon glyphicon-search "></span>
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+    
+</div>
 <br /><br />
+<div class="row">
+    @Html.Partial("Ranger")
+</div>
 
-
+<br /><br /><br />
 
 <ul class="nav nav-tabs">
     <li class="active"><a href="#home" data-toggle="tab">Orders Placed Today</a></li>
@@ -33,24 +64,24 @@
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.OrderNo)
+                    Order Number
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DateCreated)
+                    Date Created
                 </th>
                 <th>
                     Actions
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Status)
+                    Status
                 </th>
                 <th></th>
             </tr>
 
-            @foreach (var item in Model)
+            @foreach (var item in Model.Orders)
             {
                 string returnUrl = HttpContext.Current.Request.RawUrl;
-                if (item.DateCreated == DateTime.Today.Date)
+                if (item.DateCreated == DateTime.Today.Date && item.Status == false)
                 {
                     <tr>
                         <td>
@@ -69,7 +100,7 @@
                             </td>
                         }
                         <td>
-                            @Html.ActionLink("Complete", "ProcessOrder", "Order", new { id = item.OrderNo, returnUrl =  returnUrl }, new { @class = "btn btn-default btn-success" })
+                            @Html.ActionLink("Complete", "ProcessOrder", "Order", new { returnUrl = returnUrl, OrderNumber = item.OrderNo }, new { @class = "btn btn-default btn-success" })
                         </td>
                     </tr>
                 }
@@ -86,21 +117,21 @@
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.OrderNo)
+                    Order Number
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DateCreated)
+                    Date Created
                 </th>
                 <th>
                     Actions
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Status)
+                    Status
                 </th>
                 <th></th>
             </tr>
 
-            @foreach (var item in Model)
+            @foreach (var item in Model.Orders)
             {
                 string returnUrl = HttpContext.Current.Request.RawUrl;
                 if (item.DateCreated < DateTime.Today.Date && item.Status == false)
@@ -122,7 +153,7 @@
                             </td>
                         }
                         <td>
-                            @Html.ActionLink("Complete", "ProcessOrder", "Order", new { OrderNumber = item.OrderNo, returnUrl = returnUrl }, new { @class = "btn btn-default btn-success" })
+                            @Html.ActionLink("Complete", "ProcessOrder", "Order", new { returnUrl = returnUrl, OrderNumber = item.OrderNo }, new { @class = "btn btn-default btn-success" })
                         </td>
                     </tr>
                 }
@@ -139,23 +170,23 @@
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.OrderNo)
+                    Order Number
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DateCreated)
+                    Date Created
                 </th>
                 <th>
                     Actions
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Status)
+                    Status
                 </th>
                 <th>
                     Date Completed
                 </th>
             </tr>
 
-            @foreach (var item in Model)
+            @foreach (var item in Model.Orders)
             {
                 string returnUrl = HttpContext.Current.Request.RawUrl;
                 if (item.Status == true)
@@ -190,6 +221,19 @@
 
     </div>
 </div>
+
+<script type="text/javascript">
+        $('.dateFrom').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+</script>
+
+<script type="text/javascript">
+    $('.dateTo').datepicker({
+        format: 'dd/mm/yyyy'
+    });
+</script>
+
 
 
 

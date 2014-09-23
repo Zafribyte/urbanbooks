@@ -166,6 +166,8 @@ namespace urbanbooks.Models
 
        public System.Data.Entity.DbSet<urbanbooks.Order> Orders { get; set; }
 
+       public System.Data.Entity.DbSet<urbanbooks.Models.RangeValidate> RangeValidates { get; set; }
+
     }
 }
 

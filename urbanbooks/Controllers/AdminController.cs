@@ -5,39 +5,26 @@ using System.Web;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Script.Services;
+using urbanbooks.Models;
 using System.Web.Services;
+using Newtonsoft.Json;
 
 namespace urbanbooks.Controllers
 {
     [Authorize(Roles="admin")]
     public class AdminController : Controller
     {
-        // GET: Admin
+
         public ActionResult Index()
         {
-            return View();
-        }
 
-        // GET: Admin/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Admin/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-        [HttpPost]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        [WebMethod]
-        public JsonResult BookSales()
-        {
 
             #region Prep Utilities
 
             BusinessLogicHandler myHandler = new BusinessLogicHandler();
+            AdminIndexViewModel model = new AdminIndexViewModel();
+            model.BookSales = new List<CategorySalesPie>();
+            CategorySalesPie modelItem = new CategorySalesPie();
 
             #endregion
 
@@ -54,21 +41,48 @@ namespace urbanbooks.Controllers
             var dataSet = from soldT in soldItems
                           join book in books on soldT.ProductID equals book.ProductID
                           join category in categories on book.BookCategoryID equals category.BookCategoryID
-                          select new {soldT.Price, soldT.Quantity, category.CategoryName };
+                          select new { soldT.Price, soldT.Quantity, category.CategoryName };
 
-            var chartData  = new object[dataSet.Count()+1];
-            chartData[0] = new object[] {"BookCategory", "TotalSales" };
-            int count = 0;
-
-            foreach(var item in dataSet)
+            foreach (var item in dataSet)
             {
-                count++;
-                chartData[count] = new object[] { item.CategoryName, item.Price*item.Quantity };
+                modelItem.Category = item.CategoryName;
+                modelItem.TotalSales = (item.Price * item.Quantity);
+                model.BookSales.Add(modelItem);
             }
+
+
+            #region Trial
+
+            System.Web.Script.Serialization.JavaScriptSerializer oSerializer =
+                new System.Web.Script.Serialization.JavaScriptSerializer();
 
             #endregion
 
-            return Json(chartData);
+            //model.chartData = oSerializer.Serialize(model.BookSales.ToArray());
+            //model.chartData =  JsonConvert.SerializeObject(model.BookSales.ToArray());
+            //model.chartData = JsonConvert.SerializeObject(model.oData);
+            #endregion
+
+            return View(model);
+
+        }
+
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        // GET: Admin/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        [WebMethod]
+        public ActionResult BookSales()
+        {
+            return View();
         }
 
         [HttpPost]
