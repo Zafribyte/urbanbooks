@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Script.Services;
+using urbanbooks.Models;
 using System.Web.Services;
 
 namespace urbanbooks.Controllers
@@ -32,7 +33,7 @@ namespace urbanbooks.Controllers
         [HttpPost]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         [WebMethod]
-        public JsonResult BookSales()
+        public ActionResult BookSales()
         {
 
             #region Prep Utilities
@@ -46,6 +47,9 @@ namespace urbanbooks.Controllers
             IEnumerable<InvoiceItem> soldItems = myHandler.Sales();
             IEnumerable<Book> books = myHandler.GetBooks();
             IEnumerable<BookCategory> categories = myHandler.GetBookCategoryList();
+            AdminIndexViewModel model = new AdminIndexViewModel();
+            model.BookSales = new List<CategorySalesPie>();
+            CategorySalesPie modelItem = new CategorySalesPie();
 
             #endregion
 
@@ -56,19 +60,16 @@ namespace urbanbooks.Controllers
                           join category in categories on book.BookCategoryID equals category.BookCategoryID
                           select new {soldT.Price, soldT.Quantity, category.CategoryName };
 
-            var chartData  = new object[dataSet.Count()+1];
-            chartData[0] = new object[] {"BookCategory", "TotalSales" };
-            int count = 0;
-
             foreach(var item in dataSet)
             {
-                count++;
-                chartData[count] = new object[] { item.CategoryName, item.Price*item.Quantity };
+                modelItem.Category = item.CategoryName;
+                modelItem.TotalSales = (item.Price * item.Quantity);
+                model.BookSales.Add(modelItem);
             }
 
             #endregion
 
-            return Json(chartData);
+            return View(model);
         }
 
         [HttpPost]

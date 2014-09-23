@@ -285,7 +285,7 @@ namespace urbanbooks.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Book b, Book bl)
+        public ActionResult Edit(Book bl, Book b)
         {
             try
             {

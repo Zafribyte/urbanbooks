@@ -222,6 +222,7 @@
     <Compile Include="Migrations\201409212136135_gprs.Designer.cs">
       <DependentUpon>201409212136135_gprs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminIndexViewModel.cs" />
     <Compile Include="Models\InvoiceModel.cs" />
     <Compile Include="Models\OrderLineModel.cs" />
     <Compile Include="Models\RestoreModelStateFromTempDataAttribute.cs" />

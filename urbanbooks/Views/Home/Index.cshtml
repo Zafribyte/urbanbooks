@@ -2,10 +2,8 @@
     ViewBag.Title = "Home Page";
 }
 
-
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-
 
 <div class="row">
     <div id="urbanbooks-specials-carousel" class="carousel slide" data-ride="carousel" style="width:inherit;">
@@ -15,28 +13,28 @@
             <li data-target="#urbanbooks-specials-carousel" data-slide-to="1"></li>
             <li data-target="#urbanbooks-specials-carousel" data-slide-to="2"></li>
         </ol>
-
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item active">
                 <img src="~/Images/bookandJumboTron.jpg" alt="...">
-                <div class="carousel-caption" style="background-image: url(../../Images/dots.png); align-content:flex-start; align-self:flex-start;">
-                    <div class="">
-                        <h2><strong style="color:#1e1e1e;">Winter Special</strong></h2>
-                        <p style="color:#1e1e1e;">Check out our winter special on gadgets</p>
-                        <button class="btn btn-default">LEARN MORE</button>
+                <div class="carousel-caption well" style="background-image: url(../../Images/dots.png); align-content:flex-start; align-self:flex-start;">
+                    <div class="blockquote-reverse">
+                        <h4 style="color:#1e1e1e;">Read the best books first, or you may not have a chance to read them at all</h4>
+                        <small style="color:#1e1e1e;">Henry David Thoreau <cite>(Author, poet, philosopher and historian)</cite> </small>
                     </div>
                 </div>
             </div>
+            
             <div class="item">
                 <img src="~/Images/jambotron.jpg" alt="...">
-                <div class="carousel-caption" style="background-image: url(../../Images/dots.png); center">
-                    <h2><strong style="color:#1e1e1e;">Welcome</strong></h2>
-                    <p style="color:#1e1e1e;">@User.Identity.Name</p>
-                </div>
+                <div class="carousel-caption well" style="background-image: url(../../Images/dots.png); align-content:flex-start; align-self:flex-start;">
+                    <div class="blockquote-reverse">
+                        <h4><strong style="color:#1e1e1e;">Welcome</strong></h4>
+                        <small style="color:#1e1e1e;">@User.Identity.Name - <cite style="color:#1e1e1e;">to Urban Books</cite></small>
+                    </div>
+</div>
             </div>
         </div>
-
         <!-- Controls -->
         <a class="left carousel-control" href="#urbanbooks-specials-carousel" role="button" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left"></span>
@@ -47,15 +45,11 @@
     </div>
 </div>
 
-
 <div class="row" style="height:10px"></div> @*ROW DEVIDER*@
-
 
 <div class="container">
 
-
     <div class="row">
-
         <div class="col-lg-4">
             <div class="thumbnail" style="text-align:center;">
                 <i class="icon-book img-circle img-thumbnail" style="font-size:125px;color:white; background-color:#1e1e1e"></i>
@@ -65,16 +59,12 @@
                 <button class="btn btn-default btn-round">Learn More</button>
             </div>
         </div>
-
         <div class="col-lg-8 panel panel-default">
-
             <div class="panel-header" style="text-align:center;">
                 <h4>New Books</h4>
-                <hr/>
+                <hr />
             </div>
-
             <div class="panel-body">
-
                 <div class="col-sm-3">
                     <div class="thumbnail" style="text-align:center;">
                         <i class="icon-laptop-1 img-thumbnail" style="font-size:60px;color:white; width:150px; background-color:#1e1e1e"></i>
@@ -88,7 +78,6 @@
                         @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "Home", "index", htmlAttributes: new { @class = "btn" })
                     </div>
                 </div>
-
                 <div class="col-sm-3">
                     <div class="thumbnail" style="text-align:center;">
                         <i class="icon-laptop-1 img-thumbnail" style="font-size:60px;color:white; width:150px; background-color:#1e1e1e"></i>
@@ -102,7 +91,6 @@
                         @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "Home", "index", htmlAttributes: new { @class = "btn" })
                     </div>
                 </div>
-
                 <div class="col-sm-3">
                     <div class="thumbnail" style="text-align:center;">
                         <i class="icon-laptop-1 img-thumbnail" style="font-size:60px;color:white; width:150px; background-color:#1e1e1e"></i>
@@ -116,7 +104,6 @@
                         @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "Home", "index", htmlAttributes: new { @class = "btn" })
                     </div>
                 </div>
-
                 <div class="col-sm-3">
                     <div class="thumbnail" style="text-align:center;">
                         <i class="icon-laptop-1 img-thumbnail" style="font-size:60px;color:white; width:150px; background-color:#1e1e1e"></i>
@@ -130,17 +117,12 @@
                         @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "Home", "index", htmlAttributes: new { @class = "btn" })
                     </div>
                 </div>
-
             </div>
-
             <div class="panel-footer" style="text-align:center; width:auto">
                 <a href="#" class="btn btn-default btn-round">Learn More</a>
             </div>
-
         </div>
-
     </div>
-
 
     <div class="row">
         <div class="col-lg-4">
@@ -152,15 +134,11 @@
                 <button class="btn btn-default btn-round">Learn More</button>
             </div>
         </div>
-
         <div class="col-lg-8 panel panel-default">
-
             <div class="panel-header" style="text-align:center;">
                 <h4>New Stock</h4>
             </div>
-
             <div class="panel-body">
-
                 <div class="col-sm-3">
                     <div class="thumbnail" style="text-align:center;">
                         <i class="icon-mobile img-thumbnail" style="font-size:60px;color:white; background-color:#1e1e1e"></i>
@@ -174,7 +152,6 @@
                         @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "Home", "index", htmlAttributes: new { @class = "btn" })
                     </div>
                 </div>
-
                 <div class="col-sm-3">
                     <div class="thumbnail" style="text-align:center;">
                         <i class="icon-mobile img-thumbnail" style="font-size:60px;color:white; background-color:#1e1e1e"></i>
@@ -188,7 +165,6 @@
                         @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "Home", "index", htmlAttributes: new { @class = "btn" })
                     </div>
                 </div>
-
                 <div class="col-sm-3">
                     <div class="thumbnail" style="text-align:center;">
                         <i class="icon-mobile img-thumbnail" style="font-size:60px;color:white; background-color:#1e1e1e"></i>
@@ -202,7 +178,6 @@
                         @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "Home", "index", htmlAttributes: new { @class = "btn" })
                     </div>
                 </div>
-
                 <div class="col-sm-3">
                     <div class="thumbnail" style="text-align:center;">
                         <i class="icon-mobile img-thumbnail" style="font-size:60px;color:white; background-color:#1e1e1e"></i>
@@ -216,22 +191,17 @@
                         @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "Home", "index", htmlAttributes: new { @class = "btn" })
                     </div>
                 </div>
-
             </div>
-
             <div class="panel-footer" style="text-align:center;">
                 <button class="btn btn-default btn-round">Learn More</button>
             </div>
-
         </div>
     </div>
 
-
     <div class="row">
-
         <div class="col-lg-4">
             <div class="thumbnail" style="text-align:center;">
-               <!-- <i class="icon-tablet-1 img-circle img-thumbnail" style="font-size:150px;color:white; background-color:#1e1e1e"></i> -->
+                <!-- <i class="icon-tablet-1 img-circle img-thumbnail" style="font-size:150px;color:white; background-color:#1e1e1e"></i> -->
                 <span class="glyphicon glyphicon-tags img-circle img-thumbnail" style="font-size:150px;color:white; background-color:#1e1e1e"></span>
                 <h4 class="caption">Specials</h4>
                 <hr />
@@ -241,23 +211,20 @@
                 </button>
             </div>
         </div>
-
         <div class="col-lg-4">
             <div class="thumbnail"></div>
         </div>
     </div>
-
-
 
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/modalform")
     @Scripts.Render("~/bundles/bootstrap")
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/jqueryui")
-@Styles.Render("~/Content/css")
-@Styles.Render("~/Content/themes/base/css")
-@Scripts.Render("~/bundles/bootstrap")
-@Scripts.Render("~/bundles/modalform")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/modalform")
 }

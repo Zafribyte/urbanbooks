@@ -1,33 +1,19 @@
-﻿
+﻿@using urbanbooks.Models
+@model AdminIndexViewModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <script src="~/Scripts/jquery-2.1.1.js"></script>
 
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
-<script src="~/Scripts/jqPlot/jquery.jqplot.min.js"></script>
-<script src="~/Scripts/jqPlot/jquery.jqplot.js"></script>
-<link href="~/Scripts/jqPlot/jquery.jqplot.min.css" rel="stylesheet" />
-<link href="~/Scripts/jqPlot/jquery.jqplot.css" rel="stylesheet" />
-
-
-<script src="~/Scripts/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
-
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
     google.load("visualization", "1", { packages: ["corechart"] });
     google.setOnLoadCallback(drawChart);
     function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Work', 11],
-          ['Eat', 2],
-          ['Commute', 2],
-          ['Watch TV', 2],
-          ['Sleep', 7]
-        ]);
+        var dataSet = new Array(['Book Category', 'Total Sales']).concat(@Model.BookSales.ToArray())
+        var data = google.visualization.arrayToDataTable(dataSet);
 
         var options = {
             title: '',
@@ -82,7 +68,7 @@
         ]);
 
         var options = {
-            width: 600,
+            width: 1000,
             height: 400,
             legend: { position: 'none' },
             bar: { groupWidth: '75%' },
