@@ -389,6 +389,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\bookandJumboTron.jpg" />
+    <Content Include="Images\Documentation\AdminMenu.JPG" />
+    <Content Include="Images\Documentation\BookMenu.JPG" />
+    <Content Include="Images\Documentation\NewBookPage.JPG" />
     <Content Include="Images\dots.png" />
     <Content Include="Images\FAQs\Books01.png" />
     <Content Include="Images\FAQs\Cart01.png" />
@@ -561,6 +564,7 @@
     <Content Include="Views\Search\AdminBookSearch.cshtml" />
     <Content Include="Views\Search\AdminDeviceSearch.cshtml" />
     <Content Include="Views\Publisher\Books.cshtml" />
+    <Content Include="Views\Help\Documentation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
