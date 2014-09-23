@@ -279,9 +279,109 @@ namespace urbanbooks.Controllers
         }
         public ActionResult Edit(int productId)
         {
+            #region Prep Utilities
+
+            AddNewBookViewModel model = new AddNewBookViewModel();
+
+            #endregion
             myHandler = new BusinessLogicHandler();
             Book book = myHandler.GetBooks().Single(bk => bk.ProductID == productId);
-            return View(book);
+
+            model.books = new Book();
+            model.books = book;
+
+
+            #region Create
+            SupplierHandler supHandler = new SupplierHandler();
+            IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetSupplierList();
+            var disp = from nameAndId in nameList
+                       select new { Value = nameAndId.SupplierID, Text = nameAndId.Name };
+
+            ViewBag.SupplierList = new SelectList(disp.ToList());
+
+            BookCategoryHandler typeHandler = new BookCategoryHandler();
+            IEnumerable<BookCategory> typeList = (IEnumerable<BookCategory>)typeHandler.GetBookCategoryList();
+            var dispBC = from name in typeList
+                         select new { Value = name.BookCategoryID, Text = name.CategoryName };
+
+            ViewBag.BookCategoryList = new SelectList(dispBC.ToList());
+
+            AuthorHandler authHandler = new AuthorHandler();
+            IEnumerable<Author> authList = (IEnumerable<Author>)authHandler.GetAuthorList();
+            var dispAuth = from nameAndSurname in authList
+                           select new { Value = nameAndSurname.AuthorID, Text = nameAndSurname.Name, nameAndSurname.Surname };
+            ViewBag.authList = new SelectList(dispAuth.ToList());
+
+            PublisherHandler publHandler = new PublisherHandler();
+            IEnumerable<Publisher> pubList = (IEnumerable<Publisher>)publHandler.GetPublisherList();
+            var dispPublisher = from pubName in pubList
+                                select new { Value = pubName.PublisherID, Text = pubName.Name };
+            ViewBag.pubList = new SelectList(dispPublisher.ToList());
+
+            #endregion
+
+            BookCategory bkc = new BookCategory();
+            
+            foreach(var item in pubList)
+            {
+
+            }
+
+            foreach(var item in typeList)
+            {
+                if(item.BookCategoryID == model.books.BookCategoryID)
+                {
+                    bkc.BookCategoryID = item.BookCategoryID;
+                    bkc.CategoryName = item.CategoryName;
+                }
+            }
+
+
+            #region Display
+            List<SelectListItem> bookCategory = new List<SelectListItem>();
+            bookCategory.Add(new SelectListItem { Value = bkc.BookCategoryID.ToString(), Text=bkc.CategoryName, Selected = true});
+            foreach (var item in typeList)
+            {
+                if(item.BookCategoryID != bkc.BookCategoryID)
+                bookCategory.Add(new SelectListItem { Text = item.CategoryName, Value = item.BookCategoryID.ToString() });
+            }
+            model.bookCategories = new List<SelectListItem>();
+            model.bookCategories = bookCategory;
+            ViewData["bookCategories"] = bookCategory;
+
+            List<SelectListItem> supplier = new List<SelectListItem>();
+            //supplier.Add(new SelectListItem { Text = "Select Supplier", Value = "", Selected = true });
+            foreach (var item in nameList)
+            {
+                supplier.Add(new SelectListItem { Text = item.Name, Value = item.SupplierID.ToString() });
+            }
+            model.suppliers = new List<SelectListItem>();
+            model.suppliers = supplier;
+            ViewData["suppliers"] = supplier;
+
+            List<SelectListItem> author = new List<SelectListItem>();
+            //author.Add(new SelectListItem { Text = "Select Author", Value = "", Selected = true });
+            foreach (var item in authList)
+            {
+                author.Add(new SelectListItem { Text = item.Name, Value = item.AuthorID.ToString() });
+            }
+            model.authors = new List<SelectListItem>();
+            model.authors = author;
+            ViewData["authors"] = author;
+
+            List<SelectListItem> publisher = new List<SelectListItem>();
+            //publisher.Add(new SelectListItem { Text = "Select Publisher", Value = "", Selected = true });
+            foreach (var item in pubList)
+            {
+                publisher.Add(new SelectListItem { Text = item.Name, Value = item.PublisherID.ToString() });
+            }
+            model.publishers = new List<SelectListItem>();
+            model.publishers = publisher;
+            ViewData["publishers"] = publisher;
+            #endregion
+
+
+            return View(model);
         }
 
         [HttpPost]
