@@ -36,6 +36,7 @@ namespace urbanbooks.Controllers
 
             myHandler = new BusinessLogicHandler();
             Supplier supplier = new Supplier();
+            RangeViewModel model = new RangeViewModel();
 
             #endregion
 
@@ -57,11 +58,11 @@ namespace urbanbooks.Controllers
 
             #region Get Orders For Supplier
 
-            IEnumerable<Order> orders = myHandler.GetSupplierOrders(supplier.SupplierID);
-            orders.OrderBy(m => m.DateCreated);
+            model.Orders = myHandler.GetSupplierOrders(supplier.SupplierID);
+            model.Orders.OrderBy(m => m.DateCreated);
             #endregion
 
-            return View(orders);
+            return View(model);
         }
 
         public ActionResult Create()

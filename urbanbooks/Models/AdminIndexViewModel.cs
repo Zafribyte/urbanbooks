@@ -16,6 +16,10 @@ namespace urbanbooks.Models
         [NotMapped]
         public List<CategorySalesPie> DeviceSales { get; set; }
 
+        public List<string[]> oData { get; set; }
+
+        public string[] chartData { get; set; }
+
     }
     public class CategorySalesPie
     {

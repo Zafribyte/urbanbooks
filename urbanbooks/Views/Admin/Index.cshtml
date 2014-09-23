@@ -12,8 +12,16 @@
     google.load("visualization", "1", { packages: ["corechart"] });
     google.setOnLoadCallback(drawChart);
     function drawChart() {
-        var dataSet = new Array(['Book Category', 'Total Sales']).concat(@Model.BookSales.ToArray())
-        var data = google.visualization.arrayToDataTable(dataSet);
+        var dataSet = new Array();
+        dataSet = ['Book Category', 'Total Sales'];
+        var enumArray = [];
+        @foreach (var item in Model.BookSales)
+        {
+            @:enumArray["@item.Category"] = "@item.TotalSales";
+        }
+
+
+        var data = google.visualization.arrayToDataTable(enumArray);
 
         var options = {
             title: '',
@@ -37,7 +45,6 @@
           ['Task', 'Hours per Day'],
           ['Work', 13],
           ['Eat', 1],
-          ['Commute', 3],
           ['Watch TV', 1],
           ['Sleep', 6]
         ]);

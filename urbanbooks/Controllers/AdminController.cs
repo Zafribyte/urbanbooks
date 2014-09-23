@@ -7,19 +7,66 @@ using System.ComponentModel.DataAnnotations;
 using System.Web.Script.Services;
 using urbanbooks.Models;
 using System.Web.Services;
+using Newtonsoft.Json;
 
 namespace urbanbooks.Controllers
 {
     [Authorize(Roles="admin")]
     public class AdminController : Controller
     {
-        // GET: Admin
+
         public ActionResult Index()
         {
-            return View();
+
+
+            #region Prep Utilities
+
+            BusinessLogicHandler myHandler = new BusinessLogicHandler();
+            AdminIndexViewModel model = new AdminIndexViewModel();
+            model.BookSales = new List<CategorySalesPie>();
+            CategorySalesPie modelItem = new CategorySalesPie();
+
+            #endregion
+
+            #region Get Data
+
+            IEnumerable<InvoiceItem> soldItems = myHandler.Sales();
+            IEnumerable<Book> books = myHandler.GetBooks();
+            IEnumerable<BookCategory> categories = myHandler.GetBookCategoryList();
+
+            #endregion
+
+            #region Build Data Set
+
+            var dataSet = from soldT in soldItems
+                          join book in books on soldT.ProductID equals book.ProductID
+                          join category in categories on book.BookCategoryID equals category.BookCategoryID
+                          select new { soldT.Price, soldT.Quantity, category.CategoryName };
+
+            foreach (var item in dataSet)
+            {
+                modelItem.Category = item.CategoryName;
+                modelItem.TotalSales = (item.Price * item.Quantity);
+                model.BookSales.Add(modelItem);
+            }
+
+
+            #region Trial
+
+            System.Web.Script.Serialization.JavaScriptSerializer oSerializer =
+                new System.Web.Script.Serialization.JavaScriptSerializer();
+
+            #endregion
+
+            //model.chartData = oSerializer.Serialize(model.BookSales.ToArray());
+            //model.chartData =  JsonConvert.SerializeObject(model.BookSales.ToArray());
+            //model.chartData = JsonConvert.SerializeObject(model.oData);
+            #endregion
+
+            return View(model);
+
         }
 
-        // GET: Admin/Details/5
         public ActionResult Details(int id)
         {
             return View();
@@ -35,41 +82,7 @@ namespace urbanbooks.Controllers
         [WebMethod]
         public ActionResult BookSales()
         {
-
-            #region Prep Utilities
-
-            BusinessLogicHandler myHandler = new BusinessLogicHandler();
-
-            #endregion
-
-            #region Get Data
-
-            IEnumerable<InvoiceItem> soldItems = myHandler.Sales();
-            IEnumerable<Book> books = myHandler.GetBooks();
-            IEnumerable<BookCategory> categories = myHandler.GetBookCategoryList();
-            AdminIndexViewModel model = new AdminIndexViewModel();
-            model.BookSales = new List<CategorySalesPie>();
-            CategorySalesPie modelItem = new CategorySalesPie();
-
-            #endregion
-
-            #region Build Data Set
-
-            var dataSet = from soldT in soldItems
-                          join book in books on soldT.ProductID equals book.ProductID
-                          join category in categories on book.BookCategoryID equals category.BookCategoryID
-                          select new {soldT.Price, soldT.Quantity, category.CategoryName };
-
-            foreach(var item in dataSet)
-            {
-                modelItem.Category = item.CategoryName;
-                modelItem.TotalSales = (item.Price * item.Quantity);
-                model.BookSales.Add(modelItem);
-            }
-
-            #endregion
-
-            return View(model);
+            return View();
         }
 
         [HttpPost]
