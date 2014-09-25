@@ -10,8 +10,16 @@ namespace urbanbooks.Controllers
     {
         public ActionResult FAQs()
         {
+            #region Check iDentity
+            if (HttpContext.User.IsInRole("admin"))
+            {
+                return RedirectToAction("Documentation");
+            }
+            #endregion
+
             return View();
         }
+        [Authorize(Roles="admin") ]
         public ActionResult Documentation()
         {
             return View();

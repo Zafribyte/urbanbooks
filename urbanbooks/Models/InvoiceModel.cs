@@ -20,5 +20,7 @@ namespace urbanbooks.Models
         public List<OrderItem> OrderLine { get; set; }
         [NotMapped]
         public List<urbanbooks.Supplier> Suppliers { get; set; }
+        public Order Order { get; set; }
+        public Invoice Invoice { get; set; }
     }
 }

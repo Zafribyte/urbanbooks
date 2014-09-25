@@ -463,6 +463,13 @@ namespace urbanbooks
 
         #region SYSTEM ACTIONS
 
+        public List<Technology> GetNewDevices()
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.GetNewDeviceList(); }
+        public List<Book> GetNewBooks()
+        { BookHandler myHandler = new BookHandler(); return myHandler.GetNewBookList(); }
+        public List<Order> GetOrderByRange(string from, string to, int SupplierID)
+        { OrderHandler myHandler = new OrderHandler(); return myHandler.GetOrdersInRasnge(from, to, SupplierID); }
+
         public List<Book> GetBooks()
         {
             BookHandler myHandler = new BookHandler();

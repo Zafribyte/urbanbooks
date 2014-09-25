@@ -36,7 +36,7 @@
         @foreach (var item in Model.OrderLineDetails)
         {
             <tr>
-                <td>@Html.DisplayFor(model => item.ProductID)</td>
+                <td>@Html.ActionLink("" + item.ProductID, "Product","Supplier",new{ProductID = item.ProductID}, new {data_modal="" } )</td>
                 <td>@Html.DisplayFor(model => item.Quantity)</td>
             </tr>
         }

@@ -16,6 +16,7 @@ namespace urbanbooks.Controllers
     {
         public ActionResult Index()
         {
+            #region Cart and wishlist actions
             if (User.Identity.IsAuthenticated)
             {
                 #region Check iDentity
@@ -33,7 +34,7 @@ namespace urbanbooks.Controllers
                 }
                 #endregion
 
-
+                #region Getting cart total
                 CartActions act = new CartActions();
                 WishlistActions wish = new WishlistActions();
                 ApplicationDbContext mycontext = new ApplicationDbContext();
@@ -43,11 +44,26 @@ namespace urbanbooks.Controllers
                 int cartId = Convert.ToInt32(thisUser.Result.Carts.CartID);
                 Session["cartTotal"] = (double) GetCartTotal(cartId);
                 Session["wishlistTotal"] = wish.GetWishlistTotal(thisUser.Result.Wishlists.WishlistID);
+                #endregion
             }
             else
-            { Session["cartTotal"] = "0.00"; Session["wishlistTotal"] = 0; }
+            { Session["cartTotal"] = "0,00"; Session["wishlistTotal"] = 0; }
+            #endregion
 
-            return View();
+            #region Prep utilities
+            BusinessLogicHandler myHandler = new BusinessLogicHandler();
+            SearchViewModel model = new SearchViewModel();
+            #endregion
+
+            #region Get New Books
+            model.BookResults = myHandler.GetNewBooks();
+            #endregion
+
+            #region Get Devices
+            model.GadgetResults = myHandler.GetNewDevices();
+            #endregion
+
+            return View(model);
         }
 
         public double GetCartTotal(int CartID)

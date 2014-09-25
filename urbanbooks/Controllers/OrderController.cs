@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNet.Identity;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -13,6 +15,7 @@ namespace urbanbooks.Controllers
     {
         BusinessLogicHandler myHandler;
         Order order;
+        private ApplicationUserManager _userManager;
         OrderItem item;
         public ActionResult Index()
         {
@@ -39,7 +42,7 @@ namespace urbanbooks.Controllers
             #region Prep Utilities
 
             myHandler = new BusinessLogicHandler();
-             OrderLineModel model = new OrderLineModel();
+            OrderLineModel model = new OrderLineModel();
 
             #endregion
 
@@ -58,11 +61,11 @@ namespace urbanbooks.Controllers
         public ActionResult AddOrderItems(OrderItem item)
         {
             List<Order> myOrderList = new List<Order>();
-          //  await order = myHandler.GetOrdersList().Single(ord => ord.DataModified == DateTime.Now);
+            //  await order = myHandler.GetOrdersList().Single(ord => ord.DataModified == DateTime.Now);
             TryUpdateModel(item);
             myHandler = new BusinessLogicHandler();
             myHandler.AddOrderItem(item);
-            
+
             return Json(new { success = true });
         }
 
@@ -97,7 +100,7 @@ namespace urbanbooks.Controllers
 
             model.OrderLine = new List<OrderItem>();
 
-            foreach(var item in model.Orders)
+            foreach (var item in model.Orders)
             {
                 model.OrderLine.AddRange(myHandler.GetOrderItemsList(item.OrderNo));
             }
@@ -108,7 +111,7 @@ namespace urbanbooks.Controllers
 
             model.Suppliers = new List<urbanbooks.Supplier>();
 
-            foreach(var item in model.Orders)
+            foreach (var item in model.Orders)
             {
                 model.Suppliers.Add(myHandler.GetSupplier(item.SupplierID));
             }
@@ -118,19 +121,9 @@ namespace urbanbooks.Controllers
             return View(model);
         }
 
-        public ActionResult Unprocessed()
+        public ActionResult ProcessOrder(int OrderNumber, string returnUrl)
         {
-            return View();
-        } //SUPPLIER
-        [HttpPost]
-        public ActionResult Unprocessed(FormCollection collection)
-        {
-            return View();
-        } //SUPPLIER
-
-        public ActionResult ProcessOrder(int OrderNumber, string returnUrl) 
-        {
-            if(OrderNumber != 0)
+            if (OrderNumber != 0)
             {
                 myHandler = new BusinessLogicHandler();
                 order = new Order();
@@ -138,15 +131,48 @@ namespace urbanbooks.Controllers
                 order.DateLastModified = DateTime.Now;
                 myHandler.UpdateOrder(order);
 
-               return Redirect(returnUrl);
+                return Redirect(returnUrl);
             }
 
             return Redirect(returnUrl);
         }
-
-        [HttpPost]
-        public ActionResult Search()
+        public ActionResult RangeSearch(RangeViewModel model)
         {
+            if(ModelState.IsValid)
+            {
+
+                #region Prep Utilities
+
+                myHandler = new BusinessLogicHandler();
+                Supplier supplier = new Supplier();
+                #endregion
+
+                #region Get User(Supplier)
+
+                 string userName = User.Identity.GetUserName();
+                 ApplicationDbContext dataSocket = new ApplicationDbContext();
+                 UserStore<ApplicationUser> myStore = new UserStore<ApplicationUser>(dataSocket);
+                 _userManager = new ApplicationUserManager(myStore);
+                  var user = _userManager.FindByEmail(userName);
+
+                #endregion
+
+                #region Get Supplier Details
+
+                     supplier = myHandler.GetSupplier(user.Id);
+
+                #endregion
+
+               #region Get the Data
+
+                     string dateFrom = model.myRange.From.ToString("yyyMMdd");
+                     string dateTo = model.myRange.To.ToString("yyyMMdd");
+                     model.Orders = myHandler.GetOrderByRange(dateFrom, dateTo, supplier.SupplierID);
+
+                #endregion
+
+                     return View(model);
+            }
             return View();
         }
 

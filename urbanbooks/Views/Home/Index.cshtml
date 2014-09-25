@@ -1,5 +1,7 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using urbanbooks.Models
+@model SearchViewModel
+@{
+    ViewBag.Title = "Home";
 }
 
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
@@ -50,171 +52,74 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-lg-4">
-            <div class="thumbnail" style="text-align:center;">
-                <i class="icon-book img-circle img-thumbnail" style="font-size:125px;color:white; background-color:#1e1e1e"></i>
-                <h4 class="caption">Books</h4>
-                <hr />
-                <p>Browse through a selection of textbooks, the finest novels and reading books for all ages. With some content to make it even with the panel here. some more <br></p>
-                <button class="btn btn-default btn-round">Learn More</button>
-            </div>
-        </div>
-        <div class="col-lg-8 panel panel-default">
+        
+        <div class="panel panel-default">
             <div class="panel-header" style="text-align:center;">
                 <h4>New Books</h4>
                 <hr />
             </div>
             <div class="panel-body">
-                <div class="col-sm-3">
-                    <div class="thumbnail" style="text-align:center;">
-                        <i class="icon-laptop-1 img-thumbnail" style="font-size:60px;color:white; width:150px; background-color:#1e1e1e"></i>
-                        <label class="caption">Beginning C#</label>
-                        <hr />
-                        <strong>Price R0.00</strong>
-                        <br />
-                        @using urbanbooks.Helpers
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to wishlist", "Home", "index", htmlAttributes: new { @class = "btn" })
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "view", "Home", "index", htmlAttributes: new { @class = "btn" })
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "Home", "index", htmlAttributes: new { @class = "btn" })
+                @foreach (var item in Model.BookResults)
+                {
+                    string returnUrl = HttpContext.Current.Request.RawUrl;
+                    <div class="col-md-2">
+                        <div style="height:450px">
+                            <div class="thumbnail" style="text-align:center">
+                                <img class="img-thumbnail" src="~/Uploads/Books/@item.CoverImage" width="150" height="150" />
+                                <label class="caption">@Html.DisplayFor(modelItem => item.BookTitle)</label>
+                                <label>ISBN :</label>&nbsp;@Html.DisplayFor(modelItem => item.ISBN)<br />
+                                <label>Price :</label>&nbsp;@Html.DisplayFor(modelItem => item.SellingPrice)
+                                <hr />
+                                @using urbanbooks.Helpers
+                                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to Wishlist", "Add", "Wishlist", new { productId = item.ProductID, returnUrl }, htmlAttributes: new { @class = "btn" })
+                                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "View", "CustomerDetails", "Book", new { productId = item.ProductID }, htmlAttributes: new { @class = "btn" })
+                                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "AddToCart", "Cart", new { productId = item.ProductID, returnUrl }, htmlAttributes: new { @class = "btn" })
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="thumbnail" style="text-align:center;">
-                        <i class="icon-laptop-1 img-thumbnail" style="font-size:60px;color:white; width:150px; background-color:#1e1e1e"></i>
-                        <label class="caption">Beginning C#</label>
-                        <hr />
-                        <strong>Price R0.00</strong>
-                        <br />
-                        @using urbanbooks.Helpers
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to wishlist", "Home", "index", htmlAttributes: new { @class = "btn" })
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "view", "Home", "index", htmlAttributes: new { @class = "btn" })
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "Home", "index", htmlAttributes: new { @class = "btn" })
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="thumbnail" style="text-align:center;">
-                        <i class="icon-laptop-1 img-thumbnail" style="font-size:60px;color:white; width:150px; background-color:#1e1e1e"></i>
-                        <label class="caption">Beginning C#</label>
-                        <hr />
-                        <strong>Price R0.00</strong>
-                        <br />
-                        @using urbanbooks.Helpers
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to wishlist", "Home", "index", htmlAttributes: new { @class = "btn" })
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "view", "Home", "index", htmlAttributes: new { @class = "btn" })
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "Home", "index", htmlAttributes: new { @class = "btn" })
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="thumbnail" style="text-align:center;">
-                        <i class="icon-laptop-1 img-thumbnail" style="font-size:60px;color:white; width:150px; background-color:#1e1e1e"></i>
-                        <label class="caption">Beginning C#</label>
-                        <hr />
-                        <strong>Price R0.00</strong>
-                        <br />
-                        @using urbanbooks.Helpers
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to wishlist", "Home", "index", htmlAttributes: new { @class = "btn" })
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "view", "Home", "index", htmlAttributes: new { @class = "btn" })
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "Home", "index", htmlAttributes: new { @class = "btn" })
-                    </div>
-                </div>
+                }
             </div>
-            <div class="panel-footer" style="text-align:center; width:auto">
-                <a href="#" class="btn btn-default btn-round">Learn More</a>
+            <div class="panel-footer" style="text-align:center; width:auto"> 
+                @Html.ActionLink("Learn More", "Index","Book",null, new { @class = "btn btn-default btn-round" })
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-lg-4">
-            <div class="thumbnail" style="text-align:center;">
-                <i class="icon-laptop-1 img-circle img-thumbnail" style="font-size:125px;color:white; width:150px; background-color:#1e1e1e"></i>
-                <h4 class="caption">Technology</h4>
-                <hr />
-                <p>Browse through our laptops, desktops or electronic accessories, with prices to fit the tightest of budgets </p>
-                <button class="btn btn-default btn-round">Learn More</button>
-            </div>
-        </div>
-        <div class="col-lg-8 panel panel-default">
+
+        <div class=" panel panel-default">
             <div class="panel-header" style="text-align:center;">
-                <h4>New Stock</h4>
+                <h4>New Devices</h4>
+                <hr />
             </div>
-            <div class="panel-body">
-                <div class="col-sm-3">
-                    <div class="thumbnail" style="text-align:center;">
-                        <i class="icon-mobile img-thumbnail" style="font-size:60px;color:white; background-color:#1e1e1e"></i>
-                        <label class="caption">Beginning C#</label>
-                        <hr />
-                        <strong>Price R0.00</strong>
-                        <br />
-                        @using urbanbooks.Helpers
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to wishlist", "Home", "index", htmlAttributes: new { @class = "btn" })
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "view", "Home", "index", htmlAttributes: new { @class = "btn" })
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "Home", "index", htmlAttributes: new { @class = "btn" })
+            <div class="panel-body" style="height:auto">
+                @foreach (var item in Model.GadgetResults)
+                {
+                    string returnUrl = HttpContext.Current.Request.RawUrl;
+                    <div class="col-md-3">
+                        <div style="height:450px">
+                            <div class="thumbnail" style="text-align:center">
+                                <img class="img-thumbnail" src="~/Uploads/Tech/@item.ImageFront" width="100" height="100" />
+                                <h4 class="caption">@Html.DisplayFor(modelItem => item.ModelName)</h4>
+                                <label>Model Number :</label>&nbsp;@Html.DisplayFor(modelItem => item.ModelNumber)<br />
+                                <label>Price :</label>&nbsp;@Html.DisplayFor(modelItem => item.SellingPrice)
+                                <hr />
+                                @using urbanbooks.Helpers
+                                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to Wishlist", "Add", "Wishlist", new { productId = item.ProductID, returnUrl }, htmlAttributes: new { @class = "btn" })
+                                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "View", "Details", "Technology", new { ProductID = item.ProductID }, htmlAttributes: new { @class = "btn" })
+                                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "AddToCart", "Cart", new { productId = item.ProductID, returnUrl }, htmlAttributes: new { @class = "btn" })
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="thumbnail" style="text-align:center;">
-                        <i class="icon-mobile img-thumbnail" style="font-size:60px;color:white; background-color:#1e1e1e"></i>
-                        <label class="caption">Beginning C#</label>
-                        <hr />
-                        <strong>Price R0.00</strong>
-                        <br />
-                        @using urbanbooks.Helpers
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to wishlist", "Home", "index", htmlAttributes: new { @class = "btn" })
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "view", "Home", "index", htmlAttributes: new { @class = "btn" })
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "Home", "index", htmlAttributes: new { @class = "btn" })
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="thumbnail" style="text-align:center;">
-                        <i class="icon-mobile img-thumbnail" style="font-size:60px;color:white; background-color:#1e1e1e"></i>
-                        <label class="caption">Beginning C#</label>
-                        <hr />
-                        <strong>Price R0.00</strong>
-                        <br />
-                        @using urbanbooks.Helpers
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to wishlist", "Home", "index", htmlAttributes: new { @class = "btn" })
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "view", "Home", "index", htmlAttributes: new { @class = "btn" })
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "Home", "index", htmlAttributes: new { @class = "btn" })
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="thumbnail" style="text-align:center;">
-                        <i class="icon-mobile img-thumbnail" style="font-size:60px;color:white; background-color:#1e1e1e"></i>
-                        <label class="caption">Beginning C#</label>
-                        <hr />
-                        <strong>Price R0.00</strong>
-                        <br />
-                        @using urbanbooks.Helpers
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to wishlist", "Home", "index", htmlAttributes: new { @class = "btn" })
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'></span>", "view", "Home", "index", htmlAttributes: new { @class = "btn" })
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'></span>", "Add to Cart", "Home", "index", htmlAttributes: new { @class = "btn" })
-                    </div>
-                </div>
+                }
             </div>
             <div class="panel-footer" style="text-align:center;">
-                <button class="btn btn-default btn-round">Learn More</button>
+                @Html.ActionLink("Learn More", "Index", "Technology", null, new { @class = "btn btn-default btn-round" })
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="thumbnail" style="text-align:center;">
-                <!-- <i class="icon-tablet-1 img-circle img-thumbnail" style="font-size:150px;color:white; background-color:#1e1e1e"></i> -->
-                <span class="glyphicon glyphicon-tags img-circle img-thumbnail" style="font-size:150px;color:white; background-color:#1e1e1e"></span>
-                <h4 class="caption">Specials</h4>
-                <hr />
-                <p>Want to save money? Then this sections is exectly for you</p>
-                <button class="btn btn-default btn-round" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-                    Learn More
-                </button>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="thumbnail"></div>
-        </div>
-    </div>
+
 
 </div>
 @section Scripts {

@@ -213,5 +213,36 @@ namespace urbanbooks
             return SupplierOrders;
         }
 
+
+        public List<Order> GetOrdersInRasnge(string from, string to, int SupplierID)
+        {
+            List<Order> SupplierOrders = null;
+
+            SqlParameter[] Params = { 
+                                        new SqlParameter("@From", from),
+                                        new SqlParameter("@To", to),
+                                        new SqlParameter("@SupplierID", SupplierID)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewAllSupplierOrdersByDateRange",
+                CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    SupplierOrders = new List<Order>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Order order = new Order();
+                        order.OrderNo = Convert.ToInt32(row["OrderNo"]);
+                        order.Status = Convert.ToBoolean(row["Status"]);
+                        order.DateCreated = Convert.ToDateTime(row["DateCreated"]);
+                        order.InvoiceID = Convert.ToInt32(row["InvoiceID"]);
+                        order.SupplierID = Convert.ToInt32(row["SupplierID"]);
+                        SupplierOrders.Add(order);
+                    }
+                }
+            }
+            return SupplierOrders;
+        }
+
     }
 }
