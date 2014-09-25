@@ -56,8 +56,8 @@ namespace urbanbooks.Controllers
             book = myHandler.User_GetBook(ProductID);
             model.books = new Book();
             model.books = book;
-            model.book = new List<Book>();
-            model.book.Add(book);
+            model.bookList = new List<Book>();
+            model.bookList.Add(book);
 
             #endregion
 
@@ -66,8 +66,8 @@ namespace urbanbooks.Controllers
             category = myHandler.GetBookType(book.BookCategoryID);
             model.bc = new BookCategory();
             model.bc = category;
-            model.bookCategory = new List<BookCategory>();
-            model.bookCategory.Add(category);
+            model.bookCategoryList = new List<BookCategory>();
+            model.bookCategoryList.Add(category);
 
             #endregion
 
@@ -76,14 +76,14 @@ namespace urbanbooks.Controllers
             pub = myHandler.GetPublisher(book.PublisherID);
             model.publisher = new Publisher();
             model.publisher = pub;
-            model.Publishers = new List<Publisher>();
-            model.Publishers.Add(pub);
+            model.PublisherList = new List<Publisher>();
+            model.PublisherList.Add(pub);
 
             #endregion
 
             #region Get Authors Data
 
-            model.Author = myHandler.GetAuthorsPerBook(book.BookID);
+            model.AuthorList = myHandler.GetAuthorsPerBook(book.BookID);
 
             #endregion
 
@@ -283,8 +283,9 @@ namespace urbanbooks.Controllers
             #region Prep Utilities
 
             AddNewBookViewModel model = new AddNewBookViewModel();
-
+            model.model_ID = new Guid("11111111-1111-1111-1111-111111111111").ToString();
             #endregion
+
             myHandler = new BusinessLogicHandler();
             Book book = myHandler.GetBooks().Single(bk => bk.ProductID == productId);
 
@@ -338,13 +339,14 @@ namespace urbanbooks.Controllers
                 }
             }
 
-            
-
+            int[] authors = new int[bookAuthorList.Count()];
+            int x = 0;
             foreach (var item in bookAuthorList)
             {
                 if (item.BookID == model.books.BookID)
                 {
-                    ath.AuthorID = item.AuthorID;
+                    authors[x] = item.AuthorID;
+                    x++;
                 }
             }
             
@@ -393,17 +395,10 @@ namespace urbanbooks.Controllers
             
             foreach (var item in authList)
             {
-
-                foreach (var items in bookAuthorList)
-                {
-                    if (items.BookID == model.books.BookID)
-                    {
-                        author.Add(new SelectListItem { Text = item.Name, Value = item.AuthorID.ToString(), Selected = true });
-                    }
-                }
-
-
-                author.Add(new SelectListItem { Text = item.Name, Value = item.AuthorID.ToString() });
+                if(authors.Contains(item.AuthorID))
+                { author.Add(new SelectListItem { Text = item.Name, Value = item.AuthorID.ToString(), Selected=true }); }
+                else
+                { author.Add(new SelectListItem { Text = item.Name, Value = item.AuthorID.ToString() }); }                
             }
             model.authors = new List<SelectListItem>();
             model.authors = author;
@@ -425,7 +420,7 @@ namespace urbanbooks.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(AddNewBookViewModel model)
+        public ActionResult Edit(FormCollection collection, AddNewBookViewModel model)
         {
             try
             {
@@ -433,6 +428,10 @@ namespace urbanbooks.Controllers
                 book = new Book();
                 if (ModelState.IsValid)
                 {
+                    model.books.BookCategoryID = Convert.ToInt32(collection.GetValue("CategoryName").AttemptedValue);
+                    model.books.PublisherID = Convert.ToInt32(collection.GetValue("PublisherName").AttemptedValue);
+                    model.books.SupplierID = Convert.ToInt32(collection.GetValue("Name").AttemptedValue);
+                    //string[] Authors = (string[])collection.GetValue("FullName").RawValue;
                     myHandler.UpdateBookProduct(model.books);
                     myHandler.UpdateBook(model.books);
                 }

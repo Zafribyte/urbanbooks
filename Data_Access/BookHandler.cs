@@ -966,8 +966,8 @@ namespace urbanbooks
                     book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
                     book.SupplierID = Convert.ToInt32(row["SupplierID"]);
                     book.ISBN = row["ISBN"].ToString();
-                    book.catName = row["Category"].ToString();
-                    book.pubName = row["Publisher"].ToString();
+                    book.BookCategoryID = Convert.ToInt32(row["BookCategoryID"]);
+                    book.PublisherID = Convert.ToInt32(row["PublisherID"]);
                     book.CoverImage = row["CoverImage"].ToString();
                 }
             }

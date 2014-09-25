@@ -92,8 +92,8 @@ namespace urbanbooks.Controllers
 
             #region Get Books
 
-            model.book = new List<Book>();
-            model.book = myHandler.GetBooksByAuthor(AuthorID);
+            model.bookList = new List<Book>();
+            model.bookList = myHandler.GetBooksByAuthor(AuthorID);
 
             #endregion
 

@@ -11,7 +11,7 @@ namespace urbanbooks.Models
     public class AddNewBookViewModel
     {
         [Key]
-        public int ID { get; set; }
+        public string model_ID { get; set; }
         [NotMapped]
         public List<SelectListItem> bookCategories { get; set; }
         [NotMapped]
@@ -21,13 +21,13 @@ namespace urbanbooks.Models
         [NotMapped]
         public List<SelectListItem> publishers { get; set; }
         [NotMapped]
-        public List<Author> Author { get; set; }
+        public List<Author> AuthorList { get; set; }
         [NotMapped]
-        public List<BookCategory> bookCategory { get; set; }
+        public List<BookCategory> bookCategoryList { get; set; }
         [NotMapped]
-        public List<Book> book { get; set; }
+        public List<Book> bookList { get; set; }
         [NotMapped]
-        public List<Publisher> Publishers { get; set; }
+        public List<Publisher> PublisherList { get; set; }
         public BookCategory bc
         { get; set; }
         public Book books { get; set; }

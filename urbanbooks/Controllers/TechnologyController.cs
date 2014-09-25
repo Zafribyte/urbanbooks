@@ -341,15 +341,17 @@ namespace urbanbooks.Controllers
 
         [Authorize(Roles = "admin, employee")]
         [HttpPost]
-        public ActionResult Edit(int ProductID, FormCollection collection)
+        public ActionResult Edit(AddNewTechViewModel model, FormCollection collection)
         {
             try
             {
                 myHandler = new BusinessLogicHandler();
-                gadget = new Technology();
                 if (ModelState.IsValid)
                 {
-                    myHandler.UpdateTechnology(gadget);
+                    model.techs.ManufacturerID = Convert.ToInt32(collection.GetValue("Manufacturer").AttemptedValue);
+                    model.techs.TechCategoryID = Convert.ToInt32(collection.GetValue("CategoryName").AttemptedValue);
+                    model.techs.SupplierID = Convert.ToInt32(collection.GetValue("Name").AttemptedValue);
+                    myHandler.UpdateTechnology(model.techs);
                 }
                 return RedirectToAction("ManageTechnology");
             }

@@ -29,7 +29,7 @@
             @Html.DisplayNameFor(model => model.bc.CategoryName)
         </dt>
         <dd>
-            @foreach (var item in Model.bookCategory)
+            @foreach (var item in Model.bookCategoryList)
             {
                 @Html.ActionLink("" + item.CategoryName, "ByCategory", "Book", new { CategoryID = item.BookCategoryID }, null)}
         </dd>
@@ -37,7 +37,7 @@
             Author(s)
         </dt>
         <dd>
-            @foreach (var item in Model.Author)
+            @foreach (var item in Model.AuthorList)
             {
                 @Html.ActionLink("" + item.Name + " " + item.Surname, "Books", "Author", new { AuthorID = item.AuthorID }, null)
                 <span>, </span>
@@ -47,13 +47,13 @@
             @Html.DisplayNameFor(model => model.publisher.Name)
         </dt>
         <dd>
-            @foreach (var item in Model.Publishers)
+            @foreach (var item in Model.PublisherList)
             {
                 @Html.ActionLink("" + item.Name, "Books", "Publisher", new { PublisherID = item.PublisherID }, null)}
         </dd>
         <dt>Actions</dt>
         <dd>
-            @foreach (var item in Model.book) {
+            @foreach (var item in Model.bookList) {
             string returnUrl = HttpContext.Current.Request.RawUrl;
             @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'></span>", "Add to Wishlist", "Add", "Wishlist", new { productId = item.ProductID, returnUrl }, htmlAttributes: new { @class = "btn btn-default" }) 
              <span>&nbsp;</span>
