@@ -334,12 +334,6 @@ namespace urbanbooks.Controllers
                 {
                     sp.SupplierID = item.SupplierID;
                     sp.Name = item.Name;
-                    sp.LastName = item.LastName;
-                    sp.User_Id = item.User_Id;
-                    sp.Status = item.Status;
-                    sp.ContactPerson = item.ContactPerson;
-                    sp.ContactPersonNumber = item.ContactPersonNumber;
-                    sp.Fax = item.Fax;
                     
                 }
             }
