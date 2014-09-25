@@ -396,9 +396,19 @@ namespace urbanbooks.Controllers
             ViewData["suppliers"] = supplier;
 
             List<SelectListItem> author = new List<SelectListItem>();
-            //author.Add(new SelectListItem { Text = "Select Author", Value = "", Selected = true });
+            
             foreach (var item in authList)
             {
+
+                foreach (var items in bookAuthorList)
+                {
+                    if (items.BookID == model.books.BookID)
+                    {
+                        author.Add(new SelectListItem { Text = item.Name, Value = item.AuthorID.ToString(), Selected = true });
+                    }
+                }
+
+
                 author.Add(new SelectListItem { Text = item.Name, Value = item.AuthorID.ToString() });
             }
             model.authors = new List<SelectListItem>();
