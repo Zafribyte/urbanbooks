@@ -1,0 +1,202 @@
+﻿@using urbanbooks.Models
+@model RangeViewModel
+@{
+    ViewBag.Title = "RangeSearch";
+    Layout = "~/Views/Shared/_SupplierLayout.cshtml";
+}
+
+<div id="myModal" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="myModalContent">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br /><br />
+<div class="row">
+    <div class="col-md-9">
+        <h4>Orders from: <strong>@Model.myRange.From.ToShortDateString()</strong> to :<strong>@Model.myRange.To.ToShortDateString()</strong></h4>
+    </div>
+
+
+</div>
+<br /><br />
+
+<ul class="nav nav-tabs">
+    <li class="active"><a class="" href="#home" data-toggle="tab">Orders Placed Today</a></li>
+    <li><a href="#profile" data-toggle="tab">Pending Orders</a></li>
+    <li><a href="#messages" data-toggle="tab">Complete Orders</a></li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade in active" id="home">
+        <br /><br />
+        <table class="table">
+            <tr>
+                <th>
+                    Order Number
+                </th>
+                <th>
+                    Date Created
+                </th>
+                <th>
+                    Actions
+                </th>
+                <th>
+                    Status
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.Orders)
+            {
+                string returnUrl = HttpContext.Current.Request.RawUrl;
+                if (item.DateCreated == DateTime.Today.Date && item.Status == false)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateCreated)
+                        </td>
+                        <td>
+                            @Html.ActionLink("View Details", "Details", "Order", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default", data_modal = "" })
+                        </td>
+                        @if (item.Status == false)
+                        {
+                            <td>
+                                <label class="alert alert-warning">Pending</label>
+                            </td>
+                        }
+                        <td>
+                            @Html.ActionLink("Complete", "ProcessOrder", "Order", new { returnUrl = returnUrl, OrderNumber = item.OrderNo }, new { @class = "btn btn-default btn-success" })
+                        </td>
+                    </tr>
+                }
+            }
+
+        </table>
+
+    </div>
+
+
+    <div class="tab-pane fade" id="profile">
+        <br /><br />
+
+        <table class="table">
+            <tr>
+                <th>
+                    Order Number
+                </th>
+                <th>
+                    Date Created
+                </th>
+                <th>
+                    Actions
+                </th>
+                <th>
+                    Status
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.Orders)
+            {
+                string returnUrl = HttpContext.Current.Request.RawUrl;
+                if (item.DateCreated < DateTime.Today.Date && item.Status == false)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateCreated)
+                        </td>
+                        <td>
+                            @Html.ActionLink("View Details", "Details", "Order", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default", data_modal = "" })
+                        </td>
+                        @if (item.Status == false)
+                        {
+                            <td>
+                                <label class="alert alert-warning">Pending</label>
+                            </td>
+                        }
+                        <td>
+                            @Html.ActionLink("Complete", "ProcessOrder", "Order", new { returnUrl = returnUrl, OrderNumber = item.OrderNo }, new { @class = "btn btn-default btn-success" })
+                        </td>
+                    </tr>
+                }
+            }
+
+        </table>
+
+
+    </div>
+
+
+    <div class="tab-pane fade" id="messages">
+        <br /><br /><br />
+        <table class="table">
+            <tr>
+                <th>
+                    Order Number
+                </th>
+                <th>
+                    Date Created
+                </th>
+                <th>
+                    Actions
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Date Completed
+                </th>
+            </tr>
+
+            @foreach (var item in Model.Orders)
+            {
+                string returnUrl = HttpContext.Current.Request.RawUrl;
+                if (item.Status == true)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateCreated)
+                        </td>
+                        <td>
+                            @Html.ActionLink("View Details", "Details", "Order", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default", data_modal = "" })
+                        </td>
+                        @if (item.Status == false)
+                        {
+                            <td>
+                                <label class="alert alert-warning">Pending</label>
+                            </td>
+                        }
+                        <td>
+                            <label class="alert alert-success">Complete</label>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateLastModified)
+                        </td>
+                    </tr>
+                }
+            }
+
+        </table>
+
+    </div>
+</div>
+
+<br /><br /><br />
+
+<div>
+    @Html.ActionLink("Back", "Home", "Supplier", null, new { @class = "btn btn-default"})
+</div>

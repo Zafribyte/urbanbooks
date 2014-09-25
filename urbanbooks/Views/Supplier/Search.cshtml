@@ -1,0 +1,25 @@
+﻿@using urbanbooks.Models
+@model InvoiceModel
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_SupplierLayout.cshtml";
+}
+
+@if(Model != null)
+{
+    if(Model.Invoice != null)
+    {
+        
+    }
+    if(Model.Order != null)
+    {
+        
+    }
+}
+else
+{
+    <p>
+        Sorry no results were found :( 
+    </p>
+}
+
