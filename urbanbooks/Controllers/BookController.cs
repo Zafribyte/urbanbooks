@@ -287,6 +287,8 @@ namespace urbanbooks.Controllers
             myHandler = new BusinessLogicHandler();
             Book book = myHandler.GetBooks().Single(bk => bk.ProductID == productId);
 
+            IEnumerable<BookAuthor> bookAuthorList = myHandler.GetBookAuthors(book.BookID);
+
             model.books = new Book();
             model.books = book;
 
@@ -320,11 +322,44 @@ namespace urbanbooks.Controllers
 
             #endregion
 
+            Supplier sp = new Supplier();
+            Author ath = new Author();
             BookCategory bkc = new BookCategory();
+            Publisher pb = new Publisher();
+
+            foreach(var item in nameList)
+            {
+                if(item.SupplierID == model.books.SupplierID)
+                {
+                    sp.SupplierID = item.SupplierID;
+                    sp.Name = item.Name;
+                    sp.LastName = item.LastName;
+                    sp.User_Id = item.User_Id;
+                    sp.Status = item.Status;
+                    sp.ContactPerson = item.ContactPerson;
+                    sp.ContactPersonNumber = item.ContactPersonNumber;
+                    sp.Fax = item.Fax;
+                    
+                }
+            }
+
+            
+
+            foreach (var item in bookAuthorList)
+            {
+                if (item.BookID == model.books.BookID)
+                {
+                    ath.AuthorID = item.AuthorID;
+                }
+            }
             
             foreach(var item in pubList)
             {
-
+                if(item.PublisherID == model.books.PublisherID)
+                {
+                    pb.PublisherID = item.PublisherID;
+                    pb.Name = item.Name;
+                }
             }
 
             foreach(var item in typeList)
@@ -385,18 +420,16 @@ namespace urbanbooks.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Book bl, Book b)
+        public ActionResult Edit(AddNewBookViewModel model)
         {
             try
             {
                 myHandler = new BusinessLogicHandler();
                 book = new Book();
-                TryUpdateModel(bl);
-                TryUpdateModel(b);
                 if (ModelState.IsValid)
                 {
-                    //myHandler.UpdateBookProduct(b);
-                    myHandler.UpdateBook(bl);
+                    myHandler.UpdateBookProduct(model.books);
+                    myHandler.UpdateBook(model.books);
                 }
                 return RedirectToAction("Index");
             }
