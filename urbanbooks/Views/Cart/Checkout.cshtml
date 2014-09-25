@@ -7,16 +7,17 @@
     ViewBag.Title = "Checkout";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
 <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 <link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
-<link href="~/Content/bootstrap.css" rel="stylesheet" />
-
 <link href="~/Content/datepicker3.css" rel="stylesheet" />
-
-
-<script src="~/Scripts/jquery-2.1.1.js"></script>
+<link href="~/Content/datepicker.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-2.1.1.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+<script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+
+
 
 
 @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -261,26 +262,21 @@
     @Html.ActionLink("Back", "Edit", null, new { @class = "btn btn-danger" })
     <span>&nbsp;</span>
     <input type="submit" value="Checkout" class="btn btn-success" />
+    <br /><br /><br />
     <script type="text/javascript">
-        $('.datep').datepicker({
+        $(document).ready('.datep').datepicker({
             format: 'dd/mm/yyyy',
             startDate: '+1m',
             viewMode: "months",
             minViewMode: "months"
         });
-        $('#cCard').focus($('#cCard').popover());
-        $('#killed').focus($('#killed').popover());
+        $(document).ready('#cCard').focus($('#cCard').popover());
+        $(document).ready('#killed').focus($('#killed').popover());
     </script>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
-    @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/themes/base/css")
-    @Scripts.Render("~/bundles/bootstrap")
 
+    @Scripts.Render("~/bundles/jqueryval")
 
     @Scripts.Render("~/bundles/modalform")
 }
 
-@Scripts.Render("~/bundles/jqueryval")
-@Scripts.Render("~/bundles/fuelux")
