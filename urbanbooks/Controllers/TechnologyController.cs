@@ -249,10 +249,94 @@ namespace urbanbooks.Controllers
         [Authorize(Roles = "admin, employee")]
         public ActionResult Edit(int ProductID)
         {
+            AddNewTechViewModel model = new AddNewTechViewModel();
+
             myHandler = new BusinessLogicHandler();
             gadget = new Technology();
             gadget = myHandler.GetTechnologyDetails(ProductID);
-            return View(gadget);
+
+            model.techs = new Technology();
+            model.techs = gadget;
+
+            SupplierHandler supHandler = new SupplierHandler();
+            IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetSupplierList();
+            var disp = from nameAndId in nameList
+                       select new { Value = nameAndId.SupplierID, Text = nameAndId.Name };
+
+            ViewBag.SupplierList = new SelectList(disp.ToList());
+
+            TechCategoryHandler typeHandler = new TechCategoryHandler();
+            IEnumerable<TechCategory> typeList = (IEnumerable<TechCategory>)typeHandler.GetTechCategoryList();
+            var dispTC = from name in typeList
+                         select new { Value = name.TechCategoryID, Text = name.CategoryName };
+            ViewBag.TechCategoryList = new SelectList(dispTC.ToList());
+
+            ManufacturerHandler manHandler = new ManufacturerHandler();
+            IEnumerable<Manufacturer> manList = (IEnumerable<Manufacturer>)manHandler.GetManufacturerList();
+            var dispM = from mName in manList
+                        select new { Value = mName.ManufacturerID, Text = mName.Name };
+            ViewBag.ManufacturerList = new SelectList(dispM.ToList());
+
+            Supplier sp = new Supplier();
+            TechCategory tck = new TechCategory();
+            Manufacturer mna = new Manufacturer();
+
+            foreach(var item in manList)
+            {
+                if(item.ManufacturerID == model.techs.ManufacturerID)
+                {
+                    mna.ManufacturerID = item.ManufacturerID;
+                    mna.Name = item.Name;
+                }
+            }
+            foreach(var item in nameList)
+            {
+                if(item.SupplierID == model.techs.SupplierID)
+                {
+                    sp.SupplierID = item.SupplierID;
+                    sp.Name = item.Name;
+                }
+            }
+            foreach(var item in typeList)
+            {
+                if(item.TechCategoryID == model.techs.TechCategoryID)
+                {
+                    tck.TechCategoryID = item.TechCategoryID;
+                    tck.CategoryName = item.CategoryName;
+                }
+            }
+
+            List<SelectListItem> supplier = new List<SelectListItem>(); 
+            supplier.Add(new SelectListItem { Value = sp.SupplierID.ToString(), Text = sp.Name, Selected = true });
+            foreach (var item in nameList)
+            {
+                supplier.Add(new SelectListItem { Text = item.Name, Value = item.SupplierID.ToString() });
+            }
+            model.suppliers = new List<SelectListItem>();
+            model.suppliers = supplier;
+            ViewData["suppliers"] = supplier;
+
+            List<SelectListItem> techCategory = new List<SelectListItem>();
+            techCategory.Add(new SelectListItem { Value = tck.TechCategoryID.ToString(), Text = tck.CategoryName, Selected = true });
+            foreach (var item in typeList)
+            {
+                techCategory.Add(new SelectListItem { Text = item.CategoryName, Value = item.TechCategoryID.ToString() });
+            }
+            model.techCategories = new List<SelectListItem>();
+            model.techCategories = techCategory;
+            ViewData["techCategories"] = techCategory;
+
+            List<SelectListItem> manufacturer = new List<SelectListItem>();
+            manufacturer.Add(new SelectListItem { Value = mna.ManufacturerID.ToString(), Text = mna.Name, Selected = true });
+            foreach (var item in manList)
+            {
+                manufacturer.Add(new SelectListItem { Text = item.Name, Value = item.ManufacturerID.ToString() });
+            }
+            model.manufacturers = new List<SelectListItem>();
+            model.manufacturers = manufacturer;
+            ViewData["manufacturers"] = manufacturer;
+
+            return View(model);
         }
 
         [Authorize(Roles = "admin, employee")]
@@ -263,7 +347,6 @@ namespace urbanbooks.Controllers
             {
                 myHandler = new BusinessLogicHandler();
                 gadget = new Technology();
-                TryUpdateModel(gadget);
                 if (ModelState.IsValid)
                 {
                     myHandler.UpdateTechnology(gadget);
