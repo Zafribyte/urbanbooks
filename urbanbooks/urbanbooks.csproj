@@ -222,14 +222,6 @@
     <Compile Include="Migrations\201409212136135_gprs.Designer.cs">
       <DependentUpon>201409212136135_gprs.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201409241038492_gtc.cs" />
-    <Compile Include="Migrations\201409241038492_gtc.Designer.cs">
-      <DependentUpon>201409241038492_gtc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409241130266_gto.cs" />
-    <Compile Include="Migrations\201409241130266_gto.Designer.cs">
-      <DependentUpon>201409241130266_gto.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\AdminIndexViewModel.cs" />
     <Compile Include="Models\InvoiceModel.cs" />
     <Compile Include="Models\OrderLineModel.cs" />
@@ -676,12 +668,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409212136135_gprs.resx">
       <DependentUpon>201409212136135_gprs.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409241038492_gtc.resx">
-      <DependentUpon>201409241038492_gtc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409241130266_gto.resx">
-      <DependentUpon>201409241130266_gto.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
