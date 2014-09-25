@@ -733,9 +733,35 @@ namespace urbanbooks
             };
             return DataProvider.ExecuteNonQuery("sp_DeleteProduct", CommandType.StoredProcedure,
                 Params);
-        }//STORED PROCEDURE
+        }
 
-        //STORED PROCEDURE
+        public List<Technology> GetNewDeviceList()
+        {
+            List<Technology> TechnologyList = null;
+
+            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewAllNewDevices",
+                CommandType.StoredProcedure))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechnologyList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology Techno = new Technology();
+                        Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
+                        Techno.ModelName = row["ModelName"].ToString();
+                        Techno.Specs = row["Specs"].ToString();
+                        Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.SupplierID = Convert.ToInt32(row["SupplierID"].ToString());
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        TechnologyList.Add(Techno);
+                    }
+                }
+            }
+            return TechnologyList;
+        }
 
         #endregion
     }

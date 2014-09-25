@@ -38,10 +38,10 @@
                     <ul class="dropdown-menu" role="menu">
                         <li>@Html.ActionLink("All Books", "Index", "Book")</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("Textbooks", "ByCategory", "Book", new { name="textbook", CategoryID=10}, null)</li>
+                        <li>@Html.ActionLink("Textbooks", "ByCategory", "Book", new { name = "textbook", CategoryID = 10 }, null)</li>
                         <li>@Html.ActionLink("Cook books", "ByCategory", "Book", new { name = "cookbook", CategoryID = 0 }, null)</li>
                         <li>@Html.ActionLink("Sports", "ByCategory", "Book", new { name = "sports", CategoryID = 0 }, null)</li>
-                        <li>@Html.ActionLink("Children's", "ByCategory", "Book", new { name = "children", CategoryID=0 }, null)</li>
+                        <li>@Html.ActionLink("Children's", "ByCategory", "Book", new { name = "children", CategoryID = 0 }, null)</li>
                         <li class="divider"></li>
                         <li>@Html.ActionLink("More Categories", "Categories", "Book")</li>
                     </ul>
@@ -51,7 +51,7 @@
                     <ul class="dropdown-menu" role="menu">
                         <li>@Html.ActionLink("All Devices", "Index", "Technology")</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("Laptops", "ByCategory", "Technology", new { name="Laptop", CategoryID=0}, null)</li>
+                        <li>@Html.ActionLink("Laptops", "ByCategory", "Technology", new { name = "Laptop", CategoryID = 0 }, null)</li>
                         <li>@Html.ActionLink("Tablets", "ByCategory", "Technology", new { name = "Tablet", CategoryID = 0 }, null)</li>
                         <li>@Html.ActionLink("Accessories", "ByCategory", "Technology", new { name = "Accesor", CategoryID = 0 }, null)</li>
                         <li>@Html.ActionLink("Software", "ByCategory", "Technology", new { name = "Software", CategoryID = 0 }, null)</li>
@@ -59,9 +59,22 @@
                         <li>@Html.ActionLink("More Categories", "Categories", "Technology")</li>
                     </ul>
                 </li>
+                @{
+                    if (Session["cartTotal"] == null)
+                    {
+                        Session["cartTotal"] = "0,00";
+                    }
+                    if (Session["wishlistTotal"] == null)
+                    {
+                        Session["wishlistTotal"] = 0;
+                    }
+                }
                 <li>@Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'>  R" + Session["cartTotal"].ToString() + "</span>", "Cart", "Edit", "Cart", htmlAttributes: new { @class = "btn" })</li>
                 <li>@Html.NoEncodeActionLink("<span class='glyphicon glyphicon-heart-empty'>  " + Session["wishlistTotal"].ToString() + "</span>", "Wishlist", "Edit", "Wishlist", htmlAttributes: new { @class = "btn" })</li>
             </ul>
+
+
+
             @Html.Partial("_LoginPartial")
             <div class="navbar-form input-group form-inline pull-right">
                 @using (@Html.BeginForm("Search", "Search", FormMethod.Post, null))
@@ -90,9 +103,37 @@
     <!--Body PlaceHolder-->
     <div class="body-content">
         @RenderBody()
+        <br /><br />
 
+        <div class="row">
+
+        </div>
     </div>
-
+    <div class="" style="background-color:#1e1e1e; overflow:visible; margin-bottom:-75px">
+        <br />
+        <footer style="color:ActiveBorder; background-color:#1e1e1e; bottom:-40px;">
+            <div class=" container">
+                <div class="col-md-4">
+                    <br />
+                    <a href="/Home/">&copy; Urban books 2014</a><br />
+                    <p>
+                        Contact Us #facebook #twitter #pintres 
+                    </p>
+                </div>
+                <div class="col-md-4" style="text-align:center">
+                    <i class="icon-book-2"></i>  @Html.ActionLink("Books", "Index", "Books")
+                    <br />
+                    <i class="icon-mobile"></i>  @Html.ActionLink("Devices", "Index", "Technology")
+                    <br />
+                    <i class="icon-book-1"></i>  @Html.ActionLink("FAQS", "FAQs", "Help")
+                </div>
+                <div class="col-md-4 pull-right">
+                    <br />
+                    <p class="pull-right">Best viewed in #mozila #chrome <br /> On resolution 1280 X 600 and above</p>
+                </div>
+            </div>
+        </footer>
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

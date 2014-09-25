@@ -65,6 +65,11 @@ namespace urbanbooks.Controllers
             return View(model);
         }
 
+        public ActionResult Product(int ProductID)
+        {
+            return View();
+        }
+
         public ActionResult Create()
         {
             return View();
@@ -111,6 +116,57 @@ namespace urbanbooks.Controllers
             {
                 return View();
             }
+        }
+        [HttpPost]
+        public ActionResult Search(FormCollection collector)
+        {
+            #region Prep Utilities
+
+            string Query = collector.GetValue("query").AttemptedValue;
+            myHandler = new BusinessLogicHandler();
+            Supplier supplier = new Supplier();
+            InvoiceModel model = new InvoiceModel();
+
+            #endregion
+
+            #region Get User(Supplier)
+
+            string userName = User.Identity.GetUserName();
+            ApplicationDbContext dataSocket = new ApplicationDbContext();
+            UserStore<ApplicationUser> myStore = new UserStore<ApplicationUser>(dataSocket);
+            _userManager = new ApplicationUserManager(myStore);
+            var user = _userManager.FindByEmail(userName);
+
+            #endregion
+
+            #region Get Supplier Details
+
+            supplier = myHandler.GetSupplier(user.Id);
+
+            #endregion
+
+
+            #region Get the data
+
+            model.Order = new Order();
+            model.Invoice = new Invoice();
+            try
+            {
+                model.Order = myHandler.GetOrder(Convert.ToInt32(Query));
+            }
+            catch
+            { model.Order = null; }
+            try
+            {
+                model.Invoice = myHandler.GetInvoice(Convert.ToInt32(Query));
+            }
+            catch
+            { model.Invoice = null; }
+            ///get product
+            #endregion
+
+
+            return View(model);
         }
 
         public ActionResult Edit(int id)

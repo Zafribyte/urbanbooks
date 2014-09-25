@@ -222,9 +222,13 @@
     <Compile Include="Migrations\201409212136135_gprs.Designer.cs">
       <DependentUpon>201409212136135_gprs.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201409241826283_gfr.cs" />
-    <Compile Include="Migrations\201409241826283_gfr.Designer.cs">
-      <DependentUpon>201409241826283_gfr.cs</DependentUpon>
+    <Compile Include="Migrations\201409241038492_gtc.cs" />
+    <Compile Include="Migrations\201409241038492_gtc.Designer.cs">
+      <DependentUpon>201409241038492_gtc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409241130266_gto.cs" />
+    <Compile Include="Migrations\201409241130266_gto.Designer.cs">
+      <DependentUpon>201409241130266_gto.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminIndexViewModel.cs" />
     <Compile Include="Models\InvoiceModel.cs" />
@@ -570,7 +574,11 @@
     <Content Include="Views\Search\AdminDeviceSearch.cshtml" />
     <Content Include="Views\Publisher\Books.cshtml" />
     <Content Include="Views\Help\Documentation.cshtml" />
-    <Content Include="Views\Admin\Ranger.cshtml" />
+    <Content Include="Views\Supplier\Ranger.cshtml" />
+    <Content Include="Views\Order\RangeSearch.cshtml" />
+    <Content Include="Views\Supplier\Search.cshtml" />
+    <Content Include="Views\Shared\footer.cshtml" />
+    <Content Include="Views\Supplier\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
@@ -669,8 +677,11 @@
     <EmbeddedResource Include="Migrations\201409212136135_gprs.resx">
       <DependentUpon>201409212136135_gprs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409241826283_gfr.resx">
-      <DependentUpon>201409241826283_gfr.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201409241038492_gtc.resx">
+      <DependentUpon>201409241038492_gtc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409241130266_gto.resx">
+      <DependentUpon>201409241130266_gto.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

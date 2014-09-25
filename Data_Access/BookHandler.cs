@@ -34,6 +34,8 @@ namespace urbanbooks
                         book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -64,6 +66,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -94,6 +98,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -123,6 +129,8 @@ namespace urbanbooks
                         book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -155,6 +163,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -185,6 +195,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -215,6 +227,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -245,6 +259,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -275,6 +291,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -305,6 +323,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -338,6 +358,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -371,6 +393,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -404,6 +428,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -437,6 +463,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -470,6 +498,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -503,6 +533,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -536,6 +568,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -569,6 +603,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -602,6 +638,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -635,6 +673,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -669,6 +709,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -703,6 +745,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -737,6 +781,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -771,6 +817,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -805,6 +853,8 @@ namespace urbanbooks
                         book.BookCategoryID = (int)row["BookCategoryID"];
                         book.CoverImage = row["CoverImage"].ToString();
                         book.PublisherID = (int)row["PublisherID"];
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
                         BookList.Add(book);
 
 
@@ -993,6 +1043,41 @@ namespace urbanbooks
             };
             return DataProvider.ExecuteNonQuery("sp_InsertBook", CommandType.StoredProcedure,
                 Params);
+        }
+
+        public List<Book> GetNewBookList()
+        {
+            List<Book> BookList = null;
+
+            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewAllNewBooks",
+                CommandType.StoredProcedure))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    BookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        BookCategory bc = new BookCategory();
+                        book.BookID = (int)row["BookID"];
+                        book.ProductID = (int)row["ProductID"];
+                        book.BookTitle = row["BookTitle"].ToString();
+                        book.Synopsis = row["Synopsis"].ToString();
+                        book.SupplierID = Convert.ToInt32(row["SupplierID"].ToString());
+                        book.ISBN = row["ISBN"].ToString();
+                        book.CostPrice = Convert.ToDouble(row["CostPrice"]);
+                        book.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        book.BookCategoryID = (int)row["BookCategoryID"];
+                        book.CoverImage = row["CoverImage"].ToString();
+                        book.BookTitle = book.BookTitle.Substring(0, Math.Min(11, book.BookTitle.Length));
+                        book.BookTitle += "...";
+                        BookList.Add(book);
+
+
+                    }
+                }
+            }
+            return BookList;
         }
 
         #endregion
