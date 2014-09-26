@@ -189,6 +189,7 @@
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\BookTypeController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HelpController.cs" />
