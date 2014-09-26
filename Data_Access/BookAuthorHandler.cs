@@ -10,6 +10,16 @@ namespace urbanbooks
 {
     public class BookAuthorHandler
     {
+
+        public bool DeleteUpdateBookAuthor(int BookID)
+        {
+            SqlParameter[] Params = new SqlParameter[]
+            {
+                new SqlParameter("@BookID", BookID),
+            };
+            return DataProvider.ExecuteNonQuery("sp_DeleteBookINBook_Author", CommandType.StoredProcedure,
+                Params);
+        }
         public bool DeleteBookAuthor(BookAuthor bookAuthor)
         {
             SqlParameter[] Params = new SqlParameter[]

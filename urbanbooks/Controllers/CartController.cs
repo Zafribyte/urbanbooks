@@ -282,11 +282,11 @@ namespace urbanbooks.Controllers
             #endregion
 
             #region Cathing model errors
-            //        var error = ModelState.Values.SelectMany(e => e.Errors);
-    //        var errors = ModelState
-    //.Where(x => x.Value.Errors.Count > 0)
-    //.Select(x => new { x.Key, x.Value.Errors })
-            //.ToArray();
+            var error = ModelState.Values.SelectMany(e => e.Errors);
+            var errors = ModelState
+    .Where(x => x.Value.Errors.Count > 0)
+    .Select(x => new { x.Key, x.Value.Errors })
+    .ToArray();
             #endregion
 
             int? IID = 0;
@@ -315,21 +315,38 @@ namespace urbanbooks.Controllers
                             invoiceLine.Quantity = item.Quantity;
 
                             #region Get Product Price
-
-                            try {
+                            bool chk = false;
+                            chk = myHandler.CheckProductType(item.ProductID);
+                            if (chk)
+                            {
                                 Book book = new Book();
                                 book = myHandler.GetBook(item.ProductID);
                                 invoiceLine.Price = book.SellingPrice;
+                                myHandler.AddinvoiceItem(invoiceLine);
                             }
-                            catch
+                            else
                             {
                                 Technology device = new Technology();
                                 device = myHandler.GetTechnologyDetails(item.ProductID);
                                 invoiceLine.Price = device.SellingPrice;
+                                myHandler.AddinvoiceItem(invoiceLine);
                             }
+
+                            //try
+                            //{
+                            //    Book book = new Book();
+                            //    book = myHandler.GetBook(item.ProductID);
+                            //    invoiceLine.Price = book.SellingPrice;
+                            //}
+                            //catch
+                            //{
+                            //    Technology device = new Technology();
+                            //    device = myHandler.GetTechnologyDetails(item.ProductID);
+                            //    invoiceLine.Price = device.SellingPrice;
+                            //}
                             #endregion
 
-                            myHandler.AddinvoiceItem(invoiceLine);
+                            
                         }
                          IID = invoiceLine.InvoiceID;
 
@@ -717,18 +734,31 @@ namespace urbanbooks.Controllers
 
             foreach(var item in myItems)
             {
-                try
+                if(myHandler.CheckProductType(item.ProductID))
                 {
                     Book book = new Book();
                     book = myHandler.GetBook(item.ProductID);
                     ifBooks.Add(book);
                 }
-                catch
+                else
                 {
                     Technology gadget = new Technology();
                     gadget = myHandler.GetTechnologyDetails(item.ProductID);
                     ifGadget.Add(gadget);
                 }
+
+                //try
+                //{
+                //    Book book = new Book();
+                //    book = myHandler.GetBook(item.ProductID);
+                //    ifBooks.Add(book);
+                //}
+                //catch
+                //{
+                //    Technology gadget = new Technology();
+                //    gadget = myHandler.GetTechnologyDetails(item.ProductID);
+                //    ifGadget.Add(gadget);
+                //}
             }
 
             model.allTechnology = ifGadget;

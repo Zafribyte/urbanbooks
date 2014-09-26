@@ -377,6 +377,13 @@
     <Content Include="Content\jquery-ui.theme.min.css" />
     <Content Include="Content\jquery.multiselect.filter.css" />
     <Content Include="Content\multiple-select.css" />
+    <Content Include="Content\Zosial\css\animation.css" />
+    <Content Include="Content\Zosial\css\fontello-codes.css" />
+    <Content Include="Content\Zosial\css\fontello-embedded.css" />
+    <Content Include="Content\Zosial\css\fontello-ie7-codes.css" />
+    <Content Include="Content\Zosial\css\fontello-ie7.css" />
+    <Content Include="Content\Zosial\css\fontllo.css" />
+    <Content Include="Content\Zosial\font\fontello.svg" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontello\css\animation.css" />
@@ -437,6 +444,9 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="App_Data\App_Data.rar" />
     <Content Include="Less\bootstrap-multiselect.less" />
+    <Content Include="Content\Zosial\font\fontello.eot" />
+    <Content Include="Content\Zosial\font\fontello.ttf" />
+    <Content Include="Content\Zosial\font\fontello.woff" />
     <None Include="Properties\PublishProfiles\urbanSyntax.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />

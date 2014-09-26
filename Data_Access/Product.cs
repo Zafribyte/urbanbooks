@@ -22,5 +22,7 @@ namespace urbanbooks
         { get; set; }
         public virtual int SupplierID
         { get; set; }
+        public virtual int Status 
+        { get; set; }
     }
 }
