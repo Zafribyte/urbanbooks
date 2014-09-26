@@ -603,6 +603,28 @@ namespace urbanbooks
         }//STORED PROCEDURE
         #endregion
 
+
+        public Technology experimentalUpdate(Technology tech)
+        {
+            Technology tec;
+            SqlParameter[] Params = {
+                                        new SqlParameter("@CostPrice", tech.CostPrice),
+                                        new SqlParameter("@SellingPrice", tech.SellingPrice),
+                                        new SqlParameter("@IsBook", tech.IsBook = false),
+                                        new SqlParameter("@DateAdded", tech.DateAdded)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_NewManhattanProject", CommandType.StoredProcedure, Params))
+            {
+                tec = new Technology();
+                if(table.Rows.Count == 1)
+                {
+                    DataRow row = table.Rows[0];
+                    tec.ProductID = Convert.ToInt32(row["ProductID"]);
+                }
+            }
+
+            return tec;
+        }
         public Technology experimentalTech(Technology tech)
         {
             Technology tc;
@@ -654,7 +676,7 @@ namespace urbanbooks
             }
             return Techno;
         }
-        public Technology UpdateTechnologyProduct(Technology TechnoProduct)
+        public bool UpdateTechnologyProduct(Technology TechnoProduct)
         {
             Technology tc;
             SqlParameter[] Params = {
@@ -663,17 +685,7 @@ namespace urbanbooks
                                         new SqlParameter("@DateAdded", TechnoProduct.DateAdded),
                                         new SqlParameter("@IsBook", false)
                                     };
-            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_NewManhattanProject", CommandType.StoredProcedure, Params))
-            {
-                tc = new Technology();
-                if (table.Rows.Count == 1)
-                {
-                    DataRow row = table.Rows[0];
-                    tc.ProductID = Convert.ToInt32(row["ProductID"]);
-                }
-
-            }
-            return tc;
+            return DataProvider.ExecuteNonQuery("sp_UpdateProduct", CommandType.StoredProcedure, Params);
         }
         public bool UpdateTechnology(Technology TechnoProduct)
         {
@@ -691,9 +703,6 @@ namespace urbanbooks
                 new SqlParameter("@ImageFront", TechnoProduct.ImageFront),
                 new SqlParameter("@ImageTop", TechnoProduct.ImageTop),
                 new SqlParameter("@ImageSide", TechnoProduct.ImageSide),
-                
-
-                
             };
             return DataProvider.ExecuteNonQuery("sp_UpdateTechnology", CommandType.StoredProcedure,
                 Params);
