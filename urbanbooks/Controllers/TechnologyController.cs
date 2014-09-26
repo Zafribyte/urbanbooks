@@ -346,23 +346,26 @@ namespace urbanbooks.Controllers
             try
             {
                 myHandler = new BusinessLogicHandler();
-                foreach(var modelStateValue in ViewData.ModelState.Values)
+
+                #region Cathing model errors
+                try
                 {
-                    foreach(var error in modelStateValue.Errors)
-                    {
-                        var errorMessage = error.ErrorMessage;
-                        var exception = error.Exception;
-                    }
+                    model.techs.ManufacturerID = Convert.ToInt32(collection.GetValue("Manufacturer").AttemptedValue);
+                    if (ModelState.ContainsKey("Manufacturer"))
+                        ModelState["Manufacturer"].Errors.Clear();
                 }
+                catch
+                { }
+                #endregion
+
+
                 if (ModelState.IsValid)
                 {
                     
-                    model.techs.ManufacturerID = Convert.ToInt32(collection.GetValue("Manufacturer").AttemptedValue);
                     model.techs.TechCategoryID = Convert.ToInt32(collection.GetValue("CategoryName").AttemptedValue);
                     model.techs.SupplierID = Convert.ToInt32(collection.GetValue("Name").AttemptedValue);
                     myHandler.UpdateTechnology(model.techs);
-                    //myHandler.UpdateTechnologyProduct(model.techs);
-                    myHandler.UpdateExperimentTech(model.techs);
+                    myHandler.UpdateTechProduct(model.techs);
                 }
                 return RedirectToAction("ManageTechnology");
             }

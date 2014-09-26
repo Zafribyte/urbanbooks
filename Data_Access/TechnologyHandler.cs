@@ -603,28 +603,6 @@ namespace urbanbooks
         }//STORED PROCEDURE
         #endregion
 
-
-        public Technology experimentalUpdate(Technology tech)
-        {
-            Technology tec;
-            SqlParameter[] Params = {
-                                        new SqlParameter("@CostPrice", tech.CostPrice),
-                                        new SqlParameter("@SellingPrice", tech.SellingPrice),
-                                        new SqlParameter("@IsBook", tech.IsBook = false),
-                                        new SqlParameter("@DateAdded", tech.DateAdded)
-                                    };
-            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_NewManhattanProject", CommandType.StoredProcedure, Params))
-            {
-                tec = new Technology();
-                if(table.Rows.Count == 1)
-                {
-                    DataRow row = table.Rows[0];
-                    tec.ProductID = Convert.ToInt32(row["ProductID"]);
-                }
-            }
-
-            return tec;
-        }
         public Technology experimentalTech(Technology tech)
         {
             Technology tc;
@@ -678,14 +656,15 @@ namespace urbanbooks
         }
         public bool UpdateTechnologyProduct(Technology TechnoProduct)
         {
-            Technology tc;
             SqlParameter[] Params = {
+                                        new SqlParameter("@ProductID",TechnoProduct.ProductID),
                                         new SqlParameter("@CostPrice", TechnoProduct.CostPrice),
                                         new SqlParameter("@SellingPrice", TechnoProduct.SellingPrice),
-                                        new SqlParameter("@DateAdded", TechnoProduct.DateAdded),
+                                        new SqlParameter("@Status", TechnoProduct.Status),
                                         new SqlParameter("@IsBook", false)
                                     };
-            return DataProvider.ExecuteNonQuery("sp_UpdateProduct", CommandType.StoredProcedure, Params);
+                return DataProvider.ExecuteNonQuery("sp_NewManhattanProject", CommandType.StoredProcedure,
+                              Params);
         }
         public bool UpdateTechnology(Technology TechnoProduct)
         {
@@ -700,9 +679,12 @@ namespace urbanbooks
                 new SqlParameter("@ManufacturerID", TechnoProduct.ManufacturerID),
                 new SqlParameter("@TechCategoryID", TechnoProduct.TechCategoryID),
                 new SqlParameter("@SupplierID", TechnoProduct.SupplierID),
-                new SqlParameter("@ImageFront", TechnoProduct.ImageFront),
-                new SqlParameter("@ImageTop", TechnoProduct.ImageTop),
-                new SqlParameter("@ImageSide", TechnoProduct.ImageSide),
+                //new SqlParameter("@ImageFront", TechnoProduct.ImageFront),
+                //new SqlParameter("@ImageTop", TechnoProduct.ImageTop),
+                //new SqlParameter("@ImageSide", TechnoProduct.ImageSide),
+                
+
+                
             };
             return DataProvider.ExecuteNonQuery("sp_UpdateTechnology", CommandType.StoredProcedure,
                 Params);

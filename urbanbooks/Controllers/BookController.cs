@@ -431,7 +431,24 @@ namespace urbanbooks.Controllers
                     model.books.BookCategoryID = Convert.ToInt32(collection.GetValue("CategoryName").AttemptedValue);
                     model.books.PublisherID = Convert.ToInt32(collection.GetValue("PublisherName").AttemptedValue);
                     model.books.SupplierID = Convert.ToInt32(collection.GetValue("Name").AttemptedValue);
-                    //string[] Authors = (string[])collection.GetValue("FullName").RawValue;
+                    string[] Authors = (string[])collection.GetValue("FullName").RawValue;
+
+                    #region Clean Book_Authors
+                    myHandler.BookAuthorUpdateDelete(model.books.BookID);
+                    #endregion
+
+                    #region Add New Book_Authors
+
+                    BookAuthor bookAuthors = new BookAuthor();
+                    bookAuthors.BookID = model.books.BookID;
+                    foreach (var item in Authors) //INSERTING BOOK AUTHORS
+                    {
+                        bookAuthors.AuthorID = Convert.ToInt32(item);
+                        myHandler.InsertBookAuthor(bookAuthors);
+                    }
+
+                    #endregion
+
                     myHandler.UpdateBookProduct(model.books);
                     myHandler.UpdateBook(model.books);
                 }

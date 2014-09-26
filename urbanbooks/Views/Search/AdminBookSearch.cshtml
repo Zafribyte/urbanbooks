@@ -38,9 +38,9 @@
                     @Html.DisplayFor(modelItem => item.CategoryDescription)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.BookCategoryID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.BookCategoryID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.BookCategoryID })
+                    @Html.ActionLink("Edit", "Edit","BookType", new { id = item.BookCategoryID }, null) |
+                    @Html.ActionLink("Details", "Details","BookType", new { id = item.BookCategoryID }, null) |
+                    @Html.ActionLink("Delete", "Delete", "BookType",new { id = item.BookCategoryID }, null)
                 </td>
             </tr>
         }
@@ -92,7 +92,7 @@
                 <td>
                     @Html.ActionLink("Edit", "Edit", "Book", new { productId = item.ProductID }, null) |
                     @Html.ActionLink("Details", "Details", "Book", new { productId = item.ProductID }, null) |
-                    @Html.ActionLink("Delete", "Delete", "Book", new { ProductId = item.ProductID }, null)
+                    @Html.ActionLink("Delete", "Delete","Book", new { ProductId = item.ProductID }, null)
                 </td>
             </tr>
         }
@@ -131,7 +131,7 @@
     <br /><br />
 
 }
-else
+@if(Model == null)
 {
     <p>
         Sorry no results were found :(

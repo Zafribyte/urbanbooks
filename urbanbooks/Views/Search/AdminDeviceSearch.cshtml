@@ -93,9 +93,9 @@
                         @Html.DisplayFor(modelItem => item.SellingPrice)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { ProductID = item.ProductID }) |
-                        @Html.ActionLink("Details", "Details", new { ProductID = item.ProductID }) |
-                        @Html.ActionLink("Delete", "Delete", new { ProductID = item.ProductID })
+                        @Html.ActionLink("Edit", "Edit","Technology" ,new { ProductID = item.ProductID }, null) |
+                        @Html.ActionLink("Details", "Details", "Technology", new { ProductID = item.ProductID }, null) |
+                        @Html.ActionLink("Delete", "Delete", "Technology", new { ProductID = item.ProductID }, null)
                     </td>
                 </tr>
             }
@@ -130,7 +130,7 @@
 
     </table>
 }
-else
+@if(Model == null)
 {
     <p>
         Sorry No Results were found :(

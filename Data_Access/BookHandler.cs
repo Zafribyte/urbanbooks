@@ -10,6 +10,22 @@ namespace urbanbooks
 {
     public class BookHandler
     {
+        public bool CheckProductStatus(int ProductID)
+        {
+            bool isBook = false;
+
+            SqlParameter[] Params = { new SqlParameter("@ProductID", ProductID) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_CheckProductType", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count == 1)
+                {
+                    foreach(DataRow row in table.Rows)
+                    {isBook = Convert.ToBoolean(row["IsBook"]); }  
+                }
+            }
+            return isBook;
+        }
+
         public List<Book> GetBookList()
         {
             List<Book> BookList = null;

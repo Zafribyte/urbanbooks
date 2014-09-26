@@ -263,6 +263,9 @@ namespace urbanbooks
         #endregion
 
         #region TECHNOLOGY
+
+        public bool UpdateTechProduct(Technology gadget)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.UpdateTechnologyProduct(gadget); }
         public bool AddTechnology(Technology gadget)
         {
             TechnologyHandler myHandler = new TechnologyHandler();
@@ -480,6 +483,10 @@ namespace urbanbooks
 
         #region SYSTEM ACTIONS
 
+        public bool BookAuthorUpdateDelete(int BookID)
+        { BookAuthorHandler myHandler = new BookAuthorHandler(); return myHandler.DeleteUpdateBookAuthor(BookID); }
+        public bool CheckProductType(int ProductId)
+        { BookHandler myHandler = new BookHandler(); return myHandler.CheckProductStatus(ProductId); }
         public List<Technology> GetNewDevices()
         { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.GetNewDeviceList(); }
         public List<Book> GetNewBooks()
