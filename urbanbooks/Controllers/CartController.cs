@@ -374,7 +374,7 @@ namespace urbanbooks.Controllers
 
                         foreach (var item in myItems)
                         {
-                            try
+                            if(myHandler.CheckProductType(item.ProductID))
                             {
                                 book = myHandler.GetBook(item.ProductID);
                                 supplierId = book.SupplierID;
@@ -398,12 +398,16 @@ namespace urbanbooks.Controllers
                                 }
 
                             }
-                            catch
+                            else
                             {
                                 supplierId = ifGadget.SingleOrDefault(m => m.ProductID == item.ProductID).SupplierID;
                                 if (suppliers.Contains(supplierId))
                                 {
-
+                                    int y = suppliers.IndexOf(supplierId);
+                                    orderLine.OrderNo = orders.ElementAt(y);
+                                    orderLine.ProductID = item.ProductID;
+                                    orderLine.Quantity = item.Quantity;
+                                    myHandler.AddOrderItem(orderLine);
                                 }
                                 else
                                 {
@@ -411,6 +415,9 @@ namespace urbanbooks.Controllers
                                     ord = new Order { DateCreated = DateTime.Now.Date, SupplierID = supplierId, InvoiceID = IID.GetValueOrDefault(), DateLastModified = DateTime.Now.Date, Status = false };
                                     orderLine = myHandler.AddOrder(ord);
                                     orders.Add(orderLine.OrderNo);
+                                    orderLine.ProductID = item.ProductID;
+                                    orderLine.Quantity = item.Quantity;
+                                    myHandler.AddOrderItem(orderLine);
                                 }
                             }
                         }
