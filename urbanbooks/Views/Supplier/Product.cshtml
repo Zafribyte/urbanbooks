@@ -1,8 +1,120 @@
-﻿
+﻿@using urbanbooks.Models
+@using urbanbooks.Helpers
+@model UnifiedViewModel
+
 @{
-    ViewBag.Title = "Product";
-    Layout = "~/Views/Shared/_SupplierLayout.cshtml";
+    if(Model.iSupplier)
+    { 
+        ViewBag.Title = "Product";
+        Layout = "~/Views/Shared/_SupplierLayout.cshtml";
+    }
+    else
+    {
+        ViewBag.Title = "Product";
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
 }
 
-<h2>Product</h2>
+@if(Model.Book != null)
+{
+    <div class="col-md-4">
+        @Html.Partial("ImgHost")
+    </div>
+    <div class="col-md-8">
+        @Html.Partial("BookHost")
+    </div>
+}
+@if(Model.Device != null)
+{
+    
+   
+    string returnUrl = HttpContext.Current.Request.RawUrl;
+    
+    <br />
+    <h3>@Html.DisplayFor(model => model.Device.ModelName)</h3>
+    <br /><br />
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active"><a href="#home" role="tab" data-toggle="tab">Details</a></li>
+        <li><a href="#profile" role="tab" data-toggle="tab">Images</a></li>
+    </ul>
 
+    <div class="tab-content">
+
+        <div class="tab-pane fade in active" id="home">
+            <br /><br />
+            <div class="container">
+                <dl>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Device.ModelNumber)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Device.ModelNumber)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Device.Specs)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Device.Specs)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Manufacturer.Name)
+                    </dt>
+                    <dd>
+                        @Html.ActionLink("" + @Html.DisplayFor(model => model.Manufacturer.Name), "ByManufacturer", "Technology", new { ManufacturerID = @Html.ValueFor(model => model.Manufacturer.ManufacturerID) }, null)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Category.CategoryName)
+                    </dt>
+                    <dd>
+                        @Html.ActionLink("" + @Html.DisplayFor(model => model.Category.CategoryName), "ByCategory", "Technology", new { CategoryID = @Html.ValueFor(model => model.Category.TechCategoryID) }, null)
+                    </dd>
+                    @if (!Model.iSupplier)
+                    {
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Device.SellingPrice)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Device.SellingPrice)
+                        </dd>
+                    }
+                </dl>
+
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="profile">
+            <br /><br />
+            <div class="container">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(mode => mode.Device.ImageFront) <br />
+                    <img src="~/Uploads/Tech/@Model.Device.ImageFront" width="300" height="200" />
+                </div>
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(mode => mode.Device.ImageSide) <br />
+                    <img src="~/Uploads/Tech/@Model.Device.ImageSide" width="300" height="200" />
+                </div>
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(mode => mode.Device.ImageTop) <br />
+                    <img src="~/Uploads/Tech/@Model.Device.ImageTop" width="300" height="200" />
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="messages">...</div>
+    </div>
+
+    <script type="text/javascript">
+    $('#myTab a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+    </script>
+
+}
+@if(Model == null)
+{
+    <p>
+        Sorry something went wrong Please refresh page or try again later :(
+    </p>
+}

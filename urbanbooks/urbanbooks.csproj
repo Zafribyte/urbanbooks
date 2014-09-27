@@ -340,6 +340,7 @@
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Models\SupplierContext.cs" />
+    <Compile Include="Models\UnifiedViewModel.cs" />
     <Compile Include="Models\WishlistActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -582,6 +583,8 @@
     <Content Include="Views\Supplier\Search.cshtml" />
     <Content Include="Views\Shared\footer.cshtml" />
     <Content Include="Views\Supplier\Product.cshtml" />
+    <Content Include="Views\Supplier\BookHost.cshtml" />
+    <Content Include="Views\Supplier\ImgHost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />

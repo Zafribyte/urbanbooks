@@ -1,0 +1,56 @@
+﻿@using urbanbooks.Models
+@using urbanbooks.Helpers
+@model UnifiedViewModel
+
+
+<div class="container">
+    <br /><br />
+    <dl class="">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.ISBN)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Book.ISBN)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.Synopsis)
+        </dt>
+        <dd style="width:800px">
+            @Html.DisplayFor(model => model.Book.Synopsis)
+        </dd>
+        @if (!Model.iSupplier)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Book.SellingPrice)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Book.SellingPrice)
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.BookCategory.CategoryName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BookCategory.CategoryName)
+        </dd>
+        <dt>
+            Author(s)
+        </dt>
+        <dd>
+            @foreach (var item in Model.Authors)
+            {
+                @Html.DisplayFor(model => item.Name) @Html.DisplayFor(model => item.Surname)
+                <span>, </span>
+            }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Publisher.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Publisher.Name)
+        </dd>
+    </dl>
+
+</div>
+

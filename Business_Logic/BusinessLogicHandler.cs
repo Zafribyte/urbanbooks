@@ -352,7 +352,8 @@ namespace urbanbooks
             BookCategoryHandler myHander = new BookCategoryHandler();
             return myHander.InsertBookCategory(bookType);
         }
-
+        public BookCategory GetBookCategory(int CategoryID)
+        { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.GetBookCategory(CategoryID); }
         public bool UpdateBookType(BookCategory bookType)
         { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.UpdateBookCategory(bookType); }
 
