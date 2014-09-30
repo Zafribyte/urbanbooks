@@ -14,17 +14,20 @@
     function drawChart() {
         var dataSet = new Array();
         dataSet = ['Book Category', 'Total Sales'];
-        var enumArray = [];
+        var enumArray = [['Book Category', 'Total Sales']];
         @foreach (var item in Model.BookSales)
         {
-            @:enumArray["@item.Category"] = "@item.TotalSales";
+            <text>
+        
+             enumArray.push(['@item.Category' , @item.TotalSales]);
+            </text>
         }
 
-
+        window.alert(enumArray);
         var data = google.visualization.arrayToDataTable(enumArray);
 
         var options = {
-            title: '',
+            title: 'Total Book Sales By Category',
             legend: { position: 'none' },
             'width': 600,
             'height': 600
@@ -40,14 +43,15 @@
     google.load("visualization", "1", { packages: ["corechart"] });
     google.setOnLoadCallback(drawChart);
     function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
+        var array = [
           ['Task', 'Hours per Day'],
           ['Work', 13],
           ['Eat', 1],
           ['Watch TV', 1],
           ['Sleep', 6]
-        ]);
+        ];
+        window.alert(array);
+        var data = google.visualization.arrayToDataTable(array);
 
         var options = {
             title: '',

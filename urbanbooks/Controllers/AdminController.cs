@@ -24,7 +24,6 @@ namespace urbanbooks.Controllers
             BusinessLogicHandler myHandler = new BusinessLogicHandler();
             AdminIndexViewModel model = new AdminIndexViewModel();
             model.BookSales = new List<CategorySalesPie>();
-            CategorySalesPie modelItem = new CategorySalesPie();
 
             #endregion
 
@@ -42,12 +41,22 @@ namespace urbanbooks.Controllers
                           join book in books on soldT.ProductID equals book.ProductID
                           join category in categories on book.BookCategoryID equals category.BookCategoryID
                           select new { soldT.Price, soldT.Quantity, category.CategoryName };
-
+            List<string> names = new List<string>();
             foreach (var item in dataSet)
             {
-                modelItem.Category = item.CategoryName;
-                modelItem.TotalSales = (item.Price * item.Quantity);
-                model.BookSales.Add(modelItem);
+                if (names.Contains(item.CategoryName))
+                {
+                    
+                }
+                else
+                {
+                    CategorySalesPie modelItem = new CategorySalesPie();
+                    names.Add(item.CategoryName);
+                    modelItem.Category = item.CategoryName;
+                    modelItem.TotalSales = (item.Price * item.Quantity);
+                    model.BookSales.Add(modelItem);
+                }
+                
             }
 
 
@@ -62,6 +71,7 @@ namespace urbanbooks.Controllers
             //model.chartData =  JsonConvert.SerializeObject(model.BookSales.ToArray());
             //model.chartData = JsonConvert.SerializeObject(model.oData);
             #endregion
+
 
             return View(model);
 
