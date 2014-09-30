@@ -1,8 +1,9 @@
-﻿@model urbanbooks.Technology
+﻿@using urbanbooks.Models;
+@model AddNewTechViewModel
 
 @{
     ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h2>Delete</h2>
@@ -13,36 +14,50 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Manufacturer)
+            @Html.DisplayNameFor(model => model.techs.ModelName)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Manufacturer)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ModelNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModelNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CostPrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CostPrice)
+            @Html.DisplayFor(model => model.techs.ModelName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.SellingPrice)
+            @Html.DisplayNameFor(model => model.techs.ModelNumber)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SellingPrice)
+            @Html.DisplayFor(model => model.techs.ModelNumber)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.techs.ManufacturerID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.techs.ManufacturerID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.techs.CostPrice)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.techs.CostPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.techs.SellingPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.techs.SellingPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.techs.ImageFront)
+        </dt>
+        <dd>
+            <img src="~/Uploads/Tech/@Model.techs.ImageFront" width="200" height="100" />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.techs.Specs)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.techs.Specs)
+        </dd>
     </dl>
 
     @using (Html.BeginForm()) {

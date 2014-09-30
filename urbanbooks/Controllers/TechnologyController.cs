@@ -400,9 +400,15 @@ namespace urbanbooks.Controllers
         }
 
         [Authorize(Roles = "admin, employee")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int ProductID)
         {
-            return View();
+            AddNewTechViewModel model = new AddNewTechViewModel();
+            model.techs = new Technology();
+            
+            myHandler = new BusinessLogicHandler();
+            gadget = myHandler.GetTechnologyDetails(ProductID);
+            model.techs = gadget;
+            return View(model);
         }
 
         [Authorize(Roles = "admin, employee")]
