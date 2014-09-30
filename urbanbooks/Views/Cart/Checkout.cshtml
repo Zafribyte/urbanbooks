@@ -41,13 +41,13 @@
                             <th width="40%">
                                 <label>Item</label>
                             </th>
-                            <th width="100px" style="text-align:center">
+                            <th width="100px" style="text-align:right">
                                 <label>Quantity</label>
                             </th>
-                            <th width="150px" style="text-align:center">
+                            <th width="150px" style="text-align:right">
                                 <label>Unit Price</label>
                             </th>
-                            <th width="150px" style="text-align:center">
+                            <th width="150px" style="text-align:right">
                                 <label>Total</label>
                             </th>
                             <th width=""></th>
@@ -100,20 +100,20 @@
                                                             <td width="40%">
                                                                 @Html.DisplayFor(modelItem => gadget.ModelName)
                                                             </td>
-                                                            <td width="100px">
+                                                            <td width="100px" style="text-align:right">
                                                                 @Html.DisplayFor(modelItem => item.Quantity)
                                                             </td>
-                                                            <td width="150px">
+                                                            <td width="150px" style="text-align:right">
                                                                 @Html.DisplayFor(modelItem => gadget.SellingPrice)
                                                             </td>
 
                                                             if (count.ProductID == item.ProductID)
                                                             {
-                                                                <td width="150px">
+                                                                <td width="150px" style="text-align:right">
                                                                     @Html.DisplayFor(modelItem => count.TotalPerItem)
                                                                 </td>
                                                             }
-                                                        <td width="100px">
+                                                        <td width="100px" style="text-align:center">
                                                             @Html.ActionLink("Remove", "_Remove", "Cart", new { id = item.CartItemID }, new { @class = "btn btn-danger" })
                                                         </td>
                                                         }
@@ -137,23 +137,23 @@
                             <tr>
                                 <td width="40%" style=""></td>
                                 <td width="100px" style=""></td>
-                                <td width="150px">Sub Total</td>
+                                <td width="150px" style="text-align:right">Sub Total</td>
                                 <td width="150px" style="text-align:right">@Html.DisplayFor(modelItem => item.SubTotal)</td>
-                                <td ></td>
+                                <td width="100px"></td>
                             </tr>
                             <tr>
                                 <td width="40%"></td>
                                 <td width="100px"></td>
-                                <td width="150px">VAT Total</td>
+                                <td width="150px" style="text-align:right">VAT Total</td>
                                 <td width="150px" style="text-align:right">@Html.DisplayFor(modelItem => item.VatAddedTotal)</td>
-                                <td ></td>
+                                <td width="100px"></td>
                             </tr>
                             <tr>
                                 <td width="40%"></td>
                                 <td width="100px"></td>
-                                <td width="150px">Total</td>
+                                <td width="150px" style="text-align:right">Total</td>
                                 <td width="150px" style="text-align:right">@Html.DisplayFor(modelItem => item.CartTotal)</td>
-                                <td ></td>
+                                <td width="100px"></td>
                             </tr>
                         }
                     </table>

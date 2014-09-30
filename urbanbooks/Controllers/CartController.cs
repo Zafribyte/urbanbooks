@@ -29,8 +29,25 @@ namespace urbanbooks.Controllers
             Session["wishlistTotal"] = wishAct.GetWishlistTotal(thisUser.Wishlists.WishlistID);
             IEnumerable<CartItem> myItems = act.GetCartItemsAsync(Id);
             myHandler = new BusinessLogicHandler();
-            IEnumerable<Book> ifBooks = myHandler.GetBooks();
-            IEnumerable<Technology> ifGadget = myHandler.GetTechnology();
+            List<Book> ifBooks = new List<Book>();
+            List<Technology> ifGadget = new List<Technology>();
+
+            foreach (var item in myItems)
+            {
+                if (myHandler.CheckProductType(item.ProductID))
+                {
+                    Book book = new Book();
+                    book = myHandler.GetBook(item.ProductID);
+                    ifBooks.Add(book);
+                }
+                else
+                {
+                    Technology device = new Technology();
+                    device = myHandler.GetTechnologyDetails(item.ProductID);
+                    ifGadget.Add(device);
+                }
+            }
+
             ProductViewModel myNewModel = new ProductViewModel();
             myNewModel.allBook = ifBooks;
             myNewModel.allCartItem = myItems;
@@ -175,9 +192,25 @@ namespace urbanbooks.Controllers
             if (myItems != null)
             {
                 myHandler = new BusinessLogicHandler();
-                IEnumerable<Book> ifBooks = myHandler.GetBooks();
-                IEnumerable<Technology> ifGadget = myHandler.GetTechnology();
+                List<Book> ifBooks = new List<Book>();
+                List<Technology> ifGadget = new List<Technology>();
                 
+                foreach(var item in myItems)
+                {
+                    if(myHandler.CheckProductType(item.ProductID))
+                    {
+                        Book book = new Book();
+                        book = myHandler.GetBook(item.ProductID);
+                        ifBooks.Add(book);
+                    }
+                    else
+                    {
+                        Technology device = new Technology();
+                        device = myHandler.GetTechnologyDetails(item.ProductID);
+                        ifGadget.Add(device);
+                    }
+                }
+
                 myNewModel.allBook = ifBooks;
                 myNewModel.allCartItem = myItems;
                 myNewModel.allTechnology = ifGadget;

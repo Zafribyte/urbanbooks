@@ -25,7 +25,27 @@ namespace urbanbooks
         }
 
 
+        public List<Invoice> GetInvoicesInRange(string startDate, string endDate)
+        {
+            List<Invoice> invoice = null;
 
+            SqlParameter[] Params = { new SqlParameter("@StartDate", startDate), new SqlParameter("@EndDate", endDate) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewInvoiceByDate", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    invoice = new List<Invoice>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Invoice invoiceItem = new Invoice();
+                        invoiceItem.InvoiceID = Convert.ToInt32(row["InvoiceID"]);
+                        invoiceItem.DateCreated = Convert.ToDateTime(row["DateIssued"]);
+                        invoice.Add(invoiceItem);
+                    }
+                }
+            }
+            return invoice;
+        }
 
 
         public InvoiceItem GetInvoiceNumber(Invoice invoice)
@@ -49,12 +69,6 @@ namespace urbanbooks
             }
             return reciept;
         }
-
-
-
-
-
-
 
         public Invoice GetInvoice(int InvoiceID)
         {

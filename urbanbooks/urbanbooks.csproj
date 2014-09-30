@@ -199,6 +199,7 @@
     <Compile Include="Controllers\PublisherController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SearchController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -591,6 +592,7 @@
     <Folder Include="Uploads\Tech\ImageFront\" />
     <Folder Include="Uploads\Tech\ImageSide\" />
     <Folder Include="Uploads\Tech\ImageTop\" />
+    <Folder Include="Views\Report\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

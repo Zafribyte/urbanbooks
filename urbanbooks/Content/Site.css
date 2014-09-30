@@ -17,7 +17,6 @@ textarea {
 }
 
 .footer {
-  position: absolute;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
@@ -25,7 +24,6 @@ textarea {
   padding-top: 10px;
   font-size: .9em;
   border-top: 1px solid #E5E5E5;
-  background-color: whiteSmoke;
 }
 
 /*OVERRIDE*/
