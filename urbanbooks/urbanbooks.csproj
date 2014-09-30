@@ -188,6 +188,7 @@
     <Compile Include="Controllers\AuthorController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\BookTypeController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
@@ -355,8 +356,6 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\chosen.css" />
-    <Content Include="Content\chosen.min.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\datepicker3.css" />
     <Content Include="Content\images\ui-bg_flat_30_cccccc_40x100.png" />
@@ -377,8 +376,6 @@
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\jquery-ui.structure.min.css" />
     <Content Include="Content\jquery-ui.theme.min.css" />
-    <Content Include="Content\jquery.multiselect.filter.css" />
-    <Content Include="Content\multiple-select.css" />
     <Content Include="Content\Zosial\css\animation.css" />
     <Content Include="Content\Zosial\css\fontello-codes.css" />
     <Content Include="Content\Zosial\css\fontello-embedded.css" />
@@ -432,11 +429,6 @@
     <Content Include="Scripts\bootstrap-multiselect.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\chosen.jquery.js" />
-    <Content Include="Scripts\chosen.jquery.min.js" />
-    <Content Include="Scripts\chosen.proto.js" />
-    <Content Include="Scripts\chosen.proto.min.js" />
-    <Content Include="Scripts\fuelux.js" />
     <Content Include="Scripts\fuelux.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -456,8 +448,6 @@
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
-    <Content Include="Scripts\jquery.multiple.select.js" />
-    <Content Include="Scripts\jquery.multiselect.filter.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -549,7 +539,6 @@
     <Content Include="Views\Cart\Reciept.cshtml" />
     <Content Include="Views\Technology\AdminIndex.cshtml" />
     <Content Include="Views\Author\Create.cshtml" />
-    <Content Include="Views\Technology\AdminDetails.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\Account\Restricted.cshtml" />
     <Content Include="Views\Search\BooksAdvanced.cshtml" />

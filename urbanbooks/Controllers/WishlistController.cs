@@ -49,11 +49,13 @@ namespace urbanbooks.Controllers
                 CartActions cart = new CartActions();
                 ProductViewModel bridge = new ProductViewModel();
                 myHandler = new BusinessLogicHandler();
-
-                bridge.allWishlistItems =  grantMyWish.GetWishlistItems(user.Wishlists.WishlistID);
+                bridge.allWishlistItems = new List<WishlistItem>();
+                bridge.allWishlistItems =  grantMyWish.GetWishlistItems(user.Wishlists.WishlistID).ToList();
                 {
-                    bridge.allBook = (IEnumerable<Book>)myHandler.GetBooks();
-                    bridge.allTechnology = (IEnumerable<Technology>)myHandler.GetTechnology();
+                    bridge.allBook = new List<Book>();
+                    bridge.allBook = myHandler.GetBooks();
+                    bridge.allTechnology = new List<Technology>();
+                    bridge.allTechnology = myHandler.GetTechnology();
                 }
 
                 Session["wishlistTotal"] =  grantMyWish.GetWishlistTotal(user.Wishlists.WishlistID);
