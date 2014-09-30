@@ -236,8 +236,10 @@ namespace urbanbooks.Controllers
                     ta.ImageTop = gadget.ImageTop;
                     ta.ImageSide = gadget.ImageSide;
                     myHandler.AddTechnology(ta);
+
+                    TempData["AlertMessage"] = "Device Successfully Added";
                 }
-                return RedirectToAction("ManageTechnology", "Technology", gadget);
+                return RedirectToAction("Create", "Technology", gadget);
             }
 
             catch

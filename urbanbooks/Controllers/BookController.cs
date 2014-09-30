@@ -219,7 +219,10 @@ namespace urbanbooks.Controllers
                         bookAuthors.AuthorID = Convert.ToInt32(item);
                         myHandler.InsertBookAuthor(bookAuthors);
                     }
+                    TempData["AlertMessage"] = "Book Successfully Entered";
                 }
+                
+
                 //return RedirectToAction("Index", "Book", book);
                 return RedirectToAction("Create", "Book", null); //REDIRECT TO GET ACTION METHOD #INCASE THEY WANT TO INSERT ANOTHER BOOK :)
             }
@@ -483,15 +486,25 @@ namespace urbanbooks.Controllers
         }
         public ActionResult Delete(int ProductID)
         {
-            return View();
+            AddNewBookViewModel model = new AddNewBookViewModel();
+            model.books = new Book();
+            model.books = book;
+            myHandler = new BusinessLogicHandler();
+            model.books = myHandler.GetBooks().Single(bk => bk.ProductID == ProductID);
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult Delete(int ProductID, FormCollection collection)
+        public ActionResult Delete(int ProductID, AddNewBookViewModel model, FormCollection collection)
         {
             try
             {
-                return RedirectToAction("AdminIndex");
+                myHandler = new BusinessLogicHandler();
+                book = new Book();
+                book.ProductID = ProductID;
+                myHandler.DeleteBook(book);
+
+                return RedirectToAction("AdminIndex", "Book");
             }
             catch
             {

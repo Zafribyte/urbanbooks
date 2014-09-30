@@ -917,7 +917,8 @@ namespace urbanbooks
             Book bk;
             SqlParameter[] Params = { new SqlParameter("@CostPrice", book.CostPrice),
                                       new SqlParameter("@SellingPrice", book.SellingPrice),
-                                      new SqlParameter("@DateAdded", book.DateAdded)
+                                      new SqlParameter("@DateAdded", book.DateAdded),
+                                      new SqlParameter("@IsBook", book.IsBook = true)
                                     };
             using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ManhattanProject", CommandType.StoredProcedure, Params))
             {
@@ -1026,7 +1027,8 @@ namespace urbanbooks
         {
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@ProductID", book.ProductID)
+                new SqlParameter("@ProductID", book.ProductID),
+                new SqlParameter("@Status", book.Status = true)
             };
             return DataProvider.ExecuteNonQuery("sp_DeleteBook", CommandType.StoredProcedure, //procedure
                 Params);

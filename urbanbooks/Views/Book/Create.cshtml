@@ -12,6 +12,16 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+
+@{
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+
+<script type="text/javascript">
+    var message = '@message';
+    if (message)
+        alert(message);
+</script>
 <br />
 <div class="row">
     <div class="col-md-9">
@@ -63,7 +73,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.books.ISBN, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.books.ISBN, new { htmlAttributes = new { @class = "form-control",id="isbn", @placeholder = "10 or 13 Digit ISBN", data_toggle = "popover", title = "What is this ISBN?", data_content = "10 or 13 Digit Code found on the back of a book. Head over to our FAQs for more info " } })
+                @Html.EditorFor(model => model.books.ISBN, new { htmlAttributes = new { @class = "form-control", id = "isbn", @placeholder = "10 or 13 Digit ISBN", data_toggle = "popover", title = "What is this ISBN?", data_content = "10 or 13 Digit Code found on the back of a book. Head over to our FAQs for more info " } })
                 @Html.ValidationMessageFor(model => model.books.ISBN, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -112,7 +122,7 @@
             <div>
                 <label class="control-label col-md-2">Supplier</label>
                 <div class="col-md-10 dropdown">
-                    @Html.DropDownList("Name", Model.suppliers, new { @class = "form-control"  })<br />
+                    @Html.DropDownList("Name", Model.suppliers, new { @class = "form-control" })<br />
                 </div>
             </div>
         </div>
@@ -121,12 +131,12 @@
                 <label class="control-label col-md-2">Author</label>
                 <div class="col-md-10 dropdown">
                     @Html.DropDownList("FullName", Model.authors, new { @class = "form-control multiselect", multiple = "multiple" })
-                    @Html.ActionLink("Add an Author", "Create", "Author", null, new { data_modal = ""})
+                    @Html.ActionLink("Add an Author", "Create", "Author", null, new { data_modal = "" })
                 </div>
             </div>
         </div>
         <script type="text/javascript">
-                $('.multiselect').multiselect({ enableFiltering: true});
+            $('.multiselect').multiselect({ enableFiltering: true });
         </script>
         <fieldset>
             <legend>Image</legend>

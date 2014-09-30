@@ -609,7 +609,8 @@ namespace urbanbooks
             SqlParameter[] Params = {
                                         new SqlParameter("@CostPrice", tech.CostPrice),
                                         new SqlParameter("@SellingPrice", tech.SellingPrice),
-                                        new SqlParameter("@DateAdded", tech.DateAdded)
+                                        new SqlParameter("@DateAdded", tech.DateAdded),
+                                        new SqlParameter("@IsBook", tech.IsBook = false)
                                     };
             using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ManhattanProject", CommandType.StoredProcedure, Params))
             {
@@ -703,8 +704,8 @@ namespace urbanbooks
                 new SqlParameter("@SupplierID", TechnoProduct.SupplierID),
                 new SqlParameter("@ImageFront", TechnoProduct.ImageFront),
                 new SqlParameter("@ImageTop", TechnoProduct.ImageTop),
-                new SqlParameter("@ImageSide", TechnoProduct.ImageSide),
-                new SqlParameter("@IsBook", false)
+                new SqlParameter("@ImageSide", TechnoProduct.ImageSide)
+                
             };
             return DataProvider.ExecuteNonQuery("sp_InsertTechnology", CommandType.StoredProcedure,
                 Params);
