@@ -278,15 +278,6 @@ namespace urbanbooks
 
             return t;
         }
-        public Technology UpdateExperimentTech(Technology tech)
-        {
-            TechnologyHandler myHandler = new TechnologyHandler();
-            Technology th = new Technology();
-
-            //th = myHandler.experimentalUpdate(tech);
-
-            return th;
-        }
         public bool UpdateTechnology(Technology gadget)
         {
             TechnologyHandler myHandler = new TechnologyHandler();
