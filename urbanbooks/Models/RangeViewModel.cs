@@ -10,6 +10,7 @@ namespace urbanbooks.Models
     {
         public IEnumerable<Order> Orders { get; set; }
         public RangeValidate myRange { get; set; }
+        public List<Monthly> MonthlySales { get; set; }
     }
     public class RangeValidate
     {
@@ -18,5 +19,13 @@ namespace urbanbooks.Models
         [Required]
         public DateTime From { get; set; }
         public DateTime To { get; set; }
+    }
+    public class Monthly 
+    {
+        [Key]
+        public int key { get; set; }
+
+        public string Month { get; set; }
+        public double TotalSales { get; set; }
     }
 }

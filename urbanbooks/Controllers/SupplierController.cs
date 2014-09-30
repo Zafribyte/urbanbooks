@@ -67,7 +67,49 @@ namespace urbanbooks.Controllers
 
         public ActionResult Product(int ProductID)
         {
-            return View();
+
+            #region Prep Utilities
+            myHandler = new BusinessLogicHandler();
+            UnifiedViewModel model = new UnifiedViewModel();
+            Author Author = new Author();
+            #endregion
+
+            #region Config Roles
+            if(User.IsInRole("supplier"))
+            {
+                model.iSupplier = true;
+            }
+            #endregion
+
+            #region Get the Data
+            if (myHandler.CheckProductType(ProductID))
+            {
+                model.Book = new Book();
+                model.Book = myHandler.GetBook(ProductID);
+                model.BookCategory = new BookCategory();
+                model.BookCategory = myHandler.GetBookCategory(model.Book.BookCategoryID);
+                model.Publisher = new Publisher();
+                model.Publisher = myHandler.GetPublisher(model.Book.PublisherID);
+                IEnumerable<BookAuthor> authorsINbook = myHandler.GetBookAuthors(model.Book.BookID);
+                model.Authors = new List<Author>();
+                foreach(var item in authorsINbook)
+                {
+                    Author = myHandler.GetAuthorDetails(item.AuthorID);
+                    model.Authors.Add(Author);
+                }
+            }
+            else
+            {
+                model.Device = new Technology();
+                model.Device = myHandler.GetTechnologyDetails(ProductID);
+                model.Manufacturer = new Manufacturer();
+                model.Manufacturer = myHandler.GetManufacturer(model.Device.ManufacturerID);
+                model.Category = new TechCategory();
+                model.Category = myHandler.GetTechnologyType(model.Device.TechCategoryID);
+            }
+            #endregion
+
+            return View(model);
         }
 
         public ActionResult Create()

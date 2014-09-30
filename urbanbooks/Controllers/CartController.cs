@@ -29,8 +29,25 @@ namespace urbanbooks.Controllers
             Session["wishlistTotal"] = wishAct.GetWishlistTotal(thisUser.Wishlists.WishlistID);
             IEnumerable<CartItem> myItems = act.GetCartItemsAsync(Id);
             myHandler = new BusinessLogicHandler();
-            IEnumerable<Book> ifBooks = myHandler.GetBooks();
-            IEnumerable<Technology> ifGadget = myHandler.GetTechnology();
+            List<Book> ifBooks = new List<Book>();
+            List<Technology> ifGadget = new List<Technology>();
+
+            foreach (var item in myItems)
+            {
+                if (myHandler.CheckProductType(item.ProductID))
+                {
+                    Book book = new Book();
+                    book = myHandler.GetBook(item.ProductID);
+                    ifBooks.Add(book);
+                }
+                else
+                {
+                    Technology device = new Technology();
+                    device = myHandler.GetTechnologyDetails(item.ProductID);
+                    ifGadget.Add(device);
+                }
+            }
+
             ProductViewModel myNewModel = new ProductViewModel();
             myNewModel.allBook = ifBooks;
             myNewModel.allCartItem = myItems;
@@ -175,9 +192,25 @@ namespace urbanbooks.Controllers
             if (myItems != null)
             {
                 myHandler = new BusinessLogicHandler();
-                IEnumerable<Book> ifBooks = myHandler.GetBooks();
-                IEnumerable<Technology> ifGadget = myHandler.GetTechnology();
+                List<Book> ifBooks = new List<Book>();
+                List<Technology> ifGadget = new List<Technology>();
                 
+                foreach(var item in myItems)
+                {
+                    if(myHandler.CheckProductType(item.ProductID))
+                    {
+                        Book book = new Book();
+                        book = myHandler.GetBook(item.ProductID);
+                        ifBooks.Add(book);
+                    }
+                    else
+                    {
+                        Technology device = new Technology();
+                        device = myHandler.GetTechnologyDetails(item.ProductID);
+                        ifGadget.Add(device);
+                    }
+                }
+
                 myNewModel.allBook = ifBooks;
                 myNewModel.allCartItem = myItems;
                 myNewModel.allTechnology = ifGadget;
@@ -374,7 +407,7 @@ namespace urbanbooks.Controllers
 
                         foreach (var item in myItems)
                         {
-                            try
+                            if(myHandler.CheckProductType(item.ProductID))
                             {
                                 book = myHandler.GetBook(item.ProductID);
                                 supplierId = book.SupplierID;
@@ -398,12 +431,16 @@ namespace urbanbooks.Controllers
                                 }
 
                             }
-                            catch
+                            else
                             {
                                 supplierId = ifGadget.SingleOrDefault(m => m.ProductID == item.ProductID).SupplierID;
                                 if (suppliers.Contains(supplierId))
                                 {
-
+                                    int y = suppliers.IndexOf(supplierId);
+                                    orderLine.OrderNo = orders.ElementAt(y);
+                                    orderLine.ProductID = item.ProductID;
+                                    orderLine.Quantity = item.Quantity;
+                                    myHandler.AddOrderItem(orderLine);
                                 }
                                 else
                                 {
@@ -411,6 +448,9 @@ namespace urbanbooks.Controllers
                                     ord = new Order { DateCreated = DateTime.Now.Date, SupplierID = supplierId, InvoiceID = IID.GetValueOrDefault(), DateLastModified = DateTime.Now.Date, Status = false };
                                     orderLine = myHandler.AddOrder(ord);
                                     orders.Add(orderLine.OrderNo);
+                                    orderLine.ProductID = item.ProductID;
+                                    orderLine.Quantity = item.Quantity;
+                                    myHandler.AddOrderItem(orderLine);
                                 }
                             }
                         }

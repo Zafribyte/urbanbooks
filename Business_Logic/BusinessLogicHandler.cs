@@ -177,7 +177,6 @@ namespace urbanbooks
 
         #endregion
 
-
         #region USER ACTIONS
 
         public Book User_GetBook(int ProductID)
@@ -197,7 +196,6 @@ namespace urbanbooks
 
 
         #endregion
-
 
         #region ADMIN ACTIONS
 
@@ -360,7 +358,8 @@ namespace urbanbooks
             BookCategoryHandler myHander = new BookCategoryHandler();
             return myHander.InsertBookCategory(bookType);
         }
-
+        public BookCategory GetBookCategory(int CategoryID)
+        { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.GetBookCategory(CategoryID); }
         public bool UpdateBookType(BookCategory bookType)
         { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.UpdateBookCategory(bookType); }
 
@@ -471,9 +470,10 @@ namespace urbanbooks
 
         #endregion
 
-
         #region SYSTEM ACTIONS
 
+        public List<Invoice> GetInvoiceInDateRange(string startDate, string endDate)
+        { InvoiceHandler myHandler = new InvoiceHandler(); return myHandler.GetInvoicesInRange(startDate, endDate); }
         public bool BookAuthorUpdateDelete(int BookID)
         { BookAuthorHandler myHandler = new BookAuthorHandler(); return myHandler.DeleteUpdateBookAuthor(BookID); }
         public bool CheckProductType(int ProductId)

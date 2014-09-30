@@ -92,7 +92,7 @@
                                         <td width="45%">
                                             @Html.DisplayFor(modelItem => gadget.ModelName)
                                         </td>
-                                        <td width="300px">
+                                        <td class="form-group form-inline" width="300px">
                                             @Html.EditorFor(modelItem => item.Quantity, new { htmlAttributes = new { @class = "form-control quants" } })
                                         </td>
                                         <td width="100px" style="text-align:right">
@@ -123,22 +123,22 @@
     @foreach (var item in Model.ItsA_wrap)
     {
         <tr>
-            <td></td>
-            <td></td>
+            <td width="45%"></td>
+            <td width="300px"></td>
             <td width="100px"><strong>Sub Total</strong></td>
-            <td width="100" style="text-align:right">@Html.DisplayFor(modelItem => item.SubTotal)</td>
+            <td width="100px" style="text-align:right">@Html.DisplayFor(modelItem => item.SubTotal)</td>
             <td ></td>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
+            <td width="45%"></td>
+            <td width="300px"></td>
             <td width="100px"><strong>VAT Total</strong></td>
             <td width="100px" style="text-align:right">@Html.DisplayFor(modelItem => item.VatAddedTotal)</td>
-            <td ></td>
+            <td width="" ></td>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
+            <td width="45%"></td>
+            <td width="300px"></td>
             <td width="100px"><strong>Total</strong></td>
             <td width="100px" style="text-align:right">@Html.DisplayFor(modelItem => item.CartTotal)</td>
             <td ></td>
@@ -146,9 +146,10 @@
 
     }
 </table>
+<br /><br /><br /><br /><br /><br />
 @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-circle-arrow-left'> Back </span>", "Back", "Add", "Wishlist", new { }, htmlAttributes: new { @class = "btn btn-default" })
 @Html.NoEncodeActionLink("<span>Checkout <span class='glyphicon glyphicon-circle-arrow-right'></span></span>", "Proceed to Checkout", "Checkout", "Cart", new { }, htmlAttributes: new { @class = "btn btn-default" })
-
+<br /><br /><br />
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")

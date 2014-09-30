@@ -1,0 +1,12 @@
+﻿@using urbanbooks.Models
+@model UnifiedViewModel
+<div>
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.CoverImage)
+        </dt>
+        <dd>
+            <img src="~/Uploads/Books/@Model.Book.CoverImage" />
+        </dd>
+    </dl>
+</div>
