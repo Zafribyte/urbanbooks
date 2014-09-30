@@ -5,6 +5,17 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+@{
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+
+<script type="text/javascript">
+    var message = '@message';
+    if (message)
+        window.alert(message);
+</script>
+
+
 <br />
 <div class="row">
     <div class="col-md-9">

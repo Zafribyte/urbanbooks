@@ -538,7 +538,6 @@
     <Content Include="Views\Book\AdminIndex.cshtml" />
     <Content Include="Views\Cart\Reciept.cshtml" />
     <Content Include="Views\Technology\AdminIndex.cshtml" />
-    <Content Include="Views\Author\Create.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\Account\Restricted.cshtml" />
     <Content Include="Views\Search\BooksAdvanced.cshtml" />
@@ -574,6 +573,8 @@
     <Content Include="Views\Supplier\Product.cshtml" />
     <Content Include="Views\Supplier\BookHost.cshtml" />
     <Content Include="Views\Supplier\ImgHost.cshtml" />
+    <Content Include="Views\Author\Create.cshtml" />
+    <Content Include="Views\Book\DeletedIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />

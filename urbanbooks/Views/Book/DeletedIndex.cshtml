@@ -1,17 +1,20 @@
-﻿@model IEnumerable<urbanbooks.Book>
+﻿
+
+<h2>DeletedIndex</h2>
+
+@model IEnumerable<urbanbooks.Book>
 @using urbanbooks.Models
 @using urbanbooks.Helpers;
+
 @{
-    ViewBag.Title = "AdminIndex";
+    ViewBag.Title = "DeletedIndex";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-
 <br />
 <div class="row">
 
     <div class="col-md-9">
-        <h2> Catalogue</h2>
+        <h2> Deleted Books</h2>
     </div>
 
     <div class="col-md-3">
@@ -31,10 +34,6 @@
     </div>
 
 </div>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
     <tr>
@@ -73,11 +72,10 @@
             </td>
             <td>
                 <img src="~/Uploads/Books/@item.CoverImage" width="100" height="100" />
+
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { productId = item.ProductID }) |
-                @Html.ActionLink("Details", "Details", new { productId = item.ProductID }) |
-                @Html.ActionLink("Delete", "Delete", new { ProductId = item.ProductID })
+                @Html.ActionLink("Restore Book", "Restore", new { productId = item.ProductID })
             </td>
         </tr>
     }

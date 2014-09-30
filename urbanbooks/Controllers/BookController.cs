@@ -18,6 +18,16 @@ namespace urbanbooks.Controllers
 
         public ActionResult ManageBooks()
         { return View(); }
+        
+        public ActionResult DeletedIndex()
+        {
+            myHandler = new BusinessLogicHandler();
+            List<Book> myBookDelete = new List<Book>();
+            myBookDelete = myHandler.GetDeletedBooks();
+            myBookDelete.OrderBy(m => m.DateAdded);
+
+            return View(myBookDelete);
+        }
         public ActionResult Index()
         {
             myHandler = new BusinessLogicHandler();
@@ -503,6 +513,8 @@ namespace urbanbooks.Controllers
                 book = new Book();
                 book.ProductID = ProductID;
                 myHandler.DeleteBook(book);
+
+                
 
                 return RedirectToAction("AdminIndex", "Book");
             }

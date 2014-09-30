@@ -73,6 +73,9 @@ namespace urbanbooks.Controllers
             myTechList = myHandler.GetTechnology();
             IEnumerable<TechCategory> myType = myHandler.GetTechnologyTypeList();
             ViewBag.TechTypeBag = myType;
+
+            TempData["Alert Message"] = "Device Successfully Deleted";
+            
             return View(myTechList);
         }
         public ActionResult Index()
@@ -413,14 +416,21 @@ namespace urbanbooks.Controllers
 
         [Authorize(Roles = "admin, employee")]
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int ProductID, AddNewTechViewModel model, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                myHandler = new BusinessLogicHandler();
+                gadget = new Technology();
+                gadget.ProductID = ProductID;
+                myHandler.DeleteTechnology(gadget);
 
-                return RedirectToAction("Index");
+                TempData["Alert Message"] = "Device Successfully Deleted";
+
+                
+                return RedirectToAction("AdminIndex", "Technology");
             }
+
             catch
             {
                 return View();
