@@ -574,13 +574,13 @@
     <Content Include="Views\Supplier\Product.cshtml" />
     <Content Include="Views\Supplier\BookHost.cshtml" />
     <Content Include="Views\Supplier\ImgHost.cshtml" />
+    <Content Include="Views\Report\Detailed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
     <Folder Include="Uploads\Tech\ImageFront\" />
     <Folder Include="Uploads\Tech\ImageSide\" />
     <Folder Include="Uploads\Tech\ImageTop\" />
-    <Folder Include="Views\Report\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

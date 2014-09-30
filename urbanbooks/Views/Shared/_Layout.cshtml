@@ -136,6 +136,10 @@
         </footer>
     </div>
 
+    <script>
+        $('.footer').css('margin-top', $(document).height() - ($('.body-content').height()) - $('.footer').height());
+    </script>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/modalform")
