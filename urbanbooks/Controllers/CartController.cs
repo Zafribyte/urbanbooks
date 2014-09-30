@@ -31,48 +31,33 @@ namespace urbanbooks.Controllers
             myHandler = new BusinessLogicHandler();
             List<Book> ifBooks = new List<Book>();
             List<Technology> ifGadget = new List<Technology>();
+            if(myItems != null)
+            {
+                foreach (var item in myItems)
+                {
+                    if (myHandler.CheckProductType(item.ProductID))
+                    {
+                        Book book = new Book();
+                        book = myHandler.GetBook(item.ProductID);
+                        ifBooks.Add(book);
+                    }
+                    else
+                    {
+                        Technology device = new Technology();
+                        device = myHandler.GetTechnologyDetails(item.ProductID);
+                        ifGadget.Add(device);
+                    }
+                }
 
-            foreach (var item in myItems)
-            {
-                if (myHandler.CheckProductType(item.ProductID))
+                ProductViewModel myNewModel = new ProductViewModel();
+                myNewModel.allBook = ifBooks;
+                myNewModel.allCartItem = myItems;
+                myNewModel.allTechnology = ifGadget;
+                List<ProductViewModel.CartHelper> itemList = new List<ProductViewModel.CartHelper>();
+                ProductViewModel.CartHelper cartHelp;
+                if (myItems != null)
                 {
-                    Book book = new Book();
-                    book = myHandler.GetBook(item.ProductID);
-                    ifBooks.Add(book);
-                }
-                else
-                {
-                    Technology device = new Technology();
-                    device = myHandler.GetTechnologyDetails(item.ProductID);
-                    ifGadget.Add(device);
-                }
-            }
-
-            ProductViewModel myNewModel = new ProductViewModel();
-            myNewModel.allBook = ifBooks;
-            myNewModel.allCartItem = myItems;
-            myNewModel.allTechnology = ifGadget;
-            List<ProductViewModel.CartHelper> itemList = new List<ProductViewModel.CartHelper>();
-            ProductViewModel.CartHelper cartHelp;
-            if (myItems != null)
-            {
-                var revised = from rev in ifBooks
-                              join item in myItems on rev.ProductID equals item.ProductID
-                              where rev.ProductID == item.ProductID
-                              select new { rev.ProductID, rev.SellingPrice, item.Quantity };
-                foreach (var ite in revised)
-                {
-                    cartHelp = new ProductViewModel.CartHelper();
-                    cartHelp.ProductID = ite.ProductID;
-                    cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
-                    itemList.Add(cartHelp);
-                }
-            }
-            if (myItems != null)
-            {
-                if (ifGadget != null)
-                {
-                    var revised = from rev in ifGadget
+                    var revised = from rev in ifBooks
                                   join item in myItems on rev.ProductID equals item.ProductID
                                   where rev.ProductID == item.ProductID
                                   select new { rev.ProductID, rev.SellingPrice, item.Quantity };
@@ -84,25 +69,46 @@ namespace urbanbooks.Controllers
                         itemList.Add(cartHelp);
                     }
                 }
+                if (myItems != null)
+                {
+                    if (ifGadget != null)
+                    {
+                        var revised = from rev in ifGadget
+                                      join item in myItems on rev.ProductID equals item.ProductID
+                                      where rev.ProductID == item.ProductID
+                                      select new { rev.ProductID, rev.SellingPrice, item.Quantity };
+                        foreach (var ite in revised)
+                        {
+                            cartHelp = new ProductViewModel.CartHelper();
+                            cartHelp.ProductID = ite.ProductID;
+                            cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
+                            itemList.Add(cartHelp);
+                        }
+                    }
+                }
+                double cartTotal = Convert.ToDouble(Session["cartTotal"].ToString());
+                List<Company> company = myHandler.GetCompanyDetails();
+                double vat = 0;
+                foreach (var item in company)
+                { vat = item.VATPercentage; }
+                vat = vat + 1;
+                double subTotal = cartTotal / vat;
+                double vatAmount = cartTotal - subTotal;
+                ProductViewModel.CartConclude finishing = new ProductViewModel.CartConclude();
+                finishing.CartTotal = cartTotal;
+                finishing.VatAddedTotal = vatAmount;
+                finishing.SubTotal = subTotal;
+                myNewModel.ItsA_wrap = new List<ProductViewModel.CartConclude>();
+                myNewModel.ItsA_wrap.Add(finishing);
+
+                myNewModel.secureCart = itemList;
+                return View(myNewModel);
             }
-            double cartTotal = Convert.ToDouble(Session["cartTotal"].ToString());
-            List<Company> company = myHandler.GetCompanyDetails();
-            double vat = 0;
-            foreach (var item in company)
-            { vat = item.VATPercentage; }
-            vat = vat+1;
-            double subTotal = cartTotal / vat;
-            double vatAmount = cartTotal - subTotal;
-            ProductViewModel.CartConclude finishing = new ProductViewModel.CartConclude();
-            finishing.CartTotal = cartTotal;
-            finishing.VatAddedTotal = vatAmount;
-            finishing.SubTotal = subTotal;
-            myNewModel.ItsA_wrap = new List<ProductViewModel.CartConclude>();
-            myNewModel.ItsA_wrap.Add(finishing);
-
-            myNewModel.secureCart = itemList;
-
-            return View(myNewModel);
+            else
+            {
+                return View();
+            }
+            
         }
 
 

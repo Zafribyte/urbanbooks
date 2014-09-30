@@ -19,7 +19,7 @@
         {
             <text>
         
-             enumArray.push(['@item.Category' , '@item.TotalSales']);
+             enumArray.push(['@item.Category' , @item.TotalSales]);
             </text>
         }
 
@@ -43,14 +43,15 @@
     google.load("visualization", "1", { packages: ["corechart"] });
     google.setOnLoadCallback(drawChart);
     function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
+        var array = [
           ['Task', 'Hours per Day'],
           ['Work', 13],
           ['Eat', 1],
           ['Watch TV', 1],
           ['Sleep', 6]
-        ]);
+        ];
+        window.alert(array);
+        var data = google.visualization.arrayToDataTable(array);
 
         var options = {
             title: '',
