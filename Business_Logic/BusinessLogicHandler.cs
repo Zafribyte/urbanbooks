@@ -278,10 +278,27 @@ namespace urbanbooks
 
             return t;
         }
+        public Technology UpdateExperimentTech(Technology tech)
+        {
+            TechnologyHandler myHandler = new TechnologyHandler();
+            Technology th = new Technology();
+
+            th = myHandler.experimentalUpdate(tech);
+
+            return th;
+        }
         public bool UpdateTechnology(Technology gadget)
         {
             TechnologyHandler myHandler = new TechnologyHandler();
             return myHandler.UpdateTechnology(gadget);
+        }
+
+        public bool UpdateTechnologyProduct(Technology gadget)
+        {
+            TechnologyHandler myHandler = new TechnologyHandler();
+            Technology tech = new Technology();
+
+            return myHandler.UpdateTechnologyProduct(gadget);
         }
 
         public bool DeleteTechnology(int ProductID)
