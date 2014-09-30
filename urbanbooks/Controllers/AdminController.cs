@@ -42,12 +42,22 @@ namespace urbanbooks.Controllers
                           join book in books on soldT.ProductID equals book.ProductID
                           join category in categories on book.BookCategoryID equals category.BookCategoryID
                           select new { soldT.Price, soldT.Quantity, category.CategoryName };
-
+            string[] names = new string[dataSet.Count()];
             foreach (var item in dataSet)
             {
-                modelItem.Category = item.CategoryName;
-                modelItem.TotalSales = (item.Price * item.Quantity);
-                model.BookSales.Add(modelItem);
+                if (names.Contains(item.CategoryName))
+                {
+
+                }
+                else
+                {
+                    string[] items = new string[] { item.CategoryName};
+                    names.Concat(items);
+                    modelItem.Category = item.CategoryName;
+                    modelItem.TotalSales = (item.Price * item.Quantity);
+                    model.BookSales.Add(modelItem);
+                }
+                
             }
 
 
