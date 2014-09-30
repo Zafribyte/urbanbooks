@@ -582,6 +582,7 @@
     <Content Include="Views\Supplier\Search.cshtml" />
     <Content Include="Views\Shared\footer.cshtml" />
     <Content Include="Views\Supplier\Product.cshtml" />
+    <Content Include="Views\Publisher\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
