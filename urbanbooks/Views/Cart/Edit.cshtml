@@ -55,7 +55,7 @@
                 if (count.ProductID == item.ProductID)
                 {
                     <tr>
-                        @Html.HiddenFor(modelItem => item.CartItemID, new { @class = "cartItemId", id=""+item.CartItemID })
+                        @Html.HiddenFor(modelItem => item.CartItemID, new { @class = "cartItemId", id = "" + item.CartItemID })
                         @if (Model.allBook != null)
                         {
                             foreach (var book in Model.allBook)
@@ -127,21 +127,21 @@
             <td width="300px"></td>
             <td width="100px"><strong>Sub Total</strong></td>
             <td width="100px" style="text-align:right">@Html.DisplayFor(modelItem => item.SubTotal)</td>
-            <td ></td>
+            <td></td>
         </tr>
         <tr>
             <td width="45%"></td>
             <td width="300px"></td>
             <td width="100px"><strong>VAT Total</strong></td>
             <td width="100px" style="text-align:right">@Html.DisplayFor(modelItem => item.VatAddedTotal)</td>
-            <td width="" ></td>
+            <td width=""></td>
         </tr>
         <tr>
             <td width="45%"></td>
             <td width="300px"></td>
             <td width="100px"><strong>Total</strong></td>
             <td width="100px" style="text-align:right">@Html.DisplayFor(modelItem => item.CartTotal)</td>
-            <td ></td>
+            <td></td>
         </tr>
 
     }
@@ -166,7 +166,7 @@
                 type: 'post',
                 data: { 'quantity': quantity, 'itemId': itemId },
                 datatype: 'json',
-                success: function (response) {  }
+                success: function (response) { }
             })
         }
         else {
