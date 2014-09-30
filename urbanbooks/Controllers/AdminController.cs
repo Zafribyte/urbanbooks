@@ -24,10 +24,11 @@ namespace urbanbooks.Controllers
             BusinessLogicHandler myHandler = new BusinessLogicHandler();
             AdminIndexViewModel model = new AdminIndexViewModel();
             model.BookSales = new List<CategorySalesPie>();
+            model.DeviceSales = new List<CategorySalesPie>();
 
             #endregion
 
-            #region Get Data
+            #region Get Book Data
 
             IEnumerable<InvoiceItem> soldItems = myHandler.Sales();
             IEnumerable<Book> books = myHandler.GetBooks();
@@ -35,7 +36,12 @@ namespace urbanbooks.Controllers
 
             #endregion
 
-            #region Build Data Set
+            #region Get Device Data
+            IEnumerable<TechCategory> DeviceCategories = myHandler.GetTechnologyTypeList();
+            IEnumerable<Technology> Devices = myHandler.GetTechnology();
+            #endregion
+
+            #region Build Book Data Set
 
             var dataSet = from soldT in soldItems
                           join book in books on soldT.ProductID equals book.ProductID
@@ -46,7 +52,14 @@ namespace urbanbooks.Controllers
             {
                 if (names.Contains(item.CategoryName))
                 {
-                    
+                    CategorySalesPie pie = new CategorySalesPie();
+                    pie.Category = item.CategoryName;
+                    pie = model.BookSales.SingleOrDefault(m => m.Category == item.CategoryName);
+                    int x = model.BookSales.IndexOf(pie);
+                    if(x > -1)
+                    {
+                        model.BookSales[x].TotalSales += model.BookSales[x].TotalSales + (item.Price * item.Quantity);
+                    }
                 }
                 else
                 {
@@ -70,6 +83,40 @@ namespace urbanbooks.Controllers
             //model.chartData = oSerializer.Serialize(model.BookSales.ToArray());
             //model.chartData =  JsonConvert.SerializeObject(model.BookSales.ToArray());
             //model.chartData = JsonConvert.SerializeObject(model.oData);
+            #endregion
+
+
+            #region Build Device Data Set
+
+            var DeviceDataSet = from soldT in soldItems
+                                join device in Devices on soldT.ProductID equals device.ProductID
+                                join category in DeviceCategories on device.TechCategoryID equals category.TechCategoryID
+                                select new { soldT.Price, soldT.Quantity, category.CategoryName };
+            List<string> namesList = new List<string>();
+            foreach (var item in DeviceDataSet)
+            {
+                if (namesList.Contains(item.CategoryName))
+                {
+                    CategorySalesPie pie = new CategorySalesPie();
+                    pie.Category = item.CategoryName;
+                    pie = model.DeviceSales.SingleOrDefault(m => m.Category == item.CategoryName);
+                    int x = model.DeviceSales.IndexOf(pie);
+                    if (x > -1)
+                    {
+                        model.DeviceSales[x].TotalSales += model.DeviceSales[x].TotalSales + (item.Price * item.Quantity);
+                    }
+                }
+                else
+                {
+                    CategorySalesPie modelItem = new CategorySalesPie();
+                    namesList.Add(item.CategoryName);
+                    modelItem.Category = item.CategoryName;
+                    modelItem.TotalSales = (item.Price * item.Quantity);
+                    model.DeviceSales.Add(modelItem);
+                }
+
+            }
+
             #endregion
 
 

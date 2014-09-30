@@ -59,23 +59,23 @@ namespace urbanbooks.Controllers
                 myNewModel.allCartItem = new List<CartItem>();
                 myNewModel.allBook = new List<Book>();
                 myNewModel.allTechnology = new List<Technology>();
-                myNewModel.allBook = ifBooks;
-                myNewModel.allCartItem = myItems;
-                myNewModel.allTechnology = ifGadget;
                 List<ProductViewModel.CartHelper> itemList = new List<ProductViewModel.CartHelper>();
                 ProductViewModel.CartHelper cartHelp;
                 if (myItems != null)
                 {
-                    var revised = from rev in ifBooks
-                                  join item in myItems on rev.ProductID equals item.ProductID
-                                  where rev.ProductID == item.ProductID
-                                  select new { rev.ProductID, rev.SellingPrice, item.Quantity };
-                    foreach (var ite in revised)
+                    if (ifBooks != null)
                     {
-                        cartHelp = new ProductViewModel.CartHelper();
-                        cartHelp.ProductID = ite.ProductID;
-                        cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
-                        itemList.Add(cartHelp);
+                        var revised = from rev in ifBooks
+                                      join item in myItems on rev.ProductID equals item.ProductID
+                                      where rev.ProductID == item.ProductID
+                                      select new { rev.ProductID, rev.SellingPrice, item.Quantity };
+                        foreach (var ite in revised)
+                        {
+                            cartHelp = new ProductViewModel.CartHelper();
+                            cartHelp.ProductID = ite.ProductID;
+                            cartHelp.TotalPerItem = (ite.SellingPrice * ite.Quantity);
+                            itemList.Add(cartHelp);
+                        }
                     }
                 }
                 if (myItems != null)
@@ -107,6 +107,9 @@ namespace urbanbooks.Controllers
                 finishing.CartTotal = cartTotal;
                 finishing.VatAddedTotal = vatAmount;
                 finishing.SubTotal = subTotal;
+                myNewModel.allBook = ifBooks;
+                myNewModel.allCartItem = myItems;
+                myNewModel.allTechnology = ifGadget;
                 myNewModel.ItsA_wrap = new List<ProductViewModel.CartConclude>();
                 myNewModel.ItsA_wrap.Add(finishing);
 

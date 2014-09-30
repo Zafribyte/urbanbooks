@@ -43,15 +43,18 @@
     google.load("visualization", "1", { packages: ["corechart"] });
     google.setOnLoadCallback(drawChart);
     function drawChart() {
-        var array = [
-          ['Task', 'Hours per Day'],
-          ['Work', 13],
-          ['Eat', 1],
-          ['Watch TV', 1],
-          ['Sleep', 6]
-        ];
-        window.alert(array);
-        var data = google.visualization.arrayToDataTable(array);
+
+        var chartArray = [['Device Category', 'Total Sales']];
+        @foreach (var item in Model.DeviceSales)
+        {
+            <text>
+        
+             chartArray.push(['@item.Category' , @item.TotalSales]);
+            </text>
+        }
+
+        window.alert(chartArray);
+        var data = google.visualization.arrayToDataTable(chartArray);
 
         var options = {
             title: '',
