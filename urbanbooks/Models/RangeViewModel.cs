@@ -36,7 +36,7 @@ namespace urbanbooks.Models
         [Key]
         public int Id_key { get; set; }
         public int InvoiceID { get; set; }
-        public DateTime DateIssued { get; set; }
+        public string DateIssued { get; set; }
         public double InvoiceTotal { get; set; }
     }
     public class TotalClass 

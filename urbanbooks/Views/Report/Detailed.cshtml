@@ -27,7 +27,7 @@
                 @Html.LabelFor(model => model.myRange.From, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="">
                     @Html.EditorFor(model => model.myRange.From, new { htmlAttributes = new { @class = "form-control dateFrom", @readonly = "readonly" } })
-                    @Html.ValidationMessageFor(model => model.myRange.From, "", new { @class = "text-danger" })
+                   @*@Html.ValidationMessageFor(model => model.myRange.From, "", new { @class = "text-danger" })*@
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
                 @Html.LabelFor(model => model.myRange.To, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="">
                     @Html.EditorFor(model => model.myRange.To, new { htmlAttributes = new { @class = "form-control dateTo", @readonly = "readonly" } })
-                    @Html.ValidationMessageFor(model => model.myRange.To, "", new { @class = "text-danger" })
+                    @*@Html.ValidationMessageFor(model => model.myRange.To, "", new { @class = "text-danger" })*@
                     <input type="submit" value="Search" class="btn btn-default" />
                 </div>
 
@@ -52,9 +52,9 @@
                     <th>Date Issued</th>
                     <th>Total</th>
                 </tr>
-                @if(Model.Detailed != null)
-                { 
-                    foreach(var item in Model.Detailed)
+                @if (Model.Detailed != null)
+                {
+                    foreach (var item in Model.Detailed)
                     {
                         <tr>
                             <td>@Html.DisplayFor(model => item.InvoiceID)</td>
@@ -63,7 +63,18 @@
                         </tr>
                     }
                 }
+                @if (Model.Total != null)
+                {
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td class="control-label">Invoice Total</td>
+                            <td class="control-label">@Html.DisplayFor(model => model.Total.Total)</td>
+                        </tr>
+                    </tfoot>
+                }
             </table>
+
         </div>
     </div>
 }
@@ -72,13 +83,13 @@
 
 <script type="text/javascript">
         $('.dateFrom').datepicker({
-            format: 'mm/dd/yyyy'
+            format: 'dd/mm/yyyy'
         });
 </script>
 
 <script type="text/javascript">
     $('.dateTo').datepicker({
-        format: 'mm/dd/yyyy'
+        format: 'dd/mm/yyyy'
     });
 </script>
 

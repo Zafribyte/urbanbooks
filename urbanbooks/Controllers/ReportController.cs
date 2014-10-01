@@ -6,6 +6,7 @@ using urbanbooks.Models;
 using System.Collections;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Globalization;
 
 namespace urbanbooks.Controllers
 {
@@ -44,7 +45,8 @@ namespace urbanbooks.Controllers
                     DetailedCustom customJob = new DetailedCustom();
                     Invoice invoice = new Invoice();
                     invoice = myHandler.GetInvoice(item.InvoiceID);
-                    customJob.DateIssued = invoice.DateCreated;
+                    string xdate = invoice.DateCreated.ToString("dddd dd MMMM yyyy", CultureInfo.CreateSpecificCulture("en-US"));
+                    customJob.DateIssued = xdate;
                     customJob.InvoiceID = item.InvoiceID;
                     customJob.InvoiceTotal = item.Price;
                     model.Detailed.Add(customJob);
@@ -61,7 +63,8 @@ namespace urbanbooks.Controllers
                     DetailedCustom customJob = new DetailedCustom();
                     Invoice invoice = new Invoice();
                     invoice = myHandler.GetInvoice(item.InvoiceID);
-                    customJob.DateIssued = invoice.DateCreated;
+                    string xdate = invoice.DateCreated.ToString("dddd dd MMMM yyyy", CultureInfo.CreateSpecificCulture("en-US"));
+                    customJob.DateIssued = xdate;
                     customJob.InvoiceID = item.InvoiceID;
                     IEnumerable<InvoiceItem> rawItems = myHandler.GetInvoiceItems(item.InvoiceID);
                     foreach(var inv in rawItems)
@@ -81,6 +84,8 @@ namespace urbanbooks.Controllers
                 }
             }
             #endregion
+
+            #region Devices
             else if(model.radioButtons == "Dev")
             {
                 foreach(var item in invoiceItems)
@@ -88,7 +93,8 @@ namespace urbanbooks.Controllers
                     DetailedCustom customJob = new DetailedCustom();
                     Invoice invoice = new Invoice();
                     invoice = myHandler.GetInvoice(item.InvoiceID);
-                    customJob.DateIssued = invoice.DateCreated;
+                    string xdate = invoice.DateCreated.ToString("dddd dd MMMM yyyy", CultureInfo.CreateSpecificCulture("en-US"));
+                    customJob.DateIssued = xdate;
                     customJob.InvoiceID = item.InvoiceID;
                     IEnumerable<InvoiceItem> rawItems = myHandler.GetInvoiceItems(item.InvoiceID);
                     foreach (var inv in rawItems)
@@ -110,11 +116,27 @@ namespace urbanbooks.Controllers
                     { model.Detailed.Add(customJob); }
                 }
             }
+            #endregion
+
+            #region Clean Up List
+
             model.Detailed.OrderBy(m => m.InvoiceID);
             List<DetailedCustom> cleanList = new System.Collections.Generic.List<DetailedCustom>();
             cleanList = model.Detailed.Distinct().ToList();
             model.Detailed = new List<DetailedCustom>();
             model.Detailed = cleanList;
+            
+            #endregion
+
+            #region Calc Total
+
+            model.Total = new TotalClass();
+            foreach (var item in model.Detailed)
+            {
+                model.Total.Total += item.InvoiceTotal;
+            }
+
+            #endregion
             return View(model);
         }
 
