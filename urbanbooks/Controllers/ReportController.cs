@@ -4,15 +4,18 @@ using System.Linq;
 using System.Web;
 using urbanbooks.Models;
 using System.Collections;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace urbanbooks.Controllers
 {
+    [Authorize(Roles="admin")]
     public class ReportController : Controller
     {
         public ActionResult Detailed()
         {
-            return View();
+            RangeViewModel model = new RangeViewModel();
+            return View(model);
         }
 
         [HttpPost]
@@ -27,7 +30,7 @@ namespace urbanbooks.Controllers
             #endregion
 
             #region Get The Data
-            invoiceItems = myHandler.Sales();
+            invoiceItems = myHandler.SalesGroupedByInvoiceID();
             invoiceItems.OrderBy(m => m.InvoiceID);
             #endregion
 
@@ -43,47 +46,75 @@ namespace urbanbooks.Controllers
                     invoice = myHandler.GetInvoice(item.InvoiceID);
                     customJob.DateIssued = invoice.DateCreated;
                     customJob.InvoiceID = item.InvoiceID;
-
-                    //while(item.InvoiceID == inv)
-                    //{
-                    //    customJob.InvoiceTotal += (item.Price*item.Quantity);
-                    //}
-
-                    foreach (var iterate in invoiceItems)
-                    {
-                        if(iterate.InvoiceID == item.InvoiceID)
-                        {
-                            customJob.InvoiceTotal += (iterate.Price * iterate.Quantity);
-                        }
-                    }
-                    if(model.Detailed.Contains(customJob))
-                    {
-
-                    }
-                    else{
+                    customJob.InvoiceTotal = item.Price;
                     model.Detailed.Add(customJob);
-                    }
                 }
             }
             #endregion
 
             #region Books
-            else if(model.radioButtons == "Books")
+            else if(model.radioButtons == "Book")
             {
                 foreach (var item in invoiceItems)
                 {
-                    if(myHandler.CheckProductType(item.ProductID))
-                    {
 
+                    DetailedCustom customJob = new DetailedCustom();
+                    Invoice invoice = new Invoice();
+                    invoice = myHandler.GetInvoice(item.InvoiceID);
+                    customJob.DateIssued = invoice.DateCreated;
+                    customJob.InvoiceID = item.InvoiceID;
+                    IEnumerable<InvoiceItem> rawItems = myHandler.GetInvoiceItems(item.InvoiceID);
+                    foreach(var inv in rawItems)
+                    {
+                        if(myHandler.CheckProductType(inv.ProductID))
+                        {
+                            if (customJob.InvoiceTotal == 0.0)
+                            { customJob.InvoiceTotal = inv.Price * inv.Quantity; }
+                            else {customJob.InvoiceTotal += inv.Price * inv.Quantity; }
+                        }
                     }
+                    if(customJob.InvoiceTotal == 0.0)
+                    { }
+                    else
+                    { model.Detailed.Add(customJob); }
+
                 }
             }
             #endregion
             else if(model.radioButtons == "Dev")
             {
+                foreach(var item in invoiceItems)
+                {
+                    DetailedCustom customJob = new DetailedCustom();
+                    Invoice invoice = new Invoice();
+                    invoice = myHandler.GetInvoice(item.InvoiceID);
+                    customJob.DateIssued = invoice.DateCreated;
+                    customJob.InvoiceID = item.InvoiceID;
+                    IEnumerable<InvoiceItem> rawItems = myHandler.GetInvoiceItems(item.InvoiceID);
+                    foreach (var inv in rawItems)
+                    {
+                        if (myHandler.CheckProductType(inv.ProductID))
+                        {
 
+                        }
+                        else
+                        {
+                            if (customJob.InvoiceTotal == 0.0)
+                            { customJob.InvoiceTotal = inv.Price * inv.Quantity; }
+                            else { customJob.InvoiceTotal += inv.Price * inv.Quantity; }
+                        }
+                    }
+                    if (customJob.InvoiceTotal == 0.0)
+                    { }
+                    else
+                    { model.Detailed.Add(customJob); }
+                }
             }
-
+            model.Detailed.OrderBy(m => m.InvoiceID);
+            List<DetailedCustom> cleanList = new System.Collections.Generic.List<DetailedCustom>();
+            cleanList = model.Detailed.Distinct().ToList();
+            model.Detailed = new List<DetailedCustom>();
+            model.Detailed = cleanList;
             return View(model);
         }
 

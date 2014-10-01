@@ -475,6 +475,8 @@ namespace urbanbooks
 
         #region SYSTEM ACTIONS
 
+        public List<InvoiceItem> SalesGroupedByInvoiceID()
+        { InvoiceItemHandler myHandler = new InvoiceItemHandler(); return myHandler.InvoiceItemsGroupedByInvoiceID(); }
         public List<Invoice> GetInvoiceInDateRange(string startDate, string endDate)
         { InvoiceHandler myHandler = new InvoiceHandler(); return myHandler.GetInvoicesInRange(startDate, endDate); }
         public bool BookAuthorUpdateDelete(int BookID)

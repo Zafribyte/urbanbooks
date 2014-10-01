@@ -39,6 +39,31 @@ namespace urbanbooks
             return invoiceItemList;
         }
 
+
+        public List<InvoiceItem> InvoiceItemsGroupedByInvoiceID()
+        {
+            List<InvoiceItem> invoiceItemList = null;
+
+            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewAllInvoiceItems",
+                CommandType.StoredProcedure))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    invoiceItemList = new List<InvoiceItem>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        InvoiceItem item = new InvoiceItem();
+                        item.InvoiceID = Convert.ToInt32(row["InvoiceID"]);
+                        item.Price = Convert.ToDouble(row["Price"]);
+                        invoiceItemList.Add(item);
+
+
+                    }
+                }
+            }
+            return invoiceItemList;
+        }
+
         public List<InvoiceItem> GetInvoiceItemList(int InvoiceID)
         {
             List<InvoiceItem> invoiceItems = null;
