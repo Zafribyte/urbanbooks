@@ -576,6 +576,8 @@
     <Content Include="Views\Report\Detailed.cshtml" />
     <Content Include="Views\Author\Create.cshtml" />
     <Content Include="Views\Book\DeletedIndex.cshtml" />
+    <Content Include="Views\Report\Monthly.cshtml" />
+    <Content Include="Views\Report\Yearly.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />

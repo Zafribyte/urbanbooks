@@ -12,6 +12,7 @@ namespace urbanbooks.Models
         public RangeValidate myRange { get; set; }
         public List<Monthly> MonthlySales { get; set; }
         public string radioButtons { get; set; }
+        public LooseRanger Range { get; set; }
         public TotalClass Total { get; set; }
         public List<DetailedCustom> Detailed { get; set; }
     }
@@ -43,6 +44,15 @@ namespace urbanbooks.Models
     {
         [Key]
         public double Total { get; set; }
+    }
+    public class LooseRanger 
+    {
+        [Key]
+        public int keen_Id { get; set; }
+        [Required]
+        public string From { get; set; }
+        [Required]
+        public string To { get; set; }
     }
 
 }
