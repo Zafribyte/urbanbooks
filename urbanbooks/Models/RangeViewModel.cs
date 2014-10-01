@@ -11,7 +11,7 @@ namespace urbanbooks.Models
         public IEnumerable<Order> Orders { get; set; }
         public RangeValidate myRange { get; set; }
         public List<Monthly> MonthlySales { get; set; }
-        public radioHost radioButtons { get; set; }
+        public string radioButtons { get; set; }
     }
     public class RangeValidate
     {
@@ -30,12 +30,4 @@ namespace urbanbooks.Models
         public double TotalSales { get; set; }
     }
 
-    public class radioHost 
-    {
-        [Key]
-        public int Id { get; set; }
-        public string All { get; set; }
-        public string  Books { get; set; }
-        public string Devices { get; set; }
-    }
 }

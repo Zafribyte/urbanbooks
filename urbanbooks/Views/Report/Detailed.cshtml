@@ -6,7 +6,9 @@
 }
 
 <div class="row">
-    <label>Products :</label> @Html.RadioButtonFor(model => model.radioButtons.All, "All", new {@class="form-control" }) @Html.LabelFor(model => model.radioButtons.All, new { @class="control-label"}) @Html.RadioButtonFor(model => model.radioButtons.Books, "Book", new { @class="form-control"}) @Html.LabelFor(model => model.radioButtons.Books, new { @class = "control-label" }) @Html.RadioButtonFor(model => model.radioButtons.Devices, "Dev", new {@class = "form-control" }) @Html.LabelFor(model => model.radioButtons.Devices, new { @class = "control-label" })
+    <div class="form-inline">
+        <label>Products :</label> <label>@Html.RadioButtonFor(model => model.radioButtons, "All", new { @class = "form-control" }) @Html.LabelFor(model => model.radioButtons, "All", new { @class = "control-label" })</label> &nbsp; &nbsp;<label> @Html.RadioButtonFor(model => model.radioButtons, "Book", new { @class = "form-control" }) @Html.LabelFor(model => model.radioButtons, "Books", new { @class = "control-label" })</label> &nbsp; &nbsp; <label> @Html.RadioButtonFor(model => model.radioButtons, "Dev", new { @class = "form-control" }) @Html.LabelFor(model => model.radioButtons, "Devices", new { @class = "control-label" })</label>
+    </div>
 </div>
 <div class="row">
     <div class="form-inline">
