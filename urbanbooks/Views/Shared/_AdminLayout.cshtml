@@ -49,8 +49,10 @@
                         <li>@Html.ActionLink("Add new Publisher", "Create", "Publisher")</li>
                         <li>@Html.ActionLink("Manage Publishers", "Index", "Publisher")</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("Add new Author", "Create", "Author", null, new {data_modal = "" })</li>
+                        <li>@Html.ActionLink("Add new Author", "Create", "Author")</li>
                         <li>@Html.ActionLink("Manage Authors", "Index", "Author")</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("View Deleted Books", "DeletedIndex", "Book")</li>
 
                     </ul>
                 </li>

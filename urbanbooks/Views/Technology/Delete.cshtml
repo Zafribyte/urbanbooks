@@ -6,6 +6,18 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+@{
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+
+<script type="text/javascript">
+    var message = '@message';
+    if (message)
+        window.alert(message);
+</script>
+
+
+
 <h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
@@ -68,5 +80,6 @@
             @Html.ActionLink("Back to List", "Index")
         </div>
     }
+
 </div>
 

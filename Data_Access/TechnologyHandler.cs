@@ -725,13 +725,14 @@ namespace urbanbooks
         //        Params);
         //}
 
-        public bool DeleteTechnologyProduct(int ProductID)
+        public bool DeleteTechnology(Technology tech)
         {
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@_ProductID", ProductID)
+                new SqlParameter("@ProductID", tech.ProductID),
+                new SqlParameter("@Status", tech.Status = true)
             };
-            return DataProvider.ExecuteNonQuery("sp_DeleteProduct", CommandType.StoredProcedure,
+            return DataProvider.ExecuteNonQuery("sp_DeleteTechnology", CommandType.StoredProcedure, //procedure
                 Params);
         }
 

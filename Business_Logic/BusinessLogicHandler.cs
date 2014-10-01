@@ -292,8 +292,11 @@ namespace urbanbooks
             return myHandler.UpdateTechnologyProduct(gadget);
         }
 
-        public bool DeleteTechnology(int ProductID)
-        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.DeleteTechnologyProduct(ProductID); }
+        public bool DeleteTechnology(Technology tech)
+        { 
+            TechnologyHandler myHandler = new TechnologyHandler(); 
+            return myHandler.DeleteTechnology(tech); 
+        }
 
         public Technology GetTechnologyDetails(int ProductID)
         { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.GetTechnologyDetails(ProductID); }
@@ -489,6 +492,12 @@ namespace urbanbooks
         {
             BookHandler myHandler = new BookHandler();
             return myHandler.GetBookList();
+        }
+
+        public List<Book> GetDeletedBooks()
+        {
+            BookHandler myHandler = new BookHandler();
+            return myHandler.GetDeletedBooks();
         }
 
         public bool AssignOrderToSupplier(Order ord)
