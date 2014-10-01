@@ -12,6 +12,8 @@ namespace urbanbooks.Models
         public RangeValidate myRange { get; set; }
         public List<Monthly> MonthlySales { get; set; }
         public string radioButtons { get; set; }
+        public TotalClass Total { get; set; }
+        public List<DetailedCustom> Detailed { get; set; }
     }
     public class RangeValidate
     {
@@ -28,6 +30,19 @@ namespace urbanbooks.Models
 
         public string Month { get; set; }
         public double TotalSales { get; set; }
+    }
+    public class DetailedCustom
+    {
+        [Key]
+        public int Id_key { get; set; }
+        public int InvoiceID { get; set; }
+        public DateTime DateIssued { get; set; }
+        public double InvoiceTotal { get; set; }
+    }
+    public class TotalClass 
+    {
+        [Key]
+        public double Total { get; set; }
     }
 
 }
