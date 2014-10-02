@@ -93,6 +93,7 @@
                 <label class="control-label col-md-2">Manufacturer</label>
                 <div class="col-md-10 dropdown">
                     @Html.DropDownList("Manufacturer", Model.manufacturers, new { @class = "form-control" })<br />
+                    @Html.ActionLink("Add a Manufacturer", "Create", "Manufacturer")
                 </div>
             </div>
         </div>
@@ -102,6 +103,7 @@
                 <label class="control-label col-md-2">Category</label>
                 <div class="col-md-10 dropdown">
                     @Html.DropDownList("CategoryName", Model.techCategories, new { @class = "form-control" })<br />
+                    @Html.ActionLink("Add a Category", "Create", "TechCategory")
                 </div>
             </div>
         </div>

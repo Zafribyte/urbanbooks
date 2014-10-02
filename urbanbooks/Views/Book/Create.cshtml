@@ -119,7 +119,7 @@
                 <label class="control-label col-md-2">Publisher</label>
                 <div class="col-md-10 dropdown">
                     @Html.DropDownList("PublisherName", Model.publishers, new { @class = "form-control" })
-                    @Html.ActionLink("Add a Publisher", "Create", "Publisher")
+                    @Html.ActionLink("Add a Publisher", "ViewPublisher", "Publisher", null, new { data_modal = ""})
                 </div>
             </div>
         </div>

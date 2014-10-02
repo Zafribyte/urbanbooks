@@ -9,7 +9,7 @@ namespace urbanbooks.Controllers
 {
     public class PublisherController : Controller
     {
-        
+        BusinessLogicHandler myHandler;
         public ActionResult Index()
         {
             BusinessLogicHandler myHandler = new BusinessLogicHandler();
@@ -23,6 +23,20 @@ namespace urbanbooks.Controllers
             Publisher publisher = new Publisher();
             publisher = myHandler.GetPublisher(id);
             return View(publisher);
+        }
+        public ActionResult ViewPublisher()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult ViewPublisher(Publisher publisher)
+        {
+            myHandler = new BusinessLogicHandler();
+            if (ModelState.IsValid)
+            {
+                myHandler.AddPublisher(publisher);
+            }
+            return Json(new { success = true });
         }
         [Authorize(Roles="admin")]
         public ActionResult Create()
