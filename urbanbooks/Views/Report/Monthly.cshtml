@@ -1,7 +1,7 @@
 ﻿@using urbanbooks.Models
 @model RangeViewModel
 @{
-    ViewBag.Title = "Detailed";
+    ViewBag.Title = "Monthly";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -10,12 +10,14 @@
 <link href="~/Content/datepicker.css" rel="stylesheet" />
 <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
 
-@using (Html.BeginForm("Detailed", "Report", FormMethod.Post))
+@using (Html.BeginForm("Monthly", "Report", FormMethod.Post))
 {
-    <br /><br /><br />
+    <br />
+    <h2>Monthly Report</h2>
+    <br />
     <div class="row">
         <div class="container">
-            <div class="form-inline">
+            <div class="form-inline ">
                 <label>Products :</label> <label>@Html.RadioButtonFor(model => model.radioButtons, "All", new { @class = "form-control" }) @Html.LabelFor(model => model.radioButtons, "All", new { @class = "control-label" })</label> &nbsp; &nbsp;<label> @Html.RadioButtonFor(model => model.radioButtons, "Book", new { @class = "form-control" }) @Html.LabelFor(model => model.radioButtons, "Books", new { @class = "control-label" })</label> &nbsp; &nbsp; <label> @Html.RadioButtonFor(model => model.radioButtons, "Dev", new { @class = "form-control" }) @Html.LabelFor(model => model.radioButtons, "Devices", new { @class = "control-label" })</label>
             </div>
         </div>
@@ -26,17 +28,17 @@
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="col-md-4">
-                @Html.LabelFor(model => model.myRange.From, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Range.From, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="">
-                    @Html.EditorFor(model => model.myRange.From, new { htmlAttributes = new { @class = "form-control dateFrom", @readonly = "readonly" } })
-                   @*@Html.ValidationMessageFor(model => model.myRange.From, "", new { @class = "text-danger" })*@
+                    @Html.EditorFor(model => model.Range.From, new { htmlAttributes = new { @class = "form-control dateFrom", @readonly = "readonly" } })
+                    @*@Html.ValidationMessageFor(model => model.myRange.From, "", new { @class = "text-danger" })*@
                 </div>
             </div>
 
             <div class="col-md-4">
-                @Html.LabelFor(model => model.myRange.To, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Range.To, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="">
-                    @Html.EditorFor(model => model.myRange.To, new { htmlAttributes = new { @class = "form-control dateTo", @readonly = "readonly" } })
+                    @Html.EditorFor(model => model.Range.To, new { htmlAttributes = new { @class = "form-control dateTo", @readonly = "readonly" } })
                     @*@Html.ValidationMessageFor(model => model.myRange.To, "", new { @class = "text-danger" })*@
                     <input type="submit" value="Search" class="btn btn-default" />
                 </div>
@@ -45,23 +47,21 @@
         </div>
     </div>
     <hr />
-<br /><br />
+    <br /><br />
     <div class="row">
         <div class="container">
             <table class="table">
                 <tr>
-                    <th>Invoice Number</th>
-                    <th>Date Issued</th>
-                    <th>Total</th>
+                    <th>Month</th>
+                    <th>Total Sales</th>
                 </tr>
-                @if (Model.Detailed != null)
+                @if (Model.MonthlySales != null)
                 {
-                    foreach (var item in Model.Detailed)
+                    foreach (var item in Model.MonthlySales)
                     {
                         <tr>
-                            <td>@Html.DisplayFor(model => item.InvoiceID)</td>
-                            <td>@Html.DisplayFor(model => item.DateIssued)</td>
-                            <td>@Html.DisplayFor(model => item.InvoiceTotal)</td>
+                            <td>@Html.DisplayFor(model => item.Month)</td>
+                            <td>@Html.DisplayFor(model => item.TotalSales)</td>
                         </tr>
                     }
                 }
@@ -69,9 +69,8 @@
                 {
                     <tfoot>
                         <tr>
-                            <td></td>
-                            <td class="control-label">Invoice Total</td>
-                            <td class="control-label">@Html.DisplayFor(model => model.Total.Total)</td>
+                            <td ><strong>Invoice Total</strong></td>
+                            <td><strong>@Html.DisplayFor(model => model.Total.Total)</strong></td>
                         </tr>
                     </tfoot>
                 }
@@ -85,13 +84,17 @@
 
 <script type="text/javascript">
         $('.dateFrom').datepicker({
-            format: 'dd/mm/yyyy'
+            format: 'MM yyyy',
+            viewMode: "months",
+            minViewMode: "months"
         });
 </script>
 
 <script type="text/javascript">
     $('.dateTo').datepicker({
-        format: 'dd/mm/yyyy'
+        format: 'MM yyyy',
+        viewMode: "months",
+        minViewMode: "months"
     });
 </script>
 
@@ -106,3 +109,4 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/fuelux")
 }
+

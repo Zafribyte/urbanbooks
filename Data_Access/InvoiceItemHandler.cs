@@ -40,12 +40,12 @@ namespace urbanbooks
         }
 
 
-        public List<InvoiceItem> InvoiceItemsGroupedByInvoiceID()
+        public List<InvoiceItem> InvoiceItemsGroupedByInvoiceID(DateTime dateFrom, DateTime dateTo)
         {
             List<InvoiceItem> invoiceItemList = null;
 
-            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewAllInvoiceItems",
-                CommandType.StoredProcedure))
+            SqlParameter[] Params = { new SqlParameter("@dateFrom", dateFrom), new SqlParameter("@dateTo", dateTo) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_ViewAllInvoiceItems", CommandType.StoredProcedure, Params))
             {
                 if (table.Rows.Count > 0)
                 {

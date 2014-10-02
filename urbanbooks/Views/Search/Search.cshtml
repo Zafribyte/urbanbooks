@@ -13,7 +13,7 @@
 
 @if (Model.BookResults != null)
 {
-    string returnUrl = HttpContext.Current.Request.RawUrl;
+    string returnUrl = "Edit";
     <hr />
     <h4>Books</h4>
     <div class="row">
@@ -54,7 +54,7 @@
 }
 @if (Model.GadgetResults != null)
 {
-    string returnUrl = HttpContext.Current.Request.RawUrl;
+    string returnUrl = "Edit";
     <hr />
     <h4>Devices</h4>
     <div class="row">
