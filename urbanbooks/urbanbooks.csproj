@@ -465,6 +465,9 @@
     <Content Include="Views\Search\Books.cshtml" />
     <Content Include="Views\Search\Devices.cshtml" />
     <Content Include="Views\Search\DevicesAdvanced.cshtml" />
+    <Content Include="Views\Technology\DeletedIndex.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -576,6 +579,8 @@
     <Content Include="Views\Report\Detailed.cshtml" />
     <Content Include="Views\Author\Create.cshtml" />
     <Content Include="Views\Book\DeletedIndex.cshtml" />
+    <Content Include="Views\Technology\Restore.cshtml" />
+    <Content Include="Views\Book\Restore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />

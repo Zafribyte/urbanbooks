@@ -65,6 +65,16 @@ namespace urbanbooks.Controllers
 
             return View(model);
         }
+
+        public ActionResult DeletedIndex()
+        {
+            myHandler = new BusinessLogicHandler();
+            List<Technology> myTechDelete = new List<Technology>();
+            myTechDelete = myHandler.GetDeletedDevices();
+            myTechDelete.OrderBy(m => m.DateAdded);
+
+            return View(myTechDelete);
+        }
         [Authorize(Roles="admin")]
         public ActionResult AdminIndex()
         {
@@ -369,6 +379,7 @@ namespace urbanbooks.Controllers
                     
                     model.techs.TechCategoryID = Convert.ToInt32(collection.GetValue("CategoryName").AttemptedValue);
                     model.techs.SupplierID = Convert.ToInt32(collection.GetValue("Name").AttemptedValue);
+                    model.techs.Status = Convert.ToBoolean(collection.GetValue("Status"));
                     myHandler.UpdateTechnology(model.techs);
                     myHandler.UpdateTechProduct(model.techs);
                 }
@@ -429,6 +440,40 @@ namespace urbanbooks.Controllers
 
                 
                 return RedirectToAction("AdminIndex", "Technology");
+            }
+
+            catch
+            {
+                return View();
+            }
+        }
+        public ActionResult Restore(int ProductID)
+        {
+            {
+                AddNewTechViewModel model = new AddNewTechViewModel();
+                model.techs = new Technology();
+
+                myHandler = new BusinessLogicHandler();
+                gadget = myHandler.GetTechnologyDetails(ProductID);
+                model.techs = gadget;
+                return View(model);
+            }
+        }
+        [Authorize(Roles = "admin, employee")]
+        [HttpPost]
+        public ActionResult Restore(int ProductID, AddNewTechViewModel model, FormCollection collection)
+        {
+            try
+            {
+                myHandler = new BusinessLogicHandler();
+                gadget = new Technology();
+                gadget.ProductID = ProductID;
+                myHandler.RestoreDevice(gadget);
+
+                TempData["Alert Message"] = "Device Successfully Restored";
+
+
+                return RedirectToAction("DeletedIndex", "Technology");
             }
 
             catch

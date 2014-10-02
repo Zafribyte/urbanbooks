@@ -60,7 +60,14 @@ namespace urbanbooks
             }
             return BookList;
         }
-
+        public bool RestoreBook(Book book)
+        {
+            SqlParameter[] Params = {
+                                        new SqlParameter("@ProductID", book.ProductID),
+                                        new SqlParameter("@Status", book.Status = false)
+                                    };
+            return DataProvider.ExecuteNonQuery("sp_RestoreTech", CommandType.StoredProcedure, Params);
+        }
         public List<Book> GetDeletedBooks()
         {
             List<Book> BookList = null;

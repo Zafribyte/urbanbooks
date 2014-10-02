@@ -1,0 +1,73 @@
+﻿@using urbanbooks.Models;
+@model AddNewBookViewModel
+@{
+    ViewBag.Title = "Restore";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Restore</h2>
+<h3>Are you sure you want to Restore this Book?</h3>
+
+<h4>Book</h4>
+<hr />
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.books.SellingPrice)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.books.SellingPrice)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.books.SupplierID)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.books.SupplierID)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.books.ISBN)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.books.ISBN)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.books.BookTitle)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.books.BookTitle)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.books.Synopsis)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.books.Synopsis)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.books.CoverImage)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.books.CoverImage)
+    </dd>
+
+</dl>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Save" class="btn btn-default" /> |
+        @Html.ActionLink("Back to List", "DeletedIndex", "Book")
+    </div>
+}
+
+</div>
