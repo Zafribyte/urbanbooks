@@ -10,6 +10,37 @@ namespace urbanbooks
 {
     public class TechnologyHandler
     {
+        public List<Technology> GetDeletedDevices()
+        {
+            List<Technology> TechnologyList = null;
+
+            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewAllDeletedTech",
+                CommandType.StoredProcedure))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechnologyList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology Techno = new Technology();
+                        //Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
+                        Techno.ModelName = row["ModelName"].ToString();
+                        Techno.Specs = row["Specs"].ToString();
+                        Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.SupplierID = Convert.ToInt32(row["SupplierID"].ToString());
+                        Techno.ManufacturerID = (int)row["ManufacturerID"];
+                        Techno.TechCategoryID = (int)row["TechCategoryID"];
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        Techno.ImageTop = row["ImageTop"].ToString();
+                        Techno.ImageSide = row["ImageSide"].ToString();
+                        TechnologyList.Add(Techno);
+                    }
+                }
+            }
+            return TechnologyList;
+        }
         public List<Technology> GetTechnologyList()
         {
             List<Technology> TechnologyList = null;
@@ -624,6 +655,7 @@ namespace urbanbooks
             }
             return tc;
         }
+        
 
         #region Admin
 
@@ -666,6 +698,14 @@ namespace urbanbooks
                                     };
                 return DataProvider.ExecuteNonQuery("sp_NewManhattanProject", CommandType.StoredProcedure,
                               Params);
+        }
+        public bool RestoreDevice(Technology Tech)
+        {
+            SqlParameter[] Params = {
+                                        new SqlParameter("@ProductID", Tech.ProductID),
+                                        new SqlParameter("@Status", Tech.Status = false)
+                                    };
+            return DataProvider.ExecuteNonQuery("sp_RestoreTech", CommandType.StoredProcedure, Params);
         }
         public bool UpdateTechnology(Technology TechnoProduct)
         {

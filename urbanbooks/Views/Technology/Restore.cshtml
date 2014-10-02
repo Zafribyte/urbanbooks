@@ -1,0 +1,80 @@
+﻿@using urbanbooks.Models;
+@model AddNewTechViewModel
+@{
+    ViewBag.Title = "Restore";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+
+<script type="text/javascript">
+    var message = '@message';
+    if (message)
+        alert(message);
+</script>
+<h2>Restore</h2>
+
+<h3>Are you sure you want to Restore this Device?</h3>
+<div>
+    <h4>Technology</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.techs.ModelName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.techs.ModelName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.techs.ModelNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.techs.ModelNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.techs.ManufacturerID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.techs.ManufacturerID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.techs.CostPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.techs.CostPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.techs.SellingPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.techs.SellingPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.techs.ImageFront)
+        </dt>
+        <dd>
+            <img src="~/Uploads/Tech/@Model.techs.ImageFront" width="200" height="100" />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.techs.Specs)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.techs.Specs)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Save" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "DeletedIndex", "Technology")
+        </div>
+    }
+
+</div>

@@ -229,6 +229,11 @@ namespace urbanbooks
 
             return b;
         }
+        public bool RestoreBook(Book book)
+        {
+            BookHandler myHandler = new BookHandler();
+            return myHandler.RestoreBook(book);
+        }
         public bool UpdateBook(Book book)
         {
             BookHandler myHandler = new BookHandler();
@@ -297,6 +302,11 @@ namespace urbanbooks
         { 
             TechnologyHandler myHandler = new TechnologyHandler(); 
             return myHandler.DeleteTechnology(tech); 
+        }
+        public bool RestoreDevice(Technology tech)
+        {
+            TechnologyHandler myHandler = new TechnologyHandler();
+            return myHandler.RestoreDevice(tech);
         }
 
         public Technology GetTechnologyDetails(int ProductID)
@@ -501,6 +511,11 @@ namespace urbanbooks
         {
             BookHandler myHandler = new BookHandler();
             return myHandler.GetDeletedBooks();
+        }
+        public List<Technology> GetDeletedDevices()
+        {
+            TechnologyHandler myHandler = new TechnologyHandler();
+            return myHandler.GetDeletedDevices();
         }
 
         public bool AssignOrderToSupplier(Order ord)

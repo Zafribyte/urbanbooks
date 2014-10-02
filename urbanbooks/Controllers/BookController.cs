@@ -486,7 +486,8 @@ namespace urbanbooks.Controllers
             try
             {
                 s = Convert.ToDouble(selectedValue);
-                t = (s * vat) + s;
+                t = Math.Round((s * vat) + s, 2);
+                              
                 return Json(t);
             }
             catch
@@ -518,6 +519,39 @@ namespace urbanbooks.Controllers
 
                 return RedirectToAction("AdminIndex", "Book");
             }
+            catch
+            {
+                return View();
+            }
+        }
+        public ActionResult Restore(int ProductID)
+        {
+            {
+                AddNewBookViewModel model = new AddNewBookViewModel();
+                model.books = new Book();
+                model.books = book;
+                myHandler = new BusinessLogicHandler();
+                model.books = myHandler.GetBook(ProductID);
+                return View(model);
+            }
+        }
+        [Authorize(Roles = "admin, employee")]
+        [HttpPost]
+        public ActionResult Restore(int ProductID, AddNewTechViewModel model, FormCollection collection)
+        {
+            try
+            {
+                myHandler = new BusinessLogicHandler();
+                book = new Book();
+                book.ProductID = ProductID;
+                myHandler.RestoreBook(book);
+
+                TempData["Alert Message"] = "Device Successfully Restored";
+
+
+                return RedirectToAction("DeletedIndex", "Book");
+            }
+
             catch
             {
                 return View();
