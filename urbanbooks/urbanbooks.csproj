@@ -591,6 +591,7 @@
     <Content Include="Views\Technology\Restore.cshtml" />
     <Content Include="Views\Book\Restore.cshtml" />
     <Content Include="Views\Author\Edit.cshtml" />
+    <Content Include="Views\Publisher\ViewPublisher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
