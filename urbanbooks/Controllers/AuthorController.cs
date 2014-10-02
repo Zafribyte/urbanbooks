@@ -13,7 +13,10 @@ namespace urbanbooks.Controllers
         BusinessLogicHandler myHandler;
         public ActionResult Index()
         {
-            return View();
+            myHandler = new BusinessLogicHandler();
+            IEnumerable<Author> authorList = myHandler.GetAuthors();
+            
+            return View(authorList);
         }
 
         public ActionResult Details(int authorID)
@@ -30,12 +33,11 @@ namespace urbanbooks.Controllers
 
         [Authorize(Roles = "admin, employee")]
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Author author)
         {
             try
             {
                 myHandler = new BusinessLogicHandler();
-                author = new Author();
                 if (ModelState.IsValid)
                 {
                     myHandler.AddAuthor(author);
@@ -46,6 +48,20 @@ namespace urbanbooks.Controllers
             {
                 return View();
             }
+        }
+        public ActionResult ViewAuthor()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult ViewAuthor(Author author)
+        {
+            myHandler = new BusinessLogicHandler();
+            if (ModelState.IsValid)
+            {
+                myHandler.AddAuthor(author);
+            }
+            return Json(new { success = true });
         }
 
 
@@ -109,14 +125,18 @@ namespace urbanbooks.Controllers
 
 
         [Authorize(Roles = "admin, employee")]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int AuthorID)
         {
-            return View();
+            myHandler = new BusinessLogicHandler();
+            author = new Author();
+            author.AuthorID = AuthorID;
+            author = myHandler.GetAuthorDetails(AuthorID);
+            return View(author);
         }
 
         [Authorize(Roles = "admin, employee")]
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int AuthorID, FormCollection collection)
         {
             try
             {
@@ -136,19 +156,27 @@ namespace urbanbooks.Controllers
         }
 
         [Authorize(Roles = "admin, employee")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int AuthorID)
         {
-            return View();
+            myHandler = new BusinessLogicHandler();
+            author = new Author();
+            author.AuthorID = AuthorID;
+            author = myHandler.GetAuthorDetails(AuthorID);
+            return View(author);
         }
 
         [Authorize(Roles = "admin, employee")]
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int AuthorID, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                myHandler = new BusinessLogicHandler();
+                author = new Author();
+                author.AuthorID = AuthorID;
+                myHandler.DeleteAuthor(AuthorID);
 
+                TempData["Alert Message"] = "Device Successfully Restored";
                 return RedirectToAction("Index");
             }
             catch

@@ -75,6 +75,7 @@ namespace urbanbooks.Models
         { get; set; }
         [Required]
         [Display(Name = "Cell Phone")]
+        [RegularExpression(@"^[0-9].{9,9}", ErrorMessage = "Invalid Cell number")]
         [DataType(DataType.PhoneNumber)]
         public string CellPhone
         { get; set; }
@@ -180,9 +181,11 @@ namespace urbanbooks.Models
         { get; set; }
         [Required]
         [StringLength(10)]
+        [RegularExpression(@"^[0-9].{9,9}", ErrorMessage = "Invalid Fax number")]
         public string Fax
         { get; set; }
         [Display(Name = "Telephone")]
+        [RegularExpression(@"^[0-9].{9,9}", ErrorMessage = "Invalid Telephone number")]
         [StringLength(10)]
         [Required]
         public string ContactPersonNumber

@@ -459,6 +459,15 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Author\Delete.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Author\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Author\ViewAuthor.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Views\Book\Details.cshtml" />
     <Content Include="Views\Manufacturer\Edit.cshtml" />
     <Content Include="Views\Search\Advanced.cshtml" />
@@ -581,6 +590,7 @@
     <Content Include="Views\Book\DeletedIndex.cshtml" />
     <Content Include="Views\Technology\Restore.cshtml" />
     <Content Include="Views\Book\Restore.cshtml" />
+    <Content Include="Views\Author\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />

@@ -45,7 +45,14 @@
     </div>
 </div>
 
-
+<div id="myModal" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="myModalContent">
+            </div>
+        </div>
+    </div>
+</div>
 
 @using (Html.BeginForm("Create", "Book", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -131,7 +138,7 @@
                 <label class="control-label col-md-2">Author</label>
                 <div class="col-md-10 dropdown">
                     @Html.DropDownList("FullName", Model.authors, new { @class = "form-control multiselect", multiple = "multiple" })
-                    @Html.ActionLink("Add an Author", "Create", "Author")
+                    @Html.ActionLink("Add an Author", "ViewAuthor", "Author", null, new { data_modal = ""})
                 </div>
             </div>
         </div>

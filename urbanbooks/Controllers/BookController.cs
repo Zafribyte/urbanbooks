@@ -486,7 +486,8 @@ namespace urbanbooks.Controllers
             try
             {
                 s = Convert.ToDouble(selectedValue);
-                t = (s * vat) + s;
+                t = Math.Round((s * vat) + s, 2);
+                              
                 return Json(t);
             }
             catch
