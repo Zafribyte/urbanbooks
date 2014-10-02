@@ -16,15 +16,26 @@ namespace urbanbooks.Models
         {
             myHandler = new BusinessLogicHandler();
             item = new CartItem();
-            item.CartID = cartId;
-            item.ProductID = ProductID;
-            item.DateAdded = DateTime.Now;
-            item.Quantity = 1;
-            if (myHandler.AddCartItem(item))
-            { return true; }
+            item = myHandler.CheckIfExist(cartId, ProductID);
+            if(item == null)
+            {
+                item.CartID = cartId;
+                item.ProductID = ProductID;
+                item.DateAdded = DateTime.Now;
+                item.Quantity = 1;
+                if (myHandler.AddCartItem(item))
+                { return true; }
+                else
+                    return false;
+            }
             else
-                return false;
-            
+            {
+                item.Quantity += 1;
+                if (myHandler.UpdateCartItem(item))
+                { return true; }
+                else
+                    return false;
+            }
         }
 
         public double GetTotalAsync(int cartId)

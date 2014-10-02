@@ -14,7 +14,8 @@ namespace urbanbooks
 
         #region COMMON ACTIONS
 
-
+        public CartItem CheckIfExist(int CartID, int ProductID)
+        { CartItemHandler myHandler = new CartItemHandler(); return myHandler.CheckProductDuplicates(CartID, ProductID); }
         public List<InvoiceItem> Sales()
         { InvoiceItemHandler myHandler = new InvoiceItemHandler(); return myHandler.InvoiceItems(); }
         public List<Book> GetBooksByPublisher(int PublisherId)

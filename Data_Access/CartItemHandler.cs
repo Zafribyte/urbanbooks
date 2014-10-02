@@ -35,6 +35,26 @@ namespace urbanbooks
             return cartItems;
         }
 
+        public CartItem CheckProductDuplicates(int CartID, int ProductID)
+        {
+            CartItem cartItem = null;
+            SqlParameter[] Params = new SqlParameter[] { new SqlParameter("@CartID", CartID), new SqlParameter("@ProductID", ProductID) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_CheckCartDuplicate",
+                CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count == 1)
+                {
+                    DataRow row = table.Rows[0];
+                    cartItem = new CartItem();
+                    cartItem.CartItemID = Convert.ToInt32(row["CartItemID"]);
+                    cartItem.ProductID = Convert.ToInt32(row["ProductID"]);
+                    cartItem.Quantity = Convert.ToInt32(row["Quantity"]);
+                    cartItem.CartID = Convert.ToInt32(row["CartID"]);
+                }
+            }
+            return cartItem;
+        }
+
         public bool InsertCartItem(CartItem cartItem)
         {
             SqlParameter[] Params = new SqlParameter[]
