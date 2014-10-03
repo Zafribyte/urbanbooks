@@ -50,7 +50,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.techs.ModelName, htmlAttributes: new { @class = "control-label col-md-2" })
