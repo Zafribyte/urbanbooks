@@ -142,11 +142,8 @@
             $('.multiselect').multiselect({ enableFiltering: true });
         </script>
         <fieldset>
-            <legend>Image</legend>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.books.CoverImage)
-            </div>
-            <div class="editor-field">
+            <legend class="control-label col-md-2">Upload an Image Here:</legend>
+            <div class="editor-field control-label col-md-2 ">
                 <input id="CoverImage" title="Upload Book Cover" type="file" name="file" accept="image/*" />
             </div>
         </fieldset>

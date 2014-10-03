@@ -13,6 +13,7 @@ namespace urbanbooks
         [ScaffoldColumn(false)]
         public int CompanyRegistration { get; set; }
         [Required]
+        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Please enter a Valid Name")]
         public string Name { get; set; }
         [Required]
         [Display(Name="Tax Reference Number")]
@@ -33,8 +34,10 @@ namespace urbanbooks
         [DataType(DataType.MultilineText)]
         public string Address { get; set; }
         [Required]
+        [RegularExpression(@"^[0-9].{9,9}", ErrorMessage = "Invalid Telephone number")]
         public string Telephone { get; set; }
         [Required]
+        [RegularExpression(@"^[0-9].{9,9}", ErrorMessage = "Invalid Fax number")]
         public string Fax { get; set; }
         [Required]
         public string Email { get; set; }
