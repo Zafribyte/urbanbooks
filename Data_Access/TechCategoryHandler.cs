@@ -101,11 +101,11 @@ namespace urbanbooks
             return category;
         }
 
-        public bool DeleteTechCategory(int TechnologyTypeID)
+        public bool DeleteTechCategory(int TechCategoryID)
         {
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@TechnologyTypeID", TechnologyTypeID)
+                new SqlParameter("@TechCategoryID", TechCategoryID)
             };
             return DataProvider.ExecuteNonQuery("sp_DeleteTechCategory", CommandType.StoredProcedure,
                 Params);
@@ -126,11 +126,11 @@ namespace urbanbooks
         {
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@TechnologyTypeID", category.TechCategoryID),
+                new SqlParameter("@TechCategoryID", category.TechCategoryID),
                 new SqlParameter("@CategoryName", category.CategoryName ),
                 new SqlParameter("@CategoryDescription",category.CategoryDescription)
             };
-            return DataProvider.ExecuteNonQuery("sp_UpdateTechnCategory", CommandType.StoredProcedure,
+            return DataProvider.ExecuteNonQuery("sp_UpdateTechCategory", CommandType.StoredProcedure,
                 Params);
         }
     }

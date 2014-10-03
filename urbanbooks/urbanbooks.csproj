@@ -224,6 +224,14 @@
     <Compile Include="Migrations\201409212136135_gprs.Designer.cs">
       <DependentUpon>201409212136135_gprs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410030920522_msd.cs" />
+    <Compile Include="Migrations\201410030920522_msd.Designer.cs">
+      <DependentUpon>201410030920522_msd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410031139448_stuff.cs" />
+    <Compile Include="Migrations\201410031139448_stuff.Designer.cs">
+      <DependentUpon>201410031139448_stuff.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AdminIndexViewModel.cs" />
     <Compile Include="Models\InvoiceModel.cs" />
     <Compile Include="Models\OrderLineModel.cs" />
@@ -468,6 +476,10 @@
     <Content Include="Views\Author\ViewAuthor.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\BookType\Delete.cshtml" />
+    <Content Include="Views\BookType\ViewBookCategory.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Views\Book\Details.cshtml" />
     <Content Include="Views\Manufacturer\Edit.cshtml" />
     <Content Include="Views\Search\Advanced.cshtml" />
@@ -591,6 +603,12 @@
     <Content Include="Views\Technology\Restore.cshtml" />
     <Content Include="Views\Book\Restore.cshtml" />
     <Content Include="Views\Author\Edit.cshtml" />
+    <Content Include="Views\Publisher\ViewPublisher.cshtml" />
+    <Content Include="Views\Publisher\Delete.cshtml" />
+    <Content Include="Views\Manufacturer\ViewManufacturer.cshtml" />
+    <Content Include="Views\TechCategory\Edit.cshtml" />
+    <Content Include="Views\TechCategory\Delete.cshtml" />
+    <Content Include="Views\TechCategory\ViewTechCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
@@ -688,6 +706,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409212136135_gprs.resx">
       <DependentUpon>201409212136135_gprs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410030920522_msd.resx">
+      <DependentUpon>201410030920522_msd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410031139448_stuff.resx">
+      <DependentUpon>201410031139448_stuff.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

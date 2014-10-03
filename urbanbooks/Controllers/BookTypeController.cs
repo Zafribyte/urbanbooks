@@ -25,7 +25,20 @@ namespace urbanbooks.Controllers
             typeOf = myHandler.GetBookCategoryList().Single(typ => typ.BookCategoryID == id);
             return View(typeOf);
         }
-
+        public ActionResult ViewBookCategory()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult ViewBookCategory(BookCategory bookCategory)
+        {
+            myHandler = new BusinessLogicHandler();
+            if (ModelState.IsValid)
+            {
+                myHandler.AddBookType(bookCategory);
+            }
+            return Json(new { success = true });
+        }
         public ActionResult Create()
         {
             return View();
@@ -82,18 +95,28 @@ namespace urbanbooks.Controllers
             }
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int BookCategoryID)
         {
-            return View();
+            myHandler = new BusinessLogicHandler();
+            typeOf = new BookCategory();
+            typeOf.BookCategoryID = BookCategoryID;
+            typeOf = myHandler.GetBookCategory(BookCategoryID);
+            return View(typeOf);
         }
 
+        [Authorize(Roles = "admin, employee")]
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int BookCategoryID, FormCollection collection)
         {
             try
             {
+                myHandler = new BusinessLogicHandler();
+                typeOf = new BookCategory();
+                typeOf.BookCategoryID = BookCategoryID;
+                myHandler.DeleteBookType(BookCategoryID);
 
-                return RedirectToAction("Index");
+                TempData["Alert Message"] = "Device Successfully Deleted";
+                return RedirectToAction("Index", "BookType");
             }
             catch
             {

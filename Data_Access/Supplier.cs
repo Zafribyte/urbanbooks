@@ -32,6 +32,7 @@ namespace urbanbooks
         public string Fax
         { get; set; }
         [Display(Name="Telephone")]
+        [RegularExpression(@"^[0-9].{9,9}", ErrorMessage = "Invalid Contact number")]
         [StringLength(10)]
         [Required]
         public string ContactPersonNumber

@@ -106,20 +106,16 @@
                 <label class="control-label col-md-2">Category</label>
                 <div class="col-md-10 dropdown">
                     @Html.DropDownList("CategoryName", Model.bookCategories, new { @class = "form-control" })
-                    @Html.ActionLink("Add a Category", "Create", "BookType")
+                    @Html.ActionLink("Add a Category", "ViewBookCategory", "BookType", null, new { data_modal = "" })
                 </div>
             </div>
         </div>
-
-
-
-
         <div class="form-group">
             <div>
                 <label class="control-label col-md-2">Publisher</label>
                 <div class="col-md-10 dropdown">
                     @Html.DropDownList("PublisherName", Model.publishers, new { @class = "form-control" })
-                    @Html.ActionLink("Add a Publisher", "Create", "Publisher")
+                    @Html.ActionLink("Add a Publisher", "ViewPublisher", "Publisher", null, new { data_modal = "" })
                 </div>
             </div>
         </div>
@@ -146,14 +142,13 @@
             $('.multiselect').multiselect({ enableFiltering: true });
         </script>
         <fieldset>
-            <legend>Image</legend>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.books.CoverImage)
-            </div>
-            <div class="editor-field">
+            <label class="control-label col-md-2">Upload an Image Here:</label>
+            <div class="control-label col-md-2 ">
                 <input id="CoverImage" title="Upload Book Cover" type="file" name="file" accept="image/*" />
             </div>
         </fieldset>
+        <br/>
+        <br/>
         <script type="text/javascript">
             $(".new").change(function () {
                 var selectedValue = $(this).val();

@@ -8,14 +8,30 @@ namespace urbanbooks.Controllers
 {
     public class TechCategoryController : Controller
     {
+        BusinessLogicHandler myHandler;
+        TechCategory tech;
         // GET: TechCategory
         public ActionResult Index()
         {
             BusinessLogicHandler myHandler = new BusinessLogicHandler();
             IEnumerable<TechCategory> TechCategory = myHandler.GetTechnologyTypeList();
+            
             return View(TechCategory);
         }
-
+        public ActionResult ViewTechCategory()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult ViewTechCategory(TechCategory tech)
+        {
+            myHandler = new BusinessLogicHandler();
+            if (ModelState.IsValid)
+            {
+                myHandler.AddTechnologyType(tech);
+            }
+            return Json(new { success = true });
+        }
         public ActionResult Create()
         {
             return View();
@@ -36,36 +52,58 @@ namespace urbanbooks.Controllers
             }
         }
 
-        public ActionResult Edit(int id)
+        [Authorize(Roles = "admin")]
+        public ActionResult Edit(int TechCategoryID)
         {
-            return View();
+            myHandler = new BusinessLogicHandler();
+            tech = new TechCategory(); 
+            tech.TechCategoryID = TechCategoryID;
+            tech = myHandler.GetTechnologyType(TechCategoryID);
+            return View(tech);
         }
+        [Authorize(Roles = "admin")]
         [HttpPost]
-        public ActionResult Edit(TechCategory techCategory)
+        public ActionResult Edit(int TechCategoryID, FormCollection collection)
         {
             try
             {
-                BusinessLogicHandler myHandler = new BusinessLogicHandler();
-                myHandler.UpdateTechnologyType(techCategory);
-                return RedirectToAction("Index");
+                myHandler = new BusinessLogicHandler();
+                tech = new TechCategory();
+                TryUpdateModel(tech);
+                if (ModelState.IsValid)
+                {
+                    myHandler.UpdateTechnologyType(tech);
+                }
+                return RedirectToAction("Index", "TechCategory");
             }
             catch
             {
                 return View();
             }
         }
-        public ActionResult Delete(int id)
+        [Authorize(Roles = "admin")]
+        public ActionResult Delete(int TechCategoryID)
         {
-            return View();
+            myHandler = new BusinessLogicHandler();
+            tech = new TechCategory();
+            tech.TechCategoryID = TechCategoryID;
+            tech = myHandler.GetTechnologyType(TechCategoryID);
+            return View(tech);
         }
+
+        [Authorize(Roles = "admin, employee")]
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int TechCategoryID, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                myHandler = new BusinessLogicHandler();
+                tech = new TechCategory();
+                tech.TechCategoryID = TechCategoryID;
+                myHandler.DeleteTechnologyType(TechCategoryID);
 
-                return RedirectToAction("Index");
+                TempData["Alert Message"] = "Category Successfully Deleted";
+                return RedirectToAction("Index", "TechCategory");
             }
             catch
             {

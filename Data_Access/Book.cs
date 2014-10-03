@@ -14,10 +14,11 @@ namespace urbanbooks
         [ScaffoldColumn(false)]
         public int BookID
         { get; set; }
-        [StringLength(13, ErrorMessage = "Incorrect ISBN number")]
-        [RegularExpression(@"^[0-9-].{10,13}", ErrorMessage = "Incorrect ISBN Number")]
+        [Required]
+        [RegularExpression(@"^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$", ErrorMessage = "Incorrect ISBN Number")]
         public string ISBN
         { get; set; }
+        [Required]
         [Display(Name="Book Title")]
         public string BookTitle 
         { get; set; }
@@ -48,6 +49,7 @@ namespace urbanbooks
         [ScaffoldColumn(false)]
         [DataType(DataType.Currency)]
         [Display(Name = "Cost Price")]
+        [Required]
         public override double CostPrice
         { get; set; }       
         [DataType(DataType.Currency)]

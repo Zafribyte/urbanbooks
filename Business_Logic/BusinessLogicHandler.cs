@@ -363,24 +363,10 @@ namespace urbanbooks
         public bool AddPublisher(Publisher publisher)
         { PublisherHandler myHandler = new PublisherHandler(); return myHandler.InsertPublisher(publisher); }
 
+        public bool DeletePublisher(int PublisherID)
+        { PublisherHandler myHandler = new PublisherHandler(); return myHandler.DeletePublisher(PublisherID); }
         #endregion
 
-        #region BOOKTYPE
-
-        public bool AddBookType(BookCategory bookType)
-        {
-            BookCategoryHandler myHander = new BookCategoryHandler();
-            return myHander.InsertBookCategory(bookType);
-        }
-        public BookCategory GetBookCategory(int CategoryID)
-        { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.GetBookCategory(CategoryID); }
-        public bool UpdateBookType(BookCategory bookType)
-        { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.UpdateBookCategory(bookType); }
-
-        public bool DeleteBookType(int BookCategoryID)
-        { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.DeleteBookCategory(BookCategoryID); }
-
-        #endregion
 
         #region SPECIAL
 
@@ -430,6 +416,8 @@ namespace urbanbooks
 
         public List<Manufacturer> ManufacturerGlobalSearch(string query)
         { ManufacturerHandler myHandler = new ManufacturerHandler(); return myHandler.ManufacturerGlobalSearch(query); }
+        public bool DeleteManufacturer(int ManufacturerID)
+        { ManufacturerHandler myHandler = new ManufacturerHandler(); return myHandler.DeleteManufacturer(ManufacturerID); }
 
         #endregion
 
@@ -465,6 +453,24 @@ namespace urbanbooks
 
         public bool UpdateTechnologyType(TechCategory type)
         { TechCategoryHandler myHandler = new TechCategoryHandler(); return myHandler.UpdateTechCategory(type); }
+
+        public TechCategory GetTechCategory(int TechCategoryID)
+        { TechCategoryHandler myHandler = new TechCategoryHandler(); return myHandler.GetTechCategoryDetails(TechCategoryID); }
+        #endregion
+        #region BOOKTYPE
+
+        public bool AddBookType(BookCategory bookType)
+        {
+            BookCategoryHandler myHander = new BookCategoryHandler();
+            return myHander.InsertBookCategory(bookType);
+        }
+        public BookCategory GetBookCategory(int CategoryID)
+        { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.GetBookCategory(CategoryID); }
+        public bool UpdateBookType(BookCategory bookType)
+        { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.UpdateBookCategory(bookType); }
+
+        public bool DeleteBookType(int BookCategoryID)
+        { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.DeleteBookCategory(BookCategoryID); }
 
         #endregion
 
