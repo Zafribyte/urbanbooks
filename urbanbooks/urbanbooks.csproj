@@ -592,6 +592,9 @@
     <Content Include="Views\Book\Restore.cshtml" />
     <Content Include="Views\Author\Edit.cshtml" />
     <Content Include="Views\Publisher\ViewPublisher.cshtml" />
+    <Content Include="Views\BookType\ViewBookCategory.cshtml" />
+    <Content Include="Views\Publisher\Delete.cshtml" />
+    <Content Include="Views\BookType\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />

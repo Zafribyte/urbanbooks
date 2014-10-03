@@ -176,7 +176,7 @@ namespace urbanbooks.Controllers
                 author.AuthorID = AuthorID;
                 myHandler.DeleteAuthor(AuthorID);
 
-                TempData["Alert Message"] = "Device Successfully Restored";
+                TempData["Alert Message"] = "Device Successfully Deleted";
                 return RedirectToAction("Index");
             }
             catch

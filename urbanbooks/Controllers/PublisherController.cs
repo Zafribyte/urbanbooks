@@ -9,6 +9,7 @@ namespace urbanbooks.Controllers
 {
     public class PublisherController : Controller
     {
+        Publisher publisher;
         BusinessLogicHandler myHandler;
         public ActionResult Index()
         {
@@ -59,18 +60,27 @@ namespace urbanbooks.Controllers
             }
         }
         [Authorize(Roles = "admin")]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int PublisherID)
         {
-            return View();
+            myHandler = new BusinessLogicHandler();
+            publisher = new Publisher();
+            publisher.PublisherID = PublisherID;
+            publisher = myHandler.GetPublisher(PublisherID);
+            return View(publisher);
         }
         [Authorize(Roles = "admin")]
         [HttpPost]
-        public ActionResult Edit(Publisher publisher)
+        public ActionResult Edit(int PublisherID, FormCollection collection)
         {
             try
             {
-                BusinessLogicHandler myHandler = new BusinessLogicHandler();
-                myHandler.UpdatePublisher(publisher);
+                myHandler = new BusinessLogicHandler();
+                publisher = new Publisher();
+                TryUpdateModel(publisher);
+                if (ModelState.IsValid)
+                {
+                    myHandler.UpdatePublisher(publisher);
+                }
                 return RedirectToAction("Index");
             }
             catch
@@ -93,19 +103,28 @@ namespace urbanbooks.Controllers
             return View(model);
         }
         [Authorize(Roles = "admin")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int PublisherID)
         {
-            return View();
+            myHandler = new BusinessLogicHandler();
+            publisher = new Publisher();
+            publisher.PublisherID = PublisherID;
+            publisher = myHandler.GetPublisher(PublisherID);
+            return View(publisher);
         }
 
+        [Authorize(Roles = "admin, employee")]
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int PublisherID, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                myHandler = new BusinessLogicHandler();
+                publisher = new Publisher();
+                publisher.PublisherID = PublisherID;
+                myHandler.DeleteAuthor(PublisherID);
 
-                return RedirectToAction("Index");
+                TempData["Alert Message"] = "Device Successfully Deleted";
+                return RedirectToAction("Index", "Publisher");
             }
             catch
             {
