@@ -8,6 +8,8 @@ namespace urbanbooks.Controllers
 {
     public class ManufacturerController : Controller
     {
+        Manufacturer manufacturer;
+        BusinessLogicHandler myHandler;
         // GET: Manufacturer
         public ActionResult Index()
         {
@@ -17,7 +19,20 @@ namespace urbanbooks.Controllers
         }
 
 
-
+        public ActionResult ViewManufacturer()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult ViewManufacturer(Manufacturer manufacturer)
+        {
+            myHandler = new BusinessLogicHandler();
+            if (ModelState.IsValid)
+            {
+                myHandler.AddManufacturer(manufacturer);
+            }
+            return Json(new { success = true });
+        }
         // GET: Manufacturer/Create
         public ActionResult Create()
         {
@@ -40,17 +55,28 @@ namespace urbanbooks.Controllers
             }
         }
 
-        public ActionResult Edit(int id)
+        [Authorize(Roles = "admin")]
+        public ActionResult Edit(int ManufacturerID)
         {
-            return View();
+            myHandler = new BusinessLogicHandler();
+            manufacturer = new Manufacturer();
+            manufacturer.ManufacturerID = ManufacturerID;
+            manufacturer = myHandler.GetManufacturer(ManufacturerID);
+            return View(manufacturer);
         }
+        [Authorize(Roles = "admin")]
         [HttpPost]
-        public ActionResult Edit(Manufacturer manufacturer)
+        public ActionResult Edit(int ManufacturerID, FormCollection collection)
         {
             try
             {
-                BusinessLogicHandler myHandler = new BusinessLogicHandler();
-                myHandler.UpdateManufacturer(manufacturer);
+                myHandler = new BusinessLogicHandler();
+                manufacturer = new Manufacturer();
+                TryUpdateModel(manufacturer);
+                if (ModelState.IsValid)
+                {
+                    myHandler.UpdateManufacturer(manufacturer);
+                }
                 return RedirectToAction("Index");
             }
             catch
@@ -60,20 +86,29 @@ namespace urbanbooks.Controllers
         }
 
         // GET: Manufacturer/Delete/5
-        public ActionResult Delete(int id)
+        [Authorize(Roles = "admin")]
+        public ActionResult Delete(int ManufacturerID)
         {
-            return View();
+            myHandler = new BusinessLogicHandler();
+            manufacturer = new Manufacturer();
+            manufacturer.ManufacturerID = ManufacturerID;
+            manufacturer = myHandler.GetManufacturer(ManufacturerID);
+            return View(manufacturer);
         }
 
-        // POST: Manufacturer/Delete/5
+        [Authorize(Roles = "admin, employee")]
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int ManufacturerID, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                myHandler = new BusinessLogicHandler();
+                manufacturer = new Manufacturer();
+                manufacturer.ManufacturerID = ManufacturerID;
+                myHandler.DeleteManufacturer(ManufacturerID);
 
-                return RedirectToAction("Index");
+                TempData["Alert Message"] = "Device Successfully Deleted";
+                return RedirectToAction("Index", "Manufacturer");
             }
             catch
             {

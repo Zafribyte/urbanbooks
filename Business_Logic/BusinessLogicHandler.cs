@@ -431,6 +431,8 @@ namespace urbanbooks
 
         public List<Manufacturer> ManufacturerGlobalSearch(string query)
         { ManufacturerHandler myHandler = new ManufacturerHandler(); return myHandler.ManufacturerGlobalSearch(query); }
+        public bool DeleteManufacturer(int ManufacturerID)
+        { ManufacturerHandler myHandler = new ManufacturerHandler(); return myHandler.DeleteManufacturer(ManufacturerID); }
 
         #endregion
 

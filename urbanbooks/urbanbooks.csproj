@@ -228,6 +228,10 @@
     <Compile Include="Migrations\201410030920522_msd.Designer.cs">
       <DependentUpon>201410030920522_msd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410031139448_stuff.cs" />
+    <Compile Include="Migrations\201410031139448_stuff.Designer.cs">
+      <DependentUpon>201410031139448_stuff.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AdminIndexViewModel.cs" />
     <Compile Include="Models\InvoiceModel.cs" />
     <Compile Include="Models\OrderLineModel.cs" />
@@ -601,6 +605,7 @@
     <Content Include="Views\Author\Edit.cshtml" />
     <Content Include="Views\Publisher\ViewPublisher.cshtml" />
     <Content Include="Views\Publisher\Delete.cshtml" />
+    <Content Include="Views\Manufacturer\ViewManufacturer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
@@ -701,6 +706,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410030920522_msd.resx">
       <DependentUpon>201410030920522_msd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410031139448_stuff.resx">
+      <DependentUpon>201410031139448_stuff.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
