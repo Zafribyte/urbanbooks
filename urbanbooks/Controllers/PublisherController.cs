@@ -121,7 +121,7 @@ namespace urbanbooks.Controllers
                 myHandler = new BusinessLogicHandler();
                 publisher = new Publisher();
                 publisher.PublisherID = PublisherID;
-                myHandler.DeleteAuthor(PublisherID);
+                myHandler.DeletePublisher(PublisherID);
 
                 TempData["Alert Message"] = "Device Successfully Deleted";
                 return RedirectToAction("Index", "Publisher");

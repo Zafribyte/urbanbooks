@@ -362,6 +362,8 @@ namespace urbanbooks
         public bool AddPublisher(Publisher publisher)
         { PublisherHandler myHandler = new PublisherHandler(); return myHandler.InsertPublisher(publisher); }
 
+        public bool DeletePublisher(int PublisherID)
+        { PublisherHandler myHandler = new PublisherHandler(); return myHandler.DeletePublisher(PublisherID); }
         #endregion
 
         #region BOOKTYPE
