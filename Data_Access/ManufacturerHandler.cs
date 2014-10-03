@@ -79,7 +79,7 @@ namespace urbanbooks
         {
             SqlParameter[] Params = new SqlParameter[]
             {
-                new SqlParameter("@PublisherID", manufacturer.ManufacturerID ),
+                new SqlParameter("@ManufacturerID", manufacturer.ManufacturerID ),
                 new SqlParameter("@Name", manufacturer.Name)
             };
             return DataProvider.ExecuteNonQuery("sp_UpdateManufacturer", CommandType.StoredProcedure,

@@ -77,7 +77,7 @@ namespace urbanbooks.Controllers
                 {
                     myHandler.UpdateManufacturer(manufacturer);
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Manufacturer");
             }
             catch
             {

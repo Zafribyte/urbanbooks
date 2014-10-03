@@ -606,6 +606,9 @@
     <Content Include="Views\Publisher\ViewPublisher.cshtml" />
     <Content Include="Views\Publisher\Delete.cshtml" />
     <Content Include="Views\Manufacturer\ViewManufacturer.cshtml" />
+    <Content Include="Views\TechCategory\Edit.cshtml" />
+    <Content Include="Views\TechCategory\Delete.cshtml" />
+    <Content Include="Views\TechCategory\ViewTechCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />

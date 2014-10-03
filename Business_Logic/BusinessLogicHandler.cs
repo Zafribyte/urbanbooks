@@ -366,22 +366,6 @@ namespace urbanbooks
         { PublisherHandler myHandler = new PublisherHandler(); return myHandler.DeletePublisher(PublisherID); }
         #endregion
 
-        #region BOOKTYPE
-
-        public bool AddBookType(BookCategory bookType)
-        {
-            BookCategoryHandler myHander = new BookCategoryHandler();
-            return myHander.InsertBookCategory(bookType);
-        }
-        public BookCategory GetBookCategory(int CategoryID)
-        { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.GetBookCategory(CategoryID); }
-        public bool UpdateBookType(BookCategory bookType)
-        { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.UpdateBookCategory(bookType); }
-
-        public bool DeleteBookType(int BookCategoryID)
-        { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.DeleteBookCategory(BookCategoryID); }
-
-        #endregion
 
         #region SPECIAL
 
@@ -468,6 +452,24 @@ namespace urbanbooks
 
         public bool UpdateTechnologyType(TechCategory type)
         { TechCategoryHandler myHandler = new TechCategoryHandler(); return myHandler.UpdateTechCategory(type); }
+
+        public TechCategory GetTechCategory(int TechCategoryID)
+        { TechCategoryHandler myHandler = new TechCategoryHandler(); return myHandler.GetTechCategoryDetails(TechCategoryID); }
+        #endregion
+        #region BOOKTYPE
+
+        public bool AddBookType(BookCategory bookType)
+        {
+            BookCategoryHandler myHander = new BookCategoryHandler();
+            return myHander.InsertBookCategory(bookType);
+        }
+        public BookCategory GetBookCategory(int CategoryID)
+        { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.GetBookCategory(CategoryID); }
+        public bool UpdateBookType(BookCategory bookType)
+        { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.UpdateBookCategory(bookType); }
+
+        public bool DeleteBookType(int BookCategoryID)
+        { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.DeleteBookCategory(BookCategoryID); }
 
         #endregion
 
