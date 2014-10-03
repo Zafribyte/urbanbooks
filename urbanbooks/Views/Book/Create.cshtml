@@ -142,11 +142,13 @@
             $('.multiselect').multiselect({ enableFiltering: true });
         </script>
         <fieldset>
-            <legend class="control-label col-md-2">Upload an Image Here:</legend>
-            <div class="editor-field control-label col-md-2 ">
+            <label class="control-label col-md-2">Upload an Image Here:</label>
+            <div class="control-label col-md-2 ">
                 <input id="CoverImage" title="Upload Book Cover" type="file" name="file" accept="image/*" />
             </div>
         </fieldset>
+        <br/>
+        <br/>
         <script type="text/javascript">
             $(".new").change(function () {
                 var selectedValue = $(this).val();
