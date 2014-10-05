@@ -408,7 +408,14 @@
     <Content Include="Images\Documentation\BookMenu.JPG" />
     <Content Include="Images\Documentation\NewBookPage.JPG" />
     <Content Include="Images\dots.png" />
+    <Content Include="Images\FAQs\add2cartBook01 - Copy.PNG" />
+    <Content Include="Images\FAQs\add2cartBook02.PNG" />
+    <Content Include="Images\FAQs\add2cartTech01 - Copy.PNG" />
+    <Content Include="Images\FAQs\add2cartTech03.PNG" />
     <Content Include="Images\FAQs\Books01.png" />
+    <Content Include="Images\FAQs\booksHelp0.png" />
+    <Content Include="Images\FAQs\booksHelp01 - Copy.PNG" />
+    <Content Include="Images\FAQs\booksHelp01.PNG" />
     <Content Include="Images\FAQs\Cart01.png" />
     <Content Include="Images\FAQs\Devices01.PNG" />
     <Content Include="Images\FAQs\DevicesAll.png" />
@@ -427,6 +434,8 @@
     <Content Include="Images\FAQs\Register01.PNG" />
     <Content Include="Images\FAQs\Register02.PNG" />
     <Content Include="Images\FAQs\Register03.PNG" />
+    <Content Include="Images\FAQs\search01.PNG" />
+    <Content Include="Images\FAQs\search02.PNG" />
     <Content Include="Images\FAQs\Wishlist01.png" />
     <Content Include="Images\jambotron.jpg" />
     <Content Include="Scripts\bootstrap-datepicker.js" />

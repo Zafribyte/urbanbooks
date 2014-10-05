@@ -25,7 +25,10 @@ namespace urbanbooks.Controllers
             userMgr = new ApplicationUserManager(myStore);
             var thisUser = await userMgr.FindByNameAsync(User.Identity.Name);
             int Id = (int)thisUser.Carts.CartID;
-            Session["cartTotal"] = act.GetTotalAsync(Id);
+            try
+            { double nm = await GetCartTotal(Id); string[] xn = nm.ToString().Split('.'); Session["cartTotal"] = xn[0] + "," + xn[1]; }
+            catch { Session["cartTotal"] = act.GetTotalAsync(Id); }
+            
             Session["wishlistTotal"] = wishAct.GetWishlistTotal(thisUser.Wishlists.WishlistID);
             List<CartItem> myItems = new List<CartItem>();
             try
@@ -150,7 +153,14 @@ namespace urbanbooks.Controllers
                 catch { }
             }
             if (myActions.AddToCartAsync(cart.CartID, ProductID))
-            { Session["cartTotal"] = await GetCartTotal(cart.CartID); }
+            {
+                try
+                {
+                    double nm = await GetCartTotal(cart.CartID); string[] xn = nm.ToString().Split('.'); Session["cartTotal"] = xn[0] + "," + xn[1];
+                }
+                catch
+                { Session["cartTotal"] = GetCartTotal(cart.CartID); }
+            }
             else
             { }
             return Redirect(returnUrl);

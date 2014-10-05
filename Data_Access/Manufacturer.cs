@@ -13,6 +13,7 @@ namespace urbanbooks
         [Key]
         public int ManufacturerID { get; set; }
         [Required(ErrorMessage = "Required")]
+        [Display(Name="Manufacturer")]
         public string Name { get; set; }
         //public List<Technology> TechnologyList { get; set; }
     }

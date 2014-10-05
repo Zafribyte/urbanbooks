@@ -42,7 +42,13 @@ namespace urbanbooks.Controllers
                 ApplicationUserManager mgr = new ApplicationUserManager(myStore);
                 var thisUser = mgr.FindByNameAsync(User.Identity.Name);
                 int cartId = Convert.ToInt32(thisUser.Result.Carts.CartID);
-                Session["cartTotal"] = (double) GetCartTotal(cartId);
+                //
+                try
+                {
+                    double nm = GetCartTotal(cartId); string[] xn = nm.ToString().Split('.'); Session["cartTotal"] = xn[0] + "," + xn[1];
+                }
+                catch
+                { Session["cartTotal"] = (double)GetCartTotal(cartId); }
                 Session["wishlistTotal"] = wish.GetWishlistTotal(thisUser.Result.Wishlists.WishlistID);
                 #endregion
             }

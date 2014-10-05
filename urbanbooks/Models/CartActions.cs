@@ -65,7 +65,7 @@ namespace urbanbooks.Models
                         final += (double)total.Sum();
                     }
                 }
-                return final;
+                return Math.Round(final, 2);
             }
             else
                 return 0.00;
