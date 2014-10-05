@@ -172,6 +172,9 @@ namespace urbanbooks.Models
         public string Address
         { get; set; }
         [Required]
+        [Display(Name="Supplier Type ")]
+        public bool SupplierType { get; set; }
+        [Required]
         [Display(Name = "Contact Person Name")]
         public string ContactPerson
         { get; set; }

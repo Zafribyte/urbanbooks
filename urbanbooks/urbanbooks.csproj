@@ -232,6 +232,10 @@
     <Compile Include="Migrations\201410031139448_stuff.Designer.cs">
       <DependentUpon>201410031139448_stuff.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410052005323_st.cs" />
+    <Compile Include="Migrations\201410052005323_st.Designer.cs">
+      <DependentUpon>201410052005323_st.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AdminIndexViewModel.cs" />
     <Compile Include="Models\InvoiceModel.cs" />
     <Compile Include="Models\OrderLineModel.cs" />
@@ -349,6 +353,7 @@
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Models\SupplierContext.cs" />
+    <Compile Include="Models\SupplierViewModel.cs" />
     <Compile Include="Models\UnifiedViewModel.cs" />
     <Compile Include="Models\WishlistActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -721,6 +726,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410031139448_stuff.resx">
       <DependentUpon>201410031139448_stuff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410052005323_st.resx">
+      <DependentUpon>201410052005323_st.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
