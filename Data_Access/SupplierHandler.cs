@@ -11,11 +11,11 @@ namespace urbanbooks
     public class SupplierHandler
     {
         #region Admin
-        public List<Supplier> GetSupplierList()
+        public List<Supplier> GetBookSupplierList()
         {
             List<Supplier> SupplierList = null;
 
-            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewAllSupplier",
+            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewAllBookSuppliers",
                 CommandType.StoredProcedure))
             {
                 if (table.Rows.Count > 0)
@@ -36,7 +36,31 @@ namespace urbanbooks
             }
             return SupplierList;
         }
+        public List<Supplier> GetTechSupplierList()
+        {
+            List<Supplier> SupplierList = null;
 
+            using (DataTable table = DataProvider.ExecuteSelectCommand("sp_ViewAllTechSuppliers",
+                CommandType.StoredProcedure))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    SupplierList = new List<Supplier>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Supplier supplier = new Supplier();
+                        supplier.SupplierID = Convert.ToInt32(row["SupplierID"]);
+                        supplier.Name = row["Name"].ToString();
+                        supplier.LastName = row["LastName"].ToString();
+                        supplier.Fax = row["Fax"].ToString();
+                        supplier.ContactPerson = row["ContactPerson"].ToString();
+                        supplier.ContactPersonNumber = row["ContactPersonNumber"].ToString();
+                        SupplierList.Add(supplier);
+                    }
+                }
+            }
+            return SupplierList;
+        }
         public Supplier GetSupplierDetails(int SupplierID)
         {
             Supplier supplier = null;
