@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using PagedList;
+using PagedList.Mvc;
 using System.Web.Mvc;
 using urbanbooks.Models;
 using System.Drawing.Imaging;
@@ -88,13 +90,13 @@ namespace urbanbooks.Controllers
             
             return View(myTechList);
         }
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             myHandler = new BusinessLogicHandler();
             List<Technology> myGadgetList = myHandler.GetTechnology();
             IEnumerable<Manufacturer> manufacturer = myHandler.GetManufacturers();
             ViewBag.Manufact = manufacturer;
-            return View(myGadgetList);
+            return View(myGadgetList.ToList().ToPagedList(page ?? 1, 18));
         }
 
         public ActionResult Details(int ProductID)

@@ -1,6 +1,8 @@
-﻿@model IEnumerable<urbanbooks.Book>
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<urbanbooks.Book>
 @using urbanbooks.Models
-@using urbanbooks.Helpers;
+@using urbanbooks.Helpers
 
 @{
     ViewBag.Title = "Books";
@@ -40,8 +42,10 @@
             </div>
         }
     }
-
-
+    <div class="row"></div>
+<div class="row" style="text-align:center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/modalform")

@@ -118,7 +118,7 @@ namespace urbanbooks.Models
         [Required]
         public string ContactPersonNumber
         { get; set; }
-        public bool SupplierType { get; set; }
+        public bool IsBookSupplier { get; set; }
         [ScaffoldColumn(false)]
         public bool Status
         { get; set; }

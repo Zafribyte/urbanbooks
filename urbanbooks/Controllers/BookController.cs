@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using urbanbooks.Models;
+using PagedList;
+using PagedList.Mvc;
 using System.Drawing.Imaging;
 
 namespace urbanbooks.Controllers
@@ -28,7 +30,7 @@ namespace urbanbooks.Controllers
 
             return View(myBookDelete);
         }
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             myHandler = new BusinessLogicHandler();
             List<Book> myBookList = new List<Book>();
@@ -36,7 +38,7 @@ namespace urbanbooks.Controllers
             myBookList.OrderBy(m => m.DateAdded);
             IEnumerable<BookCategory> myType = myHandler.GetBookCategoryList();
             ViewBag.BookTypeBag = myType;
-            return View(myBookList);
+            return View(myBookList.ToList().ToPagedList(page ?? 1, 18));
         }
         [Authorize(Roles="admin, employee")]
         public ActionResult AdminIndex()
