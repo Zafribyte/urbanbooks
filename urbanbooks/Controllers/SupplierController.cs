@@ -181,7 +181,7 @@ namespace urbanbooks.Controllers
                     #region Register Supplier
 
                     var user = new ApplicationUser() { UserName = model.RegisterNewSupplier.Email, Email = model.RegisterNewSupplier.Email, Address = model.RegisterNewSupplier.Address, PhoneNumber = model.RegisterNewSupplier.ContactPersonNumber };
-                    Models.Supplier supplier = new Models.Supplier { Name = model.RegisterNewSupplier.Name, ContactPerson = model.RegisterNewSupplier.ContactPerson, Fax = model.RegisterNewSupplier.Fax, ContactPersonNumber = model.RegisterNewSupplier.ContactPersonNumber, LastName = model.RegisterNewSupplier.LastName, User_Id = user.Id, SupplierType = model.RegisterNewSupplier.SupplierType };
+                    Models.Supplier supplier = new Models.Supplier { Name = model.RegisterNewSupplier.Name, ContactPerson = model.RegisterNewSupplier.ContactPerson, Fax = model.RegisterNewSupplier.Fax, ContactPersonNumber = model.RegisterNewSupplier.ContactPersonNumber, LastName = model.RegisterNewSupplier.LastName, User_Id = user.Id, IsBookSupplier = model.RegisterNewSupplier.SupplierType };
                     user.Carts = new Cart { DateLastModified = DateTime.Now };
                     user.Wishlists = new Wishlist { Status = false };
                     IdentityResult result = await userMgr.CreateAsync(user, model.RegisterNewSupplier.Password);
