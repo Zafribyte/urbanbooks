@@ -232,6 +232,10 @@
     <Compile Include="Migrations\201410031139448_stuff.Designer.cs">
       <DependentUpon>201410031139448_stuff.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410052005323_st.cs" />
+    <Compile Include="Migrations\201410052005323_st.Designer.cs">
+      <DependentUpon>201410052005323_st.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AdminIndexViewModel.cs" />
     <Compile Include="Models\InvoiceModel.cs" />
     <Compile Include="Models\OrderLineModel.cs" />
@@ -349,6 +353,7 @@
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Models\SupplierContext.cs" />
+    <Compile Include="Models\SupplierViewModel.cs" />
     <Compile Include="Models\UnifiedViewModel.cs" />
     <Compile Include="Models\WishlistActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -408,7 +413,14 @@
     <Content Include="Images\Documentation\BookMenu.JPG" />
     <Content Include="Images\Documentation\NewBookPage.JPG" />
     <Content Include="Images\dots.png" />
+    <Content Include="Images\FAQs\add2cartBook01 - Copy.PNG" />
+    <Content Include="Images\FAQs\add2cartBook02.PNG" />
+    <Content Include="Images\FAQs\add2cartTech01 - Copy.PNG" />
+    <Content Include="Images\FAQs\add2cartTech03.PNG" />
     <Content Include="Images\FAQs\Books01.png" />
+    <Content Include="Images\FAQs\booksHelp0.png" />
+    <Content Include="Images\FAQs\booksHelp01 - Copy.PNG" />
+    <Content Include="Images\FAQs\booksHelp01.PNG" />
     <Content Include="Images\FAQs\Cart01.png" />
     <Content Include="Images\FAQs\Devices01.PNG" />
     <Content Include="Images\FAQs\DevicesAll.png" />
@@ -427,6 +439,8 @@
     <Content Include="Images\FAQs\Register01.PNG" />
     <Content Include="Images\FAQs\Register02.PNG" />
     <Content Include="Images\FAQs\Register03.PNG" />
+    <Content Include="Images\FAQs\search01.PNG" />
+    <Content Include="Images\FAQs\search02.PNG" />
     <Content Include="Images\FAQs\Wishlist01.png" />
     <Content Include="Images\jambotron.jpg" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
@@ -712,6 +726,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410031139448_stuff.resx">
       <DependentUpon>201410031139448_stuff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410052005323_st.resx">
+      <DependentUpon>201410052005323_st.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -114,11 +114,44 @@ namespace urbanbooks.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            #region Prep Utilities
+            myHandler = new BusinessLogicHandler();
+            SupplierViewModel model = new SupplierViewModel();
+            #endregion
+
+            #region Get The data
+            model.RegisteredSuppliers = myHandler.GetSuppliers();
+            #endregion
+
+            #region Set Up dropdown
+
+            model.SupplierType = new List<SelectListItem>();
+            model.SupplierType.Add(
+                new SelectListItem { Text = "Please Select Supplier Type", Value = "", Selected = true}
+            );
+            model.SupplierType.Add(
+                new SelectListItem { Text = "Book Supplier", Value = "0" }
+                );
+            model.SupplierType.Add(
+                new SelectListItem { Text = "Technology Supplier", Value = "1" }
+                );
+            ViewData["SupplierType"] = model.SupplierType;
+            #endregion
+
+            return View(model);
         }
         [HttpPost]
-        public async Task<ActionResult> Create(RegisterSupplier model)
+        public async Task<ActionResult> Create(SupplierViewModel model, FormCollection collect)
         {
+
+            #region Cathing model errors
+            var error = ModelState.Values.SelectMany(e => e.Errors);
+            var errors = ModelState
+    .Where(x => x.Value.Errors.Count > 0)
+    .Select(x => new { x.Key, x.Value.Errors })
+    .ToArray();
+            #endregion
+
             #region Prep Utilities
             SupplierContext dataSocket = new SupplierContext();
             ApplicationDbContext context = new ApplicationDbContext();
@@ -128,17 +161,30 @@ namespace urbanbooks.Controllers
             var roleManager = new RoleManager<IdentityRole>(roleStore);
             #endregion
 
+            #region Bend the rules
+            try
+            {
+                if(collect.GetValue("SupplierType").AttemptedValue == "0")
+                { /*Book Supplier*/ model.RegisterNewSupplier.SupplierType = true; }
+                else if (collect.GetValue("SupplierType").AttemptedValue == "1")
+                { /*Technology Supplier*/ model.RegisterNewSupplier.SupplierType = false; }
+                if (ModelState.ContainsKey("SupplierType"))
+                    ModelState["SupplierType"].Errors.Clear();
+            }
+            catch
+            { ModelState.AddModelError("SupplierType", "Please select a valid supplier type from dropdown !"); }
+            #endregion
             try
             {
                 if (ModelState.IsValid)
                 {
                     #region Register Supplier
 
-                    var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, Address = model.Address, PhoneNumber = model.ContactPersonNumber };
-                    Models.Supplier supplier = new Models.Supplier { Name = model.Name, ContactPerson = model.ContactPerson, Fax = model.Fax, ContactPersonNumber = model.ContactPersonNumber, LastName = model.LastName, User_Id = user.Id };
+                    var user = new ApplicationUser() { UserName = model.RegisterNewSupplier.Email, Email = model.RegisterNewSupplier.Email, Address = model.RegisterNewSupplier.Address, PhoneNumber = model.RegisterNewSupplier.ContactPersonNumber };
+                    Models.Supplier supplier = new Models.Supplier { Name = model.RegisterNewSupplier.Name, ContactPerson = model.RegisterNewSupplier.ContactPerson, Fax = model.RegisterNewSupplier.Fax, ContactPersonNumber = model.RegisterNewSupplier.ContactPersonNumber, LastName = model.RegisterNewSupplier.LastName, User_Id = user.Id, SupplierType = model.RegisterNewSupplier.SupplierType };
                     user.Carts = new Cart { DateLastModified = DateTime.Now };
                     user.Wishlists = new Wishlist { Status = false };
-                    IdentityResult result = await userMgr.CreateAsync(user, model.Password);
+                    IdentityResult result = await userMgr.CreateAsync(user, model.RegisterNewSupplier.Password);
                     roleManager.Create(new IdentityRole { Name = "supplier" });
                     userMgr.AddToRole(user.Id, "supplier");
                     //dataSocket.Suppliers.Add(supplier);

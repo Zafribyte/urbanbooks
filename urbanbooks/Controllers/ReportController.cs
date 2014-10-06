@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using urbanbooks.Models;
 using System.Collections;
-using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Globalization;
 
