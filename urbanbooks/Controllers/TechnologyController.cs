@@ -144,9 +144,9 @@ namespace urbanbooks.Controllers
         {
             AddNewTechViewModel techM = new AddNewTechViewModel();
             /*TEMP LIST*/
-            List<Supplier> nameList = new List<Supplier>();
+            //List<Supplier> nameList = new List<Supplier>();
             SupplierHandler supHandler = new SupplierHandler();
-            //IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetSupplierList();
+            IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetTechSupplierList();
             var disp = from nameAndId in nameList
                        select new { Value = nameAndId.SupplierID, Text = nameAndId.Name };
 
@@ -165,7 +165,7 @@ namespace urbanbooks.Controllers
             ViewBag.ManufacturerList = new SelectList(dispM.ToList());
 
             List<SelectListItem> supplier = new List<SelectListItem>();
-            supplier.Add(new SelectListItem { Text = "Select Supplier", Value = "", Selected = true });
+            //supplier.Add(new SelectListItem { Text = "Select Supplier", Value = "", Selected = true });
             foreach (var item in nameList)
             {
                 supplier.Add(new SelectListItem { Text = item.Name, Value = item.SupplierID.ToString() });
@@ -175,17 +175,17 @@ namespace urbanbooks.Controllers
             ViewData["suppliers"] = supplier;
 
             List<SelectListItem> techCategory = new List<SelectListItem>();
-            techCategory.Add(new SelectListItem { Text = "Select Category", Value = "", Selected = true });
+            //techCategory.Add(new SelectListItem { Text = "Select Category", Value = "", Selected = true });
             foreach (var item in typeList)
             {
-                techCategory.Add(new SelectListItem { Text = item.CategoryName, Value = item.TechCategoryID.ToString() });
+                techCategory.Add(new SelectListItem { Text = item.CategoryName, Value = item.TechCategoryID.ToString(), Selected = true });
             }
             techM.techCategories = new List<SelectListItem>();
             techM.techCategories = techCategory;
             ViewData["techCategories"] = techCategory;
 
             List<SelectListItem> manufacturer = new List<SelectListItem>();
-            manufacturer.Add(new SelectListItem { Text = "Select Manufacturer", Value = "", Selected = true });
+            //manufacturer.Add(new SelectListItem { Text = "Select Manufacturer", Value = "", Selected = true });
             foreach (var item in manList)
             {
                 manufacturer.Add(new SelectListItem { Text = item.Name, Value = item.ManufacturerID.ToString() });

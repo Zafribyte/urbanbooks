@@ -17,7 +17,24 @@ namespace urbanbooks.Controllers
         BusinessLogicHandler myHandler;
         Book book;
 
+        public ActionResult CheckDuplicates(string isbn)
+        {
+            List<Book> myList = new List<Book>();
+            myHandler = new BusinessLogicHandler();
+            myList = myHandler.CheckDuplicatedBook(isbn);
+            var isDuplicate = false;
 
+            foreach (var item in myList)
+            {
+                string bookISBN = item.ISBN;
+                if (isbn == bookISBN)
+                {
+                    isDuplicate = true;
+                }
+            }
+            var jsonData = new { isDuplicate };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult ManageBooks()
         { return View(); }
         
@@ -113,8 +130,8 @@ namespace urbanbooks.Controllers
             AddNewBookViewModel bookM = new AddNewBookViewModel();
             SupplierHandler supHandler = new SupplierHandler();
             /*TEMP LIST*/
-            List<Supplier> nameList = new List<Supplier>();
-           // IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetSupplierList();
+            //List<Supplier> nameList = new List<Supplier>();
+            IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetBookSupplierList();
             var disp = from nameAndId in nameList
                        select new { Value = nameAndId.SupplierID, Text = nameAndId.Name };
 
@@ -146,7 +163,7 @@ namespace urbanbooks.Controllers
             //bookCategory.Add(new SelectListItem { Text = "Select Category", Value = "", Selected = true });
             foreach (var item in typeList)
             {
-                bookCategory.Add(new SelectListItem { Text = item.CategoryName, Value = item.BookCategoryID.ToString() });
+                bookCategory.Add(new SelectListItem { Text = item.CategoryName, Value = item.BookCategoryID.ToString(), Selected = true });
             }
             bookM.bookCategories = new List<SelectListItem>();
             bookM.bookCategories = bookCategory;
@@ -156,7 +173,7 @@ namespace urbanbooks.Controllers
             //supplier.Add(new SelectListItem { Text = "Select Supplier", Value = "", Selected = true });
             foreach (var item in nameList)
             {
-                supplier.Add(new SelectListItem { Text = item.Name, Value = item.SupplierID.ToString() });
+                supplier.Add(new SelectListItem { Text = item.Name, Value = item.SupplierID.ToString(), Selected = true });
             }
             bookM.suppliers = new List<SelectListItem>();
             bookM.suppliers = supplier;
@@ -166,7 +183,7 @@ namespace urbanbooks.Controllers
             //author.Add(new SelectListItem { Text = "Select Author", Value = "", Selected = true });
             foreach (var item in authList)
             {
-                author.Add(new SelectListItem { Text = item.Name, Value = item.AuthorID.ToString() });
+                author.Add(new SelectListItem { Text = item.Name, Value = item.AuthorID.ToString(), Selected = true });
             }
             bookM.authors = new List<SelectListItem>();
             bookM.authors = author;
@@ -176,7 +193,7 @@ namespace urbanbooks.Controllers
             //publisher.Add(new SelectListItem { Text = "Select Publisher", Value = "", Selected = true });
             foreach (var item in pubList)
             {
-                publisher.Add(new SelectListItem { Text = item.Name, Value = item.PublisherID.ToString() });
+                publisher.Add(new SelectListItem { Text = item.Name, Value = item.PublisherID.ToString(), Selected = true });
             }
             bookM.publishers = new List<SelectListItem>();
             bookM.publishers = publisher;

@@ -492,7 +492,10 @@ namespace urbanbooks
         #endregion
 
         #region SYSTEM ACTIONS
-
+        public List<Publisher> CheckDuplicatedPublisher(string name)
+        { PublisherHandler myHandler = new PublisherHandler(); return myHandler.CheckDuplicatePublisher(name); }
+        public List<Book> CheckDuplicatedBook(string isbn)
+        { BookHandler myHandler = new BookHandler(); return myHandler.CheckDuplicateBook(isbn); }
         public List<InvoiceItem> SalesGroupedByInvoiceID(DateTime dateFrom, DateTime dateTo)
         { InvoiceItemHandler myHandler = new InvoiceItemHandler(); return myHandler.InvoiceItemsGroupedByInvoiceID(dateFrom, dateTo); }
         public List<Invoice> GetInvoiceInDateRange(string startDate, string endDate)

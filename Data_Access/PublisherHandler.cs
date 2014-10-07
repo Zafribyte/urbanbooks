@@ -10,6 +10,7 @@ namespace urbanbooks
 {
     public class PublisherHandler
     {
+        
         public List<Publisher> GetPublisherList()
         {
             List<Publisher> PublisherList = null;
@@ -31,7 +32,26 @@ namespace urbanbooks
             }
             return PublisherList;
         }
-
+        public List<Publisher> CheckDuplicatePublisher(string name)
+        {
+            List<Publisher> publisherList = null;
+            SqlParameter[] Params = { new SqlParameter("@Name", name) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_CheckDuplicatePublisher", CommandType.StoredProcedure, Params))
+            {
+                if(table.Rows.Count > 0)
+                {
+                    publisherList = new List<Publisher>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Publisher publisher = new Publisher();
+                        publisher.PublisherID = Convert.ToInt32(row["PublisherID"]);
+                        publisher.Name = row["Name"].ToString();
+                        publisherList.Add(publisher);
+                    }
+                }
+            }
+            return publisherList;
+        }
         public List<Publisher> PublisherGlobalSearch(string query)
         {
             List<Publisher> publisherList = null;
@@ -105,5 +125,6 @@ namespace urbanbooks
             return DataProvider.ExecuteNonQuery("sp_UpdatePublisher", CommandType.StoredProcedure,
                 Params);
         }
+
     }
 }
