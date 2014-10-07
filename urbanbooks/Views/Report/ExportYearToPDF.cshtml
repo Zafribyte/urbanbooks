@@ -43,9 +43,6 @@
 </script>
 
 
-
-
-
 <div class="row">
 
     <div class="container">
@@ -68,21 +65,25 @@
 <br />
 <hr />
 <br />
-
+<div class="row" style="text-align:center">
+    <h3>Yearly report</h3>
+    <h4>From year: @Html.DisplayFor(model => model.Month.From) &nbsp;&nbsp;&nbsp;&nbsp;  to year: @Html.DisplayFor(model => model.Month.To)</h4>
+</div>
+<br /><br /><br />
 <div class="row">
     <div class="container">
         <table class="table">
             <tr>
-                <th>Year</th>
-                <th>Total Sales</th>
+                <th style="text-align:left">Year</th>
+                <th style="text-align:right">Total Sales</th>
             </tr>
             @if (Model.MonthlySales != null)
             {
                 foreach (var item in Model.MonthlySales)
                 {
                     <tr>
-                        <td>@Html.DisplayFor(model => item.Month)</td>
-                        <td>@Html.DisplayFor(model => item.TotalSales)</td>
+                        <td style="text-align: left">@Html.DisplayFor(model => item.Month)</td>
+                        <td style="text-align:right">@Html.DisplayFor(model => item.TotalSales)</td>
                     </tr>
                 }
             }
@@ -91,7 +92,7 @@
                 <tfoot>
                     <tr>
                         <td><strong>Invoice Total</strong></td>
-                        <td><strong>@Html.DisplayFor(model => model.Total.Total)</strong></td>
+                        <td style="text-align:right"><strong>@Html.DisplayFor(model => model.Total.Total)</strong></td>
                     </tr>
                 </tfoot>
             }
