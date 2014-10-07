@@ -17,11 +17,13 @@ namespace urbanbooks.Controllers
         private ApplicationUserManager _userManager;
         BusinessLogicHandler myHandler;
         Supplier logistics;
-        public ActionResult Index()
+        public ActionResult BookIndex()
         {
             myHandler = new BusinessLogicHandler();
-            //List<Supplier> newList = myHandler.GetSuppliers();
-            return View();
+            List<Supplier> mySuppBookList = new List<Supplier>();
+            mySuppBookList = myHandler.GetBookSuppliers();
+
+            return View(mySuppBookList);
         }
 
         public ActionResult Details(int id)
