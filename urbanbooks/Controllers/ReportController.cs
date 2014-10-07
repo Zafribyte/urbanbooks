@@ -185,6 +185,15 @@ namespace urbanbooks.Controllers
             return new ViewAsPdf(model);
         }
 
+        public ActionResult ExportYearToPDF()
+        {
+            #region Prep Utilities
+            RangeViewModel model = new RangeViewModel();
+            model = (RangeViewModel)Session["yearly"];
+            #endregion
+            return new ViewAsPdf(model);
+        }
+
         public ActionResult Monthly()
         {
             RangeViewModel model = new RangeViewModel();
