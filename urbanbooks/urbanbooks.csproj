@@ -651,6 +651,7 @@
     <Content Include="Views\Report\ExportYearToPDF.cshtml" />
     <Content Include="Views\Report\ExportMonthToPDF.cshtml" />
     <Content Include="Views\Supplier\Technology.cshtml" />
+    <Content Include="Views\Supplier\BookIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
