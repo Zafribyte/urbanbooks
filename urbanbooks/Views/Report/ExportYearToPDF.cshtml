@@ -1,0 +1,103 @@
+﻿@using urbanbooks.Models
+@model RangeViewModel
+@{
+    ViewBag.Title = "ExportYearToPDF";
+    Layout = "";
+}
+
+
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var dataSet = new Array();
+        dataSet = ['Book Category', 'Total Sales'];
+        var enumArray = [['Book Category', 'Total Sales']];
+        @foreach (var item in Model.MonthlySales)
+        {
+            <text>
+
+             enumArray.push(['@item.Month' , @item.TotalSales]);
+            </text>
+        }
+
+        var data = google.visualization.arrayToDataTable(enumArray);
+
+        var options = {
+            title: 'Sales',
+            legend: { position: 'none' },
+            'width': 900,
+            'height': 900,
+            pieHole: 0.4,
+            'legend': 'left',
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+
+        chart.draw(data, options);
+    }
+</script>
+
+
+
+
+
+<div class="row">
+
+    <div class="container">
+        <div class="col-md-3">
+            <label>@Html.DisplayFor(m => m.company.Name)</label><br />
+            <label>@Html.DisplayFor(m => m.company.Address)</label><br />
+            <label>@Html.DisplayFor(m => m.company.Email)</label><br />
+            <label>Fax&nbsp;:&nbsp;@Html.DisplayFor(m => m.company.Fax)</label><br />
+            <label>Tel&nbsp;:&nbsp;@Html.DisplayFor(m => m.company.Telephone)</label>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+
+
+</div>
+<br />
+<hr />
+<br />
+
+<div class="row">
+    <div class="container">
+        <table class="table">
+            <tr>
+                <th>Year</th>
+                <th>Total Sales</th>
+            </tr>
+            @if (Model.MonthlySales != null)
+            {
+                foreach (var item in Model.MonthlySales)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(model => item.Month)</td>
+                        <td>@Html.DisplayFor(model => item.TotalSales)</td>
+                    </tr>
+                }
+            }
+            @if (Model.Total != null)
+            {
+                <tfoot>
+                    <tr>
+                        <td><strong>Invoice Total</strong></td>
+                        <td><strong>@Html.DisplayFor(model => model.Total.Total)</strong></td>
+                    </tr>
+                </tfoot>
+            }
+        </table>
+
+    </div>
+</div>
+
+<div id="chart"></div>
