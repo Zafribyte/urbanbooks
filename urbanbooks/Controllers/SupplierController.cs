@@ -274,9 +274,13 @@ namespace urbanbooks.Controllers
             return View(model);
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int SupplierID)
         {
-            return View();
+            myHandler = new BusinessLogicHandler();
+            logistics = new Supplier();
+            logistics.SupplierID = SupplierID;
+            logistics = myHandler.GetSupplier(SupplierID);
+            return View(logistics);
         }
 
         [HttpPost]
