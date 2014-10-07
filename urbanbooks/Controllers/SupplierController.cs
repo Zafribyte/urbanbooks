@@ -19,13 +19,17 @@ namespace urbanbooks.Controllers
         private ApplicationUserManager _userManager;
         BusinessLogicHandler myHandler;
         Supplier logistics;
-        public ActionResult BookIndex()
+        public ActionResult BookIndex(int? page)
         {
+            #region Prep Utilities
             myHandler = new BusinessLogicHandler();
-            List<Supplier> mySuppBookList = new List<Supplier>();
-            mySuppBookList = myHandler.GetBookSuppliers();
+            #endregion
 
-            return View(mySuppBookList);
+            #region Get data
+            IEnumerable<Supplier> suppliers = myHandler.GetBookSuppliers();
+            #endregion
+
+            return View(suppliers.ToList().ToPagedList(page ?? 1, 10));
         }
 
         public ActionResult Details(int id)

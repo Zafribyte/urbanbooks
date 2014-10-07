@@ -17,5 +17,7 @@ namespace urbanbooks.Models
         public List<SelectListItem> SupplierType { get; set; }
         [NotMapped]
         public IEnumerable<urbanbooks.Supplier> RegisteredSuppliers { get; set; }
+        public Supplier supplier { get; set; }
+
     }
 }
