@@ -118,9 +118,10 @@ namespace urbanbooks
         { BookHandler myHandler = new BookHandler(); return myHandler.GloabalSearch(query); }
         public List<Manufacturer> GetManufacturers()
         { ManufacturerHandler myHandler = new ManufacturerHandler(); return myHandler.GetManufacturerList(); }
-        public List<Supplier> GetSuppliers()
-        { SupplierHandler myHandler = new SupplierHandler(); return myHandler.GetSupplierList(); }    //ADMIN & SYSTEM
-
+        public List<Supplier> GetBookSuppliers()
+        { SupplierHandler myHandler = new SupplierHandler(); return myHandler.GetBookSupplierList(); }    //ADMIN & SYSTEM
+        public List<Supplier> GetTechSuppliers()
+        { SupplierHandler myHandler = new SupplierHandler(); return myHandler.GetTechSupplierList(); }
         public List<Author> GetAuthors()
         { AuthorHandler myHandler = new AuthorHandler(); return myHandler.GetAuthorList(); } //ADMIN &SYSTEM
         public Company GetCompanyDetail()
