@@ -17,7 +17,24 @@ namespace urbanbooks.Controllers
             IEnumerable<Publisher> Publishers = myHandler.GetPublishers();
             return View(Publishers);
         }
+        public ActionResult CheckDuplicates(string name)
+        {
+            List<Publisher> myList = new List<Publisher>();
+            myHandler = new BusinessLogicHandler();
+            myList = myHandler.CheckDuplicatedPublisher(name);
+            var isDuplicate = false;
 
+            foreach (var item in myList)
+            {
+                string pubName = item.Name;
+                if (name.ToUpper() == pubName.ToUpper())
+                {
+                    isDuplicate = true;
+                }
+            }
+            var jsonData = new { isDuplicate };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Details(int id)
         {
             BusinessLogicHandler myHandler = new BusinessLogicHandler();
@@ -39,7 +56,7 @@ namespace urbanbooks.Controllers
             }
             return Json(new { success = true });
         }
-        [Authorize(Roles="admin")]
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             return View();

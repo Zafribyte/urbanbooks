@@ -10,6 +10,25 @@ namespace urbanbooks
 {
     public class BookHandler
     {
+        public List<Book> CheckDuplicateBook(string isbn)
+        {
+            List<Book> bookList = null;
+            SqlParameter[] Params = { new SqlParameter("@ISBN", isbn) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_CheckDuplicateBook", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    bookList = new List<Book>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Book book = new Book();
+                        book.ISBN = row["ISBN"].ToString();
+                        bookList.Add(book);
+                    }
+                }
+            }
+            return bookList;
+        }
         public bool CheckProductStatus(int ProductID)
         {
             bool isBook = false;
