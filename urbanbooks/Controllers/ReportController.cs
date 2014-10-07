@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using urbanbooks.Models;
 using System.Collections;
+using Rotativa;
 using System.Web.Mvc;
 using System.Globalization;
 
@@ -152,6 +153,7 @@ namespace urbanbooks.Controllers
             }
             catch
             { model.Total = new TotalClass(); }
+            
 
             return View(model);
         }

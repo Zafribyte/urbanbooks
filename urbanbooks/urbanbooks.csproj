@@ -53,6 +53,9 @@
     <Reference Include="Portable.Licensing">
       <HintPath>..\packages\Portable.Licensing.1.1.0\lib\portable-net40+sl4+wp7+win8\Portable.Licensing.dll</HintPath>
     </Reference>
+    <Reference Include="Rotativa">
+      <HintPath>..\packages\Rotativa.1.6.1\lib\net40\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -241,6 +244,10 @@
     <Compile Include="Migrations\201410052005323_st.cs" />
     <Compile Include="Migrations\201410052005323_st.Designer.cs">
       <DependentUpon>201410052005323_st.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410061327004_stdm.cs" />
+    <Compile Include="Migrations\201410061327004_stdm.Designer.cs">
+      <DependentUpon>201410061327004_stdm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminIndexViewModel.cs" />
     <Compile Include="Models\InvoiceModel.cs" />
@@ -450,6 +457,13 @@
     <Content Include="Images\FAQs\search02.PNG" />
     <Content Include="Images\FAQs\Wishlist01.png" />
     <Content Include="Images\jambotron.jpg" />
+    <Content Include="NuGet.exe" />
+    <Content Include="Rotativa\libeay32.dll" />
+    <Content Include="Rotativa\libgcc_s_dw2-1.dll" />
+    <Content Include="Rotativa\mingwm10.dll" />
+    <Content Include="Rotativa\README.txt" />
+    <Content Include="Rotativa\ssleay32.dll" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="fonts\fontello\font\fontello.eot" />
     <Content Include="fonts\fontello\font\fontello.ttf" />
@@ -470,6 +484,7 @@
     <Content Include="Content\Zosial\font\fontello.eot" />
     <Content Include="Content\Zosial\font\fontello.ttf" />
     <Content Include="Content\Zosial\font\fontello.woff" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Properties\PublishProfiles\urbanSyntax.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
@@ -736,6 +751,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410052005323_st.resx">
       <DependentUpon>201410052005323_st.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410061327004_stdm.resx">
+      <DependentUpon>201410061327004_stdm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
