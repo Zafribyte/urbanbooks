@@ -1,0 +1,79 @@
+﻿@using urbanbooks.Models
+@model RangeViewModel
+@{
+    ViewBag.Title = "ExportToPDF";
+    Layout = "";
+}
+
+
+
+
+
+
+<div class="row">
+
+    <div class="container">
+        <div class="col-md-3">
+            <label>@Html.DisplayFor(m => m.company.Name)</label><br />
+            <label>@Html.DisplayFor(m => m.company.Address)</label><br />
+            <label>@Html.DisplayFor(m => m.company.Email)</label><br />
+            <label>Fax&nbsp;:&nbsp;@Html.DisplayFor(m => m.company.Fax)</label><br />
+            <label>Tel&nbsp;:&nbsp;@Html.DisplayFor(m => m.company.Telephone)</label>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+
+
+</div>
+<br />
+<hr />
+<br />
+<div class="row">
+    <br />
+    <h3>Sales report of &nbsp; @Html.DisplayFor(model => model.radioButtons) &nbsp; products from <strong> @Html.DisplayFor(model => model.myRange.From) </strong> to <strong>@Html.DisplayFor(model => model.myRange.To)</strong> </h3>
+    <br /><br />
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <table class="table">
+            <tr>
+                <th>Invoice Number</th>
+                <th style="text-align:center">Date Issued</th>
+                <th style="text-align:center">Total</th>
+            </tr>
+            @if (Model.Detailed != null)
+            {
+                foreach (var item in Model.Detailed)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(model => item.InvoiceID)</td>
+                        <td style="text-align:center">@Html.DisplayFor(model => item.DateIssued)</td>
+                        <td style="text-align:right">@Html.DisplayFor(model => item.InvoiceTotal)</td>
+                    </tr>
+                }
+            }
+            @if (Model.Total != null)
+            {
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td class="control-label" style="text-align:center"><strong>Invoice Total</strong></td>
+                        <td class="control-label" style="text-align:right"><strong>@Html.DisplayFor(model => model.Total.Total)</strong></td>
+                    </tr>
+                </tfoot>
+            }
+        </table>
+
+    </div>
+
+    <div id="chart" class="col-md-4">
+
+    </div>
+</div>
+
+
+

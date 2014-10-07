@@ -51,8 +51,8 @@
             <table class="table">
                 <tr>
                     <th>Invoice Number</th>
-                    <th>Date Issued</th>
-                    <th>Total</th>
+                    <th style="text-align:center">Date Issued</th>
+                    <th style="text-align:center">Total</th>
                 </tr>
                 @if (Model.Detailed != null)
                 {
@@ -60,8 +60,8 @@
                     {
                         <tr>
                             <td>@Html.DisplayFor(model => item.InvoiceID)</td>
-                            <td>@Html.DisplayFor(model => item.DateIssued)</td>
-                            <td>@Html.DisplayFor(model => item.InvoiceTotal)</td>
+                            <td style="text-align:center">@Html.DisplayFor(model => item.DateIssued)</td>
+                            <td style="text-align:right">@Html.DisplayFor(model => item.InvoiceTotal)</td>
                         </tr>
                     }
                 }
@@ -70,8 +70,8 @@
                     <tfoot>
                         <tr>
                             <td></td>
-                            <td class="control-label">Invoice Total</td>
-                            <td class="control-label">@Html.DisplayFor(model => model.Total.Total)</td>
+                            <td class="control-label" style="text-align:center"><strong>Invoice Total</strong></td>
+                            <td class="control-label" style="text-align:right"><strong>@Html.DisplayFor(model => model.Total.Total)</strong></td>
                         </tr>
                     </tfoot>
                 }
@@ -81,7 +81,18 @@
     </div>
 }
 
+@{
+    try
+    {
+        <div class="row">
+            @Html.ActionLink("Export To PDF", "ExportToPDF", new { Dfrom = Model.myRange.From.ToShortDateString(), Dto = this.Model.myRange.To.ToShortDateString() }, new { @class = "btn btn-default" })
+        </div>
+        Session["xcd"] = Model;
+    }
+    catch
+    { }
 
+}
 
 <script type="text/javascript">
         $('.dateFrom').datepicker({

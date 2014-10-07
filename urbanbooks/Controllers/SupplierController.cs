@@ -194,7 +194,7 @@ namespace urbanbooks.Controllers
 
                      #endregion
 
-                    return View("Home");
+                    return RedirectToAction("AdminIndex", "Admin", null);
                 }
 
                 return View();

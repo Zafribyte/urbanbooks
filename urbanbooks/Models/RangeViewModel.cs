@@ -15,6 +15,7 @@ namespace urbanbooks.Models
         public LooseRanger Range { get; set; }
         public TotalClass Total { get; set; }
         public List<DetailedCustom> Detailed { get; set; }
+        public Company company { get; set; }
     }
     public class RangeValidate
     {
@@ -30,6 +31,7 @@ namespace urbanbooks.Models
         public int key { get; set; }
 
         public string Month { get; set; }
+        [DataType(DataType.Currency)]
         public double TotalSales { get; set; }
     }
     public class DetailedCustom
@@ -38,11 +40,13 @@ namespace urbanbooks.Models
         public int Id_key { get; set; }
         public int InvoiceID { get; set; }
         public string DateIssued { get; set; }
+        [DataType(DataType.Currency)]
         public double InvoiceTotal { get; set; }
     }
     public class TotalClass 
     {
         [Key]
+        [DataType(DataType.Currency)]
         public double Total { get; set; }
     }
     public class LooseRanger 

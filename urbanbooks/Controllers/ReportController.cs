@@ -158,6 +158,23 @@ namespace urbanbooks.Controllers
             return View(model);
         }
 
+
+        public ActionResult ExportToPDF( DateTime? Dfrom, DateTime? Dto, string type)
+        {
+            #region Prep Utilities
+            BusinessLogicHandler myHandler = new BusinessLogicHandler();
+            RangeViewModel model = new RangeViewModel();
+            model = (RangeViewModel)Session["xcd"];
+            #endregion
+
+            #region Push Company nfo
+            model.company = new Company();
+            model.company = myHandler.GetCompanyDetail();
+            #endregion
+
+            return new ViewAsPdf(model);
+        }
+
         public ActionResult Monthly()
         {
             RangeViewModel model = new RangeViewModel();

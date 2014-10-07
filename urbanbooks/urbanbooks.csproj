@@ -645,6 +645,7 @@
     <Content Include="Views\TechCategory\Edit.cshtml" />
     <Content Include="Views\TechCategory\Delete.cshtml" />
     <Content Include="Views\TechCategory\ViewTechCategory.cshtml" />
+    <Content Include="Views\Report\ExportToPDF.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
