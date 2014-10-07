@@ -20,8 +20,8 @@ namespace urbanbooks.Controllers
         public ActionResult Index()
         {
             myHandler = new BusinessLogicHandler();
-            List<Supplier> newList = myHandler.GetSuppliers();
-            return View(newList);
+            //List<Supplier> newList = myHandler.GetSuppliers();
+            return View();
         }
 
         public ActionResult Details(int id)
@@ -120,7 +120,7 @@ namespace urbanbooks.Controllers
             #endregion
 
             #region Get The data
-            model.RegisteredSuppliers = myHandler.GetSuppliers();
+            //model.RegisteredSuppliers = myHandler.GetSuppliers();
             #endregion
 
             #region Set Up dropdown

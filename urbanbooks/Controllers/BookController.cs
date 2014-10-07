@@ -112,7 +112,9 @@ namespace urbanbooks.Controllers
             #region Create
             AddNewBookViewModel bookM = new AddNewBookViewModel();
             SupplierHandler supHandler = new SupplierHandler();
-            IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetSupplierList();
+            /*TEMP LIST*/
+            List<Supplier> nameList = new List<Supplier>();
+           // IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetSupplierList();
             var disp = from nameAndId in nameList
                        select new { Value = nameAndId.SupplierID, Text = nameAndId.Name };
 
@@ -312,7 +314,9 @@ namespace urbanbooks.Controllers
 
             #region Create
             SupplierHandler supHandler = new SupplierHandler();
-            IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetSupplierList();
+            /*TEMP LIST*/
+            List<Supplier> nameList = new List<Supplier>();
+            //IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetSupplierList();
             var disp = from nameAndId in nameList
                        select new { Value = nameAndId.SupplierID, Text = nameAndId.Name };
 

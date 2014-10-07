@@ -143,9 +143,10 @@ namespace urbanbooks.Controllers
         public ActionResult Create()
         {
             AddNewTechViewModel techM = new AddNewTechViewModel();
-
+            /*TEMP LIST*/
+            List<Supplier> nameList = new List<Supplier>();
             SupplierHandler supHandler = new SupplierHandler();
-            IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetSupplierList();
+            //IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetSupplierList();
             var disp = from nameAndId in nameList
                        select new { Value = nameAndId.SupplierID, Text = nameAndId.Name };
 
@@ -276,7 +277,9 @@ namespace urbanbooks.Controllers
             model.techs = gadget;
 
             SupplierHandler supHandler = new SupplierHandler();
-            IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetSupplierList();
+            /*TEMP LIST*/
+            List<Supplier> nameList = new List<Supplier>();
+            //IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetSupplierList();
             var disp = from nameAndId in nameList
                        select new { Value = nameAndId.SupplierID, Text = nameAndId.Name };
 
