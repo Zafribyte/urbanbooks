@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using PagedList.Mvc;
 using urbanbooks.Models;
 using System.Collections;
 
@@ -63,6 +65,19 @@ namespace urbanbooks.Controllers
             #endregion
 
             return View(model);
+        }
+
+        public ActionResult Technology(int? page)
+        {
+            #region Prep Utilities
+            myHandler = new BusinessLogicHandler();
+            #endregion
+
+            #region Get data
+            IEnumerable<Supplier> suppliers = myHandler.GetTechSuppliers();
+            #endregion
+
+            return View(suppliers.ToList().ToPagedList(page ?? 1, 10));
         }
 
         public ActionResult Product(int ProductID)
