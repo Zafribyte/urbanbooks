@@ -80,7 +80,20 @@
     </div>
 }
 
+@{
+    try
+    {
+        <div class="container">
+            <div class="row">
+                @Html.ActionLink("Export To PDF", "ExportMonthToPDF", new { Dfrom = Model.myRange.From.ToShortDateString(), Dto = this.Model.myRange.To.ToShortDateString() }, new { @class = "btn btn-default" })
+            </div>
+        </div>
+        Session["monthly"] = Model;
+    }
+    catch
+    { }
 
+}
 
 <script type="text/javascript">
         $('.dateFrom').datepicker({

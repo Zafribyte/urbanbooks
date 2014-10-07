@@ -31,6 +31,7 @@ namespace urbanbooks.Controllers
             string dateFrom = date[1] + "/" + date[0] + "/" + date[2];
             DateTime from = Convert.ToDateTime(dateFrom);
             date = collector.GetValue("myRange.To").AttemptedValue.Split('/');
+            model.myRange.To = Convert.ToDateTime(date);
             dateFrom = date[1] + "/" + date[0] + "/" + date[2];
             DateTime to = Convert.ToDateTime(dateFrom);
 
@@ -156,6 +157,41 @@ namespace urbanbooks.Controllers
             
 
             return View(model);
+        }
+
+
+        public ActionResult ExportToPDF( DateTime? Dfrom, DateTime? Dto, string type)
+        {
+            #region Prep Utilities
+            BusinessLogicHandler myHandler = new BusinessLogicHandler();
+            RangeViewModel model = new RangeViewModel();
+            model = (RangeViewModel)Session["xcd"];
+            #endregion
+
+            #region Push Company nfo
+            model.company = new Company();
+            model.company = myHandler.GetCompanyDetail();
+            #endregion
+
+            return new ViewAsPdf(model);
+        }
+
+        public ActionResult ExportMonthToPDF()
+        {   
+            #region Prep Utilities
+            RangeViewModel model = new RangeViewModel();
+            model = (RangeViewModel)Session["monthly"];
+            #endregion
+            return new ViewAsPdf(model);
+        }
+
+        public ActionResult ExportYearToPDF()
+        {
+            #region Prep Utilities
+            RangeViewModel model = new RangeViewModel();
+            model = (RangeViewModel)Session["yearly"];
+            #endregion
+            return new ViewAsPdf(model);
         }
 
         public ActionResult Monthly()
