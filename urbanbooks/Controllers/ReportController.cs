@@ -219,13 +219,15 @@ namespace urbanbooks.Controllers
         public ActionResult Monthly(RangeViewModel model, FormCollection collector)
         {
             #region Prep Utilities
-
+            model.Month = new Models.Monthly();
             BusinessLogicHandler myHandler = new BusinessLogicHandler();
             model.MonthlySales = new List<Monthly>();
             string[] date = collector.GetValue("Range.From").AttemptedValue.Split(' ');
+            model.Month.From = collector.GetValue("Range.From").AttemptedValue;
             string dateFrom = date[0] + "/" + 01 + "/" + date[1];
             DateTime from = Convert.ToDateTime(dateFrom);
             date = collector.GetValue("Range.To").AttemptedValue.Split(' ');
+            model.Month.To = collector.GetValue("Range.To").AttemptedValue;
             dateFrom = date[0] + "/" + 01 + "/" + date[1];
             DateTime to = Convert.ToDateTime(dateFrom);
 
@@ -378,13 +380,15 @@ namespace urbanbooks.Controllers
         {
 
             #region Prep Utilities
-
+            model.Month = new Models.Monthly();
             BusinessLogicHandler myHandler = new BusinessLogicHandler();
             model.MonthlySales = new List<Monthly>();
             string date = collector.GetValue("Range.From").AttemptedValue;
+            model.Month.From = date;
             string dateFrom = 01 + "/" + 01 + "/" + date;
             DateTime from = Convert.ToDateTime(dateFrom);
             date = collector.GetValue("Range.To").AttemptedValue;
+            model.Month.To = date;
             dateFrom = 01 + "/" + 01 + "/" + date;
             DateTime to = Convert.ToDateTime(dateFrom);
 

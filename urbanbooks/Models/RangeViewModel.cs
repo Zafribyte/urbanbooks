@@ -13,6 +13,7 @@ namespace urbanbooks.Models
         public List<Monthly> MonthlySales { get; set; }
         public string radioButtons { get; set; }
         public LooseRanger Range { get; set; }
+        public Monthly Month { get; set; }
         public TotalClass Total { get; set; }
         public List<DetailedCustom> Detailed { get; set; }
         public Company company { get; set; }
@@ -29,7 +30,8 @@ namespace urbanbooks.Models
     {
         [Key]
         public int key { get; set; }
-
+        public string From { get; set; }
+        public string To { get; set; }
         public string Month { get; set; }
         [DataType(DataType.Currency)]
         public double TotalSales { get; set; }
