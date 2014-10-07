@@ -5,9 +5,41 @@
     Layout = "";
 }
 
+<script src="~/Scripts/jquery-2.1.1.js"></script>
 
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var dataSet = new Array();
+        dataSet = ['Book Category', 'Total Sales'];
+        var enumArray = [['Book Category', 'Total Sales']];
+        @foreach (var item in Model.Detailed)
+        {
+            <text>
 
+             enumArray.push(['@item.DateIssued' , @item.InvoiceTotal]);
+            </text>
+        }
+
+        var data = google.visualization.arrayToDataTable(enumArray);
+
+        var options = {
+            title: 'Sales',
+            legend: { position: 'none' },
+            'width': 900,
+            'height': 900,
+            pieHole: 0.4,
+            'legend': 'left',
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart'));
+
+        chart.draw(data, options);
+    }
+</script>
 
 
 <div class="row">

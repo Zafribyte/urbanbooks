@@ -31,6 +31,7 @@ namespace urbanbooks.Controllers
             string dateFrom = date[1] + "/" + date[0] + "/" + date[2];
             DateTime from = Convert.ToDateTime(dateFrom);
             date = collector.GetValue("myRange.To").AttemptedValue.Split('/');
+            model.myRange.To = Convert.ToDateTime(date);
             dateFrom = date[1] + "/" + date[0] + "/" + date[2];
             DateTime to = Convert.ToDateTime(dateFrom);
 
@@ -172,6 +173,15 @@ namespace urbanbooks.Controllers
             model.company = myHandler.GetCompanyDetail();
             #endregion
 
+            return new ViewAsPdf(model);
+        }
+
+        public ActionResult ExportMonthToPDF()
+        {   
+            #region Prep Utilities
+            RangeViewModel model = new RangeViewModel();
+            model = (RangeViewModel)Session["monthly"];
+            #endregion
             return new ViewAsPdf(model);
         }
 
