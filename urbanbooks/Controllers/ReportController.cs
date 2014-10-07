@@ -179,18 +179,33 @@ namespace urbanbooks.Controllers
         public ActionResult ExportMonthToPDF()
         {   
             #region Prep Utilities
+            BusinessLogicHandler myHandler = new BusinessLogicHandler();
             RangeViewModel model = new RangeViewModel();
             model = (RangeViewModel)Session["monthly"];
             #endregion
+
+            #region Push Company nfo
+            model.company = new Company();
+            model.company = myHandler.GetCompanyDetail();
+            #endregion
+
             return new ViewAsPdf(model);
         }
 
         public ActionResult ExportYearToPDF()
         {
             #region Prep Utilities
+            BusinessLogicHandler myHandler = new BusinessLogicHandler();
             RangeViewModel model = new RangeViewModel();
             model = (RangeViewModel)Session["yearly"];
             #endregion
+
+
+            #region Push Company nfo
+            model.company = new Company();
+            model.company = myHandler.GetCompanyDetail();
+            #endregion
+
             return new ViewAsPdf(model);
         }
 
