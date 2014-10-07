@@ -278,8 +278,8 @@ namespace urbanbooks.Controllers
 
             SupplierHandler supHandler = new SupplierHandler();
             /*TEMP LIST*/
-            List<Supplier> nameList = new List<Supplier>();
-            //IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetSupplierList();
+            //List<Supplier> nameList = new List<Supplier>();
+            IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetTechSupplierList();
             var disp = from nameAndId in nameList
                        select new { Value = nameAndId.SupplierID, Text = nameAndId.Name };
 
