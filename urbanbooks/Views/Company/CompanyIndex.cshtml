@@ -1,15 +1,12 @@
-﻿@model IEnumerable<urbanbooks.Company>
+﻿@model Company
 
 @{
     ViewBag.Title = "CompanyIndex";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>CompanyIndex</h2>
+<h2>Company Details</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -48,47 +45,44 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => modelItem.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TaxRefferenceNumber)
+            @Html.DisplayFor(modelItem => modelItem.TaxRefferenceNumber)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.VATRegistrationNumber)
+            @Html.DisplayFor(modelItem => modelItem.VATRegistrationNumber)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.VATPercentage)
+            @Html.DisplayFor(modelItem => modelItem.VATPercentage)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.BookMarkUp)
+            @Html.DisplayFor(modelItem => modelItem.BookMarkUp)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TechMarkUp)
+            @Html.DisplayFor(modelItem => modelItem.TechMarkUp)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Address)
+            @Html.DisplayFor(modelItem => modelItem.Address)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Telephone)
+            @Html.DisplayFor(modelItem => modelItem.Telephone)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Fax)
+            @Html.DisplayFor(modelItem => modelItem.Fax)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Email)
+            @Html.DisplayFor(modelItem => modelItem.Email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CompanyLogo)
+            @Html.DisplayFor(modelItem => modelItem.CompanyLogo)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CompanyRegistration }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CompanyRegistration }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CompanyRegistration })
+            @Html.ActionLink("Edit", "Edit", new { CompanyRegistration = Model.CompanyRegistration }) |
+            @Html.ActionLink("Details", "Details", new { CompanyRegistration = Model.CompanyRegistration }) |
+            @Html.ActionLink("Delete", "Delete", new { CompanyRegistration = Model.CompanyRegistration })
         </td>
     </tr>
-}
-
 </table>

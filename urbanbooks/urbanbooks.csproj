@@ -249,6 +249,10 @@
     <Compile Include="Migrations\201410061327004_stdm.Designer.cs">
       <DependentUpon>201410061327004_stdm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410080833590_company.cs" />
+    <Compile Include="Migrations\201410080833590_company.Designer.cs">
+      <DependentUpon>201410080833590_company.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AdminIndexViewModel.cs" />
     <Compile Include="Models\InvoiceModel.cs" />
     <Compile Include="Models\OrderLineModel.cs" />
@@ -656,6 +660,7 @@
     </Content>
     <Content Include="Views\Company\Edit.cshtml" />
     <Content Include="Views\Company\CompanyIndex.cshtml" />
+    <Content Include="Views\Company\CompanyDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
@@ -765,6 +770,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410061327004_stdm.resx">
       <DependentUpon>201410061327004_stdm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410080833590_company.resx">
+      <DependentUpon>201410080833590_company.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
