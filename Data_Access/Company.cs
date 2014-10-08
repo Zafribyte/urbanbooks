@@ -11,7 +11,7 @@ namespace urbanbooks
     {
         [Key]
         [ScaffoldColumn(false)]
-        public int CompanyRegistration { get; set; }
+        public string CompanyRegistration { get; set; }
         [Required]
         [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Please enter a Valid Name")]
         public string Name { get; set; }
@@ -41,5 +41,6 @@ namespace urbanbooks
         public string Fax { get; set; }
         [Required]
         public string Email { get; set; }
+        public string CompanyLogo { get; set; }
     }
 }

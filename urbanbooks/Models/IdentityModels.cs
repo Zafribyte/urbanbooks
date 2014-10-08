@@ -171,6 +171,8 @@ namespace urbanbooks.Models
 
        public System.Data.Entity.DbSet<urbanbooks.BookCategory> BookCategories { get; set; }
 
+       public System.Data.Entity.DbSet<urbanbooks.Company> Companies { get; set; }
+
     }
 }
 
