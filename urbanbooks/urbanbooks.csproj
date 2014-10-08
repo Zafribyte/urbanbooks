@@ -253,6 +253,10 @@
     <Compile Include="Migrations\201410080833590_company.Designer.cs">
       <DependentUpon>201410080833590_company.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410081319237_random.cs" />
+    <Compile Include="Migrations\201410081319237_random.Designer.cs">
+      <DependentUpon>201410081319237_random.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AdminIndexViewModel.cs" />
     <Compile Include="Models\InvoiceModel.cs" />
     <Compile Include="Models\OrderLineModel.cs" />
@@ -774,6 +778,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410080833590_company.resx">
       <DependentUpon>201410080833590_company.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410081319237_random.resx">
+      <DependentUpon>201410081319237_random.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
