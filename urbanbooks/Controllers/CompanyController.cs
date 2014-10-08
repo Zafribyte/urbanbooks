@@ -9,9 +9,12 @@ namespace urbanbooks.Controllers
     public class CompanyController : Controller
     {
         // GET: Company
-        public ActionResult Index()
+        public ActionResult CompanyDetails()
         {
-            return View();
+            Company company = new Company();
+            BusinessLogicHandler myHandler = new BusinessLogicHandler();
+            company = myHandler.GetCompanyDetail();
+            return View(company);
         }
 
         public ActionResult Edit()
@@ -31,7 +34,7 @@ namespace urbanbooks.Controllers
             {
                 myHandler.UpdateCompany(company);
             }
-            return View();
+            return RedirectToAction("CompanyDetails", "Company", null);
         }
     }
 }

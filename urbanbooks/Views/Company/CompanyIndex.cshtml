@@ -1,0 +1,88 @@
+﻿@model Company
+
+@{
+    ViewBag.Title = "CompanyIndex";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Company Details</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxRefferenceNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VATRegistrationNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VATPercentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookMarkUp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TechMarkUp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyLogo)
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.TaxRefferenceNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.VATRegistrationNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.VATPercentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.BookMarkUp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.TechMarkUp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Telephone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Fax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.CompanyLogo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { CompanyRegistration = Model.CompanyRegistration }) |
+            @Html.ActionLink("Details", "Details", new { CompanyRegistration = Model.CompanyRegistration }) |
+            @Html.ActionLink("Delete", "Delete", new { CompanyRegistration = Model.CompanyRegistration })
+        </td>
+    </tr>
+</table>

@@ -31,6 +31,7 @@ namespace urbanbooks
                         company.BookMarkUp = Convert.ToDouble(row["BookMarkUp"].ToString());
                         company.TechMarkUp = Convert.ToDouble(row["TechnologyMarkUp"].ToString());
                         //company.VATRegistrationNumber = Convert.ToInt32(row["VATRegistrationNumber"]);
+                        company.CompanyLogo = row["CompanyLogo"].ToString();
                         AuthorList.Add(company);
                     }
                 }
@@ -49,6 +50,7 @@ namespace urbanbooks
                 {
                     DataRow row = table.Rows[0];
                     company = new Company();
+                    company.CompanyRegistration = row["CompanyRegistration"].ToString();
                     company.Address = row["PhysicalAddress"].ToString();
                     company.VATRegistrationNumber = row["VatRegistrationNumber"].ToString();
                     company.TaxRefferenceNumber = row["TaxReferenceNumber"].ToString();
@@ -59,6 +61,7 @@ namespace urbanbooks
                     company.VATPercentage = Convert.ToDouble(row["VatPercentage"].ToString());
                     company.Telephone = row["Telephone"].ToString();
                     company.Fax = row["Fax"].ToString();
+                    company.CompanyLogo = row["CompanyLogo"].ToString();
                 }
             }
             return company;
@@ -69,6 +72,7 @@ namespace urbanbooks
             SqlParameter[] Params = new SqlParameter[]
             {
                 new SqlParameter("@Name", company.Name),
+                new SqlParameter("@CompanyRegistration", company.CompanyRegistration),
                 new SqlParameter("@TaxReferenceNumber",company.TaxRefferenceNumber),
                 new SqlParameter("@PhysicalAddress",company.Address),
                 new SqlParameter("@Telephone",company.Telephone),
@@ -77,7 +81,8 @@ namespace urbanbooks
                 new SqlParameter("@VatRegistrationNumber",company.VATRegistrationNumber),
                 new SqlParameter("@VATPercentage",company.VATPercentage),
                 new SqlParameter("@BookMarkUp", company.BookMarkUp),
-                new SqlParameter("@TechnologyMarkUp", company.TechMarkUp)
+                new SqlParameter("@TechnologyMarkUp", company.TechMarkUp),
+                new SqlParameter("@CompanyLogo", company.CompanyLogo)
 
             };
             return DataProvider.ExecuteNonQuery("sp_UpdateCompany", CommandType.StoredProcedure,

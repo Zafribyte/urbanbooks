@@ -249,6 +249,10 @@
     <Compile Include="Migrations\201410061327004_stdm.Designer.cs">
       <DependentUpon>201410061327004_stdm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410080833590_company.cs" />
+    <Compile Include="Migrations\201410080833590_company.Designer.cs">
+      <DependentUpon>201410080833590_company.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AdminIndexViewModel.cs" />
     <Compile Include="Models\InvoiceModel.cs" />
     <Compile Include="Models\OrderLineModel.cs" />
@@ -398,6 +402,7 @@
     <Content Include="Content\images\ui-icons_a83300_256x240.png" />
     <Content Include="Content\images\ui-icons_cccccc_256x240.png" />
     <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\images\UrbanBooksLogo.png" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\jquery-ui.structure.min.css" />
@@ -503,28 +508,148 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\FullRegister.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Restricted.cshtml" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Author\Books.cshtml" />
+    <Content Include="Views\Author\Create.cshtml" />
     <Content Include="Views\Author\Delete.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Author\Edit.cshtml" />
     <Content Include="Views\Author\Index.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Author\New.cshtml" />
     <Content Include="Views\Author\ViewAuthor.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\BookType\Create.cshtml" />
     <Content Include="Views\BookType\Delete.cshtml" />
+    <Content Include="Views\BookType\Details.cshtml" />
+    <Content Include="Views\BookType\Edit.cshtml" />
+    <Content Include="Views\BookType\Index.cshtml" />
     <Content Include="Views\BookType\ViewBookCategory.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Book\AdminIndex.cshtml" />
+    <Content Include="Views\Book\Book.cshtml" />
+    <Content Include="Views\Book\ByCategory.cshtml" />
+    <Content Include="Views\Book\Categories.cshtml" />
+    <Content Include="Views\Book\Create.cshtml" />
+    <Content Include="Views\Book\CustomerDetails.cshtml" />
+    <Content Include="Views\Book\Delete.cshtml" />
+    <Content Include="Views\Book\DeletedIndex.cshtml" />
     <Content Include="Views\Book\Details.cshtml" />
+    <Content Include="Views\Book\Edit.cshtml" />
+    <Content Include="Views\Book\Img.cshtml" />
+    <Content Include="Views\Book\Index.cshtml" />
+    <Content Include="Views\Book\ManageBooks.cshtml" />
+    <Content Include="Views\Book\Restore.cshtml" />
+    <Content Include="Views\Cart\AddToCart.cshtml" />
+    <Content Include="Views\Cart\Checkout.cshtml" />
+    <Content Include="Views\Cart\Confirm.cshtml" />
+    <Content Include="Views\Cart\Edit.cshtml" />
+    <Content Include="Views\Cart\Reciept.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Edit.cshtml" />
+    <Content Include="Views\Employee\Create.cshtml" />
+    <Content Include="Views\Employee\Details.cshtml" />
+    <Content Include="Views\Employee\Edit.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Help\Documentation.cshtml" />
+    <Content Include="Views\Help\FAQs.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Manufacturer\Create.cshtml" />
+    <Content Include="Views\Manufacturer\Delete.cshtml" />
     <Content Include="Views\Manufacturer\Edit.cshtml" />
+    <Content Include="Views\Manufacturer\Index.cshtml" />
+    <Content Include="Views\Manufacturer\ViewManufacturer.cshtml" />
+    <Content Include="Views\Order\Details.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\Invoice.cshtml" />
+    <Content Include="Views\Order\RangeSearch.cshtml" />
+    <Content Include="Views\Publisher\Books.cshtml" />
+    <Content Include="Views\Publisher\Create.cshtml" />
+    <Content Include="Views\Publisher\Delete.cshtml" />
+    <Content Include="Views\Publisher\Details.cshtml" />
+    <Content Include="Views\Publisher\Edit.cshtml" />
+    <Content Include="Views\Publisher\Index.cshtml" />
+    <Content Include="Views\Publisher\ViewPublisher.cshtml" />
+    <Content Include="Views\Report\Detailed.cshtml" />
+    <Content Include="Views\Report\ExportMonthToPDF.cshtml" />
+    <Content Include="Views\Report\ExportToPDF.cshtml" />
+    <Content Include="Views\Report\ExportYearToPDF.cshtml" />
+    <Content Include="Views\Report\Monthly.cshtml" />
+    <Content Include="Views\Report\Yearly.cshtml" />
+    <Content Include="Views\Search\AdminBookSearch.cshtml" />
+    <Content Include="Views\Search\AdminDeviceSearch.cshtml" />
     <Content Include="Views\Search\Advanced.cshtml" />
     <Content Include="Views\Search\Books.cshtml" />
+    <Content Include="Views\Search\BooksAdvanced.cshtml" />
     <Content Include="Views\Search\Devices.cshtml" />
     <Content Include="Views\Search\DevicesAdvanced.cshtml" />
+    <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\footer.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_SupplierLayout.cshtml" />
+    <Content Include="Views\Special\Create.cshtml" />
+    <Content Include="Views\Special\Delete.cshtml" />
+    <Content Include="Views\Special\Details.cshtml" />
+    <Content Include="Views\Special\Edit.cshtml" />
+    <Content Include="Views\Special\Index.cshtml" />
+    <Content Include="Views\Supplier\BookHost.cshtml" />
+    <Content Include="Views\Supplier\BookIndex.cshtml" />
+    <Content Include="Views\Supplier\Create.cshtml" />
+    <Content Include="Views\Supplier\Edit.cshtml" />
+    <Content Include="Views\Supplier\Home.cshtml" />
+    <Content Include="Views\Supplier\ImgHost.cshtml" />
+    <Content Include="Views\Supplier\Index.cshtml" />
+    <Content Include="Views\Supplier\Product.cshtml" />
+    <Content Include="Views\Supplier\Ranger.cshtml" />
+    <Content Include="Views\Supplier\Search.cshtml" />
+    <Content Include="Views\Supplier\Technology.cshtml" />
+    <Content Include="Views\TechCategory\Create.cshtml" />
+    <Content Include="Views\TechCategory\Delete.cshtml" />
+    <Content Include="Views\TechCategory\Edit.cshtml" />
+    <Content Include="Views\TechCategory\Index.cshtml" />
+    <Content Include="Views\TechCategory\ViewTechCategory.cshtml" />
+    <Content Include="Views\Technology\AdminIndex.cshtml" />
+    <Content Include="Views\Technology\ByCategory.cshtml" />
+    <Content Include="Views\Technology\Categories.cshtml" />
+    <Content Include="Views\Technology\Create.cshtml" />
+    <Content Include="Views\Technology\Delete.cshtml" />
     <Content Include="Views\Technology\DeletedIndex.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Technology\Details.cshtml" />
+    <Content Include="Views\Technology\Edit.cshtml" />
+    <Content Include="Views\Technology\Index.cshtml" />
+    <Content Include="Views\Technology\ManageTechnology.cshtml" />
+    <Content Include="Views\Technology\Restore.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Wishlist\Details.cshtml" />
+    <Content Include="Views\Wishlist\Edit.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -534,125 +659,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
-    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Manage.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_AdminLayout.cshtml" />
-    <Content Include="Views\Shared\_SupplierLayout.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Dashboard\Index.cshtml" />
-    <Content Include="Views\Employee\Index.cshtml" />
-    <Content Include="Views\Employee\Details.cshtml" />
-    <Content Include="Views\Employee\Create.cshtml" />
-    <Content Include="Views\Employee\Edit.cshtml" />
-    <Content Include="Views\Book\Index.cshtml" />
-    <Content Include="Views\Book\CustomerDetails.cshtml" />
-    <Content Include="Views\Book\Create.cshtml" />
-    <Content Include="Views\Book\Edit.cshtml" />
-    <Content Include="Views\Book\Delete.cshtml" />
-    <Content Include="Views\Cart\Edit.cshtml" />
-    <Content Include="Views\Special\Index.cshtml" />
-    <Content Include="Views\Special\Details.cshtml" />
-    <Content Include="Views\Special\Create.cshtml" />
-    <Content Include="Views\Special\Edit.cshtml" />
-    <Content Include="Views\Special\Delete.cshtml" />
-    <Content Include="Views\Technology\Index.cshtml" />
-    <Content Include="Views\Technology\Details.cshtml" />
-    <Content Include="Views\Technology\Create.cshtml" />
-    <Content Include="Views\Technology\Edit.cshtml" />
-    <Content Include="Views\Technology\Delete.cshtml" />
-    <Content Include="Views\Wishlist\Details.cshtml" />
-    <Content Include="Views\Book\ManageBooks.cshtml" />
-    <Content Include="Views\Technology\ManageTechnology.cshtml" />
-    <Content Include="Views\Supplier\Create.cshtml" />
-    <Content Include="Views\Supplier\Index.cshtml" />
-    <Content Include="Views\BookType\Index.cshtml" />
-    <Content Include="Views\BookType\Details.cshtml" />
-    <Content Include="Views\BookType\Create.cshtml" />
-    <Content Include="Views\BookType\Edit.cshtml" />
-    <Content Include="Views\Account\FullRegister.cshtml" />
-    <Content Include="Views\Wishlist\Edit.cshtml" />
-    <Content Include="Views\Order\Index.cshtml" />
-    <Content Include="Views\Cart\Checkout.cshtml" />
-    <Content Include="Views\Cart\AddToCart.cshtml" />
-    <Content Include="Views\Cart\Confirm.cshtml" />
-    <Content Include="Views\Book\AdminIndex.cshtml" />
-    <Content Include="Views\Cart\Reciept.cshtml" />
-    <Content Include="Views\Technology\AdminIndex.cshtml" />
-    <Content Include="Views\Search\Search.cshtml" />
-    <Content Include="Views\Account\Restricted.cshtml" />
-    <Content Include="Views\Search\BooksAdvanced.cshtml" />
-    <Content Include="Views\Technology\Categories.cshtml" />
-    <Content Include="Views\Book\Categories.cshtml" />
-    <Content Include="Views\Book\ByCategory.cshtml" />
-    <Content Include="Views\Technology\ByCategory.cshtml" />
-    <Content Include="Views\Help\FAQs.cshtml" />
-    <Content Include="Views\Author\New.cshtml" />
-    <Content Include="Views\Book\Book.cshtml" />
-    <Content Include="Views\Book\Img.cshtml" />
-    <Content Include="Views\Author\Books.cshtml" />
-    <Content Include="Views\Publisher\Create.cshtml" />
-    <Content Include="Views\Publisher\Index.cshtml" />
-    <Content Include="Views\Publisher\Details.cshtml" />
-    <Content Include="Views\Publisher\Edit.cshtml" />
-    <Content Include="Views\Manufacturer\Index.cshtml" />
-    <Content Include="Views\Manufacturer\Create.cshtml" />
-    <Content Include="Views\Manufacturer\Delete.cshtml" />
-    <Content Include="Views\TechCategory\Index.cshtml" />
-    <Content Include="Views\TechCategory\Create.cshtml" />
-    <Content Include="Views\Order\Details.cshtml" />
-    <Content Include="Views\Supplier\Home.cshtml" />
-    <Content Include="Views\Order\Invoice.cshtml" />
-    <Content Include="Views\Search\AdminBookSearch.cshtml" />
-    <Content Include="Views\Search\AdminDeviceSearch.cshtml" />
-    <Content Include="Views\Publisher\Books.cshtml" />
-    <Content Include="Views\Help\Documentation.cshtml" />
-    <Content Include="Views\Supplier\Ranger.cshtml" />
-    <Content Include="Views\Order\RangeSearch.cshtml" />
-    <Content Include="Views\Supplier\Search.cshtml" />
-    <Content Include="Views\Shared\footer.cshtml" />
-    <Content Include="Views\Supplier\Product.cshtml" />
-    <Content Include="Views\Supplier\BookHost.cshtml" />
-    <Content Include="Views\Supplier\ImgHost.cshtml" />
-    <Content Include="Views\Report\Detailed.cshtml" />
-    <Content Include="Views\Author\Create.cshtml" />
-    <Content Include="Views\Book\DeletedIndex.cshtml" />
-    <Content Include="Views\Technology\Restore.cshtml" />
-    <Content Include="Views\Book\Restore.cshtml" />
-    <Content Include="Views\Author\Edit.cshtml" />
-    <Content Include="Views\Publisher\ViewPublisher.cshtml" />
-    <Content Include="Views\Publisher\Delete.cshtml" />
-    <Content Include="Views\Manufacturer\ViewManufacturer.cshtml" />
-    <Content Include="Views\TechCategory\Edit.cshtml" />
-    <Content Include="Views\TechCategory\Delete.cshtml" />
-    <Content Include="Views\TechCategory\ViewTechCategory.cshtml" />
-    <Content Include="Views\Report\ExportToPDF.cshtml" />
-    <Content Include="Views\Report\Monthly.cshtml" />
-    <Content Include="Views\Report\Yearly.cshtml" />
-    <Content Include="Views\Report\ExportYearToPDF.cshtml" />
-    <Content Include="Views\Report\ExportMonthToPDF.cshtml" />
-    <Content Include="Views\Supplier\Technology.cshtml" />
-    <Content Include="Views\Supplier\BookIndex.cshtml" />
-    <Content Include="Views\Supplier\Edit.cshtml" />
+    <Content Include="Views\Company\Edit.cshtml" />
+    <Content Include="Views\Company\CompanyIndex.cshtml" />
+    <Content Include="Views\Company\CompanyDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
@@ -762,6 +771,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410061327004_stdm.resx">
       <DependentUpon>201410061327004_stdm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410080833590_company.resx">
+      <DependentUpon>201410080833590_company.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
