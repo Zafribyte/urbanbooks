@@ -33,6 +33,7 @@
     </tr>
 
 @foreach (var item in Model) {
+    Session["supBack"] = HttpContext.Current.Request.RawUrl;
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
