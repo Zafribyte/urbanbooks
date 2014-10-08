@@ -18,7 +18,25 @@ namespace urbanbooks.Controllers
             
             return View(authorList);
         }
+        public ActionResult CheckDuplicates(string name, string surname)
+        {
+            List<Author> myList = new List<Author>();
+            myHandler = new BusinessLogicHandler();
+            myList = myHandler.CheckDuplicatedAuthor(name, surname);
+            var isDuplicate = false;
 
+            foreach (var item in myList)
+            {
+                string authorName = item.Name;
+                string authorSurname = item.Surname;
+                if (name.ToUpper() == authorName.ToUpper() && surname.ToUpper() == authorSurname.ToUpper())
+                {
+                    isDuplicate = true;
+                }
+            }
+            var jsonData = new { isDuplicate };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Details(int authorID)
         {
             author = myHandler.GetAuthorDetails(authorID);
