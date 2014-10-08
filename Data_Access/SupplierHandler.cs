@@ -79,6 +79,7 @@ namespace urbanbooks
                     supplier.Fax = row["Fax"].ToString();
                     supplier.ContactPerson = row["ContactPerson"].ToString();
                     supplier.ContactPersonNumber = row["ContactPersonNumber"].ToString();
+                    supplier.IsBookSupplier = Convert.ToBoolean(row["IsBookSupplier"]);
                 }
             }
             return supplier;

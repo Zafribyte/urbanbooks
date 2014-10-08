@@ -40,5 +40,6 @@ namespace urbanbooks
         [ScaffoldColumn(false)]
         public bool Status
         { get; set; }
+        public bool IsBookSupplier { get; set; }
     }
 }

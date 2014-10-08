@@ -317,6 +317,7 @@ namespace urbanbooks
         #endregion
 
         #region SUPPLIER
+        public Supplier MyProperty { get; set; }
         public bool AddSupplier(Supplier supplier)
         {
             SupplierHandler myHandler = new SupplierHandler();
