@@ -152,14 +152,14 @@ namespace urbanbooks.Controllers
                 }
                 catch { }
             }
-            if (myActions.AddToCartAsync(cart.CartID, ProductID))
+            if (myActions.AddToCartAsync(user.Carts.CartID, ProductID))
             {
                 try
                 {
-                    double nm = await GetCartTotal(cart.CartID); string[] xn = nm.ToString().Split('.'); Session["cartTotal"] = xn[0] + "," + xn[1];
+                    double nm = await GetCartTotal(user.Carts.CartID); string[] xn = nm.ToString().Split('.'); Session["cartTotal"] = xn[0] + "," + xn[1];
                 }
                 catch
-                { Session["cartTotal"] = GetCartTotal(cart.CartID); }
+                { Session["cartTotal"] = GetCartTotal(user.Carts.CartID); }
             }
             else
             { }

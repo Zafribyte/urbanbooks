@@ -19,6 +19,7 @@ namespace urbanbooks.Models
             item = myHandler.CheckIfExist(cartId, ProductID);
             if(item == null)
             {
+                item = new CartItem();
                 item.CartID = cartId;
                 item.ProductID = ProductID;
                 item.DateAdded = DateTime.Now;

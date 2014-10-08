@@ -215,15 +215,42 @@ namespace urbanbooks.Controllers
 
                      #endregion
 
-                    return RedirectToAction("AdminIndex", "Admin", null);
+                    return RedirectToAction("Index", "Admin", null);
                 }
+                #region Set Up dropdown
 
-                return View();
+                model.SupplierType = new List<SelectListItem>();
+                model.SupplierType.Add(
+                    new SelectListItem { Text = "Please Select Supplier Type", Value = "", Selected = true }
+                );
+                model.SupplierType.Add(
+                    new SelectListItem { Text = "Book Supplier", Value = "0" }
+                    );
+                model.SupplierType.Add(
+                    new SelectListItem { Text = "Technology Supplier", Value = "1" }
+                    );
+                ViewData["SupplierType"] = model.SupplierType;
+                #endregion
+                return View(model);
 
             }
             catch
             {
-                return View();
+                #region Set Up dropdown
+
+                model.SupplierType = new List<SelectListItem>();
+                model.SupplierType.Add(
+                    new SelectListItem { Text = "Please Select Supplier Type", Value = "", Selected = true }
+                );
+                model.SupplierType.Add(
+                    new SelectListItem { Text = "Book Supplier", Value = "0" }
+                    );
+                model.SupplierType.Add(
+                    new SelectListItem { Text = "Technology Supplier", Value = "1" }
+                    );
+                ViewData["SupplierType"] = model.SupplierType;
+                #endregion
+                return View(model);
             }
         }
         [HttpPost]
