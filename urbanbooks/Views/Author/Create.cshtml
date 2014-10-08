@@ -19,7 +19,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", id = "namez" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -27,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control", id = "surname" } })
                 @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -38,7 +38,20 @@
             </div>
         </div>
     </div>
+    
 }
+<script>
+    var namez;
+    $("#namez").focusout(namez = $(this).val());
+    $("#surname").focusout(function () {
+        $.getJSON('@Url.Action("CheckDuplicates", "Author")', { surname: $(this).val(), name: namez }, function (data) {
+            if (data.isDuplicate) {
+                alert("This Author Already Exists.");
+            }
+        }
+        )}
+        )
+</script>
 
 <div>
     @Html.ActionLink("Back to List", "Index")
@@ -46,4 +59,14 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+@Styles.Render("~/Content/css")
+@Styles.Render("~/Content/themes/base/css")
+@Scripts.Render("~/bundles/bootstrap")
+
+<script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+@Scripts.Render("~/bundles/modalform")
+
+@Scripts.Render("~/bundles/fuelux")
 }

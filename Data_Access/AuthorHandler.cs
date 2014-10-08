@@ -10,6 +10,28 @@ namespace urbanbooks
 {
     public class AuthorHandler
     {
+        public List<Author> CheckDuplicateAuthor(string name, string surname)
+        {
+            List<Author> authorList = null;
+            SqlParameter[] Params = { new SqlParameter("@Name", name),
+                                      new SqlParameter("@Surname", surname)
+                                    };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_CheckDuplicateAuthor", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    authorList = new List<Author>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Author author = new Author();
+                        author.Name = row["Name"].ToString();
+                        author.Surname = row["Surname"].ToString();
+                        authorList.Add(author);
+                    }
+                }
+            }
+            return authorList;
+        }
         public List<Author> GetAuthorList()
         {
             List<Author> AuthorList = null;

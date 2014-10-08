@@ -163,7 +163,7 @@ namespace urbanbooks.Controllers
             //bookCategory.Add(new SelectListItem { Text = "Select Category", Value = "", Selected = true });
             foreach (var item in typeList)
             {
-                bookCategory.Add(new SelectListItem { Text = item.CategoryName, Value = item.BookCategoryID.ToString(), Selected = true });
+                bookCategory.Add(new SelectListItem { Text = item.CategoryName, Value = item.BookCategoryID.ToString() });
             }
             bookM.bookCategories = new List<SelectListItem>();
             bookM.bookCategories = bookCategory;
@@ -173,7 +173,7 @@ namespace urbanbooks.Controllers
             //supplier.Add(new SelectListItem { Text = "Select Supplier", Value = "", Selected = true });
             foreach (var item in nameList)
             {
-                supplier.Add(new SelectListItem { Text = item.Name, Value = item.SupplierID.ToString(), Selected = true });
+                supplier.Add(new SelectListItem { Text = item.Name, Value = item.SupplierID.ToString() });
             }
             bookM.suppliers = new List<SelectListItem>();
             bookM.suppliers = supplier;
@@ -183,7 +183,7 @@ namespace urbanbooks.Controllers
             //author.Add(new SelectListItem { Text = "Select Author", Value = "", Selected = true });
             foreach (var item in authList)
             {
-                author.Add(new SelectListItem { Text = item.Name, Value = item.AuthorID.ToString(), Selected = true });
+                author.Add(new SelectListItem { Text = item.Name, Value = item.AuthorID.ToString()});
             }
             bookM.authors = new List<SelectListItem>();
             bookM.authors = author;
@@ -193,7 +193,7 @@ namespace urbanbooks.Controllers
             //publisher.Add(new SelectListItem { Text = "Select Publisher", Value = "", Selected = true });
             foreach (var item in pubList)
             {
-                publisher.Add(new SelectListItem { Text = item.Name, Value = item.PublisherID.ToString(), Selected = true });
+                publisher.Add(new SelectListItem { Text = item.Name, Value = item.PublisherID.ToString() });
             }
             bookM.publishers = new List<SelectListItem>();
             bookM.publishers = publisher;
