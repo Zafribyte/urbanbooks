@@ -294,19 +294,19 @@ namespace urbanbooks.Controllers
             if (model.supplier.IsBookSupplier)
             {
                 model.SupplierType.Add(
-                    new SelectListItem { Text = "Book Supplier", Value = "0", Selected=true}
+                    new SelectListItem { Text = "Book Supplier", Value = "true", Selected=true}
                     );
                 model.SupplierType.Add(
-                    new SelectListItem { Text = "Technology Supplier", Value = "1" }
+                    new SelectListItem { Text = "Technology Supplier", Value = "false", Selected = false }
                     );
             }
             else
             {
                 model.SupplierType.Add(
-                    new SelectListItem { Text = "Book Supplier", Value = "0" }
+                    new SelectListItem { Text = "Technology Supplier", Value = "false", Selected = true }
                     );
                 model.SupplierType.Add(
-                    new SelectListItem { Text = "Technology Supplier", Value = "1", Selected = true }
+                    new SelectListItem { Text = "Book Supplier", Value = "true", Selected = false }
                     );
             }
             ViewData["SupplierType"] = model.SupplierType;
@@ -315,22 +315,93 @@ namespace urbanbooks.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(SupplierViewModel model, FormCollection collection)
         {
             try
             {
-                myHandler = new BusinessLogicHandler();
-                logistics = new Supplier();
-                TryUpdateModel(logistics);
+                #region Bend the rules
+                try
+                {
+                    model.supplier.IsBookSupplier = Convert.ToBoolean(collection.GetValue("SupplierType").AttemptedValue);
+                    if (ModelState.ContainsKey("SupplierType"))
+                        ModelState["SupplierType"].Errors.Clear();
+                }
+                catch
+                { ModelState.AddModelError("SupplierType", "Please select a valid supplier type from dropdown !"); }
+                #endregion
+                ApplicationDbContext context = new ApplicationDbContext();
                 if (ModelState.IsValid)
                 {
-                    myHandler.UpdateSupplier(logistics);
+                    var supplier = context.Suppliers.Where(m => m.SupplierID == model.supplier.SupplierID).First();
+                    supplier.Name = model.supplier.Name;
+                    supplier.LastName = model.supplier.LastName;
+                    supplier.IsBookSupplier = model.supplier.IsBookSupplier;
+                    supplier.Fax = model.supplier.Fax;
+                    supplier.ContactPerson = model.supplier.ContactPerson;
+                    supplier.ContactPersonNumber = model.supplier.ContactPersonNumber;
+
+                    context.SaveChanges();
+                    if (Session["supBack"] != null)
+                    {
+                        return Redirect(Session["supBack"].ToString());
+                    }
+                    else
+                        return RedirectToAction("AdminIndex", "Admin", null);
                 }
-                return RedirectToAction("Index");
+                else
+                {
+                    #region Dropdown data
+                    model.SupplierType = new List<SelectListItem>();
+                    if (model.supplier.IsBookSupplier)
+                    {
+                        model.SupplierType.Add(
+                            new SelectListItem { Text = "Book Supplier", Value = "true", Selected = true }
+                            );
+                        model.SupplierType.Add(
+                            new SelectListItem { Text = "Technology Supplier", Value = "false", Selected = false }
+                            );
+                    }
+                    else
+                    {
+                        model.SupplierType.Add(
+                            new SelectListItem { Text = "Technology Supplier", Value = "false", Selected = true }
+                            );
+                        model.SupplierType.Add(
+                            new SelectListItem { Text = "Book Supplier", Value = "true", Selected = false }
+                            );
+                    }
+                    ViewData["SupplierType"] = model.SupplierType;
+                    #endregion
+
+                    return View(model);
+                }
             }
             catch
             {
-                return View();
+                #region Dropdown data
+                model.SupplierType = new List<SelectListItem>();
+                if (model.supplier.IsBookSupplier)
+                {
+                    model.SupplierType.Add(
+                        new SelectListItem { Text = "Book Supplier", Value = "true", Selected = true }
+                        );
+                    model.SupplierType.Add(
+                        new SelectListItem { Text = "Technology Supplier", Value = "false", Selected = false }
+                        );
+                }
+                else
+                {
+                    model.SupplierType.Add(
+                        new SelectListItem { Text = "Technology Supplier", Value = "false", Selected = true }
+                        );
+                    model.SupplierType.Add(
+                        new SelectListItem { Text = "Book Supplier", Value = "true", Selected = false }
+                        );
+                }
+                ViewData["SupplierType"] = model.SupplierType;
+                #endregion
+
+                return View(model);
             }
         }
 
