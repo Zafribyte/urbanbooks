@@ -14,6 +14,8 @@ namespace urbanbooks
 
         #region COMMON ACTIONS
 
+        public bool CheckIsBookSupplier(int SupplierID)
+        { SupplierHandler myHandler = new SupplierHandler(); return myHandler.IsBookSupplier(SupplierID); }
         public CartItem CheckIfExist(int CartID, int ProductID)
         { CartItemHandler myHandler = new CartItemHandler(); return myHandler.CheckProductDuplicates(CartID, ProductID); }
         public List<InvoiceItem> Sales()

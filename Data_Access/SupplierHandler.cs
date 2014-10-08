@@ -11,6 +11,28 @@ namespace urbanbooks
     public class SupplierHandler
     {
         #region Admin
+
+        public bool IsBookSupplier(int SupplierID)
+        {
+            Supplier supplier = null;
+            SqlParameter[] Params = new SqlParameter[]
+            {
+                new SqlParameter("@SupplierID", SupplierID) ///SEARCH
+            };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_CheckSupplierType",
+                CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count == 1)
+                {
+                    DataRow row = table.Rows[0];
+                    supplier = new Supplier();
+                    supplier.SupplierID = Convert.ToInt32(row["SupplierID"]);
+
+                }
+            }
+            return supplier.IsBookSupplier;
+        }
+
         public List<Supplier> GetBookSupplierList()
         {
             List<Supplier> SupplierList = null;
