@@ -34,7 +34,7 @@ namespace urbanbooks.Controllers
             {
                 myHandler.UpdateCompany(company);
             }
-            return View();
+            return RedirectToAction("CompanyDetails", "Company", null);
         }
     }
 }

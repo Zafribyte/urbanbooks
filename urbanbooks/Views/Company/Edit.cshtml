@@ -15,6 +15,7 @@
     <div class="form-horizontal">
         <h4>Company</h4>
         <hr />
+        @Html.HiddenFor(model => model.CompanyRegistration)
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -95,7 +96,17 @@
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <fieldset>
+            <legend>Image</legend>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CompanyLogo)
+                @Html.EditorFor(model => model.CompanyLogo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CompanyLogo, "", new { @class = "text-danger" })
+            </div>
+            <div class="editor-field">
+                <input id="CoverImage" title="Upload Book Cover" type="file" name="file" accept="image/*" />
+            </div>
+        </fieldset>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
