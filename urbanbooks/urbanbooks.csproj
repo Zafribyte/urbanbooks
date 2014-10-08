@@ -402,6 +402,7 @@
     <Content Include="Content\images\ui-icons_a83300_256x240.png" />
     <Content Include="Content\images\ui-icons_cccccc_256x240.png" />
     <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\images\UrbanBooksLogo.png" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\jquery-ui.structure.min.css" />
