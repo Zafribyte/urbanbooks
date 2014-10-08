@@ -280,11 +280,38 @@ namespace urbanbooks.Controllers
 
         public ActionResult Edit(int SupplierID)
         {
+            #region Prep Utilities
             myHandler = new BusinessLogicHandler();
-            logistics = new Supplier();
-            logistics.SupplierID = SupplierID;
-            logistics = myHandler.GetSupplier(SupplierID);
-            return View(logistics);
+            SupplierViewModel model = new SupplierViewModel();
+            #endregion
+
+            #region Get the Data
+            model.supplier = myHandler.GetSupplier(SupplierID);
+            #endregion
+
+            #region Dropdown data
+            model.SupplierType = new List<SelectListItem>();
+            if (model.supplier.IsBookSupplier)
+            {
+                model.SupplierType.Add(
+                    new SelectListItem { Text = "Book Supplier", Value = "0", Selected=true}
+                    );
+                model.SupplierType.Add(
+                    new SelectListItem { Text = "Technology Supplier", Value = "1" }
+                    );
+            }
+            else
+            {
+                model.SupplierType.Add(
+                    new SelectListItem { Text = "Book Supplier", Value = "0" }
+                    );
+                model.SupplierType.Add(
+                    new SelectListItem { Text = "Technology Supplier", Value = "1", Selected = true }
+                    );
+            }
+            ViewData["SupplierType"] = model.SupplierType;
+            #endregion
+            return View(model);
         }
 
         [HttpPost]
