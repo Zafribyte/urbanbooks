@@ -495,6 +495,8 @@ namespace urbanbooks
         #endregion
 
         #region SYSTEM ACTIONS
+        public List<BookCategory> CheckDuplicatedBookCategory(string category)
+        { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.CheckDuplicateBookCategory(category); }
         public List<Publisher> CheckDuplicatedPublisher(string name)
         { PublisherHandler myHandler = new PublisherHandler(); return myHandler.CheckDuplicatePublisher(name); }
         public List<Book> CheckDuplicatedBook(string isbn)

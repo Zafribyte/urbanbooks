@@ -10,7 +10,27 @@ namespace urbanbooks
 {
     public class BookCategoryHandler
     {
-
+        public List<BookCategory> CheckDuplicateBookCategory(string category)
+        {
+            List<BookCategory> categoryList = null;
+            SqlParameter[] Params = { new SqlParameter("@category", category) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_CheckDuplicateBookCategory", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    categoryList = new List<BookCategory>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        BookCategory bookCategory = new BookCategory();
+                        bookCategory.BookCategoryID = Convert.ToInt32(row["BookCategoryID"]);
+                        bookCategory.CategoryName = row["CategoryName"].ToString();
+                        bookCategory.CategoryDescription = row["CategoryDescription"].ToString();
+                        categoryList.Add(bookCategory);
+                    }
+                }
+            }
+            return categoryList;
+        }
         public List<BookCategory> GetBookCategoryList()
         {
             List<BookCategory> bookCategoryList = null;
