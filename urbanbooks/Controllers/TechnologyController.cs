@@ -486,5 +486,15 @@ namespace urbanbooks.Controllers
                 return View();
             }
         }
+
+        public ActionResult ByManufacturer(int ManufacturerID)
+        {
+            #region Prep Utilties
+            myHandler = new BusinessLogicHandler();
+            IEnumerable<Technology> ManufacturerList = myHandler.GetDevicesByManufacurer(ManufacturerID);
+            #endregion
+
+            return View(ManufacturerList);
+        }
     }
 }

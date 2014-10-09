@@ -5,6 +5,19 @@
     ViewBag.Title = "Books";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@{
+    var message = TempData["cartAdd"] ?? string.Empty;
+}
+
+<script type="text/javascript">
+    var msg = '@message';
+    if(msg)
+    {
+        window.alert(msg);
+    }
+</script>
+
 <br /><br /><br />
 @if (Model.BookResults != null)
 {

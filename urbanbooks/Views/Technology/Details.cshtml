@@ -7,6 +7,19 @@
 }
 
 @{
+    var message = TempData["cartAdd"] ?? string.Empty;
+}
+
+<script type="text/javascript">
+    var msg;
+    if (msg) {
+        window.alert(msg);
+    }
+</script>
+
+
+
+@{
     string returnUrl = HttpContext.Current.Request.RawUrl;
 }
 <br />

@@ -9,6 +9,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using urbanbooks.Helpers;
+
+
+@{
+    var message = TempData["cartAdd"] ?? string.Empty;
+}
+
+<script type="text/javascript">
+    var msg;
+    if(msg)
+    {
+        window.alert(msg);
+    }
+</script>
+
 <br />
 <div class="container">
     <div class="jumbotron">

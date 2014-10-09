@@ -5,6 +5,19 @@
     ViewBag.Title = "Books";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@{
+    var message = TempData["cartAdd"] ?? string.Empty;
+}
+
+<script type="text/javascript">
+    var msg;
+    if(msg)
+    {
+        window.alert(msg);
+    }
+</script>
+
 <br />
 <h4>Books by : @Html.DisplayFor(model => model.author.Name)&nbsp;@Html.DisplayFor(model => model.author.Surname) </h4>
 <br /><br />
