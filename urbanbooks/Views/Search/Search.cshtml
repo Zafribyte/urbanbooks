@@ -126,7 +126,7 @@
         <ul>
             @foreach (var item in Model.ManufacturerResults)
             {
-                <li>@Html.ActionLink("" + item.Name, "ByCategory", "Technology", new { ManufacturerID = item.ManufacturerID}, null)</li>
+                <li>@Html.ActionLink("" + item.Name, "ByManufacturer", "Technology", new { ManufacturerID = item.ManufacturerID}, null)</li>
             }
         </ul>
     </div>

@@ -48,14 +48,34 @@ namespace urbanbooks.Controllers
                 WishlistActions grantMyWish = new WishlistActions();
                 CartActions cart = new CartActions();
                 ProductViewModel bridge = new ProductViewModel();
+                List<Book> bookList = new List<Book>();
+                List<Technology> deviceList = new List<Technology>();
                 myHandler = new BusinessLogicHandler();
                 bridge.allWishlistItems = new List<WishlistItem>();
-                bridge.allWishlistItems =  grantMyWish.GetWishlistItems(user.Wishlists.WishlistID).ToList();
+                bridge.allWishlistItems =  grantMyWish.GetWishlistItems(user.Wishlists.WishlistID);
+                if(bridge.allWishlistItems != null)
                 {
                     bridge.allBook = new List<Book>();
-                    bridge.allBook = myHandler.GetBooks();
+                    foreach(var item in bridge.allWishlistItems)
+                    {
+                        if(myHandler.CheckProductType(item.ProductID))
+                        {
+                             Book myBook = new Book();
+                             myBook = myHandler.GetBook(item.ProductID);
+                             bookList.Add(myBook);
+                        }
+                        else
+                        {
+                            Technology myDevice = new Technology();
+                            myDevice = myHandler.GetTechnologyDetails(item.ProductID);
+                            deviceList.Add(myDevice);
+                        }
+                    }
+                    //bridge.allBook = myHandler.GetBooks();
                     bridge.allTechnology = new List<Technology>();
-                    bridge.allTechnology = myHandler.GetTechnology();
+                    //bridge.allTechnology = myHandler.GetTechnology();
+                    bridge.allBook = bookList;
+                    bridge.allTechnology = deviceList;
                 }
 
                 Session["wishlistTotal"] =  grantMyWish.GetWishlistTotal(user.Wishlists.WishlistID);
