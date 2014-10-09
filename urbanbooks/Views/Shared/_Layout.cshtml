@@ -17,7 +17,6 @@
     <link href="~/Content/jquery-ui.structure.min.css" rel="stylesheet" />
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-    <link href="~/Content/Zosial/css/fontllo.css" rel="stylesheet" />
 </head>
 <body>
     @using urbanbooks.Controllers;
@@ -54,7 +53,7 @@
                         <li class="divider"></li>
                         <li>@Html.ActionLink("Laptops", "ByCategory", "Technology", new { name = "Laptop", CategoryID = 0 }, null)</li>
                         <li>@Html.ActionLink("Tablets", "ByCategory", "Technology", new { name = "Tablet", CategoryID = 0 }, null)</li>
-                        <li>@Html.ActionLink("Accessories", "ByCategory", "Technology", new { name = "Accesor", CategoryID = 0 }, null)</li>
+                        <li>@Html.ActionLink("Accessories", "ByCategory", "Technology", new { name = "Accesories", CategoryID = 0 }, null)</li>
                         <li>@Html.ActionLink("Software", "ByCategory", "Technology", new { name = "Software", CategoryID = 0 }, null)</li>
                         <li class="divider"></li>
                         <li>@Html.ActionLink("More Categories", "Categories", "Technology")</li>
@@ -118,7 +117,7 @@
                     <br />
                     <a href="/Home/">&copy; Urban books 2014</a><br />
                     <p>
-                        Contact Us <i class="icon-facebook-rect"></i> <i class="icon-twitter-squared"></i> <i class="icon-pinterest-circled"></i> <i class="icon-googleplus-rect"></i>
+                        Contact Us <i class="icon-facebook-squared"></i> <i class="icon-twitter-squared"></i> <i class="icon-pinterest-circled"></i> <i class="icon-gplus-squared"></i>
                     </p>
                 </div>
                 <div class="col-md-4" style="text-align:center">
@@ -126,11 +125,11 @@
                     <br />
                     <i class="icon-mobile"></i>  @Html.ActionLink("Devices", "Index", "Technology")
                     <br />
-                    <i class="icon-book-1"></i>  @Html.ActionLink("FAQS", "FAQs", "Help")
+                    <i class="icon-book"></i>  @Html.ActionLink("FAQS", "FAQs", "Help")
                 </div>
                 <div class="col-md-4 pull-right">
                     <br />
-                    <p class="pull-right">Best viewed in <i class="icon-firefox"></i> <i class="icon-chrome"></i> built with <span style="font-size:larger"><i class="icon-html5-1"></i></span> <br /> On resolution 1280 X 600 and above</p>
+                    <p class="pull-right">Best viewed in <i class="icon-firefox"></i> <i class="icon-chrome"></i> built with <span style="font-size:larger"><i class="icon-html5"></i></span> <br /> On resolution 1280 X 600 and above</p>
                 </div>
             </div>
         </footer>
