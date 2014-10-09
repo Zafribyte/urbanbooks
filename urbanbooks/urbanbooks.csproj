@@ -656,6 +656,7 @@
     <Content Include="Views\Company\Edit.cshtml" />
     <Content Include="Views\Company\CompanyIndex.cshtml" />
     <Content Include="Views\Company\CompanyDetails.cshtml" />
+    <Content Include="Views\Cart\ExportToPDF.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\Books\" />
