@@ -103,6 +103,47 @@
             </div>
         </div>
     </div>
+    <fieldset>
+        <label class="control-label col-md-2">Front Image:</label>
+        <div class="editor-label">
+            @Html.EditorFor(model => model.techs.ImageFront, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.techs.ImageFront, "", new { @class = "text-danger" })
+        </div>
+        <br />
+
+        <label class="control-label col-md-2">Replace Front Image Here:</label>
+        <div class="control-label col-md-2 ">
+            <input id="ImageFront" title="Upload Front Image" type="file" name="file1" accept="image/*" />
+        </div>
+    </fieldset>
+    
+    <fieldset>
+        <label class="control-label col-md-2">Top Image:</label>
+        <div class="editor-label">
+            @Html.EditorFor(model => model.techs.ImageTop, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.techs.ImageTop, "", new { @class = "text-danger" })
+        </div>
+        <br />
+
+        <label class="control-label col-md-2">Replace Top Image Here:</label>
+        <div class="control-label col-md-2 ">
+            <input id="ImageTop" title="Upload Top Image" type="file" name="file2" accept="image/*" />
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <label class="control-label col-md-2">Other Image:</label>
+        <div class="editor-label">
+            @Html.EditorFor(model => model.techs.ImageSide, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.techs.ImageSide, "", new { @class = "text-danger" })
+        </div>
+        <br />
+
+        <label class="control-label col-md-2">Replace Side/Other Image Here:</label>
+        <div class="control-label col-md-2 ">
+            <input id="ImageSide" title="Upload Side Image" type="file" name="file3" accept="image/*" />
+        </div>
+    </fieldset>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

@@ -767,12 +767,9 @@ namespace urbanbooks
                 new SqlParameter("@ManufacturerID", TechnoProduct.ManufacturerID),
                 new SqlParameter("@TechCategoryID", TechnoProduct.TechCategoryID),
                 new SqlParameter("@SupplierID", TechnoProduct.SupplierID),
-                //new SqlParameter("@ImageFront", TechnoProduct.ImageFront),
-                //new SqlParameter("@ImageTop", TechnoProduct.ImageTop),
-                //new SqlParameter("@ImageSide", TechnoProduct.ImageSide),
-                
-
-                
+                new SqlParameter("@ImageFront", TechnoProduct.ImageFront),
+                new SqlParameter("@ImageTop", TechnoProduct.ImageTop),
+                new SqlParameter("@ImageSide", TechnoProduct.ImageSide)      
             };
             return DataProvider.ExecuteNonQuery("sp_UpdateTechnology", CommandType.StoredProcedure,
                 Params);

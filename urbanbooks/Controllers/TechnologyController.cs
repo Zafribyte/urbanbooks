@@ -16,7 +16,7 @@ namespace urbanbooks.Controllers
     {
         Technology gadget;
         BusinessLogicHandler myHandler;
-        [Authorize(Roles="admin, employee")]
+        [Authorize(Roles = "admin, employee")]
         public ActionResult ManageTechnology()
         { return View(); }
 
@@ -37,7 +37,7 @@ namespace urbanbooks.Controllers
             return View(model);
         }
 
-        public ActionResult ByCategory (string name, int CategoryID)
+        public ActionResult ByCategory(string name, int CategoryID)
         {
             #region Init
 
@@ -83,8 +83,8 @@ namespace urbanbooks.Controllers
                         isDuplicate = true;
                     }
                 }
-                
-                
+
+
             }
             var jsonData = new { isDuplicate };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
@@ -98,7 +98,7 @@ namespace urbanbooks.Controllers
 
             return View(myTechDelete);
         }
-        [Authorize(Roles="admin")]
+        [Authorize(Roles = "admin")]
         public ActionResult AdminIndex()
         {
             myHandler = new BusinessLogicHandler();
@@ -108,7 +108,7 @@ namespace urbanbooks.Controllers
             ViewBag.TechTypeBag = myType;
 
             TempData["Alert Message"] = "Device Successfully Deleted";
-            
+
             return View(myTechList);
         }
         public ActionResult Index(int? page)
@@ -216,7 +216,7 @@ namespace urbanbooks.Controllers
             ViewData["manufacturers"] = manufacturer;
 
             return View(techM);
-        
+
         }
 
         [Authorize(Roles = "admin, employee")]
@@ -224,8 +224,8 @@ namespace urbanbooks.Controllers
         public ActionResult Create(FormCollection collection, HttpPostedFileBase file, HttpPostedFileBase file2, HttpPostedFileBase file3)
         {
             try
-                {
-                
+            {
+
                 myHandler = new BusinessLogicHandler();
                 gadget = new Technology();
                 Company c = new Company();
@@ -239,8 +239,8 @@ namespace urbanbooks.Controllers
                 gadget.CostPrice = Convert.ToDouble(collection.GetValue("techs.CostPrice").AttemptedValue);
                 gadget.SellingPrice = Convert.ToDouble(collection.GetValue("techs.SellingPrice").AttemptedValue);
                 gadget.IsBook = false;
-                
-                
+
+
                 if (ModelState.IsValid)
                 {
                     if (file != null)
@@ -370,40 +370,42 @@ namespace urbanbooks.Controllers
                         select new { Value = mName.ManufacturerID, Text = mName.Name };
             ViewBag.ManufacturerList = new SelectList(dispM.ToList());
 
+            model.techs = myHandler.GetTechnologyDetails(ProductID);
             Supplier sp = new Supplier();
             TechCategory tck = new TechCategory();
             Manufacturer mna = new Manufacturer();
 
-            foreach(var item in manList)
+            foreach (var item in manList)
             {
-                if(item.ManufacturerID == model.techs.ManufacturerID)
+                if (item.ManufacturerID == model.techs.ManufacturerID)
                 {
                     mna.ManufacturerID = item.ManufacturerID;
                     mna.Name = item.Name;
                 }
             }
-            foreach(var item in nameList)
+            foreach (var item in nameList)
             {
-                if(item.SupplierID == model.techs.SupplierID)
+                if (item.SupplierID == model.techs.SupplierID)
                 {
                     sp.SupplierID = item.SupplierID;
                     sp.Name = item.Name;
                 }
             }
-            foreach(var item in typeList)
+            foreach (var item in typeList)
             {
-                if(item.TechCategoryID == model.techs.TechCategoryID)
+                if (item.TechCategoryID == model.techs.TechCategoryID)
                 {
                     tck.TechCategoryID = item.TechCategoryID;
                     tck.CategoryName = item.CategoryName;
                 }
             }
 
-            List<SelectListItem> supplier = new List<SelectListItem>(); 
+            List<SelectListItem> supplier = new List<SelectListItem>();
             supplier.Add(new SelectListItem { Value = sp.SupplierID.ToString(), Text = sp.Name, Selected = true });
             foreach (var item in nameList)
             {
-                supplier.Add(new SelectListItem { Text = item.Name, Value = item.SupplierID.ToString() });
+                if (item.SupplierID != sp.SupplierID)
+                    supplier.Add(new SelectListItem { Text = item.Name, Value = item.SupplierID.ToString() });
             }
             model.suppliers = new List<SelectListItem>();
             model.suppliers = supplier;
@@ -413,7 +415,8 @@ namespace urbanbooks.Controllers
             techCategory.Add(new SelectListItem { Value = tck.TechCategoryID.ToString(), Text = tck.CategoryName, Selected = true });
             foreach (var item in typeList)
             {
-                techCategory.Add(new SelectListItem { Text = item.CategoryName, Value = item.TechCategoryID.ToString() });
+                if (item.TechCategoryID != tck.TechCategoryID)
+                    techCategory.Add(new SelectListItem { Text = item.CategoryName, Value = item.TechCategoryID.ToString() });
             }
             model.techCategories = new List<SelectListItem>();
             model.techCategories = techCategory;
@@ -423,7 +426,8 @@ namespace urbanbooks.Controllers
             manufacturer.Add(new SelectListItem { Value = mna.ManufacturerID.ToString(), Text = mna.Name, Selected = true });
             foreach (var item in manList)
             {
-                manufacturer.Add(new SelectListItem { Text = item.Name, Value = item.ManufacturerID.ToString() });
+                if (item.ManufacturerID != mna.ManufacturerID)
+                    manufacturer.Add(new SelectListItem { Text = item.Name, Value = item.ManufacturerID.ToString() });
             }
             model.manufacturers = new List<SelectListItem>();
             model.manufacturers = manufacturer;
@@ -454,14 +458,14 @@ namespace urbanbooks.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    
+
                     model.techs.TechCategoryID = Convert.ToInt32(collection.GetValue("CategoryName").AttemptedValue);
                     model.techs.SupplierID = Convert.ToInt32(collection.GetValue("Name").AttemptedValue);
                     model.techs.Status = Convert.ToBoolean(collection.GetValue("Status"));
                     myHandler.UpdateTechnology(model.techs);
                     myHandler.UpdateTechProduct(model.techs);
                 }
-                return RedirectToAction("ManageTechnology");
+                return RedirectToAction("AdminIndex", "Technology", null);
             }
             catch
             {
@@ -470,7 +474,7 @@ namespace urbanbooks.Controllers
         }
         [HttpPost]
         public ActionResult GetTechMarkup(string selectedValue)
-            {
+        {
             double s = 0;
             double t = 0;
 
@@ -496,7 +500,7 @@ namespace urbanbooks.Controllers
         {
             AddNewTechViewModel model = new AddNewTechViewModel();
             model.techs = new Technology();
-            
+
             myHandler = new BusinessLogicHandler();
             gadget = myHandler.GetTechnologyDetails(ProductID);
             model.techs = gadget;
@@ -516,7 +520,7 @@ namespace urbanbooks.Controllers
 
                 TempData["Alert Message"] = "Device Successfully Deleted";
 
-                
+
                 return RedirectToAction("AdminIndex", "Technology");
             }
 
