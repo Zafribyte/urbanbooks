@@ -11,6 +11,8 @@ namespace urbanbooks.Models
         [Key]
         public int TheKey 
         { get; set; }
+        [DataType(DataType.Currency)]
+        public double totally { get; set; }
         public Order OrderDetails 
         { get; set; }
         public IEnumerable<OrderItem> OrderLineDetails 
