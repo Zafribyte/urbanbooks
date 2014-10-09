@@ -55,7 +55,7 @@
     </div>
     <script>
     $("#categoryName").focusout(function () {
-        $.getJSON('@Url.Action("CheckDuplicates", "BookType")', { name: $(this).val() }, function (data) {
+        $.getJSON('@Url.Action("CheckDuplicates", "BookType")', { category: $(this).val() }, function (data) {
             if (data.isDuplicate) {
                 alert("That Category already exists. Please try again");
             }
