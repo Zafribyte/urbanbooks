@@ -63,6 +63,7 @@ namespace urbanbooks.Controllers
             myHandler = new BusinessLogicHandler();
             List<Book> myBookList = new List<Book>();
             myBookList = myHandler.GetBooks();
+            myBookList.OrderBy(m => m.DateAdded);
             IEnumerable<BookCategory> myType = myHandler.GetBookCategoryList();
             ViewBag.BookTypeBag = myType;
             return View(myBookList);
