@@ -6,6 +6,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@{
+    var message = TempData["cartAdd"] ?? string.Empty;
+}
+
+<script type="text/javascript">
+    var msg;
+    if(msg)
+    {
+        window.alert(msg);
+    }
+</script>
+
+
 @if(Model.TCategory != null)
 {
     <h3>Devices for Category :&nbsp;@Html.DisplayFor(m => m.TCategory.CategoryName)</h3>

@@ -6,6 +6,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+@{
+    var message = TempData["cartAdd"] ?? string.Empty;
+}
+
+<script type="text/javascript">
+    var msg;
+    if(msg)
+    {
+        window.alert(msg);
+    }
+</script>
+
 <div class="row" style="text-align:center">
     <h4>Search Results for :&nbsp;<strong>@Html.DisplayFor(m => m.Query)</strong></h4>
 </div>

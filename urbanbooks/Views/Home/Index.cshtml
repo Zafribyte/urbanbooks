@@ -4,6 +4,25 @@
     ViewBag.Title = "Home";
 }
 
+
+
+@{
+    var message = TempData["cartAdd"] ?? string.Empty;
+}
+
+<script type="text/javascript">
+    var msg;
+    if (msg) {
+        window.alert(msg);
+    }
+</script>
+
+
+
+
+
+
+
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 

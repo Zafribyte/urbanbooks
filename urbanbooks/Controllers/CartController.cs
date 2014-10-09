@@ -100,6 +100,7 @@ namespace urbanbooks.Controllers
                     }
                 }
                 double cartTotal = Convert.ToDouble(Session["cartTotal"].ToString());
+                cartTotal = cartTotal / 100;
                 List<Company> company = myHandler.GetCompanyDetails();
                 double vat = 0;
                 foreach (var item in company)
@@ -150,6 +151,7 @@ namespace urbanbooks.Controllers
                 {
                     item = inWishes.SingleOrDefault(items => items.ProductID == ProductID);
                     myHandler.DeleteWishlistItem(item.WishlistItemID);
+                    TempData["cartAdd"] = "1 item added to cart";
                 }
                 catch { }
             }
@@ -158,6 +160,7 @@ namespace urbanbooks.Controllers
                 try
                 {
                     double nm = await GetCartTotal(user.Carts.CartID); string[] xn = nm.ToString().Split('.'); Session["cartTotal"] = xn[0] + "," + xn[1];
+                    
                 }
                 catch
                 { Session["cartTotal"] = GetCartTotal(user.Carts.CartID); }
@@ -214,7 +217,13 @@ namespace urbanbooks.Controllers
             userMgr = new ApplicationUserManager(myStore);
             var thisUser = await userMgr.FindByNameAsync(User.Identity.Name);
             int Id = (int)thisUser.Carts.CartID;
-            Session["cartTotal"] = act.GetTotalAsync(Id);
+
+
+            try
+            { double nm = await GetCartTotal(Id); string[] xn = nm.ToString().Split('.'); Session["cartTotal"] = xn[0] + "," + xn[1]; }
+            catch { Session["cartTotal"] = act.GetTotalAsync(Id); }
+
+
             Session["wishlistTotal"] = wishAct.GetWishlistTotal(thisUser.Wishlists.WishlistID);
             //List<CartItem> myItems = new List<CartItem>(); 
             ProductViewModel myNewModel = new ProductViewModel();
@@ -278,6 +287,7 @@ namespace urbanbooks.Controllers
                     }
                 }
                 double cartTotal = Convert.ToDouble(Session["cartTotal"].ToString());
+                cartTotal = cartTotal / 100;
                 List<Company> company = myHandler.GetCompanyDetails();
                 double vat = 0;
                 foreach (var item in company)
@@ -795,7 +805,7 @@ namespace urbanbooks.Controllers
             return PartialView(helperModel);
         }
 
-        public ActionResult Reciept(int? IID)
+        public async Task<ActionResult> Reciept(int? IID)
         {
             List<CartItem> myItems = new List<CartItem>();
             myItems = (List<CartItem>)Session["myItems"];
@@ -929,6 +939,7 @@ namespace urbanbooks.Controllers
             }
 
             double cartTotal = Convert.ToDouble(Session["cartTotal"].ToString());
+            cartTotal = cartTotal / 100;
             myHandler = new BusinessLogicHandler();
             List<Company> company = myHandler.GetCompanyDetails();
             double vat = 0;
@@ -959,6 +970,7 @@ namespace urbanbooks.Controllers
 
             #region Clear SESSION
             Session["myItems"] = null;
+            Session["cartTotal"] = (double) await GetCartTotal(user.Carts.CartID);
             #endregion
 
             #region Prep for exporting to PDF

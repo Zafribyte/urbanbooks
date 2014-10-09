@@ -6,6 +6,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+@{
+    var message = TempData["cartAdd"] ?? string.Empty;
+}
+
+<script type="text/javascript">
+    var msg;
+    if(msg)
+    {
+        window.alert(msg);
+    }
+</script>
+
+
 @if (Model.BCategory != null)
 { <h3>Books for Category :&nbsp; @Html.DisplayFor(m => m.BCategory.CategoryName)</h3>}
 <hr />

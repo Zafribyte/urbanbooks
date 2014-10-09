@@ -120,6 +120,34 @@ namespace urbanbooks
             return TechnologyList;
         }
 
+        public List<Technology> TechnologyByManufacturer(int ManufacturerID)
+        {
+            List<Technology> TechnologyList = null;
+            SqlParameter[] Params = { new SqlParameter("@ManufacturerID", ManufacturerID) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("ViewDevicesByManufacturer", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    TechnologyList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology Techno = new Technology();
+                        Techno.TechID = (int)row["TechID"];
+                        Techno.ProductID = (int)row["ProductID"];
+                        Techno.ModelName = row["ModelName"].ToString();
+                        Techno.Specs = row["Specs"].ToString();
+                        Techno.ModelNumber = row["ModelNumber"].ToString();
+                        Techno.ManufacturerID = (int)row["ManufacturerID"];
+                        Techno.TechCategoryID = (int)row["TechCategoryID"];
+                        Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
+                        Techno.ImageFront = row["ImageFront"].ToString();
+                        TechnologyList.Add(Techno);
+                    }
+                }
+            }
+            return TechnologyList;
+        }
+
         #region Search
         public List<Technology> TechnologyGlobalSearch(string query)
         {

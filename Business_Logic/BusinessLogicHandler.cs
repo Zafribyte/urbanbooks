@@ -14,6 +14,8 @@ namespace urbanbooks
 
         #region COMMON ACTIONS
 
+        public List<Technology> GetDevicesByManufacurer(int manufacurerID)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.TechnologyByManufacturer(manufacurerID); }
         public bool CheckIsBookSupplier(int SupplierID)
         { SupplierHandler myHandler = new SupplierHandler(); return myHandler.IsBookSupplier(SupplierID); }
         public CartItem CheckIfExist(int CartID, int ProductID)
