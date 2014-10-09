@@ -10,7 +10,6 @@
 <ul class="nav nav-tabs">
     <li class="active"><a href="#home" data-toggle="tab">Invoice</a></li>
     <li><a href="#profile" data-toggle="tab">Suppliers Involved</a></li>
-    <li><a href="#messages" data-toggle="tab">Order by Supplier</a></li>
 </ul>
 
 <div class="tab-content">
@@ -35,6 +34,13 @@
                             <td>@Html.DisplayFor(m => item.Price)</td>
                         </tr>
                     }
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td><label>Total</label></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
                 </table>
 
 </div>
@@ -58,11 +64,6 @@
             </dl>
             <br />
         }
-
-    </div>
-
-
-    <div class="tab-pane fade" id="messages">
 
     </div>
 

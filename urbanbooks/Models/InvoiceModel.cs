@@ -16,6 +16,7 @@ namespace urbanbooks.Models
         public List<InvoiceItem> InvoiceLine { get; set; }
         [NotMapped]
         public List<Order> Orders { get; set; }
+        public double totally { get; set; }
         [NotMapped]
         public List<OrderItem> OrderLine { get; set; }
         [NotMapped]

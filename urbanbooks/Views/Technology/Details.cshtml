@@ -3,7 +3,13 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    if(User.IsInRole("admin"))
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+    else
+    { Layout = "~/Views/Shared/_Layout.cshtml"; }
+    
 }
 
 @{
@@ -29,13 +35,34 @@
     <li class="active"><a href="#home" role="tab" data-toggle="tab">Details</a></li>
     <li><a href="#profile" role="tab" data-toggle="tab">Images</a></li>
     <li class="dropdown">
-        <a href="#"  class="dropdown-toggle" data-toggle="dropdown">Actions <span class="caret"></span></a>
-        <ol class="dropdown-menu" role="menu">
-            <li>@Html.ActionLink("Add to cart", "AddToCart", "Cart", new { productId = Model.techs.ProductID, returnUrl }, null)</li>
-            <li>@Html.ActionLink("Add to wishlist", "Add", "Wishlist", new { productId = Model.techs.ProductID, returnUrl }, null)</li>
-        </ol>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions <span class="caret"></span></a>
+        @{
+            if (User.IsInRole("admin"))
+            {
+                <ul class="dropdown-menu" role="menu">
+                    <li>@Html.ActionLink("Edit", "Edit", new { ProductID = Model.techs.ProductID })</li>
+                    <li>@Html.ActionLink("Delete", "Delete", new { ProductID = Model.techs.ProductID })</li>
+                </ul>
+                
+                
+            }
+            else
+            {
+                <ol class="dropdown-menu" role="menu">
+                    <li>@Html.ActionLink("Add to cart", "AddToCart", "Cart", new { productId = Model.techs.ProductID, returnUrl }, null)</li>
+                    <li>@Html.ActionLink("Add to wishlist", "Add", "Wishlist", new { productId = Model.techs.ProductID, returnUrl }, null)</li>
+                </ol>
+            }
+        }
+
     </li>
 </ul>
+
+
+
+
+
+
 
 <div class="tab-content">
 

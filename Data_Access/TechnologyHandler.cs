@@ -123,7 +123,7 @@ namespace urbanbooks
         public List<Technology> TechnologyByManufacturer(int ManufacturerID)
         {
             List<Technology> TechnologyList = null;
-            SqlParameter[] Params = { new SqlParameter("@ManufacturerID", ManufacturerID) };
+            SqlParameter[] Params = { new SqlParameter("@ManufacurerID", ManufacturerID) };
             using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("ViewDevicesByManufacturer", CommandType.StoredProcedure, Params))
             {
                 if (table.Rows.Count > 0)
