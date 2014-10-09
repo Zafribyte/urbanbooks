@@ -10,6 +10,25 @@ namespace urbanbooks
 {
     public class TechnologyHandler
     {
+        public List<Technology> CheckDuplicateDevice(string modelNumber)
+        {
+            List<Technology> deviceList = null;
+            SqlParameter[] Params = { new SqlParameter("@modelNumber", modelNumber) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_CheckDuplicateDevice", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    deviceList = new List<Technology>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Technology tech = new Technology(); ;
+                        tech.ModelNumber = row["ModelNumber"].ToString();
+                        deviceList.Add(tech);
+                    }
+                }
+            }
+            return deviceList;
+        }
         public List<Technology> GetDeletedDevices()
         {
             List<Technology> TechnologyList = null;
