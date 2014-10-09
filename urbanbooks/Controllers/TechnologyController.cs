@@ -50,13 +50,22 @@ namespace urbanbooks.Controllers
 
             if (name != null)
             {
-                model.GadgetResults = myHandler.CategoryDeviceSearch(name);
-                model.TCategory = new TechCategory();
-                helper = (Technology)model.GadgetResults.Take(1).FirstOrDefault();
-                model.TCategory = myHandler.GetTechnologyType(helper.TechCategoryID);
+                try
+                {
+                    model.GadgetResults = myHandler.CategoryDeviceSearch(name);
+                    model.TCategory = new TechCategory();
+                    helper = (Technology)model.GadgetResults.Take(1).FirstOrDefault();
+                    model.TCategory = myHandler.GetTechnologyType(helper.TechCategoryID);
+                }
+                catch
+                {
+                    model.GadgetResults = myHandler.DevicesByCategory(CategoryID);//Replace
+                    model.TCategory = new TechCategory();
+                    model.TCategory = myHandler.GetTechnologyType(CategoryID);
+                }
 
             }
-            else if (CategoryID != 0)
+            if (CategoryID != 0)
             {
                 model.GadgetResults = myHandler.DevicesByCategory(CategoryID);//Replace
                 model.TCategory = new TechCategory();

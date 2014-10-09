@@ -29,6 +29,8 @@
             title: 'Total Book Sales By Category',
             legend: { position: 'none' },
             'width': 600,
+            'legend': 'left',
+            pieHole: 0.3,
             'height': 600
         };
 
@@ -55,10 +57,12 @@
         var data = google.visualization.arrayToDataTable(chartArray);
 
         var options = {
-            title: '',
+            title: 'Device Sales By Categories',
             legend: { position: 'none' },
             'width': 600,
-            'height': 600
+            pieHole: 0.3,
+            'height': 600,
+            'legend': 'left'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('deviceSales'));
@@ -67,56 +71,23 @@
     }
 </script>
 
-<script type="text/javascript">
-    google.load("visualization", "1", { packages: ["corechart"] });
-    google.setOnLoadCallback(drawChart);
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Genre', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General',
-           'Western', 'Literature', { role: 'annotation' }],
-          ['2010', 10, 24, 20, 32, 18, 5, ''],
-          ['2020', 16, 22, 23, 30, 16, 9, ''],
-          ['2030', 28, 19, 29, 30, 12, 13, '']
-        ]);
-
-        var options = {
-            width: 1000,
-            height: 400,
-            legend: { position: 'none' },
-            bar: { groupWidth: '75%' },
-            isStacked: true
-        };
-        var chart = new google.visualization.BarChart(document.getElementById("yearLy"));
-        chart.draw(data, options);
-    }
-</script>
 
 
-
-
-<h2 style="text-align:center">Welcome : </h2>
+<h2 style="text-align:center">Welcome</h2>
 <div class="row">
     <br />
     <div class="col-md-6">
         <div class="thumbnail" style="text-align:center; align-content:center">
-            <label class="caption">Total Book Sales</label><br />
-            <div id="bookSales"></div>
-            @Html.ActionLink("Learn More", "Controller", null, new { @class="btn btn-default"})
+            <div id="bookSales"></div>            
         </div>
     </div>
     <div class="col-md-6">
         <div class="thumbnail" style="text-align:center">
-            <label class="caption">Total Technology Sales</label><br />
             <div id="deviceSales"></div>
-            @Html.ActionLink("Learn More", "Controller", null, new { @class = "btn btn-default" })
         </div>
     </div>
 </div>
 
 <br /><br />
 
-<div class="row">
-    <h4 style="text-align:center">Total Sales</h4>
-    <div id="yearLy"></div>
-</div>
 
