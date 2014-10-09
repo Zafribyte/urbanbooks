@@ -10,7 +10,26 @@ namespace urbanbooks
 {
     public class ManufacturerHandler
     {
-
+        public List<Manufacturer> CheckDuplicateManufacturer(string manufacturer)
+        {
+            List<Manufacturer> manufacturerList = null;
+            SqlParameter[] Params = { new SqlParameter("@manufacturer", manufacturer) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_CheckDuplicateManufacturer", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    manufacturerList = new List<Manufacturer>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Manufacturer manufact = new Manufacturer(); ;
+                        manufact.ManufacturerID = Convert.ToInt32(row["ManufacturerID"]);
+                        manufact.Name = row["Name"].ToString();
+                        manufacturerList.Add(manufact);
+                    }
+                }
+            }
+            return manufacturerList;
+        }
         public List<Manufacturer> ManufacturerGlobalSearch(string query)
         {
             List<Manufacturer> manufacturerList = null;

@@ -15,7 +15,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CategoryName, htmlAttributes: new { @class = "control-label col-md-8" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control", id = "categoryName"} })
                 @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -33,6 +33,16 @@
         <input type="submit" class="btn btn-default" value="Create" />
         <button class="btn btn-default" data-dismiss="modal">Close</button>
     </div>
+    <script>
+    $("#categoryName").focusout(function () {
+        $.getJSON('@Url.Action("CheckDuplicates", "BookType")', { category: $(this).val() }, function (data) {
+            if (data.isDuplicate) {
+                alert("That Category already exists. Please try again");
+            }
+        }
+        )}
+        )
+    </script>
 }
 
 
