@@ -447,13 +447,13 @@ namespace urbanbooks.Controllers
 
         [Authorize(Roles = "admin, employee")]
         [HttpPost]
-        public ActionResult Edit(AddNewTechViewModel model, FormCollection collection)
+        public ActionResult Edit(HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3, AddNewTechViewModel model, FormCollection collection)
         {
             try
             {
                 myHandler = new BusinessLogicHandler();
 
-                #region Cathing model errors
+                #region Catching model errors
                 try
                 {
                     model.techs.ManufacturerID = Convert.ToInt32(collection.GetValue("Manufacturer").AttemptedValue);
@@ -471,6 +471,29 @@ namespace urbanbooks.Controllers
                     model.techs.TechCategoryID = Convert.ToInt32(collection.GetValue("CategoryName").AttemptedValue);
                     model.techs.SupplierID = Convert.ToInt32(collection.GetValue("Name").AttemptedValue);
                     model.techs.Status = Convert.ToBoolean(collection.GetValue("Status"));
+                    try
+                    {
+                        if (file1 != null)
+                        {
+                            model.techs.ImageFront = file1.FileName;
+                            file1.SaveAs(HttpContext.Server.MapPath("~/Uploads/Tech/") + file1.FileName);
+                        }
+                        if (file2 != null)
+                        {
+                            model.techs.ImageTop = file2.FileName;
+                            file2.SaveAs(HttpContext.Server.MapPath("~/Uploads/Tech/") + file2.FileName);
+                        }
+                        if (file3 != null)
+                        {
+                            model.techs.ImageSide = file3.FileName;
+                            file3.SaveAs(HttpContext.Server.MapPath("~/Uploads/Tech/") + file3.FileName);
+                        }
+                    }
+                    catch
+                    {
+
+                    }
+                    
                     myHandler.UpdateTechnology(model.techs);
                     myHandler.UpdateTechProduct(model.techs);
                 }

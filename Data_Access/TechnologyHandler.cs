@@ -727,6 +727,7 @@ namespace urbanbooks
                     Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
                     Techno.ManufacturerID = (int)row["ManufacturerID"];
                     Techno.TechCategoryID = (int)row["TechCategoryID"];
+                    Techno.SupplierID = (int)row["SupplierID"];
                     Techno.ImageFront = row["ImageFront"].ToString();
                     Techno.ImageTop = row["ImageTop"].ToString();
                     Techno.ImageSide = row["ImageSide"].ToString();
