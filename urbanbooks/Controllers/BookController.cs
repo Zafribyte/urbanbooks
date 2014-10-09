@@ -37,7 +37,7 @@ namespace urbanbooks.Controllers
         }
         public ActionResult ManageBooks()
         { return View(); }
-        
+
         public ActionResult DeletedIndex()
         {
             myHandler = new BusinessLogicHandler();
@@ -57,7 +57,7 @@ namespace urbanbooks.Controllers
             ViewBag.BookTypeBag = myType;
             return View(myBookList.ToList().ToPagedList(page ?? 1, 18));
         }
-        [Authorize(Roles="admin, employee")]
+        [Authorize(Roles = "admin, employee")]
         public ActionResult AdminIndex()
         {
             myHandler = new BusinessLogicHandler();
@@ -183,7 +183,7 @@ namespace urbanbooks.Controllers
             //author.Add(new SelectListItem { Text = "Select Author", Value = "", Selected = true });
             foreach (var item in authList)
             {
-                author.Add(new SelectListItem { Text = item.Name, Value = item.AuthorID.ToString()});
+                author.Add(new SelectListItem { Text = item.Name, Value = item.AuthorID.ToString() });
             }
             bookM.authors = new List<SelectListItem>();
             bookM.authors = author;
@@ -252,14 +252,87 @@ namespace urbanbooks.Controllers
                     }
                     TempData["AlertMessage"] = "Book Successfully Entered";
                 }
-                
+
 
                 //return RedirectToAction("Index", "Book", book);
                 return RedirectToAction("Create", "Book", null); //REDIRECT TO GET ACTION METHOD #INCASE THEY WANT TO INSERT ANOTHER BOOK :)
             }
             catch
             {
-                return View();
+                AddNewBookViewModel model = new AddNewBookViewModel();
+                #region Create
+                SupplierHandler supHandler = new SupplierHandler();
+                /*TEMP LIST*/
+                //List<Supplier> nameList = new List<Supplier>();
+                IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetBookSupplierList();
+                var disp = from nameAndId in nameList
+                           select new { Value = nameAndId.SupplierID, Text = nameAndId.Name };
+
+                ViewBag.SupplierList = new SelectList(disp.ToList());
+
+                BookCategoryHandler typeHandler = new BookCategoryHandler();
+                IEnumerable<BookCategory> typeList = (IEnumerable<BookCategory>)typeHandler.GetBookCategoryList();
+                var dispBC = from name in typeList
+                             select new { Value = name.BookCategoryID, Text = name.CategoryName };
+
+                ViewBag.BookCategoryList = new SelectList(dispBC.ToList());
+
+                AuthorHandler authHandler = new AuthorHandler();
+                IEnumerable<Author> authList = (IEnumerable<Author>)authHandler.GetAuthorList();
+                var dispAuth = from nameAndSurname in authList
+                               select new { Value = nameAndSurname.AuthorID, Text = nameAndSurname.Name, nameAndSurname.Surname };
+                ViewBag.authList = new SelectList(dispAuth.ToList());
+
+                PublisherHandler publHandler = new PublisherHandler();
+                IEnumerable<Publisher> pubList = (IEnumerable<Publisher>)publHandler.GetPublisherList();
+                var dispPublisher = from pubName in pubList
+                                    select new { Value = pubName.PublisherID, Text = pubName.Name };
+                ViewBag.pubList = new SelectList(dispPublisher.ToList());
+
+                #endregion
+
+                #region Display
+                List<SelectListItem> bookCategory = new List<SelectListItem>();
+                //bookCategory.Add(new SelectListItem { Text = "Select Category", Value = "", Selected = true });
+                foreach (var item in typeList)
+                {
+                    bookCategory.Add(new SelectListItem { Text = item.CategoryName, Value = item.BookCategoryID.ToString() });
+                }
+                model.bookCategories = new List<SelectListItem>();
+                model.bookCategories = bookCategory;
+                ViewData["bookCategories"] = bookCategory;
+
+                List<SelectListItem> supplier = new List<SelectListItem>();
+                //supplier.Add(new SelectListItem { Text = "Select Supplier", Value = "", Selected = true });
+                foreach (var item in nameList)
+                {
+                    supplier.Add(new SelectListItem { Text = item.Name, Value = item.SupplierID.ToString() });
+                }
+                model.suppliers = new List<SelectListItem>();
+                model.suppliers = supplier;
+                ViewData["suppliers"] = supplier;
+
+                List<SelectListItem> author = new List<SelectListItem>();
+                //author.Add(new SelectListItem { Text = "Select Author", Value = "", Selected = true });
+                foreach (var item in authList)
+                {
+                    author.Add(new SelectListItem { Text = item.Name, Value = item.AuthorID.ToString() });
+                }
+                model.authors = new List<SelectListItem>();
+                model.authors = author;
+                ViewData["authors"] = author;
+
+                List<SelectListItem> publisher = new List<SelectListItem>();
+                //publisher.Add(new SelectListItem { Text = "Select Publisher", Value = "", Selected = true });
+                foreach (var item in pubList)
+                {
+                    publisher.Add(new SelectListItem { Text = item.Name, Value = item.PublisherID.ToString() });
+                }
+                model.publishers = new List<SelectListItem>();
+                model.publishers = publisher;
+                ViewData["publishers"] = publisher;
+                #endregion
+                return View(model);
             }
         }
 
@@ -291,9 +364,9 @@ namespace urbanbooks.Controllers
             Book helper = new Book();
             #endregion
 
-            #region Get Books By Category 
+            #region Get Books By Category
 
-            if(name != null)
+            if (name != null)
             {
                 model.BookResults = myHandler.CategoryBookSearch(name);
                 model.BCategory = new BookCategory();
@@ -301,7 +374,7 @@ namespace urbanbooks.Controllers
                 model.BCategory = myHandler.GetBookType(helper.BookCategoryID);
 
             }
-            else if(CategoryID != 0)
+            else if (CategoryID != 0)
             {
                 model.BookResults = myHandler.GetBooksByCategory(CategoryID);
                 model.BCategory = new BookCategory();
@@ -365,13 +438,13 @@ namespace urbanbooks.Controllers
             BookCategory bkc = new BookCategory();
             Publisher pb = new Publisher();
 
-            foreach(var item in nameList)
+            foreach (var item in nameList)
             {
-                if(item.SupplierID == model.books.SupplierID)
+                if (item.SupplierID == model.books.SupplierID)
                 {
                     sp.SupplierID = item.SupplierID;
                     sp.Name = item.Name;
-                    
+
                 }
             }
 
@@ -385,19 +458,19 @@ namespace urbanbooks.Controllers
                     x++;
                 }
             }
-            
-            foreach(var item in pubList)
+
+            foreach (var item in pubList)
             {
-                if(item.PublisherID == model.books.PublisherID)
+                if (item.PublisherID == model.books.PublisherID)
                 {
                     pb.PublisherID = item.PublisherID;
                     pb.Name = item.Name;
                 }
             }
 
-            foreach(var item in typeList)
+            foreach (var item in typeList)
             {
-                if(item.BookCategoryID == model.books.BookCategoryID)
+                if (item.BookCategoryID == model.books.BookCategoryID)
                 {
                     bkc.BookCategoryID = item.BookCategoryID;
                     bkc.CategoryName = item.CategoryName;
@@ -407,11 +480,11 @@ namespace urbanbooks.Controllers
 
             #region Display
             List<SelectListItem> bookCategory = new List<SelectListItem>();
-            bookCategory.Add(new SelectListItem { Value = bkc.BookCategoryID.ToString(), Text=bkc.CategoryName, Selected = true});
+            bookCategory.Add(new SelectListItem { Value = bkc.BookCategoryID.ToString(), Text = bkc.CategoryName, Selected = true });
             foreach (var item in typeList)
             {
-                if(item.BookCategoryID != bkc.BookCategoryID)
-                bookCategory.Add(new SelectListItem { Text = item.CategoryName, Value = item.BookCategoryID.ToString() });
+                if (item.BookCategoryID != bkc.BookCategoryID)
+                    bookCategory.Add(new SelectListItem { Text = item.CategoryName, Value = item.BookCategoryID.ToString() });
             }
             model.bookCategories = new List<SelectListItem>();
             model.bookCategories = bookCategory;
@@ -428,13 +501,13 @@ namespace urbanbooks.Controllers
             ViewData["suppliers"] = supplier;
 
             List<SelectListItem> author = new List<SelectListItem>();
-            
+
             foreach (var item in authList)
             {
-                if(authors.Contains(item.AuthorID))
-                { author.Add(new SelectListItem { Text = item.Name, Value = item.AuthorID.ToString(), Selected=true }); }
+                if (authors.Contains(item.AuthorID))
+                { author.Add(new SelectListItem { Text = item.Name, Value = item.AuthorID.ToString(), Selected = true }); }
                 else
-                { author.Add(new SelectListItem { Text = item.Name, Value = item.AuthorID.ToString() }); }                
+                { author.Add(new SelectListItem { Text = item.Name, Value = item.AuthorID.ToString() }); }
             }
             model.authors = new List<SelectListItem>();
             model.authors = author;
@@ -510,7 +583,7 @@ namespace urbanbooks.Controllers
             {
                 s = Convert.ToDouble(selectedValue);
                 t = Math.Round((s * vat) + s, 2);
-                              
+
                 return Json(t);
             }
             catch
@@ -538,7 +611,7 @@ namespace urbanbooks.Controllers
                 book.ProductID = ProductID;
                 myHandler.DeleteBook(book);
 
-                
+
 
                 return RedirectToAction("AdminIndex", "Book");
             }
