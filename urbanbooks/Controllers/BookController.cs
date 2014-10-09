@@ -534,7 +534,7 @@ namespace urbanbooks.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(FormCollection collection, AddNewBookViewModel model)
+        public ActionResult Edit(FormCollection collection, AddNewBookViewModel model, HttpPostedFileBase file)
         {
             try
             {
@@ -547,6 +547,18 @@ namespace urbanbooks.Controllers
                     model.books.SupplierID = Convert.ToInt32(collection.GetValue("Name").AttemptedValue);
                     string[] Authors = (string[])collection.GetValue("FullName").RawValue;
 
+                    try
+                    {
+                        if (file != null)
+                        {
+                            model.books.CoverImage = file.FileName;
+                            file.SaveAs(HttpContext.Server.MapPath("~/Uploads/Books/") + file.FileName);
+                        }
+                    }
+                    catch
+                    {
+
+                    }
                     #region Clean Book_Authors
                     myHandler.BookAuthorUpdateDelete(model.books.BookID);
                     #endregion
