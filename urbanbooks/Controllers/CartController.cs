@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Threading.Tasks;
 using urbanbooks.Models;
+using Rotativa;
 using System.Web.ModelBinding;
 using urbanbooks.Controllers;
 using Microsoft.AspNet.Identity;
@@ -956,7 +957,25 @@ namespace urbanbooks.Controllers
 
             #endregion
 
+            #region Clear SESSION
+            Session["myItems"] = null;
+            #endregion
+
+            #region Prep for exporting to PDF
+            Session["pdf"] = model;
+            #endregion
+
             return View(model);
+        }
+
+        public ActionResult ExportToPDF()
+        {
+            #region Get the data
+            ProductViewModel model = new ProductViewModel();
+            model = (ProductViewModel)Session["pdf"];
+            #endregion
+
+            return new ViewAsPdf(model);
         }
 
     }

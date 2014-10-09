@@ -1,15 +1,15 @@
 ﻿@using urbanbooks.Models
 
 @model  ProductViewModel
-
 @{
-    ViewBag.Title = "Reciept";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "ExportToPDF";
+    Layout = "";
 }
 
+<br />
 @if (Model.UserDetails != null)
 {
-   <br/> 
+    <br />
     <div class="row">
 
         <div class="container">
@@ -27,23 +27,23 @@
             </div>
         </div>
 
-        
+
     </div>
     <br />
     <div class="row">
 
-            <div class="container">
-                <div class="col-md-3"></div>
-                <div class="col-md-3"></div>
-                <div class="col-md-3"></div>
-                <div class="col-md-3">
-                    <label>Invoice Number :</label>&nbsp;@Html.DisplayFor(m => m.recieptData.InvoiceID)<br />
-                    <label>Date Created :</label>&nbsp;@Html.DisplayFor(m => m.recieptData.DateCreated)
-                </div>
+        <div class="container">
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <label>Invoice Number :</label>&nbsp;@Html.DisplayFor(m => m.recieptData.InvoiceID)<br />
+                <label>Date Created :</label>&nbsp;@Html.DisplayFor(m => m.recieptData.DateCreated)
             </div>
-
         </div>
-<br/>
+
+    </div>
+    <br />
     <div class="row">
 
         <div class="container">
@@ -56,16 +56,16 @@
                 <label class="control-label">Address :</label> @Html.DisplayFor(model => model.UserDetails.Address)<br />
             </div>
             <div class="col-md-3">
-                
+
             </div>
             <div class="col-md-3">
 
             </div>
             <div class="col-md-3">
-                <label class="caption">Shipping Details</label><br/>
-                <label class="control-label">Service Name :</label> @Html.DisplayFor(model => model.deliveryHelper.DeliveryServiceName)<br/>
-                <label class="control-label">Service Type :</label> @Html.DisplayFor(model => model.deliveryHelper.DeliveryServiceType)<br/>
-              <label class="control-label">Delivery Address :</label>  @Html.DisplayFor(model => model.deliveryHelper.DeliveryAddress)<br />
+                <label class="caption">Shipping Details</label><br />
+                <label class="control-label">Service Name :</label> @Html.DisplayFor(model => model.deliveryHelper.DeliveryServiceName)<br />
+                <label class="control-label">Service Type :</label> @Html.DisplayFor(model => model.deliveryHelper.DeliveryServiceType)<br />
+                <label class="control-label">Delivery Address :</label>  @Html.DisplayFor(model => model.deliveryHelper.DeliveryAddress)<br />
             </div>
         </div>
 
@@ -79,7 +79,7 @@
 
     </div>
 }
-<br/>
+<br />
 <div class="row">
     <div class="container">
         <table class="table table-striped">
@@ -192,10 +192,7 @@
                 }
             </tfoot>
         </table>
-        <br /><br />
-        @Html.ActionLink("Export to PDF", "ExportToPDF", new { @class="btn btn-default"})
-        @Html.ActionLink("Continue Shopping", "Index", "Home", null, new { @class="btn btn-default"})
-        <br /><br />
     </div>
 </div>
+
 
