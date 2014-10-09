@@ -17,8 +17,24 @@ namespace urbanbooks.Controllers
             IEnumerable<Manufacturer> Manufacturers = myHandler.GetManufacturers();
             return View(Manufacturers);
         }
+        public ActionResult CheckDuplicates(string manufact)
+        {
+            List<Manufacturer> myList = new List<Manufacturer>();
+            myHandler = new BusinessLogicHandler();
+            myList = myHandler.CheckDuplicatedManufacturer(manufact);
+            var isDuplicate = false;
 
-
+            foreach (var item in myList)
+            {
+                string manName = item.Name;
+                if (manufact.ToUpper() == manName.ToUpper())
+                {
+                    isDuplicate = true;
+                }
+            }
+            var jsonData = new { isDuplicate };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult ViewManufacturer()
         {
             return PartialView();

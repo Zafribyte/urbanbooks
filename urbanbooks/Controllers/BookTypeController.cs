@@ -25,6 +25,24 @@ namespace urbanbooks.Controllers
             typeOf = myHandler.GetBookCategoryList().Single(typ => typ.BookCategoryID == id);
             return View(typeOf);
         }
+        public ActionResult CheckDuplicates(string category)
+        {
+            List<BookCategory> myList = new List<BookCategory>();
+            myHandler = new BusinessLogicHandler();
+            myList = myHandler.CheckDuplicatedBookCategory(category);
+            var isDuplicate = false;
+
+            foreach (var item in myList)
+            {
+                string categoryName = item.CategoryName;
+                if (category.ToUpper() == categoryName.ToUpper())
+                {
+                    isDuplicate = true;
+                }
+            }
+            var jsonData = new { isDuplicate };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult ViewBookCategory()
         {
             return PartialView();

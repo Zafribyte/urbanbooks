@@ -497,6 +497,14 @@ namespace urbanbooks
         #endregion
 
         #region SYSTEM ACTIONS
+        public List<Manufacturer> CheckDuplicatedManufacturer(string manufacturer)
+        { ManufacturerHandler myHandler = new ManufacturerHandler(); return myHandler.CheckDuplicateManufacturer(manufacturer); }
+        public List<TechCategory> CheckDuplicatedTechCategory(string category)
+        { TechCategoryHandler myHandler = new TechCategoryHandler(); return myHandler.CheckDuplicateTechCategory(category); }
+        public List<BookCategory> CheckDuplicatedBookCategory(string category)
+        { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.CheckDuplicateBookCategory(category); }
+        public List<Technology> CheckDuplicatedDevice(string modelNumber)
+        { TechnologyHandler myHandler = new TechnologyHandler(); return myHandler.CheckDuplicateDevice(modelNumber); }
         public List<Publisher> CheckDuplicatedPublisher(string name)
         { PublisherHandler myHandler = new PublisherHandler(); return myHandler.CheckDuplicatePublisher(name); }
         public List<Book> CheckDuplicatedBook(string isbn)

@@ -68,7 +68,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.techs.ModelNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.techs.ModelNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.techs.ModelNumber, new { htmlAttributes = new { @class = "form-control", id = "modelNumber" } })
                 @Html.ValidationMessageFor(model => model.techs.ModelNumber, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -149,6 +149,17 @@
                     $(".olden").val(" ");
                 }
             });
+        </script>
+        <script>
+    $("#modelNumber").focusout(function () {
+        $.getJSON('@Url.Action("CheckDuplicates", "Technology")', { modelNumber: $(this).val() }, function (data) {
+            if (data.isDuplicate) {
+                alert("This Item Already Exists.");
+            }
+        }
+        )
+    }
+        )
         </script>
 
         <div class="form-group">

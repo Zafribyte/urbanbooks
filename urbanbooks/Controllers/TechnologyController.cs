@@ -67,7 +67,24 @@ namespace urbanbooks.Controllers
 
             return View(model);
         }
+        public ActionResult CheckDuplicates(string modelNumber)
+        {
+            List<Technology> myList = new List<Technology>();
+            myHandler = new BusinessLogicHandler();
+            myList = myHandler.CheckDuplicatedDevice(modelNumber);
+            var isDuplicate = false;
 
+            foreach (var item in myList)
+            {
+                string modelN = item.ModelNumber;
+                if (modelNumber.ToUpper() == modelN.ToUpper())
+                {
+                    isDuplicate = true;
+                }
+            }
+            var jsonData = new { isDuplicate };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult DeletedIndex()
         {
             myHandler = new BusinessLogicHandler();
