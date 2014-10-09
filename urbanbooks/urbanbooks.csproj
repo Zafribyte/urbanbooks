@@ -558,7 +558,7 @@
     <Content Include="Views\Cart\Checkout.cshtml" />
     <Content Include="Views\Cart\Confirm.cshtml" />
     <Content Include="Views\Cart\Edit.cshtml" />
-    <Content Include="Views\Cart\Reciept.cshtml" />
+    <Content Include="Views\Cart\Receipt.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Edit.cshtml" />
     <Content Include="Views\Employee\Create.cshtml" />

@@ -501,7 +501,7 @@ namespace urbanbooks.Controllers
                 catch
                 {/*Navigate to custom error page*/ }
                 Session["deliverData"] = model;
-                return RedirectToAction("Reciept", new { IID = IID });
+                return RedirectToAction("Receipt", new { IID = IID });
             }
             else
             {
@@ -805,7 +805,7 @@ namespace urbanbooks.Controllers
             return PartialView(helperModel);
         }
 
-        public async Task<ActionResult> Reciept(int? IID)
+        public async Task<ActionResult> Receipt(int? IID)
         {
             List<CartItem> myItems = new List<CartItem>();
             myItems = (List<CartItem>)Session["myItems"];
