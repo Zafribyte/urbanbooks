@@ -10,6 +10,27 @@ namespace urbanbooks
 {
     public class TechCategoryHandler
     {
+        public List<TechCategory> CheckDuplicateTechCategory(string category)
+        {
+            List<TechCategory> categoryList = null;
+            SqlParameter[] Params = { new SqlParameter("@category", category) };
+            using (DataTable table = DataProvider.ExecuteParamatizedSelectCommand("sp_CheckDuplicateTechCategory", CommandType.StoredProcedure, Params))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    categoryList = new List<TechCategory>();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        TechCategory techCategory = new TechCategory();
+                        techCategory.TechCategoryID = Convert.ToInt32(row["TechCategoryID"]);
+                        techCategory.CategoryName = row["CategoryName"].ToString();
+                        techCategory.CategoryDescription = row["CategoryDescription"].ToString();
+                        categoryList.Add(techCategory);
+                    }
+                }
+            }
+            return categoryList;
+        }
         public List<TechCategory> GetTechCategoryList()
         {
             List<TechCategory> TechCategoryList = null;

@@ -495,6 +495,8 @@ namespace urbanbooks
         #endregion
 
         #region SYSTEM ACTIONS
+        public List<TechCategory> CheckDuplicatedTechCategory(string category)
+        { TechCategoryHandler myHandler = new TechCategoryHandler(); return myHandler.CheckDuplicateTechCategory(category); }
         public List<BookCategory> CheckDuplicatedBookCategory(string category)
         { BookCategoryHandler myHandler = new BookCategoryHandler(); return myHandler.CheckDuplicateBookCategory(category); }
         public List<Technology> CheckDuplicatedDevice(string modelNumber)

@@ -18,6 +18,24 @@ namespace urbanbooks.Controllers
             
             return View(TechCategory);
         }
+        public ActionResult CheckDuplicates(string category)
+        {
+            List<TechCategory> myList = new List<TechCategory>();
+            myHandler = new BusinessLogicHandler();
+            myList = myHandler.CheckDuplicatedTechCategory(category);
+            var isDuplicate = false;
+
+            foreach (var item in myList)
+            {
+                string categoryName = item.CategoryName;
+                if (category.ToUpper() == categoryName.ToUpper())
+                {
+                    isDuplicate = true;
+                }
+            }
+            var jsonData = new { isDuplicate };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult ViewTechCategory()
         {
             return PartialView();
