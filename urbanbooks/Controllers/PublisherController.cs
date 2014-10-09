@@ -24,13 +24,15 @@ namespace urbanbooks.Controllers
             myHandler = new BusinessLogicHandler();
             myList = myHandler.CheckDuplicatedPublisher(name);
             var isDuplicate = false;
-
-            foreach (var item in myList)
+            if (myList != null)
             {
-                string pubName = item.Name;
-                if (name.ToUpper() == pubName.ToUpper())
+                foreach (var item in myList)
                 {
-                    isDuplicate = true;
+                    string pubName = item.Name;
+                    if (name.ToUpper() == pubName.ToUpper())
+                    {
+                        isDuplicate = true;
+                    }
                 }
             }
             var jsonData = new { isDuplicate };

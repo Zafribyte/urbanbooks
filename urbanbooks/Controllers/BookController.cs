@@ -23,13 +23,15 @@ namespace urbanbooks.Controllers
             myHandler = new BusinessLogicHandler();
             myList = myHandler.CheckDuplicatedBook(isbn);
             var isDuplicate = false;
-
-            foreach (var item in myList)
+            if (myList != null)
             {
-                string bookISBN = item.ISBN;
-                if (isbn == bookISBN)
+                foreach (var item in myList)
                 {
-                    isDuplicate = true;
+                    string bookISBN = item.ISBN;
+                    if (isbn == bookISBN)
+                    {
+                        isDuplicate = true;
+                    }
                 }
             }
             var jsonData = new { isDuplicate };
@@ -63,6 +65,7 @@ namespace urbanbooks.Controllers
             myHandler = new BusinessLogicHandler();
             List<Book> myBookList = new List<Book>();
             myBookList = myHandler.GetBooks();
+            myBookList.OrderBy(m => m.DateAdded);
             IEnumerable<BookCategory> myType = myHandler.GetBookCategoryList();
             ViewBag.BookTypeBag = myType;
             return View(myBookList);
@@ -394,7 +397,7 @@ namespace urbanbooks.Controllers
             #endregion
 
             myHandler = new BusinessLogicHandler();
-            Book book = myHandler.GetBooks().Single(bk => bk.ProductID == productId);
+            Book book = myHandler.GetBook(productId);
 
             IEnumerable<BookAuthor> bookAuthorList = myHandler.GetBookAuthors(book.BookID);
 
@@ -405,8 +408,8 @@ namespace urbanbooks.Controllers
             #region Create
             SupplierHandler supHandler = new SupplierHandler();
             /*TEMP LIST*/
-            List<Supplier> nameList = new List<Supplier>();
-            //IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetSupplierList();
+            //List<Supplier> nameList = new List<Supplier>();
+            IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetBookSupplierList();
             var disp = from nameAndId in nameList
                        select new { Value = nameAndId.SupplierID, Text = nameAndId.Name };
 
@@ -479,6 +482,17 @@ namespace urbanbooks.Controllers
 
 
             #region Display
+            List<SelectListItem> publisher = new List<SelectListItem>();
+            publisher.Add(new SelectListItem { Value = pb.PublisherID.ToString(), Text = pb.Name, Selected = true });
+            foreach (var item in pubList)
+            {
+                if (item.PublisherID != pb.PublisherID)
+                publisher.Add(new SelectListItem { Text = item.Name, Value = item.PublisherID.ToString() });
+            }
+            model.publishers = new List<SelectListItem>();
+            model.publishers = publisher;
+            ViewData["publishers"] = publisher;
+
             List<SelectListItem> bookCategory = new List<SelectListItem>();
             bookCategory.Add(new SelectListItem { Value = bkc.BookCategoryID.ToString(), Text = bkc.CategoryName, Selected = true });
             foreach (var item in typeList)
@@ -491,10 +505,11 @@ namespace urbanbooks.Controllers
             ViewData["bookCategories"] = bookCategory;
 
             List<SelectListItem> supplier = new List<SelectListItem>();
-            //supplier.Add(new SelectListItem { Text = "Select Supplier", Value = "", Selected = true });
+            supplier.Add(new SelectListItem { Value = sp.SupplierID.ToString(), Text = sp.Name, Selected = true });
             foreach (var item in nameList)
             {
-                supplier.Add(new SelectListItem { Text = item.Name, Value = item.SupplierID.ToString() });
+                if (item.SupplierID != sp.SupplierID)
+                    supplier.Add(new SelectListItem { Text = item.Name, Value = item.SupplierID.ToString() });
             }
             model.suppliers = new List<SelectListItem>();
             model.suppliers = supplier;
@@ -512,16 +527,6 @@ namespace urbanbooks.Controllers
             model.authors = new List<SelectListItem>();
             model.authors = author;
             ViewData["authors"] = author;
-
-            List<SelectListItem> publisher = new List<SelectListItem>();
-            //publisher.Add(new SelectListItem { Text = "Select Publisher", Value = "", Selected = true });
-            foreach (var item in pubList)
-            {
-                publisher.Add(new SelectListItem { Text = item.Name, Value = item.PublisherID.ToString() });
-            }
-            model.publishers = new List<SelectListItem>();
-            model.publishers = publisher;
-            ViewData["publishers"] = publisher;
             #endregion
 
 
@@ -561,7 +566,7 @@ namespace urbanbooks.Controllers
                     myHandler.UpdateBookProduct(model.books);
                     myHandler.UpdateBook(model.books);
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("AdminIndex", "Book", null);
             }
             catch
             {

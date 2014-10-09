@@ -73,14 +73,18 @@ namespace urbanbooks.Controllers
             myHandler = new BusinessLogicHandler();
             myList = myHandler.CheckDuplicatedDevice(modelNumber);
             var isDuplicate = false;
-
-            foreach (var item in myList)
+            if (myList != null)
             {
-                string modelN = item.ModelNumber;
-                if (modelNumber.ToUpper() == modelN.ToUpper())
+                foreach (var item in myList)
                 {
-                    isDuplicate = true;
+                    string modelN = item.ModelNumber;
+                    if (modelNumber.ToUpper() == modelN.ToUpper())
+                    {
+                        isDuplicate = true;
+                    }
                 }
+                
+                
             }
             var jsonData = new { isDuplicate };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
@@ -277,7 +281,59 @@ namespace urbanbooks.Controllers
 
             catch
             {
-                return View();
+                AddNewTechViewModel techM = new AddNewTechViewModel();
+                /*TEMP LIST*/
+                //List<Supplier> nameList = new List<Supplier>();
+                SupplierHandler supHandler = new SupplierHandler();
+                IEnumerable<Supplier> nameList = (IEnumerable<Supplier>)supHandler.GetTechSupplierList();
+                var disp = from nameAndId in nameList
+                           select new { Value = nameAndId.SupplierID, Text = nameAndId.Name };
+
+                ViewBag.SupplierList = new SelectList(disp.ToList());
+
+                TechCategoryHandler typeHandler = new TechCategoryHandler();
+                IEnumerable<TechCategory> typeList = (IEnumerable<TechCategory>)typeHandler.GetTechCategoryList();
+                var dispTC = from name in typeList
+                             select new { Value = name.TechCategoryID, Text = name.CategoryName };
+                ViewBag.TechCategoryList = new SelectList(dispTC.ToList());
+
+                ManufacturerHandler manHandler = new ManufacturerHandler();
+                IEnumerable<Manufacturer> manList = (IEnumerable<Manufacturer>)manHandler.GetManufacturerList();
+                var dispM = from mName in manList
+                            select new { Value = mName.ManufacturerID, Text = mName.Name };
+                ViewBag.ManufacturerList = new SelectList(dispM.ToList());
+
+                List<SelectListItem> supplier = new List<SelectListItem>();
+                //supplier.Add(new SelectListItem { Text = "Select Supplier", Value = "", Selected = true });
+                foreach (var item in nameList)
+                {
+                    supplier.Add(new SelectListItem { Text = item.Name, Value = item.SupplierID.ToString() });
+                }
+                techM.suppliers = new List<SelectListItem>();
+                techM.suppliers = supplier;
+                ViewData["suppliers"] = supplier;
+
+                List<SelectListItem> techCategory = new List<SelectListItem>();
+                //techCategory.Add(new SelectListItem { Text = "Select Category", Value = "", Selected = true });
+                foreach (var item in typeList)
+                {
+                    techCategory.Add(new SelectListItem { Text = item.CategoryName, Value = item.TechCategoryID.ToString(), Selected = true });
+                }
+                techM.techCategories = new List<SelectListItem>();
+                techM.techCategories = techCategory;
+                ViewData["techCategories"] = techCategory;
+
+                List<SelectListItem> manufacturer = new List<SelectListItem>();
+                //manufacturer.Add(new SelectListItem { Text = "Select Manufacturer", Value = "", Selected = true });
+                foreach (var item in manList)
+                {
+                    manufacturer.Add(new SelectListItem { Text = item.Name, Value = item.ManufacturerID.ToString() });
+                }
+                techM.manufacturers = new List<SelectListItem>();
+                techM.manufacturers = manufacturer;
+                ViewData["manufacturers"] = manufacturer;
+
+                return View(techM);
             }
         }
 

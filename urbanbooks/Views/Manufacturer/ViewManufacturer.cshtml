@@ -1,27 +1,29 @@
 ﻿@model urbanbooks.Manufacturer
 
+<div class="modal-header" style="align-content:center;">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">Add New Manufacturer</h4>
+</div>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Manufacturer</h4>
-        <hr />
+    <br />
+    <div class="modal-body">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <label class="control-label col-md-2">Manufacturer</label>
+            <div class="col-md-12">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", id = "manufacturerName" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+    </div>
+    <br />
+    <br />
+    <div class="modal-footer">
+        <input type="submit" class="btn btn-default" value="Create" />
+        <button class="btn btn-default" data-dismiss="modal">Close</button>
     </div>
     <script>
     $("#manufacturerName").focusout(function () {
@@ -33,12 +35,8 @@
         )}
         )
     </script>
+    
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

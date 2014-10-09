@@ -31,13 +31,15 @@ namespace urbanbooks.Controllers
             myHandler = new BusinessLogicHandler();
             myList = myHandler.CheckDuplicatedBookCategory(category);
             var isDuplicate = false;
-
-            foreach (var item in myList)
+            if (myList != null)
             {
-                string categoryName = item.CategoryName;
-                if (category.ToUpper() == categoryName.ToUpper())
+                foreach (var item in myList)
                 {
-                    isDuplicate = true;
+                    string categoryName = item.CategoryName;
+                    if (category.ToUpper() == categoryName.ToUpper())
+                    {
+                        isDuplicate = true;
+                    }
                 }
             }
             var jsonData = new { isDuplicate };
