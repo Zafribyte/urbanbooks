@@ -1076,7 +1076,7 @@ namespace urbanbooks
                 new SqlParameter("@CostPrice", book.CostPrice),
                 new SqlParameter("@SellingPrice", book.SellingPrice),
                 new SqlParameter("@IsBook", book.IsBook = true),
-                new SqlParameter("@DateAdded", book.DateAdded = DateTime.Now),
+                //new SqlParameter("@DateAdded", book.DateAdded = DateTime.Now),
             };
             return DataProvider.ExecuteNonQuery("sp_UpdateProduct", CommandType.StoredProcedure,
                 Params);

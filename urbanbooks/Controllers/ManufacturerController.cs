@@ -24,12 +24,15 @@ namespace urbanbooks.Controllers
             myList = myHandler.CheckDuplicatedManufacturer(manufact);
             var isDuplicate = false;
 
-            foreach (var item in myList)
+            if (myList != null)
             {
-                string manName = item.Name;
-                if (manufact.ToUpper() == manName.ToUpper())
+                foreach (var item in myList)
                 {
-                    isDuplicate = true;
+                    string manName = item.Name;
+                    if (manufact.ToUpper() == manName.ToUpper())
+                    {
+                        isDuplicate = true;
+                    }
                 }
             }
             var jsonData = new { isDuplicate };

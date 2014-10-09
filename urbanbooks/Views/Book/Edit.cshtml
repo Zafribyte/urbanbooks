@@ -9,7 +9,7 @@
 <script src="~/Scripts/bootstrap-multiselect.js" type="text/javascript"></script>
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h2>Edit</h2>
@@ -96,19 +96,25 @@
             </div>
         </div>
         <script type="text/javascript">
-            $('.multiselect').multiselect({ enablefiltering: true});
+                $('.multiselect').multiselect({
+                    enableCaseInsensitiveFiltering: true
+                });
         </script>
         <fieldset>
-            <legend>Image</legend>
+            <label class="control-label col-md-2">Cover Image:</label>
             <div class="editor-label">
-                @Html.LabelFor(model => model.books.CoverImage)
                 @Html.EditorFor(model => model.books.CoverImage, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.books.CoverImage, "", new { @class = "text-danger" })
             </div>
-            <div class="editor-field">
+            <br />
+
+            <label class="control-label col-md-2">Replace Image Here:</label>
+            <div class="control-label col-md-2 ">
                 <input id="CoverImage" title="Upload Book Cover" type="file" name="file" accept="image/*" />
             </div>
         </fieldset>
+        <br />
+        <br />
         <script type="text/javascript">
     $(".new").change(function () {
         var selectedValue = $(this).val();

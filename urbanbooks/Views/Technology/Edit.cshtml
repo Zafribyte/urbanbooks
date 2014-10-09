@@ -60,13 +60,6 @@
                 @Html.ValidationMessageFor(model => model.techs.SellingPrice, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.techs.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md=10">
-                @Html.CheckBoxFor(model => model.techs.Status, new { htmlattributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.techs.Status, "", new { @class = "text-danger" })
-            </div>
-        </div>
         <script type="text/javascript">
             $(".new").change(function () {
                 var selectedValue = $(this).val();
