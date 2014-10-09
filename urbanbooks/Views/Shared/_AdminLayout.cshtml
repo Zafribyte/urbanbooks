@@ -38,12 +38,12 @@
                 </li>
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="icon-book"></span> Books </a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="icon-book-2"></span> Books </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li>@Html.ActionLink("Add new", "Create", "Book")</li>
-                        <li>@Html.ActionLink("Manage books", "AdminIndex", "Book")</li>
+                        <li>@Html.ActionLink("Add new Book", "Create", "Book")</li>
+                        <li>@Html.ActionLink("Manage Books", "AdminIndex", "Book")</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("Add new Category", "Create", "BookType")</li>
+                        <li>@Html.ActionLink("Add new Book Category", "Create", "BookType")</li>
                         <li>@Html.ActionLink("Manage Book Category", "Index", "BookType")</li>
                         <li class="divider"></li>
                         <li>@Html.ActionLink("Add new Publisher", "Create", "Publisher")</li>
@@ -58,16 +58,16 @@
                 </li>
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="icon-laptop"></span> Devices </a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="icon-laptop-circled"></span> Devices </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li>@Html.ActionLink("Add new", "Create", "Technology")</li>
+                        <li>@Html.ActionLink("Add new Device", "Create", "Technology")</li>
                         <li>@Html.ActionLink("Manage Devices", "AdminIndex", "Technology")</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("Add new category", "Create", "TechCategory")</li>
-                        <li>@Html.ActionLink("Manage categories", "Index", "TechCategory")</li>
+                        <li>@Html.ActionLink("Add new Device Category", "Create", "TechCategory")</li>
+                        <li>@Html.ActionLink("Manage Device Categories", "Index", "TechCategory")</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("Add new manufacturer", "Create", "Manufacturer")</li>
-                        <li>@Html.ActionLink("Manage manufacturers", "Index", "Manufacturer")</li>
+                        <li>@Html.ActionLink("Add new Manufacturer", "Create", "Manufacturer")</li>
+                        <li>@Html.ActionLink("Manage Manufacturers", "Index", "Manufacturer")</li>
                         <li class="divider"></li>
                         <li>@Html.ActionLink("View Deleted Devices", "DeletedIndex", "Technology")</li>
                     </ul>
