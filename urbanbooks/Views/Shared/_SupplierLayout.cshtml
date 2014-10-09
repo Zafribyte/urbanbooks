@@ -25,17 +25,7 @@
             @Html.ActionLink("Dashboard", "Home", "Supplier", new { area = "" }, new { @class = "navbar-brand" })
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>@Html.NoEncodeActionLink("<span class='glyphicon glyphicon-barcode'></span> Products", "Products", "Products", "Supplier", htmlAttributes: new { @class = "btn" })</li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-tasks"></span> Orders </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li>@Html.ActionLink("New Orders", "New_Orders", "Order")</li>
-                        <li class="divider"></li>
-                        <li>@Html.ActionLink("Unprocessed Orders", "Unprocessed", "Order")</li>
-                    </ul>
-                </li>
-            </ul>
+            
 
             
 

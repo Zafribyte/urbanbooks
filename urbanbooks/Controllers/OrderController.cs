@@ -54,6 +54,25 @@ namespace urbanbooks.Controllers
 
             #endregion
 
+            #region Get Order Total
+            model.totally = 0;
+            foreach(var item in model.OrderLineDetails)
+            {
+                if(myHandler.CheckProductType(item.ProductID))
+                {
+                    Book myBook = new Book();
+                    myBook = myHandler.GetBook(item.ProductID);
+                    model.totally += (myBook.SellingPrice*item.Quantity);
+                }
+                else
+                {
+                    Technology device = new Technology();
+                    device = myHandler.GetTechnologyDetails(item.ProductID);
+                    model.totally += (device.SellingPrice * item.Quantity);
+                }
+            }
+            #endregion
+
             return PartialView(model);
         }
 
@@ -86,7 +105,12 @@ namespace urbanbooks.Controllers
             #region Get Invoice Lines
             model.InvoiceLine = new List<InvoiceItem>();
             model.InvoiceLine = myHandler.GetInvoiceItems(InvoiceID);
-
+            if(model.InvoiceLine != null)
+            {
+                model.totally = 0;
+                foreach(var item in model.InvoiceLine)
+                { model.totally += item.Price; }
+            }
             #endregion
 
             #region Get Order

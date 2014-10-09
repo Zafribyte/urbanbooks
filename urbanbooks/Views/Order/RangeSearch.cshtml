@@ -50,35 +50,36 @@
                 </th>
                 <th></th>
             </tr>
-
-            @foreach (var item in Model.Orders)
+            @if (Model.Orders != null)
             {
-                string returnUrl = HttpContext.Current.Request.RawUrl;
-                if (item.DateCreated == DateTime.Today.Date && item.Status == false)
+                foreach (var item in Model.Orders)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.OrderNo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DateCreated)
-                        </td>
-                        <td>
-                            @Html.ActionLink("View Details", "Details", "Order", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default", data_modal = "" })
-                        </td>
-                        @if (item.Status == false)
-                        {
+                    string returnUrl = HttpContext.Current.Request.RawUrl;
+                    if (item.DateCreated == DateTime.Today.Date && item.Status == false)
+                    {
+                        <tr>
                             <td>
-                                <label class="alert alert-warning">Pending</label>
+                                @Html.DisplayFor(modelItem => item.OrderNo)
                             </td>
-                        }
-                        <td>
-                            @Html.ActionLink("Complete", "ProcessOrder", "Order", new { returnUrl = returnUrl, OrderNumber = item.OrderNo }, new { @class = "btn btn-default btn-success" })
-                        </td>
-                    </tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateCreated)
+                            </td>
+                            <td>
+                                @Html.ActionLink("View Details", "Details", "Order", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default", data_modal = "" })
+                            </td>
+                            @if (item.Status == false)
+                            {
+                                <td>
+                                    <label class="alert alert-warning">Pending</label>
+                                </td>
+                            }
+                            <td>
+                                @Html.ActionLink("Complete", "ProcessOrder", "Order", new { returnUrl = returnUrl, OrderNumber = item.OrderNo }, new { @class = "btn btn-default btn-success" })
+                            </td>
+                        </tr>
+                    }
                 }
             }
-
         </table>
 
     </div>
@@ -104,31 +105,34 @@
                 <th></th>
             </tr>
 
-            @foreach (var item in Model.Orders)
+            @if (Model.Orders != null)
             {
-                string returnUrl = HttpContext.Current.Request.RawUrl;
-                if (item.DateCreated < DateTime.Today.Date && item.Status == false)
+                foreach (var item in Model.Orders)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.OrderNo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DateCreated)
-                        </td>
-                        <td>
-                            @Html.ActionLink("View Details", "Details", "Order", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default", data_modal = "" })
-                        </td>
-                        @if (item.Status == false)
-                        {
+                    string returnUrl = HttpContext.Current.Request.RawUrl;
+                    if (item.DateCreated < DateTime.Today.Date && item.Status == false)
+                    {
+                        <tr>
                             <td>
-                                <label class="alert alert-warning">Pending</label>
+                                @Html.DisplayFor(modelItem => item.OrderNo)
                             </td>
-                        }
-                        <td>
-                            @Html.ActionLink("Complete", "ProcessOrder", "Order", new { returnUrl = returnUrl, OrderNumber = item.OrderNo }, new { @class = "btn btn-default btn-success" })
-                        </td>
-                    </tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateCreated)
+                            </td>
+                            <td>
+                                @Html.ActionLink("View Details", "Details", "Order", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default", data_modal = "" })
+                            </td>
+                            @if (item.Status == false)
+                            {
+                                <td>
+                                    <label class="alert alert-warning">Pending</label>
+                                </td>
+                            }
+                            <td>
+                                @Html.ActionLink("Complete", "ProcessOrder", "Order", new { returnUrl = returnUrl, OrderNumber = item.OrderNo }, new { @class = "btn btn-default btn-success" })
+                            </td>
+                        </tr>
+                    }
                 }
             }
 
@@ -158,38 +162,39 @@
                     Date Completed
                 </th>
             </tr>
-
-            @foreach (var item in Model.Orders)
+            @if (Model.Orders != null)
             {
-                string returnUrl = HttpContext.Current.Request.RawUrl;
-                if (item.Status == true)
+                foreach (var item in Model.Orders)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.OrderNo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DateCreated)
-                        </td>
-                        <td>
-                            @Html.ActionLink("View Details", "Details", "Order", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default", data_modal = "" })
-                        </td>
-                        @if (item.Status == false)
-                        {
+                    string returnUrl = HttpContext.Current.Request.RawUrl;
+                    if (item.Status == true)
+                    {
+                        <tr>
                             <td>
-                                <label class="alert alert-warning">Pending</label>
+                                @Html.DisplayFor(modelItem => item.OrderNo)
                             </td>
-                        }
-                        <td>
-                            <label class="alert alert-success">Complete</label>
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DateLastModified)
-                        </td>
-                    </tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateCreated)
+                            </td>
+                            <td>
+                                @Html.ActionLink("View Details", "Details", "Order", new { OrderNumber = item.OrderNo }, new { @class = "btn btn-default", data_modal = "" })
+                            </td>
+                            @if (item.Status == false)
+                            {
+                                <td>
+                                    <label class="alert alert-warning">Pending</label>
+                                </td>
+                            }
+                            <td>
+                                <label class="alert alert-success">Complete</label>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateLastModified)
+                            </td>
+                        </tr>
+                    }
                 }
             }
-
         </table>
 
     </div>

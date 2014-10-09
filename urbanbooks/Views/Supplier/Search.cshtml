@@ -5,15 +5,56 @@
     Layout = "~/Views/Shared/_SupplierLayout.cshtml";
 }
 
-@if(Model != null)
+@if (Model != null)
 {
-    if(Model.Invoice != null)
+    if (Model.Invoice != null)
     {
-        
+
     }
-    if(Model.Order != null)
+    if (Model.Order != null)
     {
-        
+        <br /><br />
+        <table class="table">
+            <tr>
+                <th>
+                    Order Number
+                </th>
+                <th>
+                    Date Created
+                </th>
+                <th>
+                    Actions
+                </th>
+                <th>
+                    Status
+                </th>
+                <th></th>
+            </tr>
+                @if (Model.Order.DateCreated == DateTime.Today.Date && Model.Order.Status == false)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Order.OrderNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Order.DateCreated)
+                        </td>
+                        <td>
+                            @Html.ActionLink("View Details", "Details", "Order", new { OrderNumber = Model.Order.OrderNo }, new { @class = "btn btn-default", data_modal = "" })
+                        </td>
+                        @if (Model.Order.Status == false)
+                        {
+                            <td>
+                                <label class="alert alert-warning">Pending</label>
+                            </td>
+                        }
+                        <td>
+                            @Html.ActionLink("Complete", "ProcessOrder", "Order", new { returnUrl = "Supplier/Home", OrderNumber = Model.Order.OrderNo }, new { @class = "btn btn-default btn-success" })
+                        </td>
+                    </tr>
+                }
+
+        </table>
     }
 }
 else

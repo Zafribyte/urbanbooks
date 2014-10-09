@@ -23,22 +23,22 @@
                 <table class="table">
                     <tr>
                         <th>Product ID</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
+                        <th style="text-align:center">Quantity</th>
+                        <th style="text-align:center">Price</th>
                     </tr>
                     @foreach (var item in Model.InvoiceLine)
                     {
                         <tr>
                             <td>@Html.DisplayFor(m => item.ProductID)</td>
-                            <td>@Html.DisplayFor(m => item.Quantity)</td>
-                            <td>@Html.DisplayFor(m => item.Price)</td>
+                            <td style="text-align:center">@Html.DisplayFor(m => item.Quantity)</td>
+                            <td style="text-align:right">@Html.DisplayFor(m => item.Price)</td>
                         </tr>
                     }
                     <tfoot>
                         <tr>
                             <td></td>
-                            <td><label>Total</label></td>
-                            <td></td>
+                            <td style="text-align:center"><label>Total</label></td>
+                            <td style="text-align:right">@Html.DisplayFor(model => model.totally)</td>
                         </tr>
                     </tfoot>
                 </table>

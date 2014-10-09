@@ -67,7 +67,8 @@ namespace urbanbooks.Controllers
             #region Get Orders For Supplier
 
             model.Orders = myHandler.GetSupplierOrders(supplier.SupplierID);
-            model.Orders.OrderBy(m => m.DateCreated);
+            if(model.Orders != null)
+            { model.Orders.OrderBy(m => m.DateCreated); }
             #endregion
 
             return View(model);

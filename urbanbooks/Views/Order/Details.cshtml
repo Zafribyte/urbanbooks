@@ -39,6 +39,12 @@
                 <td>@Html.ActionLink("" + item.ProductID, "Product","Supplier",new{ProductID = item.ProductID}, new {data_modal="" } )</td>
                 <td>@Html.DisplayFor(model => item.Quantity)</td>
             </tr>
+            <tfoot>
+                <tr>
+                    <td><label>Total</label></td>
+                    <td>@Html.DisplayFor(model => model.totally)</td>
+                </tr>
+            </tfoot>
         }
     </table>
 
