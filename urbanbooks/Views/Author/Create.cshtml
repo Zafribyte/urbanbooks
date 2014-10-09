@@ -38,20 +38,39 @@
             </div>
         </div>
     </div>
-    
-}
-<script>
-    var namez;
-    $("#namez").focusout(namez = $(this).val());
+    @*<script>
     $("#surname").focusout(function () {
-        $.getJSON('@Url.Action("CheckDuplicates", "Author")', { surname: $(this).val(), name: namez }, function (data) {
+        $.ajax('@Url.Action("CheckDuplicates", "Author")', { surname: $(this).val(), name: namez }, function (data) {
             if (data.isDuplicate) {
                 alert("This Author Already Exists.");
             }
         }
-        )}
         )
-</script>
+    }
+        )
+    </script>*@
+    <script type="text/javascript">
+        var namez;
+        $("#namez").focusout(function () { namez = $("#namez").val(); });
+    $("#surname").change(function () {
+        var selectedValue = $(this).val();
+        if (selectedValue != " ") {
+            $.ajax({
+                url: '@Url.Action("CheckDuplicates", "Author")',
+                type: 'post',
+                data: { 'selectedValue': selectedValue, 'name' : namez },
+                datatype: 'json',
+                success: function (response) { window.alert("This author already exists."); }
+            })
+        }
+        else {
+            $(".olden").val(" ");
+        }
+    });
+    $('#isbn').focus($('#isbn').popover());
+    </script>
+}
+
 
 <div>
     @Html.ActionLink("Back to List", "Index")
