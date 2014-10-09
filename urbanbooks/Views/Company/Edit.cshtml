@@ -10,7 +10,7 @@
 </div>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Company", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -98,14 +98,16 @@
             </div>
         </div>
         <fieldset>
-            <legend>Image</legend>
+            <label class="control-label col-md-2">Company Logo:</label>
             <div class="editor-label">
-                @Html.LabelFor(model => model.CompanyLogo)
                 @Html.EditorFor(model => model.CompanyLogo, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CompanyLogo, "", new { @class = "text-danger" })
             </div>
-            <div class="editor-field">
-                <input id="CoverImage" title="Upload Book Cover" type="file" name="file" accept="image/*" />
+            <br />
+
+            <label class="control-label col-md-2">Replace Logo Here:</label>
+            <div class="control-label col-md-2 ">
+                <input id="CompanyLogo" title="Upload Company Logo" type="file" name="file" accept="image/*" />
             </div>
         </fieldset>
         <div class="form-group">
