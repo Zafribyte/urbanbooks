@@ -15,6 +15,7 @@ namespace urbanbooks.Controllers
         {
             BusinessLogicHandler myHandler = new BusinessLogicHandler();
             IEnumerable<Publisher> Publishers = myHandler.GetPublishers();
+            Publishers.OrderBy(m => m.Name);
             return View(Publishers);
         }
         public ActionResult CheckDuplicates(string name)
