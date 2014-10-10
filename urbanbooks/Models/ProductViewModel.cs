@@ -16,6 +16,7 @@ namespace urbanbooks.Models
         public IEnumerable<CartItem> allCartItem { get; set; }
         [NotMapped]
         public IEnumerable<Book> allBook { get; set; }
+        public string logo { get; set; }
         [NotMapped]
         public IEnumerable<Technology> allTechnology { get; set; }
         [NotMapped]

@@ -22,6 +22,9 @@
         <th>
             <label>Unit Price</label>
         </th>
+        <th>
+            Actions
+        </th>
     </tr>
     @if (Model.allWishlistItems != null)
     {
@@ -73,7 +76,7 @@
                     
                     <td>
                         @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-shopping-cart'> </span>", "Add to cart", "_AddToCart", "Cart", new { productId = item.ProductID, wishID = item.WishlistItemID, returnUrl}, htmlAttributes: new { @class = "btn btn-default" })
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'> </span>", "View Product Details", "Details", "Book", new { bookId = item.ProductID }, htmlAttributes: new { @class = "btn btn-default" })
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open'> </span>", "View Product Details", "CustomerDetails", "Book", new { ProductID = item.ProductID }, htmlAttributes: new { @class = "btn btn-default" })
                         @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-remove'> </span>", "Remove from wishlist", "Delete", "Wishlist", new { WishlistItemID = item.WishlistItemID }, htmlAttributes: new { @class = "btn btn-default" })
                     </td>
 

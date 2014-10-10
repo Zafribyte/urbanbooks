@@ -60,7 +60,7 @@ namespace urbanbooks.Controllers
             return View(myBookList.ToList().ToPagedList(page ?? 1, 18));
         }
         [Authorize(Roles = "admin, employee")]
-        public ActionResult AdminIndex()
+        public ActionResult AdminIndex(int? page)
         {
             myHandler = new BusinessLogicHandler();
             List<Book> myBookList = new List<Book>();
@@ -68,7 +68,7 @@ namespace urbanbooks.Controllers
             myBookList.OrderBy(m => m.DateAdded);
             IEnumerable<BookCategory> myType = myHandler.GetBookCategoryList();
             ViewBag.BookTypeBag = myType;
-            return View(myBookList);
+            return View(myBookList.ToList().ToPagedList(page ?? 1, 20));
         }
         public ActionResult CustomerDetails(int ProductID)
         {
@@ -81,6 +81,13 @@ namespace urbanbooks.Controllers
             Publisher pub = new Publisher();
             Author authors = new Author();
 
+            #endregion
+
+            #region Check Type
+            if (myHandler.CheckProductType(ProductID))
+            { }
+            else
+            { return RedirectToAction("Details","Technology", new { ProductID = ProductID }); }
             #endregion
 
             #region Get Book Data

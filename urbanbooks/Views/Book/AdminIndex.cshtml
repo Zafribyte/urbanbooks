@@ -1,4 +1,6 @@
-﻿@model IEnumerable<urbanbooks.Book>
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<urbanbooks.Book>
 @using urbanbooks.Models
 @using urbanbooks.Helpers;
 @{
@@ -11,7 +13,7 @@
 <div class="row">
 
     <div class="col-md-9">
-        <h2> Catalogue</h2>
+        <h2> Book Catalogue</h2>
     </div>
 
     <div class="col-md-3">
@@ -39,19 +41,22 @@
     <tr>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.BookTitle)
+            @Html.DisplayNameFor(model => model.First().BookTitle)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ISBN)
+            @Html.DisplayNameFor(model => model.First().ISBN)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CostPrice)
+            @Html.DisplayNameFor(model => model.First().CostPrice)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SellingPrice)
+            @Html.DisplayNameFor(model => model.First().SellingPrice)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CoverImage)
+            @Html.DisplayNameFor(model => model.First().CoverImage)
+        </th>
+        <th>
+            Actions
         </th>
     </tr>
 
@@ -83,4 +88,8 @@
     }
 
 </table>
-
+<br /><br />
+<div class="row" style="text-align:center">
+    @Html.PagedListPager(Model, page => Url.Action("AdminIndex", new { page }))
+</div>
+<br />

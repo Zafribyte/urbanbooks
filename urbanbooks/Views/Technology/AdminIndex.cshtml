@@ -1,4 +1,6 @@
-﻿@model IEnumerable<urbanbooks.Technology>
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<urbanbooks.Technology>
 @using urbanbooks.Models;
 
 @{
@@ -41,23 +43,24 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ModelName)
+            @Html.DisplayNameFor(model => model.First().ModelName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ModelNumber)
+            @Html.DisplayNameFor(model => model.First().ModelNumber)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ImageFront)
+            @Html.DisplayNameFor(model => model.First().ImageFront)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ImageTop)
+            @Html.DisplayNameFor(model => model.First().ImageTop)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ImageSide)
+            @Html.DisplayNameFor(model => model.First().ImageSide)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SellingPrice)
+            @Html.DisplayNameFor(model => model.First().SellingPrice)
         </th>
+        <th></th>
     </tr>
 
     @if (Model != null)
@@ -93,7 +96,11 @@
     }
 
 </table>
-
+<br /><br />
+<div class="row" style="text-align:center">
+    @Html.PagedListPager(Model, page => Url.Action("AdminIndex", new { page }))
+</div>
+<br />
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
