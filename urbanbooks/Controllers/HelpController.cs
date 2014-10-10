@@ -15,6 +15,10 @@ namespace urbanbooks.Controllers
             {
                 return RedirectToAction("Documentation");
             }
+            if (HttpContext.User.IsInRole("supplier"))
+            {
+                return RedirectToAction("Home", "Supplier", null);
+            }
             #endregion
 
             return View();
