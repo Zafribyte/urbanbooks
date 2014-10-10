@@ -332,7 +332,7 @@ namespace urbanbooks.Controllers
 
             return View(myNewModel);
         }
-
+        
         [HttpPost]
         public ActionResult Checkout(FormCollection collection, ProductViewModel model)
         {
@@ -404,19 +404,6 @@ namespace urbanbooks.Controllers
                                 invoiceLine.Price = device.SellingPrice;
                                 myHandler.AddinvoiceItem(invoiceLine);
                             }
-
-                            //try
-                            //{
-                            //    Book book = new Book();
-                            //    book = myHandler.GetBook(item.ProductID);
-                            //    invoiceLine.Price = book.SellingPrice;
-                            //}
-                            //catch
-                            //{
-                            //    Technology device = new Technology();
-                            //    device = myHandler.GetTechnologyDetails(item.ProductID);
-                            //    invoiceLine.Price = device.SellingPrice;
-                            //}
                             #endregion
 
 
@@ -513,8 +500,6 @@ namespace urbanbooks.Controllers
                 {
                     ProductViewModel.CartHelper cartHelp;
                     List<ProductViewModel.CartHelper> itemList = new List<ProductViewModel.CartHelper>();
-                    // if (myItems.Count == 0)
-                    // { return RedirectToAction("Edit"); }
                     double cartTotal = 0;
                     if (myItems != null)
                     {

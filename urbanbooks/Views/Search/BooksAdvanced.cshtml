@@ -8,7 +8,7 @@
 
 @if (Model.BookResults != null)
 {
-    string returnUrl = HttpContext.Current.Request.RawUrl;
+    string returnUrl = "Edit";
     <div class="row">
         <div class="container" style="text-align:center">
             <h4>@Model.BookResults.Count() items found</h4>

@@ -180,6 +180,7 @@ namespace urbanbooks
                         order.OrderNo = Convert.ToInt32(row["OrderNo"]);
                         order.Status = Convert.ToBoolean(row["Status"]);
                         order.DateCreated = Convert.ToDateTime(row["DateCreated"]);
+                        order.DateLastModified = Convert.ToDateTime(row["DateLastModified"]);
                         SupplierOrders.Add(order);
                     }
                 }

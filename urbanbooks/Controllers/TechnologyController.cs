@@ -108,7 +108,7 @@ namespace urbanbooks.Controllers
             return View(myTechDelete);
         }
         [Authorize(Roles = "admin")]
-        public ActionResult AdminIndex()
+        public ActionResult AdminIndex(int? page)
         {
             myHandler = new BusinessLogicHandler();
             List<Technology> myTechList = new List<Technology>();
@@ -118,7 +118,7 @@ namespace urbanbooks.Controllers
 
             TempData["Alert Message"] = "Device Successfully Deleted";
 
-            return View(myTechList);
+            return View(myTechList.ToList().ToPagedList(page ??1,20));
         }
         public ActionResult Index(int? page)
         {
