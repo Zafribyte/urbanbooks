@@ -230,7 +230,7 @@ namespace urbanbooks.Controllers
 
         [Authorize(Roles = "admin, employee")]
         [HttpPost]
-        public ActionResult Create(FormCollection collection, HttpPostedFileBase file, HttpPostedFileBase file2, HttpPostedFileBase file3)
+        public ActionResult Create(FormCollection collection, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3)
         {
             try
             {
@@ -252,10 +252,10 @@ namespace urbanbooks.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if (file != null)
+                    if (file1 != null)
                     {
-                        file.SaveAs(HttpContext.Server.MapPath("~/Uploads/Tech/") + file.FileName);
-                        gadget.ImageFront = file.FileName;
+                        file1.SaveAs(HttpContext.Server.MapPath("~/Uploads/Tech/") + file1.FileName);
+                        gadget.ImageFront = file1.FileName;
                     }
                     if (file2 != null)
                     {
