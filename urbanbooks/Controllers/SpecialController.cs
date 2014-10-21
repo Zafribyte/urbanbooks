@@ -10,7 +10,6 @@ namespace urbanbooks.Controllers
     {
         BusinessLogicHandler myHandler;
         Special mySpecial;
-        List<Special> mySpecialList;
         public ActionResult Index()
         {
             myHandler = new BusinessLogicHandler(); 

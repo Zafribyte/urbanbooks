@@ -18,7 +18,6 @@ namespace urbanbooks.Controllers
     {
         private ApplicationUserManager _userManager;
         BusinessLogicHandler myHandler;
-        Supplier logistics;
         public ActionResult BookIndex(int? page)
         {
             #region Prep Utilities

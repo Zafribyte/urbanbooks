@@ -73,7 +73,7 @@ namespace urbanbooks.Controllers
                     {
                         ModelState.AddModelError("", "Invalid username or password.");
                     }
-                    await experiment(user);
+                    //await experiment(user);
                 }
                 catch (DbEntityValidationException dbx)
                 {
@@ -121,7 +121,7 @@ namespace urbanbooks.Controllers
                     {
                         ModelState.AddModelError("", "Invalid username or password.");
                     }
-                    await experiment(user);
+                    //await experiment(user);
                 }
                 catch (DbEntityValidationException dbx)
                 {
@@ -144,13 +144,13 @@ namespace urbanbooks.Controllers
 
 
 
-        private async Task experiment(ApplicationUser user)
-        {
-            CartActions act = new CartActions();
-            Cart cart = new Cart();
-            // cart = await act.GetCartAsync(user.Customers.CustomerID);
-            ViewBag.CartTotal = act.GetTotalAsync(cart.CartID);
-        }
+        //private async Task experiment(ApplicationUser user)
+        //{
+        //    CartActions act = new CartActions();
+        //    Cart cart = new Cart();
+        //    // cart = await act.GetCartAsync(user.Customers.CustomerID);
+        //    ViewBag.CartTotal = act.GetTotalAsync(cart.CartID);
+        //}
 
         [AllowAnonymous]
         public ActionResult FullRegister()

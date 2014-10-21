@@ -85,6 +85,8 @@ namespace urbanbooks
                         Techno.ImageFront = row["ImageFront"].ToString();
                         Techno.ImageTop = row["ImageTop"].ToString();
                         Techno.ImageSide = row["ImageSide"].ToString();
+                        Techno.ModelName = Techno.ModelName.Substring(0, Math.Min(11, Techno.ModelName.Length));
+                        Techno.ModelName += "...";
                         TechnologyList.Add(Techno);
                     }
                 }
@@ -842,6 +844,8 @@ namespace urbanbooks
                         Techno.SupplierID = Convert.ToInt32(row["SupplierID"].ToString());
                         Techno.SellingPrice = Convert.ToDouble(row["SellingPrice"]);
                         Techno.ImageFront = row["ImageFront"].ToString();
+                        Techno.ModelName = Techno.ModelName.Substring(0, Math.Min(11, Techno.ModelName.Length));
+                        Techno.ModelName += "...";
                         TechnologyList.Add(Techno);
                     }
                 }
